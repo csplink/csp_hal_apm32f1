@@ -1,0 +1,16 @@
+#Clion
+.idea/
+cmake-build*/
+CMakeLists.txt
+
+#vscode
+.vscode/
+
+#keil
+*.uvmpw.*
+DebugConfig/
+Listings/
+Objects/
+RTE/
+*.uvoptx
+*.uvguix.*
