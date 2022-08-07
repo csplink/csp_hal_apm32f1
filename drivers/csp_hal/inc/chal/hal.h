@@ -20,20 +20,21 @@
 
 #include <apm32f10x.h>
 #include <apm32f10x_gpio.h>
+#include <apm32f10x_rcm.h>
 #include <rtthread.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define chal_write_bit(reg, bit)                 ((reg) |= (bit))
-#define chal_clear_bit(reg, bit)                 ((reg) &= ~(bit))
-#define chal_read_bit(reg, bit)                  ((reg) & (bit))
-#define chal_write_reg(reg, val)                 ((reg) = (val))
-#define chal_clear_reg(reg)                      ((reg) = (0x0))
-#define chal_read_reg(reg)                       ((reg))
-#define chal_modify_reg(reg, clearmask, setmask) chal_write_reg((reg), (((chal_read_reg(reg)) & (~(clearmask))) | (setmask)))
-#define chal_position_val(val)                   (__CLZ(__RBIT(val)))
+#define CHAL_WRITE_BIT(REG, BIT)                 ((REG) |= (BIT))
+#define CHAL_CLEAR_BIT(REG, BIT)                 ((REG) &= ~(BIT))
+#define CHAL_READ_BIT(REG, BIT)                  ((REG) & (BIT))
+#define CHAL_WRITE_REG(REG, VAL)                 ((REG) = (VAL))
+#define CHAL_CLEAR_REG(REG)                      ((REG) = (0X0))
+#define CHAL_READ_REG(REG)                       ((REG))
+#define CHAL_MODIFY_REG(REG, CLEARMASK, SETMASK) CHAL_WRITE_REG((REG), (((CHAL_READ_REG(REG)) & (~(CLEARMASK))) | (SETMASK)))
+#define CHAL_POSITION_VAL(VAL)                   (__CLZ(__RBIT(VAL)))
 
 void chal_error_handler(char *s, int num);
 

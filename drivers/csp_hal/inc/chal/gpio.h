@@ -164,7 +164,7 @@ extern "C" {
 #define PG15       CHAL_GPIO_GET_PIN(G, 15)
 #endif
 
-#define CHAL_GPIO_GET_PIN(PORTx, PIN) CHAL_GPIO##PORTx, CHAL_GPIO_PIN_##PIN, CHAL_GPIO_EINT##PIN##_IRQn
+#define CHAL_GPIO_GET_PIN(PORTx, PIN) CHAL_GPIO##PORTx, CHAL_GPIO_PIN_##PIN
 
 #define CHAL_GPIO_PIN_0               (0x00000101U)
 #define CHAL_GPIO_PIN_1               (0x00000202U)
@@ -187,21 +187,21 @@ extern "C" {
 #define CHAL_GPIO_PIN_RESET           (0U)
 #define CHAL_GPIO_PIN_SET             (1U)
 
-#define CHAL_GPIO_MODE_ANALOG         (0x00000000U)  // analog mode
-#define CHAL_GPIO_MODE_FLOATING       (0x00000004U)  // floating mode
-#define CHAL_GPIO_MODE_INPUT          (0x00000008U)  // input mode
-#define CHAL_GPIO_MODE_OUTPUT         (0x00000001U)  // output mode
-#define CHAL_GPIO_MODE_ALTERNATE      (0x00000009U)  // alternate mode
+#define CHAL_GPIO_MODE_ANALOG         (0x00000000U)  // 模拟模式
+#define CHAL_GPIO_MODE_FLOATING       (0x00000004U)  // 浮空模式
+#define CHAL_GPIO_MODE_INPUT          (0x00000008U)  // 输入模式
+#define CHAL_GPIO_MODE_OUTPUT         (0x00000001U)  // 输出模式
+#define CHAL_GPIO_MODE_ALTERNATE      (0x00000009U)  // 复用模式
 
-#define CHAL_GPIO_OUTPUT_PP           (0x00000000U)  // push-pull output mode
-#define CHAL_GPIO_OUTPUT_OD           (0x00000004U)  // open-drain output mode
+#define CHAL_GPIO_OUTPUT_PP           (0x00000000U)  // 推挽输出
+#define CHAL_GPIO_OUTPUT_OD           (0x00000004U)  // 开漏输出
 
-#define CHAL_GPIO_PULL_DOWN           (0x00000000U)  // pull down
-#define CHAL_GPIO_PULL_UP             (0x00000001U)  // pull up
+#define CHAL_GPIO_PULL_DOWN           (0x00000000U)  // 下拉
+#define CHAL_GPIO_PULL_UP             (0x00000001U)  // 上拉
 
-#define CHAL_GPIO_SPEED_10MHz         (0x1U)
-#define CHAL_GPIO_SPEED_20MHz         (0x2U)
-#define CHAL_GPIO_SPEED_50MHz         (0x3U)
+#define CHAL_GPIO_SPEED_10MHz         (0x1U)  // 10MHz
+#define CHAL_GPIO_SPEED_20MHz         (0x2U)  // 20MHz
+#define CHAL_GPIO_SPEED_50MHz         (0x3U)  // 50MHz
 
 #define CHAL_GPIO_EINT0_IRQn          EINT0_IRQn
 #define CHAL_GPIO_EINT1_IRQn          EINT1_IRQn
@@ -220,60 +220,460 @@ extern "C" {
 #define CHAL_GPIO_EINT14_IRQn         EINT15_10_IRQn
 #define CHAL_GPIO_EINT15_IRQn         EINT15_10_IRQn
 
+#define CHAL_GPIO_CLK_AFIO            RCM_APB2_PERIPH_AFIO
+#define CHAL_GPIO_CLK_GPIOA           RCM_APB2_PERIPH_GPIOA
+#define CHAL_GPIO_CLK_GPIOB           RCM_APB2_PERIPH_GPIOB
+#define CHAL_GPIO_CLK_GPIOC           RCM_APB2_PERIPH_GPIOC
+#define CHAL_GPIO_CLK_GPIOD           RCM_APB2_PERIPH_GPIOD
+#define CHAL_GPIO_CLK_GPIOE           RCM_APB2_PERIPH_GPIOE
+#define CHAL_GPIO_CLK_GPIOF           RCM_APB2_PERIPH_GPIOF
+#define CHAL_GPIO_CLK_GPIOG           RCM_APB2_PERIPH_GPIOG
+
 typedef struct
 {
     rt_uint32_t pin;
     rt_uint32_t mode;
     rt_uint32_t speed;
-    rt_uint32_t output_type;
+    rt_uint32_t output;
     rt_uint32_t pull;
 } chal_gpio_init_t;
 
-rt_inline void chal_gpio_set_mode(GPIO_T *port, rt_uint32_t pin, rt_uint32_t eint, rt_uint32_t mode)
+/**
+ * @brief   GPIO时钟使能
+ *
+ * @param   periphs 只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_CLK_AFIO
+ *          @arg @ref CHAL_GPIO_CLK_GPIOA
+ *          @arg @ref CHAL_GPIO_CLK_GPIOB
+ *          @arg @ref CHAL_GPIO_CLK_GPIOC
+ *          @arg @ref CHAL_GPIO_CLK_GPIOD
+ *          @arg @ref CHAL_GPIO_CLK_GPIOE (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOF (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @return  void
+ */
+rt_inline void chal_gpio_enable_clk(rt_uint32_t periphs)
+{
+    __IO rt_uint32_t reg;
+    CHAL_WRITE_BIT(RCM->APB2CLKEN, periphs);
+    reg = CHAL_READ_BIT(RCM->APB2CLKEN, periphs);  // 延时一个时钟
+    (void)reg;
+}
+
+/**
+ * @brief   检查GPIO时钟是否使能
+ *
+ * @param   periphs 只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_CLK_AFIO
+ *          @arg @ref CHAL_GPIO_CLK_GPIOA
+ *          @arg @ref CHAL_GPIO_CLK_GPIOB
+ *          @arg @ref CHAL_GPIO_CLK_GPIOC
+ *          @arg @ref CHAL_GPIO_CLK_GPIOD
+ *          @arg @ref CHAL_GPIO_CLK_GPIOE (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOF (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @return  rt_bool_t
+ *          @arg @ref RT_TRUE
+ *          @arg @ref RT_FALSE
+ */
+rt_inline rt_bool_t chal_gpio_is_clk_enabled(rt_uint32_t periphs)
+{
+    return (CHAL_READ_BIT(RCM->APB2CLKEN, periphs) == periphs);
+}
+
+/**
+ * @brief   GPIO时钟失能
+ *
+ * @param   periphs 只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_CLK_AFIO
+ *          @arg @ref CHAL_GPIO_CLK_GPIOA
+ *          @arg @ref CHAL_GPIO_CLK_GPIOB
+ *          @arg @ref CHAL_GPIO_CLK_GPIOC
+ *          @arg @ref CHAL_GPIO_CLK_GPIOD
+ *          @arg @ref CHAL_GPIO_CLK_GPIOE (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOF (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @return  void
+ */
+rt_inline void chal_gpio_disable_clk(rt_uint32_t periphs)
+{
+    CHAL_CLEAR_BIT(RCM->APB2CLKEN, periphs);
+}
+
+/**
+ * @brief   GPIO时钟强制置位
+ *
+ * @param   periphs 只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_CLK_AFIO
+ *          @arg @ref CHAL_GPIO_CLK_GPIOA
+ *          @arg @ref CHAL_GPIO_CLK_GPIOB
+ *          @arg @ref CHAL_GPIO_CLK_GPIOC
+ *          @arg @ref CHAL_GPIO_CLK_GPIOD
+ *          @arg @ref CHAL_GPIO_CLK_GPIOE (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOF (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @return  void
+ */
+rt_inline void chal_gpio_force_set_clk(rt_uint32_t periphs)
+{
+    CHAL_WRITE_BIT(RCM->APB2CLKEN, periphs);
+}
+
+/**
+ * @brief   GPIO时钟强制复位
+ *
+ * @param   periphs 只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_CLK_AFIO
+ *          @arg @ref CHAL_GPIO_CLK_GPIOA
+ *          @arg @ref CHAL_GPIO_CLK_GPIOB
+ *          @arg @ref CHAL_GPIO_CLK_GPIOC
+ *          @arg @ref CHAL_GPIO_CLK_GPIOD
+ *          @arg @ref CHAL_GPIO_CLK_GPIOE (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOF (*)
+ *          @arg @ref CHAL_GPIO_CLK_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @return  void
+ */
+rt_inline void chal_gpio_force_reset_clk(rt_uint32_t periphs)
+{
+    CHAL_CLEAR_BIT(RCM->APB2CLKEN, periphs);
+}
+
+/**
+ * @brief   GPIO设置引脚模式
+ *
+ * @param   port GPIO端口，只能是以下值之一：
+ *          @arg @ref CHAL_GPIOA
+ *          @arg @ref CHAL_GPIOB
+ *          @arg @ref CHAL_GPIOC
+ *          @arg @ref CHAL_GPIOD
+ *          @arg @ref CHAL_GPIOE (*)
+ *          @arg @ref CHAL_GPIOF (*)
+ *          @arg @ref CHAL_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @param   pin GPIO引脚号，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_PIN_0
+ *          @arg @ref CHAL_GPIO_PIN_1
+ *          @arg @ref CHAL_GPIO_PIN_2
+ *          @arg @ref CHAL_GPIO_PIN_3
+ *          @arg @ref CHAL_GPIO_PIN_4
+ *          @arg @ref CHAL_GPIO_PIN_5
+ *          @arg @ref CHAL_GPIO_PIN_6
+ *          @arg @ref CHAL_GPIO_PIN_7
+ *          @arg @ref CHAL_GPIO_PIN_8
+ *          @arg @ref CHAL_GPIO_PIN_9
+ *          @arg @ref CHAL_GPIO_PIN_10
+ *          @arg @ref CHAL_GPIO_PIN_11
+ *          @arg @ref CHAL_GPIO_PIN_12
+ *          @arg @ref CHAL_GPIO_PIN_13
+ *          @arg @ref CHAL_GPIO_PIN_14
+ *          @arg @ref CHAL_GPIO_PIN_15
+ * @param   mode GPIO引脚模式，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_MODE_ANALOG
+ *          @arg @ref CHAL_GPIO_MODE_FLOATING
+ *          @arg @ref CHAL_GPIO_MODE_INPUT
+ *          @arg @ref CHAL_GPIO_MODE_OUTPUT
+ *          @arg @ref CHAL_GPIO_MODE_ALTERNATE
+ * @return  void
+ */
+rt_inline void chal_gpio_set_mode(GPIO_T *port, rt_uint32_t pin, rt_uint32_t mode)
 {
     register rt_uint32_t *reg = (rt_uint32_t *)((rt_uint32_t)((rt_uint32_t)(&port->CFGLOW) + (pin >> 24)));
-    chal_modify_reg(*reg, ((0x0FU) << (chal_position_val(pin) * 4U)), (mode << (chal_position_val(pin) * 4U)));
+    CHAL_MODIFY_REG(*reg, ((0x0FU) << (CHAL_POSITION_VAL(pin) * 4U)), (mode << (CHAL_POSITION_VAL(pin) * 4U)));
 }
 
-rt_inline rt_uint32_t chal_gpio_get_mode(GPIO_T *port, rt_uint32_t pin, rt_uint32_t eint)
+/**
+ * @brief   GPIO获取引脚模式
+ *
+ * @param   port GPIO端口，只能是以下值之一：
+ *          @arg @ref CHAL_GPIOA
+ *          @arg @ref CHAL_GPIOB
+ *          @arg @ref CHAL_GPIOC
+ *          @arg @ref CHAL_GPIOD
+ *          @arg @ref CHAL_GPIOE (*)
+ *          @arg @ref CHAL_GPIOF (*)
+ *          @arg @ref CHAL_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @param   pin GPIO引脚号，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_PIN_0
+ *          @arg @ref CHAL_GPIO_PIN_1
+ *          @arg @ref CHAL_GPIO_PIN_2
+ *          @arg @ref CHAL_GPIO_PIN_3
+ *          @arg @ref CHAL_GPIO_PIN_4
+ *          @arg @ref CHAL_GPIO_PIN_5
+ *          @arg @ref CHAL_GPIO_PIN_6
+ *          @arg @ref CHAL_GPIO_PIN_7
+ *          @arg @ref CHAL_GPIO_PIN_8
+ *          @arg @ref CHAL_GPIO_PIN_9
+ *          @arg @ref CHAL_GPIO_PIN_10
+ *          @arg @ref CHAL_GPIO_PIN_11
+ *          @arg @ref CHAL_GPIO_PIN_12
+ *          @arg @ref CHAL_GPIO_PIN_13
+ *          @arg @ref CHAL_GPIO_PIN_14
+ *          @arg @ref CHAL_GPIO_PIN_15
+ * @return  GPIO引脚模式，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_MODE_ANALOG
+ *          @arg @ref CHAL_GPIO_MODE_FLOATING
+ *          @arg @ref CHAL_GPIO_MODE_INPUT
+ *          @arg @ref CHAL_GPIO_MODE_OUTPUT
+ *          @arg @ref CHAL_GPIO_MODE_ALTERNATE
+ */
+rt_inline rt_uint32_t chal_gpio_get_mode(GPIO_T *port, rt_uint32_t pin)
 {
     register rt_uint32_t *reg = (rt_uint32_t *)((rt_uint32_t)((rt_uint32_t)(&port->CFGLOW) + (pin >> 24)));
-    return (chal_read_bit(*reg, ((0x0FU) << (chal_position_val(pin) * 4U))) >> (chal_position_val(pin) * 4U));
+    return (CHAL_READ_BIT(*reg, ((0x0FU) << (CHAL_POSITION_VAL(pin) * 4U))) >> (CHAL_POSITION_VAL(pin) * 4U));
 }
 
-rt_inline void chal_gpio_set_speed(GPIO_T *port, rt_uint32_t pin, rt_uint32_t eint, rt_uint32_t speed)
+/**
+ * @brief   GPIO设置引脚速度
+ *
+ * @param   port GPIO端口，只能是以下值之一：
+ *          @arg @ref CHAL_GPIOA
+ *          @arg @ref CHAL_GPIOB
+ *          @arg @ref CHAL_GPIOC
+ *          @arg @ref CHAL_GPIOD
+ *          @arg @ref CHAL_GPIOE (*)
+ *          @arg @ref CHAL_GPIOF (*)
+ *          @arg @ref CHAL_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @param   pin GPIO引脚号，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_PIN_0
+ *          @arg @ref CHAL_GPIO_PIN_1
+ *          @arg @ref CHAL_GPIO_PIN_2
+ *          @arg @ref CHAL_GPIO_PIN_3
+ *          @arg @ref CHAL_GPIO_PIN_4
+ *          @arg @ref CHAL_GPIO_PIN_5
+ *          @arg @ref CHAL_GPIO_PIN_6
+ *          @arg @ref CHAL_GPIO_PIN_7
+ *          @arg @ref CHAL_GPIO_PIN_8
+ *          @arg @ref CHAL_GPIO_PIN_9
+ *          @arg @ref CHAL_GPIO_PIN_10
+ *          @arg @ref CHAL_GPIO_PIN_11
+ *          @arg @ref CHAL_GPIO_PIN_12
+ *          @arg @ref CHAL_GPIO_PIN_13
+ *          @arg @ref CHAL_GPIO_PIN_14
+ *          @arg @ref CHAL_GPIO_PIN_15
+ * @param   speed GPIO引脚速度，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_SPEED_10MHz
+ *          @arg @ref CHAL_GPIO_SPEED_20MHz
+ *          @arg @ref CHAL_GPIO_SPEED_50MHz
+ * @return  void
+ */
+rt_inline void chal_gpio_set_speed(GPIO_T *port, rt_uint32_t pin, rt_uint32_t speed)
 {
     register rt_uint32_t *reg = (rt_uint32_t *)((rt_uint32_t)((rt_uint32_t)(&port->CFGLOW) + (pin >> 24)));
-    chal_modify_reg(*reg, ((0x03U) << (chal_position_val(pin) * 4U)), (speed << (chal_position_val(pin) * 4U)));
+    CHAL_MODIFY_REG(*reg, ((0x03U) << (CHAL_POSITION_VAL(pin) * 4U)), (speed << (CHAL_POSITION_VAL(pin) * 4U)));
 }
 
-rt_inline rt_uint32_t chal_gpio_get_speed(GPIO_T *port, rt_uint32_t pin, rt_uint32_t eint)
+/**
+ * @brief   GPIO获取引脚速度
+ *
+ * @param   port GPIO端口，只能是以下值之一：
+ *          @arg @ref CHAL_GPIOA
+ *          @arg @ref CHAL_GPIOB
+ *          @arg @ref CHAL_GPIOC
+ *          @arg @ref CHAL_GPIOD
+ *          @arg @ref CHAL_GPIOE (*)
+ *          @arg @ref CHAL_GPIOF (*)
+ *          @arg @ref CHAL_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @param   pin GPIO引脚号，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_PIN_0
+ *          @arg @ref CHAL_GPIO_PIN_1
+ *          @arg @ref CHAL_GPIO_PIN_2
+ *          @arg @ref CHAL_GPIO_PIN_3
+ *          @arg @ref CHAL_GPIO_PIN_4
+ *          @arg @ref CHAL_GPIO_PIN_5
+ *          @arg @ref CHAL_GPIO_PIN_6
+ *          @arg @ref CHAL_GPIO_PIN_7
+ *          @arg @ref CHAL_GPIO_PIN_8
+ *          @arg @ref CHAL_GPIO_PIN_9
+ *          @arg @ref CHAL_GPIO_PIN_10
+ *          @arg @ref CHAL_GPIO_PIN_11
+ *          @arg @ref CHAL_GPIO_PIN_12
+ *          @arg @ref CHAL_GPIO_PIN_13
+ *          @arg @ref CHAL_GPIO_PIN_14
+ *          @arg @ref CHAL_GPIO_PIN_15
+ * @return  GPIO引脚速度，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_SPEED_10MHz
+ *          @arg @ref CHAL_GPIO_SPEED_20MHz
+ *          @arg @ref CHAL_GPIO_SPEED_50MHz
+ */
+rt_inline rt_uint32_t chal_gpio_get_speed(GPIO_T *port, rt_uint32_t pin)
 {
     register rt_uint32_t *reg = (rt_uint32_t *)((rt_uint32_t)((rt_uint32_t)(&port->CFGLOW) + (pin >> 24)));
-    return (chal_read_bit(*reg, ((0x03U) << (chal_position_val(pin) * 4U))) >> (chal_position_val(pin) * 4U));
+    return (CHAL_READ_BIT(*reg, ((0x03U) << (CHAL_POSITION_VAL(pin) * 4U))) >> (CHAL_POSITION_VAL(pin) * 4U));
 }
 
-rt_inline void chal_gpio_set_output_type(GPIO_T *port, rt_uint32_t pin, rt_uint32_t eint, rt_uint32_t output_type)
+/**
+ * @brief   GPIO设置引脚输出模式
+ *
+ * @param   port GPIO端口，只能是以下值之一：
+ *          @arg @ref CHAL_GPIOA
+ *          @arg @ref CHAL_GPIOB
+ *          @arg @ref CHAL_GPIOC
+ *          @arg @ref CHAL_GPIOD
+ *          @arg @ref CHAL_GPIOE (*)
+ *          @arg @ref CHAL_GPIOF (*)
+ *          @arg @ref CHAL_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @param   pin GPIO引脚号，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_PIN_0
+ *          @arg @ref CHAL_GPIO_PIN_1
+ *          @arg @ref CHAL_GPIO_PIN_2
+ *          @arg @ref CHAL_GPIO_PIN_3
+ *          @arg @ref CHAL_GPIO_PIN_4
+ *          @arg @ref CHAL_GPIO_PIN_5
+ *          @arg @ref CHAL_GPIO_PIN_6
+ *          @arg @ref CHAL_GPIO_PIN_7
+ *          @arg @ref CHAL_GPIO_PIN_8
+ *          @arg @ref CHAL_GPIO_PIN_9
+ *          @arg @ref CHAL_GPIO_PIN_10
+ *          @arg @ref CHAL_GPIO_PIN_11
+ *          @arg @ref CHAL_GPIO_PIN_12
+ *          @arg @ref CHAL_GPIO_PIN_13
+ *          @arg @ref CHAL_GPIO_PIN_14
+ *          @arg @ref CHAL_GPIO_PIN_15
+ * @param   output GPIO引脚输出模式，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_OUTPUT_PUSHPULL
+ *          @arg @ref CHAL_GPIO_OUTPUT_OPENDRAIN
+ * @return  void
+ */
+rt_inline void chal_gpio_set_output(GPIO_T *port, rt_uint32_t pin, rt_uint32_t output)
 {
     register rt_uint32_t *reg = (rt_uint32_t *)((rt_uint32_t)((rt_uint32_t)(&port->CFGLOW) + (pin >> 24)));
-    chal_modify_reg(*reg, ((0x04U) << (chal_position_val(pin) * 4U)), (output_type << (chal_position_val(pin) * 4U)));
+    CHAL_MODIFY_REG(*reg, ((0x04U) << (CHAL_POSITION_VAL(pin) * 4U)), (output << (CHAL_POSITION_VAL(pin) * 4U)));
 }
 
-rt_inline rt_uint32_t chal_gpio_get_output_type(GPIO_T *port, rt_uint32_t pin, rt_uint32_t eint)
+/**
+ * @brief   GPIO获取引脚输出模式
+ *
+ * @param   port GPIO端口，只能是以下值之一：
+ *          @arg @ref CHAL_GPIOA
+ *          @arg @ref CHAL_GPIOB
+ *          @arg @ref CHAL_GPIOC
+ *          @arg @ref CHAL_GPIOD
+ *          @arg @ref CHAL_GPIOE (*)
+ *          @arg @ref CHAL_GPIOF (*)
+ *          @arg @ref CHAL_GPIOG (*)
+ *
+ *          (*) 不是所有设备都有此定义
+ * @param   pin GPIO引脚号，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_PIN_0
+ *          @arg @ref CHAL_GPIO_PIN_1
+ *          @arg @ref CHAL_GPIO_PIN_2
+ *          @arg @ref CHAL_GPIO_PIN_3
+ *          @arg @ref CHAL_GPIO_PIN_4
+ *          @arg @ref CHAL_GPIO_PIN_5
+ *          @arg @ref CHAL_GPIO_PIN_6
+ *          @arg @ref CHAL_GPIO_PIN_7
+ *          @arg @ref CHAL_GPIO_PIN_8
+ *          @arg @ref CHAL_GPIO_PIN_9
+ *          @arg @ref CHAL_GPIO_PIN_10
+ *          @arg @ref CHAL_GPIO_PIN_11
+ *          @arg @ref CHAL_GPIO_PIN_12
+ *          @arg @ref CHAL_GPIO_PIN_13
+ *          @arg @ref CHAL_GPIO_PIN_14
+ *          @arg @ref CHAL_GPIO_PIN_15
+ * @return  GPIO引脚输出模式，只能是以下值之一：
+ *          @arg @ref CHAL_GPIO_OUTPUT_PUSHPULL
+ *          @arg @ref CHAL_GPIO_OUTPUT_OPENDRAIN
+ */
+rt_inline rt_uint32_t chal_gpio_get_output(GPIO_T *port, rt_uint32_t pin)
 {
     register rt_uint32_t *reg = (rt_uint32_t *)((rt_uint32_t)((rt_uint32_t)(&port->CFGLOW) + (pin >> 24)));
-    return (chal_read_bit(*reg, ((0x04U) << (chal_position_val(pin) * 4U))) >> (chal_position_val(pin) * 4U));
+    return (CHAL_READ_BIT(*reg, ((0x04U) << (CHAL_POSITION_VAL(pin) * 4U))) >> (CHAL_POSITION_VAL(pin) * 4U));
 }
 
-rt_inline void chal_gpio_set_pull(GPIO_T *port, rt_uint32_t pin, rt_uint32_t eint, rt_uint32_t pull)
+rt_inline void chal_gpio_set_pull(GPIO_T *port, rt_uint32_t pin, rt_uint32_t pull)
 {
-    chal_modify_reg(port->ODATA, (pin >> (8U)), pull << (chal_position_val(pin >> (8U))));
+    CHAL_MODIFY_REG(port->ODATA, (pin >> (8U)), pull << (CHAL_POSITION_VAL(pin >> (8U))));
 }
 
-rt_inline rt_uint32_t chal_gpio_get_pull(GPIO_T *port, rt_uint32_t pin, rt_uint32_t eint)
+rt_inline rt_uint32_t chal_gpio_get_pull(GPIO_T *port, rt_uint32_t pin)
 {
-    return (chal_read_bit(port->ODATA, ((0x01U) << (chal_position_val(pin >> (8U))))) >> (chal_position_val(pin >> (8U))));
+    return (CHAL_READ_BIT(port->ODATA, ((0x01U) << (CHAL_POSITION_VAL(pin >> (8U))))) >> (CHAL_POSITION_VAL(pin >> (8U))));
 }
+
+rt_inline void chal_gpio_lock_pin(GPIO_T *port, rt_uint32_t pin)
+{
+    __IO rt_uint32_t temp;
+    CHAL_WRITE_REG(port->LOCK, (0x00010000U) | ((pin >> (8U)) & 0x0000FFFFU));
+    CHAL_WRITE_REG(port->LOCK, ((pin >> (8U)) & 0x0000FFFFU));
+    CHAL_WRITE_REG(port->LOCK, (0x00010000U) | ((pin >> (8U)) & 0x0000FFFFU));
+    temp = CHAL_READ_REG(port->LOCK);
+    (void)temp;
+}
+
+rt_inline rt_uint32_t chal_gpio_is_pin_locked(GPIO_T *port, rt_uint32_t pin)
+{
+    return (CHAL_READ_BIT(port->LOCK, ((pin >> (8U)) & 0x0000FFFFU)) == ((pin >> (8U)) & 0x0000FFFFU));
+}
+
+rt_inline rt_uint32_t chal_gpio_is_anypin_locked(GPIO_T *port)
+{
+    return (CHAL_READ_BIT(port->LOCK, (0x00010000U)) == ((0x00010000U)));
+}
+
+rt_inline rt_uint32_t chal_gpio_read_input_port(GPIO_T *port)
+{
+    return (CHAL_READ_REG(port->IDATA));
+}
+
+rt_inline rt_uint32_t chal_gpio_is_input_pin_set(GPIO_T *port, rt_uint32_t pin)
+{
+    return (CHAL_READ_BIT(port->IDATA, (pin >> (8U)) & 0x0000FFFFU) == ((pin >> (8U)) & 0x0000FFFFU));
+}
+
+rt_inline void chal_gpio_write_output_port(GPIO_T *port, rt_uint32_t pin)
+{
+    CHAL_WRITE_REG(port->ODATA, pin);
+}
+
+rt_inline rt_uint32_t chal_gpio_read_output_port(GPIO_T *port)
+{
+    return (rt_uint32_t)(CHAL_READ_REG(port->ODATA));
+}
+
+rt_inline rt_uint32_t chal_gpio_is_output_pin_set(GPIO_T *port, rt_uint32_t pin)
+{
+    return (CHAL_READ_BIT(port->ODATA, (pin >> (8U)) & 0x0000FFFFU) == ((pin >> (8U)) & 0x0000FFFFU));
+}
+
+rt_inline void chal_gpio_set_output_pin(GPIO_T *port, rt_uint32_t pin)
+{
+    CHAL_WRITE_REG(port->BSC, (pin >> (8U)) & 0x0000FFFFU);
+}
+
+rt_inline void chal_gpio_reset_output_pin(GPIO_T *port, rt_uint32_t pin)
+{
+    CHAL_WRITE_REG(port->BC, (pin >> (8U)) & 0x0000FFFFU);
+}
+
+rt_inline void chal_gpio_toggle_pin(GPIO_T *port, rt_uint32_t pin)
+{
+    rt_uint32_t odr     = CHAL_READ_REG(port->ODATA);
+    rt_uint32_t pinmask = ((pin >> (8U)) & 0x0000FFFFU);
+    CHAL_WRITE_REG(port->BSC, ((odr & pinmask) << 16u) | (~odr & pinmask));
+}
+
+rt_err_t chal_gpio_deinit(GPIO_T *port);
+rt_err_t chal_gpio_init(GPIO_T *port, rt_uint32_t pin, chal_gpio_init_t *init);
+void     chal_gpio_init_init(chal_gpio_init_t *init);
 
 #ifdef __cplusplus
 }
