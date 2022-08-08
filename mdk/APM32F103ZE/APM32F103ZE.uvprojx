@@ -403,6 +403,11 @@
               <FilePath>..\..\drivers\csp_hal\src\chal_clock.c</FilePath>
             </File>
             <File>
+              <FileName>chal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\drivers\csp_hal\src\chal_flash.c</FilePath>
+            </File>
+            <File>
               <FileName>chal_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\drivers\csp_hal\src\chal_gpio.c</FilePath>
