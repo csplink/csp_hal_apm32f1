@@ -11,7 +11,7 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2022-08-08     xqyjlj      the first version
+ * 2022-08-08     xqyjlj       the first version
  *
  */
 #ifndef __CHAL_FLASH_H__
