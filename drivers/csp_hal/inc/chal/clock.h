@@ -24,6 +24,63 @@
 extern "C" {
 #endif
 
+#define CHAL_CLOCK_SYSCLK_SOURCE_HSI         RCM_SYSCLK_SEL_HSI  // 选择HSI作为系统时钟
+#define CHAL_CLOCK_SYSCLK_SOURCE_HSE         RCM_SYSCLK_SEL_HSE  // 选择HSE作为系统时钟
+#define CHAL_CLOCK_SYSCLK_SOURCE_PLL         RCM_SYSCLK_SEL_PLL  // 选择PLL作为系统时钟
+
+#define CHAL_CLOCK_AHBCLK_DIV_1              RCM_AHB_DIV_1
+#define CHAL_CLOCK_AHBCLK_DIV_2              RCM_AHB_DIV_2
+#define CHAL_CLOCK_AHBCLK_DIV_4              RCM_AHB_DIV_4
+#define CHAL_CLOCK_AHBCLK_DIV_8              RCM_AHB_DIV_8
+#define CHAL_CLOCK_AHBCLK_DIV_16             RCM_AHB_DIV_16
+#define CHAL_CLOCK_AHBCLK_DIV_64             RCM_AHB_DIV_64
+#define CHAL_CLOCK_AHBCLK_DIV_128            RCM_AHB_DIV_128
+#define CHAL_CLOCK_AHBCLK_DIV_256            RCM_AHB_DIV_256
+#define CHAL_CLOCK_AHBCLK_DIV_512            RCM_AHB_DIV_512
+
+#define CHAL_CLOCK_APBCLK_DIV_1              RCM_APB_DIV_1
+#define CHAL_CLOCK_APBCLK_DIV_2              RCM_APB_DIV_2
+#define CHAL_CLOCK_APBCLK_DIV_4              RCM_APB_DIV_4
+#define CHAL_CLOCK_APBCLK_DIV_8              RCM_APB_DIV_8
+#define CHAL_CLOCK_APBCLK_DIV_16             RCM_APB_DIV_16
+
+#define CHAL_CLOCK_ADCCLK_DIV_2              RCM_PCLK2_DIV_2
+#define CHAL_CLOCK_ADCCLK_DIV_4              RCM_PCLK2_DIV_4
+#define CHAL_CLOCK_ADCCLK_DIV_6              RCM_PCLK2_DIV_6
+#define CHAL_CLOCK_ADCCLK_DIV_8              RCM_PCLK2_DIV_8
+
+#define CHAL_CLOCK_PLLCLK_SOURCE_HSI_DIV_2   (0x00000000U)
+#define CHAL_CLOCK_PLLCLK_SOURCE_HSE_DIV_1   (0x00010000U)
+#define CHAL_CLOCK_PLLCLK_SOURCE_HSE_DIV_2   (0x00030000U)
+
+#define CHAL_CLOCK_PLLCLK_MUL_2              RCM_PLLMF_2
+#define CHAL_CLOCK_PLLCLK_MUL_3              RCM_PLLMF_3
+#define CHAL_CLOCK_PLLCLK_MUL_4              RCM_PLLMF_4
+#define CHAL_CLOCK_PLLCLK_MUL_5              RCM_PLLMF_5
+#define CHAL_CLOCK_PLLCLK_MUL_6              RCM_PLLMF_6
+#define CHAL_CLOCK_PLLCLK_MUL_7              RCM_PLLMF_7
+#define CHAL_CLOCK_PLLCLK_MUL_8              RCM_PLLMF_8
+#define CHAL_CLOCK_PLLCLK_MUL_9              RCM_PLLMF_9
+#define CHAL_CLOCK_PLLCLK_MUL_10             RCM_PLLMF_10
+#define CHAL_CLOCK_PLLCLK_MUL_11             RCM_PLLMF_11
+#define CHAL_CLOCK_PLLCLK_MUL_12             RCM_PLLMF_12
+#define CHAL_CLOCK_PLLCLK_MUL_13             RCM_PLLMF_13
+#define CHAL_CLOCK_PLLCLK_MUL_14             RCM_PLLMF_14
+#define CHAL_CLOCK_PLLCLK_MUL_15             RCM_PLLMF_15
+#define CHAL_CLOCK_PLLCLK_MUL_16             RCM_PLLMF_16
+
+#define CHAL_CLOCK_USBCLK_SOURCE_PLL_DIV_1_5 RCM_USB_DIV_1_5
+#define CHAL_CLOCK_USBCLK_SOURCE_PLL_DIV_1   RCM_USB_DIV_1
+
+#define CHAL_CLOCK_MCOCLK_NOCLOCK            RCM_MCOCLK_NO_CLOCK
+#define CHAL_CLOCK_MCOCLK_SYSCLK             RCM_MCOCLK_SYSCLK
+#define CHAL_CLOCK_MCOCLK_HSI                RCM_MCOCLK_HSI
+#define CHAL_CLOCK_MCOCLK_HSE                RCM_MCOCLK_HSE
+#define CHAL_CLOCK_MCOCLK_PLL_DIV_2          RCM_MCOCLK_PLLCLK_DIV_2
+
+#define CHAL_CLOCK_FPUCLK_DIV_1              RCM_FPU_DIV_1
+#define CHAL_CLOCK_FPUCLK_DIV_2              RCM_FPU_DIV_2
+
 rt_inline void chal_clock_hsi_enable(void)
 {
     RCM->CTRL_B.HSIEN = 1;
@@ -156,22 +213,12 @@ rt_inline rt_uint32_t chal_clock_get_adc_clock_prescaler(void)
 
 rt_inline void chal_clock_set_pll_source(rt_uint32_t source)
 {
-    RCM->CFG_B.PLLSRCSEL = source;
+    CHAL_MODIFY_REG(RCM->CFG, (0x00030000U), (source & 0x00030000U));
 }
 
 rt_inline rt_uint32_t chal_clock_get_pll_source(void)
 {
-    return RCM->CFG_B.PLLSRCSEL;
-}
-
-rt_inline void chal_clock_set_pll_prediv(rt_uint32_t prediv)
-{
-    RCM->CFG_B.PLLHSEPSC = prediv;
-}
-
-rt_inline rt_uint32_t chal_clock_get_pll_prediv(void)
-{
-    return RCM->CFG_B.PLLHSEPSC;
+    return CHAL_READ_BIT(RCM->CFG, (0x00030000U));
 }
 
 rt_inline void chal_clock_set_pll_mul(rt_uint32_t mul)
