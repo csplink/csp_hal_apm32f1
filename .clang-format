@@ -10,7 +10,7 @@ AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: Consecutive
 # 连续声明时，对齐所有声明的变量名
 AlignConsecutiveDeclarations: Consecutive
-AlignConsecutiveMacros: AcrossEmptyLines
+AlignConsecutiveMacros: AcrossEmptyLinesAndComments
 AlignEscapedNewlines: Right
 AlignConsecutiveBitFields: Consecutive
 AlignArrayOfStructures: Left
