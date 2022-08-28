@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Pins>
+    <Pin Name="PE2" Position="1" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A23"/>
+            <Function Name="SYS_TRACECLK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE3" Position="2" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A19"/>
+            <Function Name="SYS_TRACED0"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE4" Position="3" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A20"/>
+            <Function Name="SYS_TRACED1"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE5" Position="4" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A21"/>
+            <Function Name="SYS_TRACED2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE6" Position="5" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A22"/>
+            <Function Name="SYS_TRACED3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VBAT" Position="6" Type="Power"/>
+    <Pin Name="PC13" Position="7" Type="I/O">
+        <Functions>
+            <Function Name="RTC_OUT"/>
+            <Function Name="RTC_TAMPER"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC14" Position="8" Type="I/O">
+        <Functions>
+            <Function Name="RCC_OSC32_IN"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC15" Position="9" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI15"/>
+            <Function Name="ADC2_EXTI15"/>
+            <Function Name="RCC_OSC32_OUT"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF0" Position="10" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A0"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF1" Position="11" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A1"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF2" Position="12" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF3" Position="13" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF4" Position="14" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A4"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF5" Position="15" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A5"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="16" Type="Power"/>
+    <Pin Name="VDD" Position="17" Type="Power"/>
+    <Pin Name="PF6" Position="18" Type="I/O">
+        <Functions>
+            <Function Name="ADC3_IN4"/>
+            <Function Name="FSMC_NIORD"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF7" Position="19" Type="I/O">
+        <Functions>
+            <Function Name="ADC3_IN5"/>
+            <Function Name="FSMC_NREG"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF8" Position="20" Type="I/O">
+        <Functions>
+            <Function Name="ADC3_IN6"/>
+            <Function Name="FSMC_NIOWR"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF9" Position="21" Type="I/O">
+        <Functions>
+            <Function Name="ADC3_IN7"/>
+            <Function Name="DAC_EXTI9"/>
+            <Function Name="FSMC_CD"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF10" Position="22" Type="I/O">
+        <Functions>
+            <Function Name="ADC3_IN8"/>
+            <Function Name="FSMC_INTR"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD0" Position="23" Type="MonoIO">
+        <Function Name="RCC_OSC_IN"/>
+    </Pin>
+    <Pin Name="PD1" Position="24" Type="MonoIO">
+        <Function Name="RCC_OSC_OUT"/>
+    </Pin>
+    <Pin Name="NRST" Position="25" Type="Reset"/>
+    <Pin Name="PC0" Position="26" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN10"/>
+            <Function Name="ADC2_IN10"/>
+            <Function Name="ADC3_IN10"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC1" Position="27" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN11"/>
+            <Function Name="ADC2_IN11"/>
+            <Function Name="ADC3_IN11"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC2" Position="28" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN12"/>
+            <Function Name="ADC2_IN12"/>
+            <Function Name="ADC3_IN12"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC3" Position="29" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN13"/>
+            <Function Name="ADC2_IN13"/>
+            <Function Name="ADC3_IN13"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSSA" Position="30" Type="Power"/>
+    <Pin Name="VREF-" Position="31" Type="Power"/>
+    <Pin Name="VREF+" Position="32" Type="Power"/>
+    <Pin Name="VDDA" Position="33" Type="Power"/>
+    <Pin Name="PA0-WKUP" Position="34" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN0"/>
+            <Function Name="ADC2_IN0"/>
+            <Function Name="ADC3_IN0"/>
+            <Function Name="SYS_WKUP"/>
+            <Function Name="TIM2_CH1"/>
+            <Function Name="TIM2_ETR"/>
+            <Function Name="TIM5_CH1"/>
+            <Function Name="TIM8_ETR"/>
+            <Function Name="USART2_CTS"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA1" Position="35" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN1"/>
+            <Function Name="ADC2_IN1"/>
+            <Function Name="ADC3_IN1"/>
+            <Function Name="TIM2_CH2"/>
+            <Function Name="TIM5_CH2"/>
+            <Function Name="USART2_RTS"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA2" Position="36" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN2"/>
+            <Function Name="ADC2_IN2"/>
+            <Function Name="ADC3_IN2"/>
+            <Function Name="TIM2_CH3"/>
+            <Function Name="TIM5_CH3"/>
+            <Function Name="USART2_TX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA3" Position="37" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN3"/>
+            <Function Name="ADC2_IN3"/>
+            <Function Name="ADC3_IN3"/>
+            <Function Name="TIM2_CH4"/>
+            <Function Name="TIM5_CH4"/>
+            <Function Name="USART2_RX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="38" Type="Power"/>
+    <Pin Name="VDD" Position="39" Type="Power"/>
+    <Pin Name="PA4" Position="40" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN4"/>
+            <Function Name="ADC2_IN4"/>
+            <Function Name="DAC_OUT1"/>
+            <Function Name="SPI1_NSS"/>
+            <Function Name="USART2_CK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA5" Position="41" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN5"/>
+            <Function Name="ADC2_IN5"/>
+            <Function Name="DAC_OUT2"/>
+            <Function Name="SPI1_SCK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA6" Position="42" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN6"/>
+            <Function Name="ADC2_IN6"/>
+            <Function Name="SPI1_MISO"/>
+            <Function Name="TIM1_BKIN"/>
+            <Function Name="TIM3_CH1"/>
+            <Function Name="TIM8_BKIN"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA7" Position="43" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN7"/>
+            <Function Name="ADC2_IN7"/>
+            <Function Name="SPI1_MOSI"/>
+            <Function Name="TIM1_CH1N"/>
+            <Function Name="TIM3_CH2"/>
+            <Function Name="TIM8_CH1N"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC4" Position="44" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN14"/>
+            <Function Name="ADC2_IN14"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC5" Position="45" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN15"/>
+            <Function Name="ADC2_IN15"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB0" Position="46" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN8"/>
+            <Function Name="ADC2_IN8"/>
+            <Function Name="TIM1_CH2N"/>
+            <Function Name="TIM3_CH3"/>
+            <Function Name="TIM8_CH2N"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB1" Position="47" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_IN9"/>
+            <Function Name="ADC2_IN9"/>
+            <Function Name="TIM1_CH3N"/>
+            <Function Name="TIM3_CH4"/>
+            <Function Name="TIM8_CH3N"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB2" Position="48" Type="I/O">
+        <Functions>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF11" Position="49" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI11"/>
+            <Function Name="ADC2_EXTI11"/>
+            <Function Name="FSMC_NIOS16"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF12" Position="50" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A6"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="51" Type="Power"/>
+    <Pin Name="VDD" Position="52" Type="Power"/>
+    <Pin Name="PF13" Position="53" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A7"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF14" Position="54" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A8"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PF15" Position="55" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI15"/>
+            <Function Name="ADC2_EXTI15"/>
+            <Function Name="FSMC_A9"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG0" Position="56" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A10"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG1" Position="57" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A11"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE7" Position="58" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D4"/>
+            <Function Name="FSMC_DA4"/>
+            <Function Name="TIM1_ETR"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE8" Position="59" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D5"/>
+            <Function Name="FSMC_DA5"/>
+            <Function Name="TIM1_CH1N"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE9" Position="60" Type="I/O">
+        <Functions>
+            <Function Name="DAC_EXTI9"/>
+            <Function Name="FSMC_D6"/>
+            <Function Name="FSMC_DA6"/>
+            <Function Name="TIM1_CH1"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="61" Type="Power"/>
+    <Pin Name="VDD" Position="62" Type="Power"/>
+    <Pin Name="PE10" Position="63" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D7"/>
+            <Function Name="FSMC_DA7"/>
+            <Function Name="TIM1_CH2N"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE11" Position="64" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI11"/>
+            <Function Name="ADC2_EXTI11"/>
+            <Function Name="FSMC_D8"/>
+            <Function Name="FSMC_DA8"/>
+            <Function Name="TIM1_CH2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE12" Position="65" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D9"/>
+            <Function Name="FSMC_DA9"/>
+            <Function Name="TIM1_CH3N"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE13" Position="66" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D10"/>
+            <Function Name="FSMC_DA10"/>
+            <Function Name="TIM1_CH3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE14" Position="67" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D11"/>
+            <Function Name="FSMC_DA11"/>
+            <Function Name="TIM1_CH4"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE15" Position="68" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI15"/>
+            <Function Name="ADC2_EXTI15"/>
+            <Function Name="FSMC_D12"/>
+            <Function Name="FSMC_DA12"/>
+            <Function Name="TIM1_BKIN"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB10" Position="69" Type="I/O">
+        <Functions>
+            <Function Name="I2C2_SCL"/>
+            <Function Name="TIM2_CH3"/>
+            <Function Name="USART3_TX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB11" Position="70" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI11"/>
+            <Function Name="ADC2_EXTI11"/>
+            <Function Name="I2C2_SDA"/>
+            <Function Name="TIM2_CH4"/>
+            <Function Name="USART3_RX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="71" Type="Power"/>
+    <Pin Name="VDD" Position="72" Type="Power"/>
+    <Pin Name="PB12" Position="73" Type="I/O">
+        <Functions>
+            <Function Name="I2C2_SMBA"/>
+            <Function Name="I2S2_WS"/>
+            <Function Name="SPI2_NSS"/>
+            <Function Name="TIM1_BKIN"/>
+            <Function Name="USART3_CK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB13" Position="74" Type="I/O">
+        <Functions>
+            <Function Name="I2S2_CK"/>
+            <Function Name="SPI2_SCK"/>
+            <Function Name="TIM1_CH1N"/>
+            <Function Name="USART3_CTS"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB14" Position="75" Type="I/O">
+        <Functions>
+            <Function Name="SPI2_MISO"/>
+            <Function Name="TIM1_CH2N"/>
+            <Function Name="USART3_RTS"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB15" Position="76" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI15"/>
+            <Function Name="ADC2_EXTI15"/>
+            <Function Name="I2S2_SD"/>
+            <Function Name="SPI2_MOSI"/>
+            <Function Name="TIM1_CH3N"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD8" Position="77" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D13"/>
+            <Function Name="FSMC_DA13"/>
+            <Function Name="USART3_TX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD9" Position="78" Type="I/O">
+        <Functions>
+            <Function Name="DAC_EXTI9"/>
+            <Function Name="FSMC_D14"/>
+            <Function Name="FSMC_DA14"/>
+            <Function Name="USART3_RX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD10" Position="79" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D15"/>
+            <Function Name="FSMC_DA15"/>
+            <Function Name="USART3_CK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD11" Position="80" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI11"/>
+            <Function Name="ADC2_EXTI11"/>
+            <Function Name="FSMC_A16"/>
+            <Function Name="FSMC_CLE"/>
+            <Function Name="USART3_CTS"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD12" Position="81" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A17"/>
+            <Function Name="FSMC_ALE"/>
+            <Function Name="TIM4_CH1"/>
+            <Function Name="USART3_RTS"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD13" Position="82" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A18"/>
+            <Function Name="TIM4_CH2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="83" Type="Power"/>
+    <Pin Name="VDD" Position="84" Type="Power"/>
+    <Pin Name="PD14" Position="85" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_D0"/>
+            <Function Name="FSMC_DA0"/>
+            <Function Name="TIM4_CH3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD15" Position="86" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI15"/>
+            <Function Name="ADC2_EXTI15"/>
+            <Function Name="FSMC_D1"/>
+            <Function Name="FSMC_DA1"/>
+            <Function Name="TIM4_CH4"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG2" Position="87" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A12"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG3" Position="88" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A13"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG4" Position="89" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A14"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG5" Position="90" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A15"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG6" Position="91" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_INT2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG7" Position="92" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_INT3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG8" Position="93" Type="I/O">
+        <Functions>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="94" Type="Power"/>
+    <Pin Name="VDD" Position="95" Type="Power"/>
+    <Pin Name="PC6" Position="96" Type="I/O">
+        <Functions>
+            <Function Name="I2S2_MCK"/>
+            <Function Name="SDIO_D6"/>
+            <Function Name="TIM3_CH1"/>
+            <Function Name="TIM8_CH1"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC7" Position="97" Type="I/O">
+        <Functions>
+            <Function Name="I2S3_MCK"/>
+            <Function Name="SDIO_D7"/>
+            <Function Name="TIM3_CH2"/>
+            <Function Name="TIM8_CH2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC8" Position="98" Type="I/O">
+        <Functions>
+            <Function Name="SDIO_D0"/>
+            <Function Name="TIM3_CH3"/>
+            <Function Name="TIM8_CH3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+        <Condition Diagnostic="Conflict with UART4_TX" Expression="(!(SDIO_D0 &amp; PC10_UART4_TX) )"/>
+        <Condition Diagnostic="Conflict with USART3_TX" Expression="(!(SDIO_D0 &amp; PC10_USART3_TX) )"/>
+    </Pin>
+    <Pin Name="PC9" Position="99" Type="I/O">
+        <Functions>
+            <Function Name="DAC_EXTI9"/>
+            <Function Name="SDIO_D1"/>
+            <Function Name="TIM3_CH4"/>
+            <Function Name="TIM8_CH4"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA8" Position="100" Type="I/O">
+        <Functions>
+            <Function Name="RCC_MCO"/>
+            <Function Name="TIM1_CH1"/>
+            <Function Name="USART1_CK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA9" Position="101" Type="I/O">
+        <Functions>
+            <Function Name="DAC_EXTI9"/>
+            <Function Name="TIM1_CH2"/>
+            <Function Name="USART1_TX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA10" Position="102" Type="I/O">
+        <Functions>
+            <Function Name="TIM1_CH3"/>
+            <Function Name="USART1_RX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA11" Position="103" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI11"/>
+            <Function Name="ADC2_EXTI11"/>
+            <Function Name="CAN_RX"/>
+            <Function Name="TIM1_CH4"/>
+            <Function Name="USART1_CTS"/>
+            <Function Name="USB_DM"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA12" Position="104" Type="I/O">
+        <Functions>
+            <Function Name="CAN_TX"/>
+            <Function Name="TIM1_ETR"/>
+            <Function Name="USART1_RTS"/>
+            <Function Name="USB_DP"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA13" Position="105" Type="I/O">
+        <Functions>
+            <Function Name="SYS_JTMS-SWDIO"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="NC" Position="106" Type="NC"/>
+    <Pin Name="VSS" Position="107" Type="Power"/>
+    <Pin Name="VDD" Position="108" Type="Power"/>
+    <Pin Name="PA14" Position="109" Type="I/O">
+        <Functions>
+            <Function Name="SYS_JTCK-SWCLK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PA15" Position="110" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI15"/>
+            <Function Name="ADC2_EXTI15"/>
+            <Function Name="I2S3_WS"/>
+            <Function Name="SPI1_NSS"/>
+            <Function Name="SPI3_NSS"/>
+            <Function Name="SYS_JTDI"/>
+            <Function Name="TIM2_CH1"/>
+            <Function Name="TIM2_ETR"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC10" Position="111" Type="I/O">
+        <Functions>
+            <Function Name="SDIO_D2"/>
+            <Function Name="UART4_TX"/>
+            <Function Name="USART3_TX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+        <Condition Diagnostic="Conflict with SDIO_D2" Expression="(!(UART4_TX &amp; PC8_SDIO_D0) )"/>
+        <Condition Diagnostic="Conflict with SDIO_D2" Expression="(!(USART3_TX &amp; PC8_SDIO_D0) )"/>
+    </Pin>
+    <Pin Name="PC11" Position="112" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI11"/>
+            <Function Name="ADC2_EXTI11"/>
+            <Function Name="SDIO_D3"/>
+            <Function Name="UART4_RX"/>
+            <Function Name="USART3_RX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PC12" Position="113" Type="I/O">
+        <Functions>
+            <Function Name="SDIO_CK"/>
+            <Function Name="UART5_TX"/>
+            <Function Name="USART3_CK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD0" Position="114" Type="I/O">
+        <Functions>
+            <Function Name="CAN_RX"/>
+            <Function Name="FSMC_D2"/>
+            <Function Name="FSMC_DA2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD1" Position="115" Type="I/O">
+        <Functions>
+            <Function Name="CAN_TX"/>
+            <Function Name="FSMC_D3"/>
+            <Function Name="FSMC_DA3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD2" Position="116" Type="I/O">
+        <Functions>
+            <Function Name="SDIO_CMD"/>
+            <Function Name="TIM3_ETR"/>
+            <Function Name="UART5_RX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD3" Position="117" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_CLK"/>
+            <Function Name="USART2_CTS"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD4" Position="118" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NOE"/>
+            <Function Name="USART2_RTS"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD5" Position="119" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NWE"/>
+            <Function Name="USART2_TX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="120" Type="Power"/>
+    <Pin Name="VDD" Position="121" Type="Power"/>
+    <Pin Name="PD6" Position="122" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NWAIT"/>
+            <Function Name="USART2_RX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PD7" Position="123" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NCE2"/>
+            <Function Name="FSMC_NE1"/>
+            <Function Name="USART2_CK"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG9" Position="124" Type="I/O">
+        <Functions>
+            <Function Name="DAC_EXTI9"/>
+            <Function Name="FSMC_NCE3"/>
+            <Function Name="FSMC_NE2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG10" Position="125" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NCE4_1"/>
+            <Function Name="FSMC_NE3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG11" Position="126" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI11"/>
+            <Function Name="ADC2_EXTI11"/>
+            <Function Name="FSMC_NCE4_2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG12" Position="127" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NE4"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG13" Position="128" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A24"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PG14" Position="129" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_A25"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="130" Type="Power"/>
+    <Pin Name="VDD" Position="131" Type="Power"/>
+    <Pin Name="PG15" Position="132" Type="I/O">
+        <Functions>
+            <Function Name="ADC1_EXTI15"/>
+            <Function Name="ADC2_EXTI15"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB3" Position="133" Type="I/O">
+        <Functions>
+            <Function Name="I2S3_CK"/>
+            <Function Name="SPI1_SCK"/>
+            <Function Name="SPI3_SCK"/>
+            <Function Name="SYS_JTDO-TRACESWO"/>
+            <Function Name="TIM2_CH2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB4" Position="134" Type="I/O">
+        <Functions>
+            <Function Name="SPI1_MISO"/>
+            <Function Name="SPI3_MISO"/>
+            <Function Name="SYS_NJTRST"/>
+            <Function Name="TIM3_CH1"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB5" Position="135" Type="I/O">
+        <Functions>
+            <Function Name="I2C1_SMBA"/>
+            <Function Name="I2S3_SD"/>
+            <Function Name="SPI1_MOSI"/>
+            <Function Name="SPI3_MOSI"/>
+            <Function Name="TIM3_CH2"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB6" Position="136" Type="I/O">
+        <Functions>
+            <Function Name="I2C1_SCL"/>
+            <Function Name="TIM4_CH1"/>
+            <Function Name="USART1_TX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB7" Position="137" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NL"/>
+            <Function Name="I2C1_SDA"/>
+            <Function Name="TIM4_CH2"/>
+            <Function Name="USART1_RX"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="BOOT0" Position="138" Type="Boot"/>
+    <Pin Name="PB8" Position="139" Type="I/O">
+        <Functions>
+            <Function Name="CAN_RX"/>
+            <Function Name="I2C1_SCL"/>
+            <Function Name="SDIO_D4"/>
+            <Function Name="TIM4_CH3"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PB9" Position="140" Type="I/O">
+        <Functions>
+            <Function Name="CAN_TX"/>
+            <Function Name="DAC_EXTI9"/>
+            <Function Name="I2C1_SDA"/>
+            <Function Name="SDIO_D5"/>
+            <Function Name="TIM4_CH4"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE0" Position="141" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NBL0"/>
+            <Function Name="TIM4_ETR"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="PE1" Position="142" Type="I/O">
+        <Functions>
+            <Function Name="FSMC_NBL1"/>
+            <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
+            <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
+            <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
+            <Function Name="EVENTOUT" Type="GPIO" Mode="Eventout-Std"/>
+            <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
+        </Functions>
+    </Pin>
+    <Pin Name="VSS" Position="143" Type="Power"/>
+    <Pin Name="VDD" Position="144" Type="Power"/>
+</Pins>

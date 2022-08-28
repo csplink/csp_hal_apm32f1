@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map>
+    <Groups>
+        <Group Name="chal_gpio_level">
+            <Comments>GPIO电平类型</Comments>
+            <Values>
+                <Value Name="CHAL_GPIO_LEVEL_LOW">
+                    <Comments>低电平</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_LEVEL_HIGH">
+                    <Comments>高电平</Comments>
+                </Value>
+            </Values>
+        </Group>
+        <Group Name="chal_gpio_mode">
+            <Comments>GPIO模式类型</Comments>
+            <Values>
+                <Value Name="CHAL_GPIO_MODE_ANALOG">
+                    <Comments>模拟模式</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_MODE_FLOATING">
+                    <Comments>浮空模式</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_MODE_INPUT">
+                    <Comments>输入模式</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_MODE_OUTPUT">
+                    <Comments>输出模式</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_MODE_ALTERNATE">
+                    <Comments>复用模式</Comments>
+                </Value>
+            </Values>
+        </Group>
+        <Group Name="chal_gpio_output_type">
+            <Comments>GPIO输出类型</Comments>
+            <Values>
+                <Value Name="CHAL_GPIO_OUTPUT_PP">
+                    <Comments>推挽输出</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_OUTPUT_OD">
+                    <Comments>开漏输出</Comments>
+                </Value>
+            </Values>
+        </Group>
+        <Group Name="chal_gpio_pull">
+            <Comments>GPIO钳位类型</Comments>
+            <Values>
+                <Value Name="CHAL_GPIO_PULL_DOWN">
+                    <Comments>下拉</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_PULL_UP">
+                    <Comments>上拉</Comments>
+                </Value>
+            </Values>
+        </Group>
+        <Group Name="chal_gpio_speed">
+            <Comments>GPIO速度类型</Comments>
+            <Values>
+                <Value Name="CHAL_GPIO_SPEED_LOW">
+                    <Comments>10MHz</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_SPEED_MEDIUM">
+                    <Comments>20MHz</Comments>
+                </Value>
+                <Value Name="CHAL_GPIO_SPEED_HIGH">
+                    <Comments>50MHz</Comments>
+                </Value>
+            </Values>
+        </Group>
+    </Groups>
+    <Properties>
+        <Property Group="chal_gpio_level">
+            <DisplayName>电平</DisplayName>
+            <Description>GPIO-电平</Description>
+            <Category>GPIO</Category>
+            <ReadOnly>false</ReadOnly>
+        </Property>
+        <Property Group="chal_gpio_mode">
+            <DisplayName>模式</DisplayName>
+            <Description>GPIO-模式</Description>
+            <Category>GPIO</Category>
+            <ReadOnly>false</ReadOnly>
+        </Property>
+        <Property Group="chal_gpio_output_type">
+            <DisplayName>输出类型</DisplayName>
+            <Description>GPIO-输出类型</Description>
+            <Category>GPIO</Category>
+            <ReadOnly>false</ReadOnly>
+        </Property>
+        <Property Group="chal_gpio_pull">
+            <DisplayName>钳位</DisplayName>
+            <Description>GPIO-钳位</Description>
+            <Category>GPIO</Category>
+            <ReadOnly>false</ReadOnly>
+        </Property>
+        <Property Group="chal_gpio_speed">
+            <DisplayName>速度</DisplayName>
+            <Description>GPIO-速度</Description>
+            <Category>GPIO</Category>
+            <ReadOnly>false</ReadOnly>
+        </Property>
+    </Properties>
+</Map>
