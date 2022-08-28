@@ -22,6 +22,7 @@ RT_WEAK void csp_clock_init() {}
 
 RT_WEAK void rt_hw_board_init()
 {
+    csp_clock_init();
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
 #endif
@@ -35,6 +36,7 @@ void chal_error_handler(char *s, int num)
 }
 
 #ifdef RT_DEBUG
+
 /**
  * The RT_ASSERT function.
  *
@@ -48,4 +50,11 @@ RT_WEAK void rt_assert_handler(const char *ex_string, const char *func, rt_size_
     while (1) {
     };
 }
+
 #endif /* RT_DEBUG */
+
+void HardFault_Handler(void)
+{
+    while (1) {
+    }
+}

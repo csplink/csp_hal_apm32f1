@@ -38,7 +38,7 @@ rt_err_t chal_gpio_deinit(GPIO_T *port)
     /* Check the parameters */
     RT_ASSERT(CHAL_GPIO_IS_INSTANCE(port));
 
-    /* Force and Release reset on clock of port Port */
+    /* Force and Release reset on clock of Port */
     if (port == CHAL_GPIOA) {
         chal_gpio_force_set_clk(CHAL_GPIO_CLK_GPIOA);
         chal_gpio_force_reset_clk(CHAL_GPIO_CLK_GPIOA);

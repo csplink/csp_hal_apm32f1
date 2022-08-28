@@ -1,7 +1,6 @@
 #Clion
 .idea/
 cmake-build*/
-CMakeLists.txt
 
 #vscode
 .vscode/
