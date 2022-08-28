@@ -8,7 +8,7 @@
   <WorkspaceName>WorkSpace</WorkspaceName>
 
   <project>
-    <PathAndName>.\APM32F103ZE\APM32F103ZE.uvprojx</PathAndName>
+    <PathAndName>.\APM32F103ZET6\APM32F103ZET6.uvprojx</PathAndName>
     <NodeIsActive>1</NodeIsActive>
     <NodeIsExpanded>1</NodeIsExpanded>
   </project>

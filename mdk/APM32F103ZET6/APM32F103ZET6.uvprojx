@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>APM32F103ZE</TargetName>
+      <TargetName>APM32F103ZET6</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>6180000::V6.18::ARMCLANG</pCCUsed>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>APM32F103ZE</OutputName>
+          <OutputName>APM32F103ZET6</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\csp\inc;..\..\drivers\csp_hal\inc;..\..\drivers\csp_rt\inc;..\..\libraries\APM32F10x_StdPeriphDriver\inc;..\..\libraries\Device\Geehy\APM32F10x\Include</IncludePath>
+              <IncludePath>..\..\csp\inc;..\..\drivers\csp_hal\inc;..\..\drivers\csp_rt\inc;..\..\libraries\APM32F10x_StdPeriphDriver\inc;..\..\libraries\CMSIS\Device\Geehy\APM32F10x\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -435,12 +435,12 @@
             <File>
               <FileName>system_apm32f10x.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\Device\Geehy\APM32F10x\Source\system_apm32f10x.c</FilePath>
+              <FilePath>..\..\libraries\CMSIS\Device\Geehy\APM32F10x\Source\system_apm32f10x.c</FilePath>
             </File>
             <File>
               <FileName>startup_apm32f10x_hd.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\..\libraries\Device\Geehy\APM32F10x\Source\arm\startup_apm32f10x_hd.s</FilePath>
+              <FilePath>..\..\libraries\CMSIS\Device\Geehy\APM32F10x\Source\arm\startup_apm32f10x_hd.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -587,7 +587,7 @@
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.6.0" condition="ARMv6_7_8-M Device">
         <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
         <targetInfos>
-          <targetInfo name="APM32F103ZE"/>
+          <targetInfo name="APM32F103ZET6"/>
         </targetInfos>
       </component>
     </components>
