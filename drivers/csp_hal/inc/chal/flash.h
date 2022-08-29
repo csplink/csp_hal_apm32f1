@@ -32,7 +32,7 @@ rt_inline void chal_flash_set_latency(rt_uint32_t latency)
     FMC->CTRL1_B.WS = latency;
 }
 
-rt_inline rt_uint32_t chal_flash_get_latency(rt_uint32_t latency)
+rt_inline rt_uint32_t chal_flash_get_latency()
 {
     return (FMC->CTRL1_B.WS);
 }
