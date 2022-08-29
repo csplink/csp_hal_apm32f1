@@ -82,6 +82,7 @@ rt_err_t chal_gpio_deinit(GPIO_T *port)
 
 rt_err_t chal_gpio_init(GPIO_T *port, rt_uint32_t pin, chal_gpio_init_t *init)
 {
+    CHAL_UNUSED(pin);
     rt_uint32_t pinmask, pinpos, currentpin;
 
     RT_ASSERT(CHAL_GPIO_IS_INSTANCE(port));

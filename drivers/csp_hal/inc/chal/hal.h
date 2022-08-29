@@ -51,6 +51,8 @@
 extern "C" {
 #endif
 
+#define CHAL_UNUSED(x)                           (void)(x)
+
 #define CHAL_WRITE_BIT(REG, BIT)                 ((REG) |= (BIT))
 #define CHAL_CLEAR_BIT(REG, BIT)                 ((REG) &= ~(BIT))
 #define CHAL_READ_BIT(REG, BIT)                  ((REG) & (BIT))
