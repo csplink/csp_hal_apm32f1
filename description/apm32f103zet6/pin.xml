@@ -255,7 +255,7 @@
     <Pin Name="VREF-" Position="31" Type="Power"/>
     <Pin Name="VREF+" Position="32" Type="Power"/>
     <Pin Name="VDDA" Position="33" Type="Power"/>
-    <Pin Name="PA0-WKUP" Position="34" Type="I/O">
+    <Pin Name="PA0" Position="34" Type="I/O">
         <Functions>
             <Function Name="ADC1_IN0"/>
             <Function Name="ADC2_IN0"/>
