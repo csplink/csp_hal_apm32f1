@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MCU Name="APM32F103ZET6" Series="APM32F1" Line="APM32F103" ClockTree="APM32F103" HasPowerPad="false" IoType=""
+     Package="LQFP144" Company="Geehy" Price="0">
+    <HAL Name="csp_hal_apm32f1" Version="latest"/>
+    <CompanyUrl>https://geehy.com</CompanyUrl>
+    <RepositoryUrl>https://github.com/xqyjlj/csp_hal_apm32f1</RepositoryUrl>
+    <Introduction>具有512KB Flash和96MHz CPU的主流Arm Cortex-M3超值系列MCU</Introduction>
+    <Illustrate>
+        <![CDATA[
+APM32F103xDxE系列MCU，基于32位Arm® Cortex®-M3内核，最高工作主频96MHz，支持FPU浮点运算单元，配置增强型外部存储控制器EMMC，支持USB和CAN接口同时使用；集成片上储存器、定时器以及数据转换器等多种外设接口，具有功耗低、容量大、可移植性好、Flash擦除/编程速度快等特点。目前已经通过中国IEC61508 SIL2认证和USB-IF测试，符合工业级高可靠性标准。适用于航模飞机、手持云台、扫码枪、报警器、密码锁、电子秤等领域。
+        ]]>
+    </Illustrate>
+    <Url>https://geehy.com/apm32?id=17</Url>
+    <DataSheets>
+        <Document Name="Datasheet">
+            <Url>https://geehy.com/uploads/tool/APM32F103xDxE%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%20V1.7.pdf</Url>
+        </Document>
+    </DataSheets>
+    <Errata>
+        <Document Name="APM32F103XE_I2C_加入六轴传感器后，I2C通讯EEPROM会挂">
+            <Url>
+                https://geehy.com/uploads/tool/FAQ20220306_APM32F103XE_I2C_%E5%8A%A0%E5%85%A5%E5%85%AD%E8%BD%B4%E4%BC%A0%E6%84%9F%E5%99%A8%E5%90%8E%EF%BC%8CI2C%E9%80%9A%E8%AE%AFEEPROM%E4%BC%9A%E6%8C%82%E6%AD%BB.pdf
+            </Url>
+        </Document>
+    </Errata>
+    <Modules>
+        <Module Name="System Core">
+            <Categories>
+                <Category Name="DMA"/>
+                <Category Name="GPIO"/>
+                <Category Name="IWDG"/>
+                <Category Name="NVIC"/>
+                <Category Name="RCC"/>
+                <Category Name="SYS"/>
+                <Category Name="WWDG"/>
+            </Categories>
+        </Module>
+        <Module Name="Analog">
+            <Categories>
+                <Category Name="ADC1"/>
+                <Category Name="ADC2"/>
+                <Category Name="ADC3"/>
+                <Category Name="DAC"/>
+            </Categories>
+        </Module>
+        <Module Name="Timers">
+            <Categories>
+                <Category Name="RTC"/>
+                <Category Name="TIM1"/>
+                <Category Name="TIM2"/>
+                <Category Name="TIM3"/>
+                <Category Name="TIM4"/>
+                <Category Name="TIM5"/>
+                <Category Name="TIM6"/>
+                <Category Name="TIM7"/>
+                <Category Name="TIM8"/>
+            </Categories>
+        </Module>
+        <Module Name="Connectivity">
+            <Categories>
+                <Category Name="CAN"/>
+                <Category Name="FSMC"/>
+                <Category Name="I2C1"/>
+                <Category Name="I2C2"/>
+                <Category Name="SDIO"/>
+                <Category Name="SPI1"/>
+                <Category Name="SPI2"/>
+                <Category Name="SPI3"/>
+                <Category Name="UART4"/>
+                <Category Name="UART5"/>
+                <Category Name="USART1"/>
+                <Category Name="USART2"/>
+                <Category Name="USART3"/>
+                <Category Name="USB"/>
+            </Categories>
+        </Module>
+        <Module Name="Multimedia">
+            <Categories>
+                <Category Name="I2S2"/>
+                <Category Name="I2S3"/>
+            </Categories>
+        </Module>
+        <Module Name="Computing">
+            <Categories>
+                <Category Name="CRC"/>
+            </Categories>
+        </Module>
+    </Modules>
+</MCU>
