@@ -144,8 +144,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="16" Type="Power"/>
-        <Pin Name="VDD" Position="17" Type="Power"/>
+        <Pin Name="VSS_5" Position="16" Type="Power"/>
+        <Pin Name="VDD_5" Position="17" Type="Power"/>
         <Pin Name="PF6" Position="18" Type="I/O">
             <Functions>
                 <Function Name="ADC3_IN4"/>
@@ -197,11 +197,15 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="PD0" Position="23" Type="I/O">
-            <Function Name="RCC_OSC_IN"/>
+        <Pin Name="RCC_OSC_IN" Position="23" Type="I/O">
+            <Functions>
+                <Function Name="RCC_OSC_IN"/>
+            </Functions>
         </Pin>
-        <Pin Name="PD1" Position="24" Type="I/O">
-            <Function Name="RCC_OSC_OUT"/>
+        <Pin Name="RCC_OSC_OUT" Position="24" Type="I/O">
+            <Functions>
+                <Function Name="RCC_OSC_OUT"/>
+            </Functions>
         </Pin>
         <Pin Name="NRST" Position="25" Type="Reset"/>
         <Pin Name="PC0" Position="26" Type="I/O">
@@ -319,8 +323,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="38" Type="Power"/>
-        <Pin Name="VDD" Position="39" Type="Power"/>
+        <Pin Name="VSS_4" Position="38" Type="Power"/>
+        <Pin Name="VDD_4" Position="39" Type="Power"/>
         <Pin Name="PA4" Position="40" Type="I/O">
             <Functions>
                 <Function Name="ADC1_IN4"/>
@@ -457,8 +461,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="51" Type="Power"/>
-        <Pin Name="VDD" Position="52" Type="Power"/>
+        <Pin Name="VSS_6" Position="51" Type="Power"/>
+        <Pin Name="VDD_6" Position="52" Type="Power"/>
         <Pin Name="PF13" Position="53" Type="I/O">
             <Functions>
                 <Function Name="FSMC_A7"/>
@@ -543,8 +547,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="61" Type="Power"/>
-        <Pin Name="VDD" Position="62" Type="Power"/>
+        <Pin Name="VSS_7" Position="61" Type="Power"/>
+        <Pin Name="VDD_7" Position="62" Type="Power"/>
         <Pin Name="PE10" Position="63" Type="I/O">
             <Functions>
                 <Function Name="FSMC_D7"/>
@@ -647,8 +651,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="71" Type="Power"/>
-        <Pin Name="VDD" Position="72" Type="Power"/>
+        <Pin Name="VSS_1" Position="71" Type="Power"/>
+        <Pin Name="VDD_1" Position="72" Type="Power"/>
         <Pin Name="PB12" Position="73" Type="I/O">
             <Functions>
                 <Function Name="I2C2_SMBA"/>
@@ -777,8 +781,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="83" Type="Power"/>
-        <Pin Name="VDD" Position="84" Type="Power"/>
+        <Pin Name="VSS_8" Position="83" Type="Power"/>
+        <Pin Name="VDD_8" Position="84" Type="Power"/>
         <Pin Name="PD14" Position="85" Type="I/O">
             <Functions>
                 <Function Name="FSMC_D0"/>
@@ -867,8 +871,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="94" Type="Power"/>
-        <Pin Name="VDD" Position="95" Type="Power"/>
+        <Pin Name="VSS_9" Position="94" Type="Power"/>
+        <Pin Name="VDD_9" Position="95" Type="Power"/>
         <Pin Name="PC6" Position="96" Type="I/O">
             <Functions>
                 <Function Name="I2S2_MCK"/>
@@ -996,8 +1000,8 @@
             </Functions>
         </Pin>
         <Pin Name="NC" Position="106" Type="NC"/>
-        <Pin Name="VSS" Position="107" Type="Power"/>
-        <Pin Name="VDD" Position="108" Type="Power"/>
+        <Pin Name="VSS_2" Position="107" Type="Power"/>
+        <Pin Name="VDD_2" Position="108" Type="Power"/>
         <Pin Name="PA14" Position="109" Type="I/O">
             <Functions>
                 <Function Name="SYS_JTCK-SWCLK"/>
@@ -1134,8 +1138,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="120" Type="Power"/>
-        <Pin Name="VDD" Position="121" Type="Power"/>
+        <Pin Name="VSS_10" Position="120" Type="Power"/>
+        <Pin Name="VDD_10" Position="121" Type="Power"/>
         <Pin Name="PD6" Position="122" Type="I/O">
             <Functions>
                 <Function Name="FSMC_NWAIT"/>
@@ -1218,8 +1222,8 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="130" Type="Power"/>
-        <Pin Name="VDD" Position="131" Type="Power"/>
+        <Pin Name="VSS_11" Position="130" Type="Power"/>
+        <Pin Name="VDD_11" Position="131" Type="Power"/>
         <Pin Name="PG15" Position="132" Type="I/O">
             <Functions>
                 <Function Name="ADC1_EXTI15"/>
@@ -1345,7 +1349,7 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="VSS" Position="143" Type="Power"/>
-        <Pin Name="VDD" Position="144" Type="Power"/>
+        <Pin Name="VSS_3" Position="143" Type="Power"/>
+        <Pin Name="VDD_3" Position="144" Type="Power"/>
     </Pins>
 </Pinout>
