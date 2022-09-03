@@ -197,10 +197,10 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="PD0" Position="23" Type="MonoIO">
+        <Pin Name="PD0" Position="23" Type="I/O">
             <Function Name="RCC_OSC_IN"/>
         </Pin>
-        <Pin Name="PD1" Position="24" Type="MonoIO">
+        <Pin Name="PD1" Position="24" Type="I/O">
             <Function Name="RCC_OSC_OUT"/>
         </Pin>
         <Pin Name="NRST" Position="25" Type="Reset"/>
