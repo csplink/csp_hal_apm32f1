@@ -30,7 +30,7 @@ APM32F103xDxE系列MCU，基于32位Arm® Cortex®-M3内核，最高工作主频
                 <Category Name="GPIO"/>
                 <Category Name="IWDG"/>
                 <Category Name="NVIC"/>
-                <Category Name="RCC"/>
+                <Category Name="Clock"/>
                 <Category Name="SYS"/>
                 <Category Name="WWDG"/>
             </Categories>
