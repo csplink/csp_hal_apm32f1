@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map>
+    <Groups>
+        <Group Name="chal_clock_osc">
+            <Comments>HSE时钟输入源类型</Comments>
+            <Values>
+                <Value Name="CHAL_CLOCK_OSC_DISABLE">
+                    <Comments>禁用</Comments>
+                </Value>
+                <Value Name="CHAL_CLOCK_OSC_BYPASS">
+                    <Comments>有源晶振模式</Comments>
+                </Value>
+                <Value Name="CHAL_CLOCK_OSC_NO_BYPASS">
+                    <Comments>无源晶振模式</Comments>
+                </Value>
+            </Values>
+        </Group>
+        <Group Name="chal_clock_osc32">
+            <Comments>HSI时钟输入源类型</Comments>
+            <Values>
+                <Value Name="CHAL_CLOCK_OSC32_DISABLE">
+                    <Comments>禁用</Comments>
+                </Value>
+                <Value Name="CHAL_CLOCK_OSC32_BYPASS">
+                    <Comments>有源晶振模式</Comments>
+                </Value>
+                <Value Name="CHAL_CLOCK_OSC32_NO_BYPASS">
+                    <Comments>无源晶振模式</Comments>
+                </Value>
+            </Values>
+        </Group>
+    </Groups>
+    <Properties>
+        <Property Group="chal_clock_osc">
+            <DisplayName>HSE时钟输入源</DisplayName>
+            <Description>Clock-HSE时钟输入源</Description>
+            <Category>Clock</Category>
+            <ReadOnly>false</ReadOnly>
+        </Property>
+        <Property Group="chal_clock_osc32">
+            <DisplayName>HSI时钟输入源</DisplayName>
+            <Description>Clock-HSI时钟输入源</Description>
+            <Category>Clock</Category>
+            <ReadOnly>false</ReadOnly>
+        </Property>
+    </Properties>
+</Map>

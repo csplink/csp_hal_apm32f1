@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IP>
+    <Modes>
+        <Mode Type="Clock-OSC" Name="Clock-OSC">
+            <Parameters>
+                <Parameter Group="chal_clock_osc">
+                    <Values>
+                        <Value>CHAL_CLOCK_OSC_DISABLE</Value>
+                        <Value>CHAL_CLOCK_OSC_BYPASS</Value>
+                        <Value>CHAL_CLOCK_OSC_NO_BYPASS</Value>
+                    </Values>
+                </Parameter>
+            </Parameters>
+        </Mode>
+        <Mode Type="Clock-OSC32" Name="Clock-OSC32">
+            <Parameters>
+                <Parameter Group="chal_clock_osc32">
+                    <Values>
+                        <Value>CHAL_CLOCK_OSC32_DISABLE</Value>
+                        <Value>CHAL_CLOCK_OSC32_BYPASS</Value>
+                        <Value>CHAL_CLOCK_OSC32_NO_BYPASS</Value>
+                    </Values>
+                </Parameter>
+            </Parameters>
+        </Mode>
+    </Modes>
+</IP>
