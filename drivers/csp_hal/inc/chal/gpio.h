@@ -184,84 +184,29 @@ extern "C" {
 #define CHAL_GPIO_PIN_15              (0x04800080U)
 #define CHAL_GPIO_PIN_ALL             (0x04FFFFFFU)
 
-/** @defgroup  chal_gpio_level  GPIO电平类型
- * @{
- */
-/** @defmap
- * @DisplayName 电平
- * @Description GPIO电平
- * @ReadOnly false
- */
-#define CHAL_GPIO_PIN_RESET           (0U)                 /* 低电平 */
-#define CHAL_GPIO_PIN_SET             (1U)                 /* 高电平 */
+#define CHAL_GPIO_PIN_RESET           (0U)                 // 低电平
+#define CHAL_GPIO_PIN_SET             (1U)                 // 高电平
 #define CHAL_GPIO_LEVEL_LOW           CHAL_GPIO_PIN_RESET  // 低电平
 #define CHAL_GPIO_LEVEL_HIGH          CHAL_GPIO_PIN_SET    // 高电平
-/**
- * @}
- */
 
-/** @defgroup chal_gpio_mode  GPIO模式类型
- * @{
- */
-/** @defmap
- * @DisplayName 模式
- * @Description GPIO模式
- * @ReadOnly false
- */
 #define CHAL_GPIO_MODE_ANALOG         (0x00000000U)  // 模拟模式
 #define CHAL_GPIO_MODE_FLOATING       (0x00000004U)  // 浮空模式
 #define CHAL_GPIO_MODE_INPUT          (0x00000008U)  // 输入模式
 #define CHAL_GPIO_MODE_OUTPUT         (0x00000001U)  // 输出模式
 #define CHAL_GPIO_MODE_ALTERNATE      (0x00000009U)  // 复用模式
-/**
- * @}
- */
 
-/** @defgroup chal_gpio_output_type  GPIO输出类型
- * @{
- */
-/** @defmap
- * @DisplayName 输出类型
- * @Description GPIO输出类型
- * @ReadOnly false
- */
 #define CHAL_GPIO_OUTPUT_PP           (0x00000000U)  // 推挽输出
 #define CHAL_GPIO_OUTPUT_OD           (0x00000004U)  // 开漏输出
-/**
- * @}
- */
 
-/** @defgroup chal_gpio_pull  GPIO钳位类型
- * @{
- */
-/** @defmap
- * @DisplayName 钳位
- * @Description GPIO钳位
- * @ReadOnly false
- */
 #define CHAL_GPIO_PULL_DOWN           (0x00000000U)  // 下拉
 #define CHAL_GPIO_PULL_UP             (0x00000001U)  // 上拉
-/**
- * @}
- */
 
-/** @defgroup chal_gpio_speed  GPIO速度类型
- * @{
- */
-/** @defmap
- * @DisplayName 速度
- * @Description GPIO速度
- * @ReadOnly false
- */
-#define CHAL_GPIO_SPEED_10MHz         (0x1U)                 /* 10MHz */
-#define CHAL_GPIO_SPEED_20MHz         (0x2U)                 /* 20MHz */
-#define CHAL_GPIO_SPEED_50MHz         (0x3U)                 /* 50MHz */
+#define CHAL_GPIO_SPEED_10MHz         (0x1U)                 // 10MHz
+#define CHAL_GPIO_SPEED_20MHz         (0x2U)                 // 20MHz
+#define CHAL_GPIO_SPEED_50MHz         (0x3U)                 // 50MHz
 #define CHAL_GPIO_SPEED_LOW           CHAL_GPIO_SPEED_10MHz  // 10MHz
 #define CHAL_GPIO_SPEED_MEDIUM        CHAL_GPIO_SPEED_20MHz  // 20MHz
 #define CHAL_GPIO_SPEED_HIGH          CHAL_GPIO_SPEED_50MHz  // 50MHz
-/**
- * @}
- */
 
 #define CHAL_GPIO_EINT0_IRQn          EINT0_IRQn
 #define CHAL_GPIO_EINT1_IRQn          EINT1_IRQn
