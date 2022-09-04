@@ -70,7 +70,7 @@
         </Pin>
         <Pin Name="PC14" Position="8" Type="I/O">
             <Functions>
-                <Function Name="RCC-OSC32-IN"/>
+                <Function Name="RCM-OSC32-IN" Type="Clock"/>
                 <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
                 <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
                 <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
@@ -82,7 +82,7 @@
             <Functions>
                 <Function Name="ADC1-EXTI15"/>
                 <Function Name="ADC2-EXTI15"/>
-                <Function Name="RCC-OSC32-OUT"/>
+                <Function Name="RCM-OSC32-OUT" Type="Clock"/>
                 <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
                 <Function Name="GPIO-Output" Type="GPIO" Mode="Output-Std"/>
                 <Function Name="GPIO-Analog" Type="GPIO" Mode="Analog-Std"/>
@@ -197,14 +197,14 @@
                 <Function Name="GPIO-EXTI" Type="GPIO" Mode="Exti-Std"/>
             </Functions>
         </Pin>
-        <Pin Name="RCC-OSC-IN" Position="23" Type="I/O">
+        <Pin Name="RCM-OSC-IN" Position="23" Type="I/O">
             <Functions>
-                <Function Name="RCC-OSC-IN"/>
+                <Function Name="RCM-OSC-IN" Type="Clock"/>
             </Functions>
         </Pin>
-        <Pin Name="RCC-OSC-OUT" Position="24" Type="I/O">
+        <Pin Name="RCM-OSC-OUT" Position="24" Type="I/O">
             <Functions>
-                <Function Name="RCC-OSC-OUT"/>
+                <Function Name="RCM-OSC-OUT" Type="Clock"/>
             </Functions>
         </Pin>
         <Pin Name="NRST" Position="25" Type="Reset"/>
@@ -928,7 +928,7 @@
         </Pin>
         <Pin Name="PA8" Position="100" Type="I/O">
             <Functions>
-                <Function Name="RCC-MCO"/>
+                <Function Name="RCM-MCO" Type="Clock"/>
                 <Function Name="TIM1-CH1"/>
                 <Function Name="USART1-CK"/>
                 <Function Name="GPIO-Input" Type="GPIO" Mode="Input-Std"/>
