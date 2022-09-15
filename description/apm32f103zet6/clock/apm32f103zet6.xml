@@ -1,41 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf8'?>
 <Clock>
     <Rects Width="1603.0" Height="903.0">
-        <Rect ID="1" X="25.0" Y="135.0" Width="55.0" Height="30.0"/>
-        <Rect ID="2" X="25.0" Y="475.0" Width="55.0" Height="30.0"/>
-        <Rect ID="3" X="25.0" Y="665.0" Width="55.0" Height="30.0"/>
-        <Rect ID="4" X="110.0" Y="90.0" Width="80.0" Height="30.0"/>
-        <Rect ID="5" X="110.0" Y="430.0" Width="80.0" Height="30.0"/>
-        <Rect ID="6" X="120.0" Y="270.0" Width="55.0" Height="30.0"/>
-        <Rect ID="7" X="120.0" Y="665.0" Width="55.0" Height="30.0"/>
-        <Rect ID="8" X="220.0" Y="475.0" Width="55.0" Height="30.0"/>
-        <Rect ID="9" X="462.0" Y="453.56" Width="55.0" Height="30.0"/>
-        <Rect ID="10" X="520.0" Y="133.82" Width="55.0" Height="30.0"/>
-        <Rect ID="11" X="601.8" Y="560.73" Width="55.0" Height="30.0"/>
-        <Rect ID="12" X="672.0" Y="385.0" Width="55.0" Height="30.0"/>
-        <Rect ID="13" X="700.0" Y="560.73" Width="55.0" Height="30.0"/>
-        <Rect ID="14" X="790.0" Y="385.0" Width="55.0" Height="30.0"/>
-        <Rect ID="15" X="790.0" Y="460.0" Width="55.0" Height="30.0"/>
-        <Rect ID="16" X="905.0" Y="385.0" Width="55.0" Height="30.0"/>
-        <Rect ID="17" X="1022.0" Y="285.0" Width="55.0" Height="30.0"/>
-        <Rect ID="18" X="1022.0" Y="385.0" Width="55.0" Height="30.0"/>
-        <Rect ID="19" X="1022.0" Y="485.02" Width="55.0" Height="30.0"/>
-        <Rect ID="20" X="1160.0" Y="435.0" Width="55.0" Height="30.0"/>
-        <Rect ID="21" X="1160.0" Y="535.0" Width="55.0" Height="30.0"/>
-        <Rect ID="22" X="1160.0" Y="590.0" Width="55.0" Height="30.0"/>
-        <Rect ID="23" X="1280.0" Y="35.0" Width="55.0" Height="30.0"/>
-        <Rect ID="24" X="1280.0" Y="85.0" Width="55.0" Height="30.0"/>
-        <Rect ID="25" X="1280.0" Y="135.0" Width="55.0" Height="30.0"/>
-        <Rect ID="26" X="1280.0" Y="185.0" Width="55.0" Height="30.0"/>
-        <Rect ID="27" X="1280.0" Y="235.0" Width="55.0" Height="30.0"/>
-        <Rect ID="28" X="1280.0" Y="285.0" Width="55.0" Height="30.0"/>
-        <Rect ID="29" X="1280.0" Y="335.0" Width="55.0" Height="30.0"/>
-        <Rect ID="30" X="1280.0" Y="385.0" Width="55.0" Height="30.0"/>
-        <Rect ID="31" X="1280.0" Y="435.0" Width="55.0" Height="30.0"/>
-        <Rect ID="32" X="1280.0" Y="484.29" Width="55.0" Height="30.0"/>
-        <Rect ID="33" X="1280.0" Y="535.0" Width="55.0" Height="30.0"/>
-        <Rect ID="34" X="1280.0" Y="590.0" Width="55.0" Height="30.0"/>
-        <Rect ID="35" X="1280.0" Y="645.0" Width="55.0" Height="30.0"/>
-        <Rect ID="36" X="1280.0" Y="700.0" Width="55.0" Height="30.0"/>
+        <Rect ID="1" X="25.0" Y="135.0" Width="55.0" Height="30.0" />
+        <Rect ID="2" X="25.0" Y="475.0" Width="55.0" Height="30.0" />
+        <Rect ID="3" X="25.0" Y="665.0" Width="55.0" Height="30.0" />
+        <Rect ID="4" X="110.0" Y="90.0" Width="80.0" Height="30.0" />
+        <Rect ID="5" X="110.0" Y="430.0" Width="80.0" Height="30.0" />
+        <Rect ID="6" X="120.0" Y="270.0" Width="55.0" Height="30.0" />
+        <Rect ID="7" X="120.0" Y="665.0" Width="55.0" Height="30.0" />
+        <Rect ID="8" X="220.0" Y="475.0" Width="55.0" Height="30.0" />
+        <Rect ID="9" X="462.0" Y="453.56" Width="55.0" Height="30.0" />
+        <Rect ID="10" X="520.0" Y="133.82" Width="55.0" Height="30.0" />
+        <Rect ID="11" X="601.8" Y="560.73" Width="55.0" Height="30.0" />
+        <Rect ID="12" X="672.0" Y="385.0" Width="55.0" Height="30.0" />
+        <Rect ID="13" X="700.0" Y="560.73" Width="55.0" Height="30.0" />
+        <Rect ID="14" X="790.0" Y="385.0" Width="55.0" Height="30.0" />
+        <Rect ID="15" X="790.0" Y="460.0" Width="55.0" Height="30.0" />
+        <Rect ID="16" X="905.0" Y="385.0" Width="55.0" Height="30.0" />
+        <Rect ID="17" X="1022.0" Y="285.0" Width="55.0" Height="30.0" />
+        <Rect ID="18" X="1022.0" Y="385.0" Width="55.0" Height="30.0" />
+        <Rect ID="19" X="1022.0" Y="485.02" Width="55.0" Height="30.0" />
+        <Rect ID="20" X="1160.0" Y="435.0" Width="55.0" Height="30.0" />
+        <Rect ID="21" X="1160.0" Y="535.0" Width="55.0" Height="30.0" />
+        <Rect ID="22" X="1160.0" Y="590.0" Width="55.0" Height="30.0" />
+        <Rect ID="23" X="1280.0" Y="35.0" Width="55.0" Height="30.0" />
+        <Rect ID="24" X="1280.0" Y="85.0" Width="55.0" Height="30.0" />
+        <Rect ID="25" X="1280.0" Y="135.0" Width="55.0" Height="30.0" />
+        <Rect ID="26" X="1280.0" Y="185.0" Width="55.0" Height="30.0" />
+        <Rect ID="27" X="1280.0" Y="235.0" Width="55.0" Height="30.0" />
+        <Rect ID="28" X="1280.0" Y="285.0" Width="55.0" Height="30.0" />
+        <Rect ID="29" X="1280.0" Y="335.0" Width="55.0" Height="30.0" />
+        <Rect ID="30" X="1280.0" Y="385.0" Width="55.0" Height="30.0" />
+        <Rect ID="31" X="1280.0" Y="435.0" Width="55.0" Height="30.0" />
+        <Rect ID="32" X="1280.0" Y="484.29" Width="55.0" Height="30.0" />
+        <Rect ID="33" X="1280.0" Y="535.0" Width="55.0" Height="30.0" />
+        <Rect ID="34" X="1280.0" Y="590.0" Width="55.0" Height="30.0" />
+        <Rect ID="35" X="1280.0" Y="645.0" Width="55.0" Height="30.0" />
+        <Rect ID="36" X="1280.0" Y="700.0" Width="55.0" Height="30.0" />
     </Rects>
 </Clock>
