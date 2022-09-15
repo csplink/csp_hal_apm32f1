@@ -1,6 +1,5 @@
 import os
 import xml.etree.ElementTree as Et
-from xml.dom import minidom
 
 
 class Rect:
@@ -18,6 +17,22 @@ class Rect:
 
 class Svg:
     @staticmethod
+    def indent(elem, level=0):
+        i = "\n" + level * "    "
+        if len(elem):
+            if not elem.text or not elem.text.strip():
+                elem.text = i + "    "
+            if not elem.tail or not elem.tail.strip():
+                elem.tail = i
+            for elem in elem:
+                Svg.indent(elem, level + 1)
+            if not elem.tail or not elem.tail.strip():
+                elem.tail = i
+        else:
+            if level and (not elem.tail or not elem.tail.strip()):
+                elem.tail = i
+
+    @staticmethod
     def generate_xml(file, width, height, rects):
         xml_clock = Et.Element('Clock')
         xml_rects = Et.SubElement(xml_clock, 'Rects', Width=str(width), Height=str(height))
@@ -26,10 +41,29 @@ class Svg:
             i += 1
             Et.SubElement(xml_rects, 'Rect', ID=str(i), X=str(item.x), Y=str(item.y), Width=str(item.width),
                           Height=str(item.height))
-        dom = minidom.parseString(Et.tostring(xml_clock))
+        Svg.indent(xml_clock)
+        with open(file, 'wb') as f:
+            f.write(Et.tostring(xml_clock, encoding="utf8"))
 
-        with open(file, 'w') as f:
-            dom.writexml(f, "", "    ", "\n", "utf-8")
+    @staticmethod
+    def change_xml(file, width, height, rects):
+        xml_tree = Et.parse(file)
+        xml_root = xml_tree.getroot()
+        # 只删除Rects节点
+        rect_nodes = xml_root.findall("Rects")
+        for node in rect_nodes:
+            xml_root.remove(node)
+
+        xml_rects = Et.Element('Rects', Width=str(width), Height=str(height))
+        i = 0
+        for item in rects:
+            i += 1
+            Et.SubElement(xml_rects, 'Rect', ID=str(i), X=str(item.x), Y=str(item.y), Width=str(item.width),
+                          Height=str(item.height))
+        xml_root.append(xml_rects)
+        Svg.indent(xml_root)
+        with open(file, 'wb') as f:
+            f.write(Et.tostring(xml_root, encoding="utf8"))
 
     @staticmethod
     def parse_svg(file):
@@ -59,7 +93,7 @@ class Svg:
         if not os.path.exists(xml_path):
             Svg.generate_xml(xml_path, width, height, rects)
         else:
-            print("generate: " + xml_path)
+            Svg.change_xml(xml_path, width, height, rects)
 
         print("generate: " + xml_path)
 
