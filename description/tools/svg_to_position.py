@@ -34,8 +34,8 @@ class Svg:
 
     @staticmethod
     def generate_xml(file, width, height, rects):
-        xml_clock = Et.Element('Clock')
-        xml_rects = Et.SubElement(xml_clock, 'Rects', Width=str(width), Height=str(height))
+        xml_clock = Et.Element('Clock', Width=str(width), Height=str(height))
+        xml_rects = Et.SubElement(xml_clock, 'Rects')
         i = 0
         for item in rects:
             i += 1
@@ -49,12 +49,17 @@ class Svg:
     def change_xml(file, width, height, rects):
         xml_tree = Et.parse(file)
         xml_root = xml_tree.getroot()
+
+        if "Width" in xml_root.attrib.keys() and "Height" in xml_root.attrib.keys():
+            xml_root.attrib["Width"] = str(width)
+            xml_root.attrib["Height"] = str(height)
+
         # 只删除Rects节点
         rect_nodes = xml_root.findall("Rects")
         for node in rect_nodes:
             xml_root.remove(node)
 
-        xml_rects = Et.Element('Rects', Width=str(width), Height=str(height))
+        xml_rects = Et.Element('Rects')
         i = 0
         for item in rects:
             i += 1
