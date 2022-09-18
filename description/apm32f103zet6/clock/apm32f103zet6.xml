@@ -1,41 +1,81 @@
 <?xml version='1.0' encoding='utf8'?>
-<Clock>
-    <Rects Width="1603.0" Height="903.0">
-        <Rect ID="1" X="25.0" Y="135.0" Width="55.0" Height="30.0" />
-        <Rect ID="2" X="25.0" Y="475.0" Width="55.0" Height="30.0" />
-        <Rect ID="3" X="25.0" Y="665.0" Width="55.0" Height="30.0" />
-        <Rect ID="4" X="110.0" Y="90.0" Width="80.0" Height="30.0" />
-        <Rect ID="5" X="110.0" Y="430.0" Width="80.0" Height="30.0" />
-        <Rect ID="6" X="120.0" Y="270.0" Width="55.0" Height="30.0" />
-        <Rect ID="7" X="120.0" Y="665.0" Width="55.0" Height="30.0" />
-        <Rect ID="8" X="220.0" Y="475.0" Width="55.0" Height="30.0" />
-        <Rect ID="9" X="462.0" Y="453.56" Width="55.0" Height="30.0" />
-        <Rect ID="10" X="520.0" Y="133.82" Width="55.0" Height="30.0" />
-        <Rect ID="11" X="601.8" Y="560.73" Width="55.0" Height="30.0" />
-        <Rect ID="12" X="672.0" Y="385.0" Width="55.0" Height="30.0" />
-        <Rect ID="13" X="700.0" Y="560.73" Width="55.0" Height="30.0" />
-        <Rect ID="14" X="790.0" Y="385.0" Width="55.0" Height="30.0" />
-        <Rect ID="15" X="790.0" Y="460.0" Width="55.0" Height="30.0" />
-        <Rect ID="16" X="905.0" Y="385.0" Width="55.0" Height="30.0" />
-        <Rect ID="17" X="1022.0" Y="285.0" Width="55.0" Height="30.0" />
-        <Rect ID="18" X="1022.0" Y="385.0" Width="55.0" Height="30.0" />
-        <Rect ID="19" X="1022.0" Y="485.02" Width="55.0" Height="30.0" />
-        <Rect ID="20" X="1160.0" Y="435.0" Width="55.0" Height="30.0" />
-        <Rect ID="21" X="1160.0" Y="535.0" Width="55.0" Height="30.0" />
-        <Rect ID="22" X="1160.0" Y="590.0" Width="55.0" Height="30.0" />
-        <Rect ID="23" X="1280.0" Y="35.0" Width="55.0" Height="30.0" />
-        <Rect ID="24" X="1280.0" Y="85.0" Width="55.0" Height="30.0" />
-        <Rect ID="25" X="1280.0" Y="135.0" Width="55.0" Height="30.0" />
-        <Rect ID="26" X="1280.0" Y="185.0" Width="55.0" Height="30.0" />
-        <Rect ID="27" X="1280.0" Y="235.0" Width="55.0" Height="30.0" />
-        <Rect ID="28" X="1280.0" Y="285.0" Width="55.0" Height="30.0" />
-        <Rect ID="29" X="1280.0" Y="335.0" Width="55.0" Height="30.0" />
-        <Rect ID="30" X="1280.0" Y="385.0" Width="55.0" Height="30.0" />
-        <Rect ID="31" X="1280.0" Y="435.0" Width="55.0" Height="30.0" />
-        <Rect ID="32" X="1280.0" Y="484.29" Width="55.0" Height="30.0" />
-        <Rect ID="33" X="1280.0" Y="535.0" Width="55.0" Height="30.0" />
-        <Rect ID="34" X="1280.0" Y="590.0" Width="55.0" Height="30.0" />
-        <Rect ID="35" X="1280.0" Y="645.0" Width="55.0" Height="30.0" />
-        <Rect ID="36" X="1280.0" Y="700.0" Width="55.0" Height="30.0" />
+<Clock Width="1603.0" Height="903.0">
+    <Controls>
+        <Control ID="1" Name="1" Type="TextBox" />
+        <Control ID="2" Name="2" Type="TextBox" />
+        <Control ID="3" Name="3" Type="TextBox" />
+        <Control ID="4" Name="4" Type="TextBox" />
+        <Control ID="5" Name="5" Type="TextBox" />
+        <Control ID="6" Name="6" Type="TextBox" />
+        <Control ID="7" Name="7" Type="TextBox" />
+        <Control ID="8" Name="8" Type="TextBox" />
+        <Control ID="9" Name="9" Type="TextBox" />
+        <Control ID="10" Name="10" Type="TextBox" />
+        <Control ID="11" Name="11" Type="TextBox" />
+        <Control ID="12" Name="12" Type="TextBox" />
+        <Control ID="13" Name="13" Type="TextBox" />
+        <Control ID="14" Name="14" Type="TextBox" />
+        <Control ID="15" Name="15" Type="TextBox" />
+        <Control ID="16" Name="16" Type="TextBox" />
+        <Control ID="17" Name="17" Type="TextBox" />
+        <Control ID="18" Name="18" Type="TextBox" />
+        <Control ID="19" Name="19" Type="TextBox" />
+        <Control ID="20" Name="20" Type="TextBox" />
+        <Control ID="21" Name="21" Type="TextBox" />
+        <Control ID="22" Name="22" Type="TextBox" />
+        <Control ID="23" Name="23" Type="TextBox" />
+        <Control ID="24" Name="24" Type="TextBox" />
+        <Control ID="25" Name="25" Type="TextBox" />
+        <Control ID="26" Name="26" Type="TextBox" />
+        <Control ID="27" Name="27" Type="TextBox" />
+        <Control ID="28" Name="28" Type="TextBox" />
+        <Control ID="29" Name="29" Type="TextBox" />
+        <Control ID="30" Name="30" Type="TextBox" />
+        <Control ID="31" Name="31" Type="TextBox" />
+        <Control ID="32" Name="32" Type="TextBox" />
+        <Control ID="33" Name="33" Type="TextBox" />
+        <Control ID="34" Name="34" Type="TextBox" />
+        <Control ID="35" Name="35" Type="TextBox" />
+        <Control ID="36" Name="36" Type="TextBox" />
+        <Control ID="37" Name="37" Type="TextBox" />
+    </Controls>
+    <Rects>
+        <Rect ID="1" X="25.5" Y="135.5" Width="56.0" Height="31.0" />
+        <Rect ID="2" X="25.5" Y="475.5" Width="56.0" Height="31.0" />
+        <Rect ID="3" X="25.5" Y="665.5" Width="56.0" Height="31.0" />
+        <Rect ID="4" X="110.5" Y="90.5" Width="81.0" Height="31.0" />
+        <Rect ID="5" X="110.5" Y="430.5" Width="81.0" Height="31.0" />
+        <Rect ID="6" X="120.5" Y="270.5" Width="56.0" Height="31.0" />
+        <Rect ID="7" X="120.5" Y="665.5" Width="56.0" Height="31.0" />
+        <Rect ID="8" X="220.5" Y="475.5" Width="56.0" Height="31.0" />
+        <Rect ID="9" X="462.5" Y="454.06" Width="56.0" Height="31.0" />
+        <Rect ID="10" X="520.5" Y="134.32" Width="56.0" Height="31.0" />
+        <Rect ID="11" X="602.3" Y="505.5" Width="119.2" Height="31.0" />
+        <Rect ID="12" X="602.3" Y="561.23" Width="56.0" Height="31.0" />
+        <Rect ID="13" X="672.5" Y="385.5" Width="56.0" Height="31.0" />
+        <Rect ID="14" X="700.5" Y="561.23" Width="56.0" Height="31.0" />
+        <Rect ID="15" X="790.5" Y="385.5" Width="56.0" Height="31.0" />
+        <Rect ID="16" X="790.5" Y="460.5" Width="56.0" Height="31.0" />
+        <Rect ID="17" X="905.5" Y="385.5" Width="56.0" Height="31.0" />
+        <Rect ID="18" X="1022.5" Y="285.5" Width="56.0" Height="31.0" />
+        <Rect ID="19" X="1022.5" Y="385.5" Width="56.0" Height="31.0" />
+        <Rect ID="20" X="1022.5" Y="485.52" Width="56.0" Height="31.0" />
+        <Rect ID="21" X="1160.5" Y="435.5" Width="56.0" Height="31.0" />
+        <Rect ID="22" X="1160.5" Y="535.5" Width="56.0" Height="31.0" />
+        <Rect ID="23" X="1160.5" Y="590.5" Width="56.0" Height="31.0" />
+        <Rect ID="24" X="1280.5" Y="35.5" Width="56.0" Height="31.0" />
+        <Rect ID="25" X="1280.5" Y="85.5" Width="56.0" Height="31.0" />
+        <Rect ID="26" X="1280.5" Y="135.5" Width="56.0" Height="31.0" />
+        <Rect ID="27" X="1280.5" Y="185.5" Width="56.0" Height="31.0" />
+        <Rect ID="28" X="1280.5" Y="235.5" Width="56.0" Height="31.0" />
+        <Rect ID="29" X="1280.5" Y="285.5" Width="56.0" Height="31.0" />
+        <Rect ID="30" X="1280.5" Y="335.5" Width="56.0" Height="31.0" />
+        <Rect ID="31" X="1280.5" Y="385.5" Width="56.0" Height="31.0" />
+        <Rect ID="32" X="1280.5" Y="435.5" Width="56.0" Height="31.0" />
+        <Rect ID="33" X="1280.5" Y="484.79" Width="56.0" Height="31.0" />
+        <Rect ID="34" X="1280.5" Y="535.5" Width="56.0" Height="31.0" />
+        <Rect ID="35" X="1280.5" Y="590.5" Width="56.0" Height="31.0" />
+        <Rect ID="36" X="1280.5" Y="645.5" Width="56.0" Height="31.0" />
+        <Rect ID="37" X="1280.5" Y="700.5" Width="56.0" Height="31.0" />
     </Rects>
 </Clock>
