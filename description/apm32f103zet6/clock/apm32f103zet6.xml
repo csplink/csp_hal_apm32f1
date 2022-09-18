@@ -93,17 +93,17 @@
         <Rect ID="38" X="1280.5" Y="700.5" Width="56.0" Height="31.0" />
     </Rects>
     <Ellipses>
-        <Ellipse ID="39" X="255.3" Y="625.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="40" X="255.3" Y="660.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="41" X="255.3" Y="695.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="42" X="255.3" Y="735.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="43" X="336.94" Y="445.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="44" X="336.94" Y="490.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="45" X="435.56" Y="95.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="46" X="435.56" Y="149.31" Width="6.0" Height="6.0" />
-        <Ellipse ID="47" X="435.56" Y="205.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="48" X="629.8" Y="350.5" Width="6.0" Height="6.0" />
-        <Ellipse ID="49" X="629.8" Y="400.86" Width="6.0" Height="6.0" />
-        <Ellipse ID="50" X="629.8" Y="455.5" Width="6.0" Height="6.0" />
+        <Ellipse ID="39" X="249.20000000000002" Y="619.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="40" X="249.20000000000002" Y="654.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="41" X="249.20000000000002" Y="689.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="42" X="249.20000000000002" Y="729.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="43" X="330.84" Y="439.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="44" X="330.84" Y="484.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="45" X="429.46" Y="89.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="46" X="429.46" Y="143.01" Width="14.0" Height="14.0" />
+        <Ellipse ID="47" X="429.46" Y="199.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="48" X="623.6999999999999" Y="344.2" Width="14.0" Height="14.0" />
+        <Ellipse ID="49" X="623.6999999999999" Y="394.56" Width="14.0" Height="14.0" />
+        <Ellipse ID="50" X="623.6999999999999" Y="449.2" Width="14.0" Height="14.0" />
     </Ellipses>
 </Clock>

@@ -22,10 +22,10 @@ class Ellipse:
     height = 0
 
     def __init__(self, x, y, width, height):
-        self.x = float(x) - 0.5
-        self.y = float(y) - 0.5
-        self.width = float(width) + 1
-        self.height = float(height) + 1
+        self.x = float(x) - float(width) - 1.6
+        self.y = float(y) - float(height) - 1.8
+        self.width = (float(width) + 2) * 2
+        self.height = (float(height) + 2) * 2
 
 
 class Svg:
