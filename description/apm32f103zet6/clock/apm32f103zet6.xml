@@ -51,6 +51,7 @@
         <Control ID="48" Name="System-HSI" GroupName="System-Clk-Selector" Type="RadioButton" />
         <Control ID="49" Name="System-HSE" GroupName="System-Clk-Selector" Type="RadioButton" />
         <Control ID="50" Name="System-PLL" GroupName="System-Clk-Selector" Type="RadioButton" />
+    </Controls>
     <Rects>
         <Rect ID="1" X="25.5" Y="135.5" Width="56.0" Height="31.0" />
         <Rect ID="2" X="25.5" Y="475.5" Width="56.0" Height="31.0" />
