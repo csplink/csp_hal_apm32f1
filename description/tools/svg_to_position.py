@@ -82,8 +82,16 @@ class Svg:
             if item.tag.lower().endswith("svg"):
                 width = float(item.attrib["width"].replace("px", ""))
                 height = float(item.attrib["height"].replace("px", ""))
-            elif item.tag.lower().endswith("rect") and "ff0000" in item.attrib["stroke"].lower():
-                rects.append(Rect(item.attrib["x"], item.attrib["y"], item.attrib["width"], item.attrib["height"]))
+            # rx 和 ry 为圆角矩形的半径
+            elif item.tag.lower().endswith("rect") \
+                    and "rx" not in item.attrib.keys() \
+                    and "ry" not in item.attrib.keys():
+                if "stroke-width" not in item.attrib.keys():  # stroke-width 代表外框线宽，为空默认就为1，我们只匹配线宽1的矩形
+                    rects.append(Rect(item.attrib["x"], item.attrib["y"], item.attrib["width"], item.attrib["height"]))
+                else:
+                    if item.attrib["stroke-width"] == "1":
+                        rects.append(
+                            Rect(item.attrib["x"], item.attrib["y"], item.attrib["width"], item.attrib["height"]))
         rects.sort(key=lambda x: (x.x, x.y))  # 按坐标重排控件
         return width, height, rects
 
