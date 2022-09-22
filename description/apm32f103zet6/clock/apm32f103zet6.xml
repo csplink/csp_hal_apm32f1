@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf8'?>
 <Clock Width="1603.0" Height="903.0">
     <Controls>
-        <Control ID="1" Name="Control-LSE-Input" Type="TextBox" />
-        <Control ID="2" Name="Control-HSE-Input" Type="TextBox" />
+        <Control ID="1" Name="Control-LSE-Input" Type="TextBox" DefaultValue="32.768" Multiple="1000" />
+        <Control ID="2" Name="Control-HSE-Input" Type="TextBox" DefaultValue="8" Multiple="1000000" />
         <Control ID="3" Name="Control-MCO-Output" Type="Label" />
         <Control ID="4" Name="Control-LSE-Is-Bypass" Type="Label" />
         <Control ID="5" Name="Control-HSE-Is-Bypass" Type="Label" />
@@ -39,19 +39,22 @@
         <Control ID="36" Name="Control-ADC1,2,3-Timers-Out" Type="Label" />
         <Control ID="37" Name="Control-SDIO-AHB-Clk-Out" Type="Label" />
         <Control ID="38" Name="Control-FPU-Clk-Out" Type="Label" />
-        <Control ID="39" Name="Control-MCO-PLL/2" GroupName="MCO-Clk-Selector" Type="RadioButton" />
+        <Control ID="39" Name="Control-MCO-PLL/2" GroupName="MCO-Clk-Selector" Type="RadioButton" DefaultValue="1" Multiple="-114514" />
         <Control ID="40" Name="Control-MCO-HSI" GroupName="MCO-Clk-Selector" Type="RadioButton" />
         <Control ID="41" Name="Control-MCO-HSE" GroupName="MCO-Clk-Selector" Type="RadioButton" />
         <Control ID="42" Name="Control-MCO-System-Clk" GroupName="MCO-Clk-Selector" Type="RadioButton" />
-        <Control ID="43" Name="Control-PLL-HSI/2" GroupName="PLL-Selector" Type="RadioButton" />
+        <Control ID="43" Name="Control-PLL-HSI/2" GroupName="PLL-Selector" Type="RadioButton" DefaultValue="1" Multiple="-114514" />
         <Control ID="44" Name="Control-PLL-HSE" GroupName="PLL-Selector" Type="RadioButton" />
-        <Control ID="45" Name="Control-RTC-HSE/128" GroupName="RTC-Clk-Selector" Type="RadioButton" />
+        <Control ID="45" Name="Control-RTC-HSE/128" GroupName="RTC-Clk-Selector" Type="RadioButton" DefaultValue="1" Multiple="-114514" />
         <Control ID="46" Name="Control-RTC-LSE" GroupName="RTC-Clk-Selector" Type="RadioButton" />
         <Control ID="47" Name="Control-RTC-LSI" GroupName="RTC-Clk-Selector" Type="RadioButton" />
-        <Control ID="48" Name="Control-System-HSI" GroupName="System-Clk-Selector" Type="RadioButton" />
+        <Control ID="48" Name="Control-System-HSI" GroupName="System-Clk-Selector" Type="RadioButton" DefaultValue="1" Multiple="-114514" />
         <Control ID="49" Name="Control-System-HSE" GroupName="System-Clk-Selector" Type="RadioButton" />
         <Control ID="50" Name="Control-System-PLL" GroupName="System-Clk-Selector" Type="RadioButton" />
     </Controls>
+    <Signals>
+
+    </Signals>
     <Rects>
         <Rect ID="1" X="25.5" Y="135.5" Width="56.0" Height="31.0" />
         <Rect ID="2" X="25.5" Y="475.5" Width="56.0" Height="31.0" />
