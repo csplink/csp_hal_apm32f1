@@ -10,7 +10,11 @@
         <Control ID="7" Name="Control-MCO-Out" Type="Label" />
         <Control ID="8" Name="Control-HSE-In" Type="ComboBox" />
         <Control ID="9" Name="Control-PLL" Type="Label" />
-        <Control ID="10" Name="Control-PLL-HSE-Mul" Type="ComboBox" />
+        <Control ID="10" Name="Control-PLL-HSE-Mul" Type="ComboBox">
+            <Sources>
+                <Source Value=""></Source>
+            </Sources>
+        </Control>
         <Control ID="11" Name="Control-RTC-Clk-Out" Type="Label" />
         <Control ID="12" Name="Control-CSS" Type="Label" />
         <Control ID="13" Name="Control-USB-Clk-Psc" Type="ComboBox" />
