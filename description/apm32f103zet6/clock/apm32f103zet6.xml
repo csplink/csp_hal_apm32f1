@@ -8,24 +8,81 @@
         <Control ID="5" Name="Control-HSE-Is-Bypass" Type="Label" />
         <Control ID="6" Name="Control-HSI-Calibration" Type="TextBox" />
         <Control ID="7" Name="Control-MCO-Out" Type="Label" />
-        <Control ID="8" Name="Control-HSE-In" Type="ComboBox" />
-        <Control ID="9" Name="Control-PLL" Type="Label" />
-        <Control ID="10" Name="Control-PLL-HSE-Mul" Type="ComboBox">
+        <Control ID="8" Name="Control-HSE-In" Type="ComboBox" DefaultValue="1">
             <Sources>
-                <Source Value=""></Source>
+                <Source Value="1" Operator="/" />
+                <Source Value="2" Operator="/" />
+            </Sources>
+        </Control>
+        <Control ID="9" Name="Control-PLL" Type="Label" />
+        <Control ID="10" Name="Control-PLL-HSE-Mul" Type="ComboBox" DefaultValue="0">
+            <Sources>
+                <Source Value="2" Operator="x" />
+                <Source Value="3" Operator="x" />
+                <Source Value="4" Operator="x" />
+                <Source Value="5" Operator="x" />
+                <Source Value="6" Operator="x" />
+                <Source Value="7" Operator="x" />
+                <Source Value="8" Operator="x" />
+                <Source Value="9" Operator="x" />
+                <Source Value="10" Operator="x" />
+                <Source Value="11" Operator="x" />
+                <Source Value="12" Operator="x" />
+                <Source Value="13" Operator="x" />
+                <Source Value="14" Operator="x" />
+                <Source Value="15" Operator="x" />
+                <Source Value="16" Operator="x" />
             </Sources>
         </Control>
         <Control ID="11" Name="Control-RTC-Clk-Out" Type="Label" />
         <Control ID="12" Name="Control-CSS" Type="Label" />
-        <Control ID="13" Name="Control-USB-Clk-Psc" Type="ComboBox" />
+        <Control ID="13" Name="Control-USB-Clk-Psc" Type="ComboBox" DefaultValue="0">
+            <Sources>
+                <Source Value="1" Operator="/" />
+                <Source Value="1.5" Operator="/" />
+            </Sources>
+        </Control>
         <Control ID="14" Name="Control-SYS-Clk" Type="Label" />
         <Control ID="15" Name="Control-USB-Clk-Out" Type="Label" />
-        <Control ID="16" Name="Control-AHB-Psc" Type="ComboBox" />
+        <Control ID="16" Name="Control-AHB-Psc" Type="ComboBox" DefaultValue="0">
+            <Sources>
+                <Source Value="1" Operator="/" />
+                <Source Value="2" Operator="/" />
+                <Source Value="4" Operator="/" />
+                <Source Value="8" Operator="/" />
+                <Source Value="16" Operator="/" />
+                <Source Value="64" Operator="/" />
+                <Source Value="128" Operator="/" />
+                <Source Value="256" Operator="/" />
+                <Source Value="512" Operator="/" />
+            </Sources>
+        </Control>
         <Control ID="17" Name="Control-Flash-Latency" Type="Label" />
         <Control ID="18" Name="Control-HCLK" Type="TextBox" />
-        <Control ID="19" Name="Control-SysTick-Clk-Psc" Type="ComboBox" />
-        <Control ID="20" Name="Control-APB1-Psc" Type="ComboBox" />
-        <Control ID="21" Name="Control-APB2-Psc" Type="ComboBox" />
+        <Control ID="19" Name="Control-SysTick-Clk-Psc" Type="ComboBox" DefaultValue="0">
+            <Sources>
+                <Source Value="1" Operator="/" />
+                <Source Value="8" Operator="/" />
+            </Sources>
+        </Control>
+        <Control ID="20" Name="Control-APB1-Psc" Type="ComboBox" DefaultValue="0">
+            <Sources>
+                <Source Value="1" Operator="/" />
+                <Source Value="2" Operator="/" />
+                <Source Value="4" Operator="/" />
+                <Source Value="8" Operator="/" />
+                <Source Value="16" Operator="/" />
+            </Sources>
+        </Control>
+        <Control ID="21" Name="Control-APB2-Psc" Type="ComboBox" DefaultValue="0">
+            <Sources>
+                <Source Value="1" Operator="/" />
+                <Source Value="2" Operator="/" />
+                <Source Value="4" Operator="/" />
+                <Source Value="8" Operator="/" />
+                <Source Value="16" Operator="/" />
+            </Sources>
+        </Control>
         <Control ID="22" Name="Control-APB1-Timers-Mul" Type="Label" />
         <Control ID="23" Name="Control-APB2-Timers-Mul" Type="Label" />
         <Control ID="24" Name="Control-ADC-Clk-Psc" Type="ComboBox" />
