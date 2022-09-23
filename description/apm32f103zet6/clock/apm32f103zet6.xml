@@ -85,7 +85,14 @@
         </Control>
         <Control ID="22" Name="Control-APB1-Timers-Mul" Type="Label" />
         <Control ID="23" Name="Control-APB2-Timers-Mul" Type="Label" />
-        <Control ID="24" Name="Control-ADC-Clk-Psc" Type="ComboBox" />
+        <Control ID="24" Name="Control-ADC-Clk-Psc" Type="ComboBox" DefaultValue="0">
+            <Sources>
+                <Source Value="2" Operator="/" />
+                <Source Value="4" Operator="/" />
+                <Source Value="6" Operator="/" />
+                <Source Value="8" Operator="/" />
+            </Sources>
+        </Control>
         <Control ID="25" Name="Control-I2S3-Clk-Out" Type="Label" />
         <Control ID="26" Name="Control-I2S2-Clk-Out" Type="Label" />
         <Control ID="27" Name="Control-EMMC-Clk-Out" Type="Label" />
