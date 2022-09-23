@@ -58,7 +58,7 @@
             </Sources>
         </Control>
         <Control ID="17" Name="Control-Flash-Latency" Type="Label" />
-        <Control ID="18" Name="Control-HCLK" Type="TextBox" />
+        <Control ID="18" Name="Control-CLK" Type="Label" />
         <Control ID="19" Name="Control-SysTick-Clk-Psc" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
