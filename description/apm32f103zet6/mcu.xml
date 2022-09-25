@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<MCU Name="APM32F103ZET6" Series="APM32F1" Line="APM32F103" ClockTree="APM32F103" HasPowerPad="false" IoType=""
-     Package="LQFP144" Company="Geehy" Price="0">
-    <HAL Name="csp_hal_apm32f1" Version="latest"/>
+<?xml version="1.0" encoding="utf-8"?>
+<MCU Name="APM32F103ZET6" Series="APM32F1" Line="APM32F103" ClockTree="APM32F103" HasPowerPad="false" IoType="" Package="LQFP144" Company="Geehy" Price="0">
+    <HAL Name="csp_hal_apm32f1" Version="latest" />
     <CompanyUrl>https://geehy.com</CompanyUrl>
     <RepositoryUrl>https://github.com/xqyjlj/csp_hal_apm32f1</RepositoryUrl>
     <Introduction>具有512KB Flash和96MHz CPU的主流Arm Cortex-M3超值系列MCU</Introduction>
@@ -26,63 +25,63 @@ APM32F103xDxE系列MCU，基于32位Arm® Cortex®-M3内核，最高工作主频
     <Modules>
         <Module Name="System Core">
             <Categories>
-                <Category Name="DMA"/>
-                <Category Name="GPIO"/>
-                <Category Name="IWDG"/>
-                <Category Name="NVIC"/>
-                <Category Name="Clock"/>
-                <Category Name="SYS"/>
-                <Category Name="WWDG"/>
+                <Category Name="DMA" />
+                <Category Name="GPIO" />
+                <Category Name="IWDG" />
+                <Category Name="NVIC" />
+                <Category Name="Clock" />
+                <Category Name="SYS" />
+                <Category Name="WWDG" />
             </Categories>
         </Module>
         <Module Name="Analog">
             <Categories>
-                <Category Name="ADC1"/>
-                <Category Name="ADC2"/>
-                <Category Name="ADC3"/>
-                <Category Name="DAC"/>
+                <Category Name="ADC1" />
+                <Category Name="ADC2" />
+                <Category Name="ADC3" />
+                <Category Name="DAC" />
             </Categories>
         </Module>
         <Module Name="Timers">
             <Categories>
-                <Category Name="RTC"/>
-                <Category Name="TIM1"/>
-                <Category Name="TIM2"/>
-                <Category Name="TIM3"/>
-                <Category Name="TIM4"/>
-                <Category Name="TIM5"/>
-                <Category Name="TIM6"/>
-                <Category Name="TIM7"/>
-                <Category Name="TIM8"/>
+                <Category Name="RTC" />
+                <Category Name="TIM1" />
+                <Category Name="TIM2" />
+                <Category Name="TIM3" />
+                <Category Name="TIM4" />
+                <Category Name="TIM5" />
+                <Category Name="TIM6" />
+                <Category Name="TIM7" />
+                <Category Name="TIM8" />
             </Categories>
         </Module>
         <Module Name="Connectivity">
             <Categories>
-                <Category Name="CAN"/>
-                <Category Name="FSMC"/>
-                <Category Name="I2C1"/>
-                <Category Name="I2C2"/>
-                <Category Name="SDIO"/>
-                <Category Name="SPI1"/>
-                <Category Name="SPI2"/>
-                <Category Name="SPI3"/>
-                <Category Name="UART4"/>
-                <Category Name="UART5"/>
-                <Category Name="USART1"/>
-                <Category Name="USART2"/>
-                <Category Name="USART3"/>
-                <Category Name="USB"/>
+                <Category Name="CAN" />
+                <Category Name="FSMC" />
+                <Category Name="I2C1" />
+                <Category Name="I2C2" />
+                <Category Name="SDIO" />
+                <Category Name="SPI1" />
+                <Category Name="SPI2" />
+                <Category Name="SPI3" />
+                <Category Name="UART4" />
+                <Category Name="UART5" />
+                <Category Name="USART1" />
+                <Category Name="USART2" />
+                <Category Name="USART3" />
+                <Category Name="USB" />
             </Categories>
         </Module>
         <Module Name="Multimedia">
             <Categories>
-                <Category Name="I2S2"/>
-                <Category Name="I2S3"/>
+                <Category Name="I2S2" />
+                <Category Name="I2S3" />
             </Categories>
         </Module>
         <Module Name="Computing">
             <Categories>
-                <Category Name="CRC"/>
+                <Category Name="CRC" />
             </Categories>
         </Module>
     </Modules>
