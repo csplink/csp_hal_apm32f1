@@ -6,20 +6,67 @@
         <Control ID="3" Name="Control-MCO-Output" Type="Label" />
         <Control ID="4" Name="Control-LSE-Is-Bypass" Type="Label">
             <Status>
-                <Status Dependencies="CSP_CLOCK_LSE_ENABLE_BYPASS" IsEnable="true">
+                <Status IsEnable="false">
+                    <Dependencies>
+                        <Dependence Key="CSP_USING_CHAL_CLOCK_OSC32_DISABLE" />
+                    </Dependencies>
                     <Styles>
-                        <Style Name="Text" Value="旁路模式" />
+                        <Style Name="Text" Value="关闭" />
+                        <Style Name="Style" Value="Disable" />
                     </Styles>
                 </Status>
-                <Status Dependencies="!CSP_CLOCK_LSE_ENABLE_BYPASS" IsEnable="true">
+                <Status IsEnable="true">
+                    <Dependencies>
+                        <Dependence Key="CSP_USING_CHAL_CLOCK_OSC32_BYPASS" />
+                    </Dependencies>
+                    <Styles>
+                        <Style Name="Text" Value="旁路模式" />
+                        <Style Name="Style" Value="Enable" />
+                    </Styles>
+                </Status>
+                <Status IsEnable="true">
+                    <Dependencies>
+                        <Dependence Key="CSP_USING_CHAL_CLOCK_OSC32_NO_BYPASS" />
+                    </Dependencies>
                     <Styles>
                         <Style Name="Text" Value="晶体模式" />
+                        <Style Name="Style" Value="Enable" />
                     </Styles>
                 </Status>
             </Status>
         </Control>
-        <Control ID="5" Name="Control-HSE-Is-Bypass" Type="Label" />
-        <Control ID="6" Name="Control-HSI-Calibration" Type="TextBox" />
+        <Control ID="5" Name="Control-HSE-Is-Bypass" Type="Label">
+            <Status>
+                <Status IsEnable="false">
+                    <Dependencies>
+                        <Dependence Key="CSP_USING_CHAL_CLOCK_OSC_DISABLE" />
+                    </Dependencies>
+                    <Styles>
+                        <Style Name="Text" Value="关闭" />
+                        <Style Name="Style" Value="Disable" />
+                    </Styles>
+                </Status>
+                <Status IsEnable="true">
+                    <Dependencies>
+                        <Dependence Key="CSP_USING_CHAL_CLOCK_OSC_BYPASS" />
+                    </Dependencies>
+                    <Styles>
+                        <Style Name="Text" Value="旁路模式" />
+                        <Style Name="Style" Value="Enable" />
+                    </Styles>
+                </Status>
+                <Status IsEnable="true">
+                    <Dependencies>
+                        <Dependence Key="CSP_USING_CHAL_CLOCK_OSC_NO_BYPASS" />
+                    </Dependencies>
+                    <Styles>
+                        <Style Name="Text" Value="晶体模式" />
+                        <Style Name="Style" Value="Enable" />
+                    </Styles>
+                </Status>
+            </Status>
+        </Control>
+        <Control ID="6" Name="Control-HSI-Calibration" Type="TextBox" DefaultValue="16" Multiple="1" />
         <Control ID="7" Name="Control-MCO-Out" Type="Label" />
         <Control ID="8" Name="Control-HSE-In" Type="ComboBox" DefaultValue="1">
             <Sources>
@@ -48,7 +95,28 @@
             </Sources>
         </Control>
         <Control ID="11" Name="Control-RTC-Clk-Out" Type="Label" />
-        <Control ID="12" Name="Control-CSS" Type="Label" />
+        <Control ID="12" Name="Control-CSS" Type="Label">
+            <Status>
+                <Status IsEnable="false">
+                    <Dependencies>
+                        <Dependence Key="CSP_USING_CHAL_CLOCK_CSS_DISABLE" />
+                    </Dependencies>
+                    <Styles>
+                        <Style Name="Text" Value="禁用CSS" />
+                        <Style Name="Style" Value="Disable" />
+                    </Styles>
+                </Status>
+                <Status IsEnable="true">
+                    <Dependencies>
+                        <Dependence Key="CSP_USING_CHAL_CLOCK_CSS_ENABLE" />
+                    </Dependencies>
+                    <Styles>
+                        <Style Name="Text" Value="使能CSS" />
+                        <Style Name="Style" Value="Enable" />
+                    </Styles>
+                </Status>
+            </Status>
+        </Control>
         <Control ID="13" Name="Control-USB-Clk-Psc" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
