@@ -68,14 +68,17 @@
         </Control>
         <Control ID="6" Name="HSI-Calibration" Type="TextBox" DefaultValue="16" Multiple="1" />
         <Control ID="7" Name="MCO-Out" Type="Label" />
-        <Control ID="8" Name="HSE-Psc" Type="ComboBox" DefaultValue="1" Multiple="-114514">
+        <Control ID="8" Name="HSE-Psc" Type="ComboBox" DefaultValue="1">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
             </Sources>
+            <Signals>
+                <Signal Source="LSE" />
+            </Signals>
         </Control>
         <Control ID="9" Name="PLL" Type="Label" />
-        <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" DefaultValue="0" Multiple="-114514">
+        <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="2" Operator="x" />
                 <Source Value="3" Operator="x" />
@@ -117,7 +120,7 @@
                 </Status>
             </Status>
         </Control>
-        <Control ID="13" Name="USB-Clk-Psc" Type="ComboBox" DefaultValue="0" Multiple="-114514">
+        <Control ID="13" Name="USB-Clk-Psc" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="1.5" Operator="/" />
@@ -125,7 +128,7 @@
         </Control>
         <Control ID="14" Name="SYS-Clk" Type="Label" />
         <Control ID="15" Name="USB-Clk-Out" Type="Label" />
-        <Control ID="16" Name="AHB-Psc" Type="ComboBox" DefaultValue="0" Multiple="-114514">
+        <Control ID="16" Name="AHB-Psc" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -140,13 +143,13 @@
         </Control>
         <Control ID="17" Name="Flash-Latency" Type="Label" />
         <Control ID="18" Name="CLK" Type="Label" />
-        <Control ID="19" Name="SysTick-Clk-Psc" Type="ComboBox" DefaultValue="0" Multiple="-114514">
+        <Control ID="19" Name="SysTick-Clk-Psc" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="8" Operator="/" />
             </Sources>
         </Control>
-        <Control ID="20" Name="APB1-Psc" Type="ComboBox" DefaultValue="0" Multiple="-114514">
+        <Control ID="20" Name="APB1-Psc" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -155,7 +158,7 @@
                 <Source Value="16" Operator="/" />
             </Sources>
         </Control>
-        <Control ID="21" Name="APB2-Psc" Type="ComboBox" DefaultValue="0" Multiple="-114514">
+        <Control ID="21" Name="APB2-Psc" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -166,7 +169,7 @@
         </Control>
         <Control ID="22" Name="APB1-Timers-Mul" Type="Label" />
         <Control ID="23" Name="APB2-Timers-Mul" Type="Label" />
-        <Control ID="24" Name="ADC-Clk-Psc" Type="ComboBox" DefaultValue="0" Multiple="-114514">
+        <Control ID="24" Name="ADC-Clk-Psc" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="2" Operator="/" />
                 <Source Value="4" Operator="/" />
@@ -188,16 +191,16 @@
         <Control ID="36" Name="ADC1,2,3-Timers-Out" Type="Label" />
         <Control ID="37" Name="SDIO-AHB-Clk-Out" Type="Label" />
         <Control ID="38" Name="FPU-Clk-Out" Type="Label" />
-        <Control ID="39" Name="MCO-PLL/2" GroupName="MCO-Clk-Selector" Type="RadioButton" DefaultValue="1" Multiple="-114514" />
+        <Control ID="39" Name="MCO-PLL/2" GroupName="MCO-Clk-Selector" Type="RadioButton" DefaultValue="1" />
         <Control ID="40" Name="MCO-HSI" GroupName="MCO-Clk-Selector" Type="RadioButton" />
         <Control ID="41" Name="MCO-HSE" GroupName="MCO-Clk-Selector" Type="RadioButton" />
         <Control ID="42" Name="MCO-System-Clk" GroupName="MCO-Clk-Selector" Type="RadioButton" />
-        <Control ID="43" Name="PLL-HSI/2" GroupName="PLL-Selector" Type="RadioButton" DefaultValue="1" Multiple="-114514" />
+        <Control ID="43" Name="PLL-HSI/2" GroupName="PLL-Selector" Type="RadioButton" DefaultValue="1" />
         <Control ID="44" Name="PLL-HSE" GroupName="PLL-Selector" Type="RadioButton" />
-        <Control ID="45" Name="RTC-HSE/128" GroupName="RTC-Clk-Selector" Type="RadioButton" DefaultValue="1" Multiple="-114514" />
+        <Control ID="45" Name="RTC-HSE/128" GroupName="RTC-Clk-Selector" Type="RadioButton" DefaultValue="1" />
         <Control ID="46" Name="RTC-LSE" GroupName="RTC-Clk-Selector" Type="RadioButton" />
         <Control ID="47" Name="RTC-LSI" GroupName="RTC-Clk-Selector" Type="RadioButton" />
-        <Control ID="48" Name="System-HSI" GroupName="System-Clk-Selector" Type="RadioButton" DefaultValue="1" Multiple="-114514" />
+        <Control ID="48" Name="System-HSI" GroupName="System-Clk-Selector" Type="RadioButton" DefaultValue="1" />
         <Control ID="49" Name="System-HSE" GroupName="System-Clk-Selector" Type="RadioButton" />
         <Control ID="50" Name="System-PLL" GroupName="System-Clk-Selector" Type="RadioButton" />
     </Controls>
