@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <IP>
     <Modes>
-        <Mode Type="Clock-OSC" Name="Clock-OSC">
+        <Mode Type="Clock" Name="Clock-OSC">
             <Parameters>
                 <Parameter Group="chal_clock_osc">
                     <Values>
@@ -12,13 +12,23 @@
                 </Parameter>
             </Parameters>
         </Mode>
-        <Mode Type="Clock-OSC32" Name="Clock-OSC32">
+        <Mode Type="Clock" Name="Clock-OSC32">
             <Parameters>
                 <Parameter Group="chal_clock_osc32">
                     <Values>
                         <Value>CHAL_CLOCK_OSC32_DISABLE</Value>
                         <Value>CHAL_CLOCK_OSC32_BYPASS</Value>
                         <Value>CHAL_CLOCK_OSC32_NO_BYPASS</Value>
+                    </Values>
+                </Parameter>
+            </Parameters>
+        </Mode>
+        <Mode Type="Clock" Name="Clock-CSS">
+            <Parameters>
+                <Parameter Group="chal_clock_css">
+                    <Values>
+                        <Value>CHAL_CLOCK_CSS_DISABLE</Value>
+                        <Value>CHAL_CLOCK_CSS_ENABLE</Value>
                     </Values>
                 </Parameter>
             </Parameters>
