@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Clock Width="1603.0" Height="903.0">
     <Controls>
-        <Control ID="1" Name="LSE-Input" Type="TextBox" DefaultValue="32.768" Multiple="1000" />
-        <Control ID="2" Name="HSE-Input" Type="TextBox" DefaultValue="8" Multiple="1000000" />
+        <Control ID="1" Name="LSE-Input" Type="TextBox" Multiple="1000" DefaultValue="32.768" />
+        <Control ID="2" Name="HSE-Input" Type="TextBox" Multiple="1000000" DefaultValue="8" />
         <Control ID="3" Name="MCO-Output" Type="Label" />
         <Control ID="4" Name="LSE-Is-Bypass" Type="Label">
             <Status>
@@ -66,7 +66,7 @@
                 </Status>
             </Status>
         </Control>
-        <Control ID="6" Name="HSI-Calibration" Type="TextBox" DefaultValue="16" Multiple="1" />
+        <Control ID="6" Name="HSI-Calibration" Type="TextBox" Multiple="1" DefaultValue="16" />
         <Control ID="7" Name="MCO-Out" Type="Label" />
         <Control ID="8" Name="HSE-Psc" Type="ComboBox" DefaultValue="1">
             <Sources>
@@ -74,10 +74,14 @@
                 <Source Value="2" Operator="/" />
             </Sources>
             <Signals>
-                <Signal Source="LSE" />
+                <Signal Source="HSE-Input" />
             </Signals>
         </Control>
-        <Control ID="9" Name="PLL" Type="Label" />
+        <Control ID="9" Name="PLL" Type="Label">
+            <Signals>
+                <Signal Source="HSE-Psc" />
+            </Signals>
+        </Control>
         <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" DefaultValue="0">
             <Sources>
                 <Source Value="2" Operator="x" />
