@@ -77,12 +77,12 @@
                 <Signal Source="HSE-Input" />
             </Signals>
         </Control>
-        <Control ID="9" Name="PLL" Type="Label">
+        <Control ID="9" Name="PLL" Type="Label" Multiple="1000000">
             <Signals>
                 <Signal Source="HSE-Psc" />
             </Signals>
         </Control>
-        <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" DefaultValue="0">
+        <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" Multiple="1" DefaultValue="0">
             <Sources>
                 <Source Value="2" Operator="x" />
                 <Source Value="3" Operator="x" />
@@ -100,6 +100,9 @@
                 <Source Value="15" Operator="x" />
                 <Source Value="16" Operator="x" />
             </Sources>
+            <Signals>
+                <Signal Source="PLL" />
+            </Signals>
         </Control>
         <Control ID="11" Name="RTC-Clk-Out" Type="Label" />
         <Control ID="12" Name="CSS" Type="Label">
@@ -124,15 +127,19 @@
                 </Status>
             </Status>
         </Control>
-        <Control ID="13" Name="USB-Clk-Psc" Type="ComboBox" DefaultValue="0">
+        <Control ID="13" Name="USB-Clk-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="1.5" Operator="/" />
             </Sources>
         </Control>
-        <Control ID="14" Name="SYS-Clk" Type="Label" />
+        <Control ID="14" Name="SYS-Clk" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="PLL-HSE-Mul" />
+            </Signals>
+        </Control>
         <Control ID="15" Name="USB-Clk-Out" Type="Label" />
-        <Control ID="16" Name="AHB-Psc" Type="ComboBox" DefaultValue="0">
+        <Control ID="16" Name="AHB-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -144,16 +151,26 @@
                 <Source Value="256" Operator="/" />
                 <Source Value="512" Operator="/" />
             </Sources>
+            <Signals>
+                <Signal Source="SYS-Clk" />
+            </Signals>
         </Control>
         <Control ID="17" Name="Flash-Latency" Type="Label" />
-        <Control ID="18" Name="CLK" Type="Label" />
-        <Control ID="19" Name="SysTick-Clk-Psc" Type="ComboBox" DefaultValue="0">
+        <Control ID="18" Name="CLK" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="AHB-Psc" />
+            </Signals>
+        </Control>
+        <Control ID="19" Name="SysTick-Clk-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="8" Operator="/" />
             </Sources>
+            <Signals>
+                <Signal Source="CLK" />
+            </Signals>
         </Control>
-        <Control ID="20" Name="APB1-Psc" Type="ComboBox" DefaultValue="0">
+        <Control ID="20" Name="APB1-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -161,8 +178,11 @@
                 <Source Value="8" Operator="/" />
                 <Source Value="16" Operator="/" />
             </Sources>
+            <Signals>
+                <Signal Source="CLK" />
+            </Signals>
         </Control>
-        <Control ID="21" Name="APB2-Psc" Type="ComboBox" DefaultValue="0">
+        <Control ID="21" Name="APB2-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -170,31 +190,77 @@
                 <Source Value="8" Operator="/" />
                 <Source Value="16" Operator="/" />
             </Sources>
+            <Signals>
+                <Signal Source="CLK" />
+            </Signals>
         </Control>
         <Control ID="22" Name="APB1-Timers-Mul" Type="Label" />
         <Control ID="23" Name="APB2-Timers-Mul" Type="Label" />
-        <Control ID="24" Name="ADC-Clk-Psc" Type="ComboBox" DefaultValue="0">
+        <Control ID="24" Name="ADC-Clk-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
             <Sources>
                 <Source Value="2" Operator="/" />
                 <Source Value="4" Operator="/" />
                 <Source Value="6" Operator="/" />
                 <Source Value="8" Operator="/" />
             </Sources>
+            <Signals>
+                <Signal Source="APB2-Psc" />
+            </Signals>
         </Control>
-        <Control ID="25" Name="I2S3-Clk-Out" Type="Label" />
-        <Control ID="26" Name="I2S2-Clk-Out" Type="Label" />
-        <Control ID="27" Name="EMMC-Clk-Out" Type="Label" />
-        <Control ID="28" Name="SDIO-Clk-Out" Type="Label" />
-        <Control ID="29" Name="HCLK-Out" Type="Label" />
-        <Control ID="30" Name="SysTick-Clk-Out" Type="Label" />
-        <Control ID="31" Name="FCLK-Out" Type="Label" />
-        <Control ID="32" Name="APB1-Peripherals-Out" Type="Label" />
-        <Control ID="33" Name="APB1-Timers-Out" Type="Label" />
-        <Control ID="34" Name="APB2-Peripherals-Out" Type="Label" />
-        <Control ID="35" Name="APB2-Timers-Out" Type="Label" />
-        <Control ID="36" Name="ADC1,2,3-Timers-Out" Type="Label" />
-        <Control ID="37" Name="SDIO-AHB-Clk-Out" Type="Label" />
-        <Control ID="38" Name="FPU-Clk-Out" Type="Label" />
+        <Control ID="25" Name="I2S3-Clk-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="SYS-Clk" />
+            </Signals>
+        </Control>
+        <Control ID="26" Name="I2S2-Clk-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="SYS-Clk" />
+            </Signals>
+        </Control>
+        <Control ID="27" Name="EMMC-Clk-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="CLK" />
+            </Signals>
+        </Control>
+        <Control ID="28" Name="SDIO-Clk-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="CLK" />
+            </Signals>
+        </Control>
+        <Control ID="29" Name="HCLK-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="CLK" />
+            </Signals>
+        </Control>
+        <Control ID="30" Name="SysTick-Clk-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="SysTick-Clk-Psc" />
+            </Signals>
+        </Control>
+        <Control ID="31" Name="FCLK-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="CLK" />
+            </Signals>
+        </Control>
+        <Control ID="32" Name="APB1-Peripherals-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="APB1-Psc" />
+            </Signals>
+        </Control>
+        <Control ID="33" Name="APB1-Timers-Out" Type="Label" Multiple="1000000" />
+        <Control ID="34" Name="APB2-Peripherals-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="APB2-Psc" />
+            </Signals>
+        </Control>
+        <Control ID="35" Name="APB2-Timers-Out" Type="Label" Multiple="1000000" />
+        <Control ID="36" Name="ADC1,2,3-Timers-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="ADC-Clk-Psc" />
+            </Signals>
+        </Control>
+        <Control ID="37" Name="SDIO-AHB-Clk-Out" Type="Label" Multiple="1000000" />
+        <Control ID="38" Name="FPU-Clk-Out" Type="Label" Multiple="1000000" />
         <Control ID="39" Name="MCO-PLL/2" GroupName="MCO-Clk-Selector" Type="RadioButton" DefaultValue="1" />
         <Control ID="40" Name="MCO-HSI" GroupName="MCO-Clk-Selector" Type="RadioButton" />
         <Control ID="41" Name="MCO-HSE" GroupName="MCO-Clk-Selector" Type="RadioButton" />
