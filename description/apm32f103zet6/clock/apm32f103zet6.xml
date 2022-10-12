@@ -68,7 +68,7 @@
         </Control>
         <Control ID="6" Name="HSI-Calibration" Type="TextBox" Multiple="1" DefaultValue="16" />
         <Control ID="7" Name="MCO-Out" Type="Label" />
-        <Control ID="8" Name="HSE-Psc" Type="ComboBox" DefaultValue="1">
+        <Control ID="8" Name="HSE-Psc" Type="ComboBox" DefaultIndex="1">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -82,7 +82,7 @@
                 <Signal Source="HSE-Psc" />
             </Signals>
         </Control>
-        <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" Multiple="1" DefaultValue="0">
+        <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
                 <Source Value="2" Operator="x" />
                 <Source Value="3" Operator="x" />
@@ -127,7 +127,7 @@
                 </Status>
             </Status>
         </Control>
-        <Control ID="13" Name="USB-Clk-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
+        <Control ID="13" Name="USB-Clk-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="1.5" Operator="/" />
@@ -139,7 +139,7 @@
             </Signals>
         </Control>
         <Control ID="15" Name="USB-Clk-Out" Type="Label" />
-        <Control ID="16" Name="AHB-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
+        <Control ID="16" Name="AHB-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -161,7 +161,7 @@
                 <Signal Source="AHB-Psc" />
             </Signals>
         </Control>
-        <Control ID="19" Name="SysTick-Clk-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
+        <Control ID="19" Name="SysTick-Clk-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="8" Operator="/" />
@@ -170,7 +170,7 @@
                 <Signal Source="CLK" />
             </Signals>
         </Control>
-        <Control ID="20" Name="APB1-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
+        <Control ID="20" Name="APB1-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -182,7 +182,7 @@
                 <Signal Source="CLK" />
             </Signals>
         </Control>
-        <Control ID="21" Name="APB2-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
+        <Control ID="21" Name="APB2-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
                 <Source Value="1" Operator="/" />
                 <Source Value="2" Operator="/" />
@@ -196,7 +196,7 @@
         </Control>
         <Control ID="22" Name="APB1-Timers-Mul" Type="Label" />
         <Control ID="23" Name="APB2-Timers-Mul" Type="Label" />
-        <Control ID="24" Name="ADC-Clk-Psc" Type="ComboBox" Multiple="1" DefaultValue="0">
+        <Control ID="24" Name="ADC-Clk-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
                 <Source Value="2" Operator="/" />
                 <Source Value="4" Operator="/" />
