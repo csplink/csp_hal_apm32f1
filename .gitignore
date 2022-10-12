@@ -13,3 +13,6 @@ Objects/
 RTE/
 *.uvoptx
 *.uvguix.*
+
+#cache
+cache/
