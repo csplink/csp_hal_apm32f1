@@ -88,12 +88,9 @@
             </Signals>
         </Control>
         <Control ID="8" Name="HSE-Psc" Type="ComboBox" DefaultIndex="1">
-            <Sources>
-                <Source Value="1" Operator="/" />
-                <Source Value="2" Operator="/" />
-            </Sources>
             <Signals>
-                <Signal Source="HSE-Input" />
+                <Signal Source="HSE-Input" Value="1" Operator="/" />
+                <Signal Source="HSE-Input" Value="2" Operator="/" />
             </Signals>
         </Control>
         <Control ID="9" Name="PLL" Type="Label" Multiple="1000000">
@@ -111,25 +108,22 @@
             </Signals>
         </Control>
         <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" Multiple="1" DefaultIndex="0">
-            <Sources>
-                <Source Value="2" Operator="*" />
-                <Source Value="3" Operator="*" />
-                <Source Value="4" Operator="*" />
-                <Source Value="5" Operator="*" />
-                <Source Value="6" Operator="*" />
-                <Source Value="7" Operator="*" />
-                <Source Value="8" Operator="*" />
-                <Source Value="9" Operator="*" />
-                <Source Value="10" Operator="*" />
-                <Source Value="11" Operator="*" />
-                <Source Value="12" Operator="*" />
-                <Source Value="13" Operator="*" />
-                <Source Value="14" Operator="*" />
-                <Source Value="15" Operator="*" />
-                <Source Value="16" Operator="*" />
-            </Sources>
             <Signals>
-                <Signal Source="PLL" />
+                <Signal Source="PLL" Value="2" Operator="*" />
+                <Signal Source="PLL" Value="3" Operator="*" />
+                <Signal Source="PLL" Value="4" Operator="*" />
+                <Signal Source="PLL" Value="5" Operator="*" />
+                <Signal Source="PLL" Value="6" Operator="*" />
+                <Signal Source="PLL" Value="7" Operator="*" />
+                <Signal Source="PLL" Value="8" Operator="*" />
+                <Signal Source="PLL" Value="9" Operator="*" />
+                <Signal Source="PLL" Value="10" Operator="*" />
+                <Signal Source="PLL" Value="11" Operator="*" />
+                <Signal Source="PLL" Value="12" Operator="*" />
+                <Signal Source="PLL" Value="13" Operator="*" />
+                <Signal Source="PLL" Value="14" Operator="*" />
+                <Signal Source="PLL" Value="15" Operator="*" />
+                <Signal Source="PLL" Value="16" Operator="*" />
             </Signals>
         </Control>
         <Control ID="11" Name="RTC-Clk-Out" Type="Label" Multiple="1000">
@@ -174,12 +168,9 @@
             </Status>
         </Control>
         <Control ID="13" Name="USB-Clk-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
-            <Sources>
-                <Source Value="1" Operator="/" />
-                <Source Value="1.5" Operator="/" />
-            </Sources>
             <Signals>
-                <Signal Source="PLL-HSE-Mul" />
+                <Signal Source="PLL-HSE-Mul" Value="1" Operator="/" />
+                <Signal Source="PLL-HSE-Mul" Value="1.5" Operator="/" />
             </Signals>
         </Control>
         <Control ID="14" Name="SYS-Clk" Type="Label" Multiple="1000000">
@@ -201,19 +192,16 @@
             </Signals>
         </Control>
         <Control ID="16" Name="AHB-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
-            <Sources>
-                <Source Value="1" Operator="/" />
-                <Source Value="2" Operator="/" />
-                <Source Value="4" Operator="/" />
-                <Source Value="8" Operator="/" />
-                <Source Value="16" Operator="/" />
-                <Source Value="64" Operator="/" />
-                <Source Value="128" Operator="/" />
-                <Source Value="256" Operator="/" />
-                <Source Value="512" Operator="/" />
-            </Sources>
             <Signals>
-                <Signal Source="SYS-Clk" />
+                <Signal Source="SYS-Clk" Value="1" Operator="/" />
+                <Signal Source="SYS-Clk" Value="2" Operator="/" />
+                <Signal Source="SYS-Clk" Value="4" Operator="/" />
+                <Signal Source="SYS-Clk" Value="8" Operator="/" />
+                <Signal Source="SYS-Clk" Value="16" Operator="/" />
+                <Signal Source="SYS-Clk" Value="64" Operator="/" />
+                <Signal Source="SYS-Clk" Value="128" Operator="/" />
+                <Signal Source="SYS-Clk" Value="256" Operator="/" />
+                <Signal Source="SYS-Clk" Value="512" Operator="/" />
             </Signals>
         </Control>
         <Control ID="17" Name="Flash-Latency" Type="Label" />
@@ -223,49 +211,37 @@
             </Signals>
         </Control>
         <Control ID="19" Name="SysTick-Clk-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
-            <Sources>
-                <Source Value="1" Operator="/" />
-                <Source Value="8" Operator="/" />
-            </Sources>
             <Signals>
-                <Signal Source="CLK" />
+                <Signal Source="CLK" Value="1" Operator="/" />
+                <Signal Source="CLK" Value="8" Operator="/" />
             </Signals>
         </Control>
         <Control ID="20" Name="APB1-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
-            <Sources>
-                <Source Value="1" Operator="/" />
-                <Source Value="2" Operator="/" />
-                <Source Value="4" Operator="/" />
-                <Source Value="8" Operator="/" />
-                <Source Value="16" Operator="/" />
-            </Sources>
             <Signals>
-                <Signal Source="CLK" />
+                <Signal Source="CLK" Value="1" Operator="/" />
+                <Signal Source="CLK" Value="2" Operator="/" />
+                <Signal Source="CLK" Value="4" Operator="/" />
+                <Signal Source="CLK" Value="8" Operator="/" />
+                <Signal Source="CLK" Value="16" Operator="/" />
             </Signals>
         </Control>
         <Control ID="21" Name="APB2-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
-            <Sources>
-                <Source Value="1" Operator="/" />
-                <Source Value="2" Operator="/" />
-                <Source Value="4" Operator="/" />
-                <Source Value="8" Operator="/" />
-                <Source Value="16" Operator="/" />
-            </Sources>
             <Signals>
-                <Signal Source="CLK" />
+                <Signal Source="CLK" Value="1" Operator="/" />
+                <Signal Source="CLK" Value="2" Operator="/" />
+                <Signal Source="CLK" Value="4" Operator="/" />
+                <Signal Source="CLK" Value="8" Operator="/" />
+                <Signal Source="CLK" Value="16" Operator="/" />
             </Signals>
         </Control>
         <Control ID="22" Name="APB1-Timers-Mul" Type="Label" />
         <Control ID="23" Name="APB2-Timers-Mul" Type="Label" />
         <Control ID="24" Name="ADC-Clk-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
-            <Sources>
-                <Source Value="2" Operator="/" />
-                <Source Value="4" Operator="/" />
-                <Source Value="6" Operator="/" />
-                <Source Value="8" Operator="/" />
-            </Sources>
             <Signals>
-                <Signal Source="APB2-Psc" />
+                <Signal Source="APB2-Psc" Value="2" Operator="/" />
+                <Signal Source="APB2-Psc" Value="4" Operator="/" />
+                <Signal Source="APB2-Psc" Value="6" Operator="/" />
+                <Signal Source="APB2-Psc" Value="8" Operator="/" />
             </Signals>
         </Control>
         <Control ID="25" Name="I2S3-Clk-Out" Type="Label" Multiple="1000000">
