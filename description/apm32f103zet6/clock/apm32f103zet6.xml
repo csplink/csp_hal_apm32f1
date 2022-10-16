@@ -3,7 +3,11 @@
     <Controls>
         <Control ID="1" Name="LSE-Input" Type="TextBox" Multiple="1000" DefaultValue="32.768" />
         <Control ID="2" Name="HSE-Input" Type="TextBox" Multiple="1000000" DefaultValue="8" />
-        <Control ID="3" Name="MCO-Output" Type="Label" />
+        <Control ID="3" Name="MCO-Output" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="MCO-Out" />
+            </Signals>
+        </Control>
         <Control ID="4" Name="LSE-Is-Bypass" Type="Label">
             <Status>
                 <Status IsEnable="false">
@@ -67,7 +71,22 @@
             </Status>
         </Control>
         <Control ID="6" Name="HSI-Calibration" Type="TextBox" Multiple="1" DefaultValue="16" />
-        <Control ID="7" Name="MCO-Out" Type="Label" />
+        <Control ID="7" Name="MCO-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="PLL-HSE-Mul" Value="2" Operator="/">
+                    <Dependencies>CSP_USING_CLOCK_MCO_PLL_DIV2</Dependencies>
+                </Signal>
+                <Signal SourceValue="8000000">
+                    <Dependencies>CSP_USING_CLOCK_MCO_HSI</Dependencies>
+                </Signal>
+                <Signal Source="HSE-Input">
+                    <Dependencies>CSP_USING_CLOCK_MCO_HSE</Dependencies>
+                </Signal>
+                <Signal Source="SYS-Clk">
+                    <Dependencies>CSP_USING_CLOCK_MCO_SYSTEM_CLK</Dependencies>
+                </Signal>
+            </Signals>
+        </Control>
         <Control ID="8" Name="HSE-Psc" Type="ComboBox" DefaultIndex="1">
             <Sources>
                 <Source Value="1" Operator="/" />
@@ -79,32 +98,59 @@
         </Control>
         <Control ID="9" Name="PLL" Type="Label" Multiple="1000000">
             <Signals>
-                <Signal Source="HSE-Psc" />
+                <Signal SourceValue="8000000" Value="2" Operator="/">
+                    <Dependencies>
+                        CSP_USING_CLOCK_PLL_HSI_DIV2
+                    </Dependencies>
+                </Signal>
+                <Signal Source="HSE-Psc">
+                    <Dependencies>
+                        CSP_USING_CLOCK_PLL_HSE
+                    </Dependencies>
+                </Signal>
             </Signals>
         </Control>
         <Control ID="10" Name="PLL-HSE-Mul" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
-                <Source Value="2" Operator="x" />
-                <Source Value="3" Operator="x" />
-                <Source Value="4" Operator="x" />
-                <Source Value="5" Operator="x" />
-                <Source Value="6" Operator="x" />
-                <Source Value="7" Operator="x" />
-                <Source Value="8" Operator="x" />
-                <Source Value="9" Operator="x" />
-                <Source Value="10" Operator="x" />
-                <Source Value="11" Operator="x" />
-                <Source Value="12" Operator="x" />
-                <Source Value="13" Operator="x" />
-                <Source Value="14" Operator="x" />
-                <Source Value="15" Operator="x" />
-                <Source Value="16" Operator="x" />
+                <Source Value="2" Operator="*" />
+                <Source Value="3" Operator="*" />
+                <Source Value="4" Operator="*" />
+                <Source Value="5" Operator="*" />
+                <Source Value="6" Operator="*" />
+                <Source Value="7" Operator="*" />
+                <Source Value="8" Operator="*" />
+                <Source Value="9" Operator="*" />
+                <Source Value="10" Operator="*" />
+                <Source Value="11" Operator="*" />
+                <Source Value="12" Operator="*" />
+                <Source Value="13" Operator="*" />
+                <Source Value="14" Operator="*" />
+                <Source Value="15" Operator="*" />
+                <Source Value="16" Operator="*" />
             </Sources>
             <Signals>
                 <Signal Source="PLL" />
             </Signals>
         </Control>
-        <Control ID="11" Name="RTC-Clk-Out" Type="Label" />
+        <Control ID="11" Name="RTC-Clk-Out" Type="Label" Multiple="1000">
+            <Signals>
+                <Signal Source="HSE-Input" Value="128" Operator="/">
+                    <Dependencies>
+                        CSP_USING_CLOCK_RTC_HSE_DIV128
+                    </Dependencies>
+                </Signal>
+                <Signal Source="LSE-Input">
+                    <Dependencies>
+                        CSP_USING_CLOCK_RTC_LSE
+                    </Dependencies>
+                </Signal>
+                <Signal SourceValue="40000">
+                    <Dependencies>
+                        CSP_USING_CLOCK_RTC_LSI
+                    </Dependencies>
+                </Signal>
+            </Signals>
+        </Control>
         <Control ID="12" Name="CSS" Type="Label">
             <Status>
                 <Status IsEnable="false">
@@ -132,13 +178,28 @@
                 <Source Value="1" Operator="/" />
                 <Source Value="1.5" Operator="/" />
             </Sources>
-        </Control>
-        <Control ID="14" Name="SYS-Clk" Type="Label" Multiple="1000000">
             <Signals>
                 <Signal Source="PLL-HSE-Mul" />
             </Signals>
         </Control>
-        <Control ID="15" Name="USB-Clk-Out" Type="Label" />
+        <Control ID="14" Name="SYS-Clk" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal SourceValue="8000000">
+                    <Dependencies>CSP_USING_CLOCK_SYSTEM_HSI</Dependencies>
+                </Signal>
+                <Signal Source="HSE-Input">
+                    <Dependencies>CSP_USING_CLOCK_SYSTEM_HSE</Dependencies>
+                </Signal>
+                <Signal Source="PLL-HSE-Mul">
+                    <Dependencies>CSP_USING_CLOCK_SYSTEM_PLL</Dependencies>
+                </Signal>
+            </Signals>
+        </Control>
+        <Control ID="15" Name="USB-Clk-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="USB-Clk-Psc" />
+            </Signals>
+        </Control>
         <Control ID="16" Name="AHB-Psc" Type="ComboBox" Multiple="1" DefaultIndex="0">
             <Sources>
                 <Source Value="1" Operator="/" />
@@ -259,13 +320,21 @@
                 <Signal Source="ADC-Clk-Psc" />
             </Signals>
         </Control>
-        <Control ID="37" Name="SDIO-AHB-Clk-Out" Type="Label" Multiple="1000000" />
-        <Control ID="38" Name="FPU-Clk-Out" Type="Label" Multiple="1000000" />
+        <Control ID="37" Name="SDIO-AHB-Clk-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="CLK" Value="2" Operator="/" />
+            </Signals>
+        </Control>
+        <Control ID="38" Name="FPU-Clk-Out" Type="Label" Multiple="1000000">
+            <Signals>
+                <Signal Source="CLK" Value="2" Operator="/" />
+            </Signals>
+        </Control>
         <Control ID="39" Name="MCO-PLL/2" GroupName="MCO-Clk-Selector" Macro="CLOCK_MCO_PLL_DIV2" Type="RadioButton" DefaultValue="1" />
         <Control ID="40" Name="MCO-HSI" GroupName="MCO-Clk-Selector" Macro="CLOCK_MCO_HSI" Type="RadioButton" />
         <Control ID="41" Name="MCO-HSE" GroupName="MCO-Clk-Selector" Macro="CLOCK_MCO_HSE" Type="RadioButton" />
         <Control ID="42" Name="MCO-System-Clk" GroupName="MCO-Clk-Selector" Macro="CLOCK_MCO_SYSTEM_CLK" Type="RadioButton" />
-        <Control ID="43" Name="PLL-HSI/2" GroupName="PLL-Selector" Macro="CLOCK_PLL-HSI_DIV2" Type="RadioButton" DefaultValue="1" />
+        <Control ID="43" Name="PLL-HSI/2" GroupName="PLL-Selector" Macro="CLOCK_PLL_HSI_DIV2" Type="RadioButton" DefaultValue="1" />
         <Control ID="44" Name="PLL-HSE" GroupName="PLL-Selector" Macro="CLOCK_PLL_HSE" Type="RadioButton" />
         <Control ID="45" Name="RTC-HSE/128" GroupName="RTC-Clk-Selector" Macro="CLOCK_RTC_HSE_DIV128" Type="RadioButton" DefaultValue="1" />
         <Control ID="46" Name="RTC-LSE" GroupName="RTC-Clk-Selector" Macro="CLOCK_RTC_LSE" Type="RadioButton" />
