@@ -64,7 +64,11 @@ class Svg:
 
         Svg.indent(xml_clock)
         with open(file, 'wb') as f:
-            f.write(Et.tostring(xml_clock, encoding="utf-8", xml_declaration=True))
+            data = Et.tostring(xml_clock, encoding="utf-8", xml_declaration=True)
+            if data[-1] == b'\n'[0]:
+                f.write(data[0:len(data) - 1])
+            else:
+                f.write(data)
 
     @staticmethod
     def change_xml(file, width, height, rects, ellipses):
@@ -100,7 +104,11 @@ class Svg:
 
         Svg.indent(xml_root)
         with open(file, 'wb') as f:
-            f.write(Et.tostring(xml_root, encoding="utf-8", xml_declaration=True))
+            data = Et.tostring(xml_root, encoding="utf-8", xml_declaration=True)
+            if data[-1] == b'\n'[0]:
+                f.write(data[0:len(data) - 1])
+            else:
+                f.write(data)
 
     @staticmethod
     def parse_svg(file):
