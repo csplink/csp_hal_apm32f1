@@ -1,0 +1,3 @@
+[submodule "description/tools"]
+	path = description/tools
+	url = ../../csplink/csp_hal_tools.git
