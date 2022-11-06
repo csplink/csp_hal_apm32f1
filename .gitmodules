@@ -7,3 +7,6 @@
 [submodule "libraries/driver_stm32f1_hal"]
 	path = libraries/driver_stm32f1_hal
 	url = ../../csplink/driver_stm32f1_hal.git
+[submodule "drivers/driver_stm32f1_cmsis"]
+	path = drivers/driver_stm32f1_cmsis
+	url = ../../csplink/driver_stm32f1_cmsis.git
