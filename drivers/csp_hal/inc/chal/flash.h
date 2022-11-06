@@ -23,20 +23,6 @@
 extern "C" {
 #endif
 
-#define CHAL_FLASH_LATENCY_0 FMC_LATENCY_0
-#define CHAL_FLASH_LATENCY_1 FMC_LATENCY_1
-#define CHAL_FLASH_LATENCY_2 FMC_LATENCY_2
-
-rt_inline void chal_flash_set_latency(rt_uint32_t latency)
-{
-    FMC->CTRL1_B.WS = latency;
-}
-
-rt_inline rt_uint32_t chal_flash_get_latency()
-{
-    return (FMC->CTRL1_B.WS);
-}
-
 #ifdef __cplusplus
 }
 #endif
