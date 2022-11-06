@@ -1,10 +1,10 @@
-[submodule "description/tools"]
+[submodule "tools"]
 	path = tools
 	url = ../../csplink/csp_hal_tools.git
-[submodule "components/rtthread_nano"]
+[submodule "components/rtos_rtthread_nano"]
 	path = components/rtos_rtthread_nano
 	url = ../../csplink/rtos_rtthread_nano.git
-[submodule "libraries/driver_stm32f1_hal"]
+[submodule "drivers/driver_stm32f1_hal"]
 	path = drivers/driver_stm32f1_hal
 	url = ../../csplink/driver_stm32f1_hal.git
 [submodule "drivers/driver_stm32f1_cmsis"]
