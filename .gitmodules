@@ -10,3 +10,6 @@
 [submodule "drivers/driver_apm32f1_cmsis"]
 	path = drivers/driver_apm32f1_cmsis
 	url = ../../csplink/driver_apm32f1_cmsis.git
+[submodule "drivers/driver_cmsis_core"]
+	path = drivers/driver_cmsis_core
+	url = ../../csplink/driver_cmsis_core.git
