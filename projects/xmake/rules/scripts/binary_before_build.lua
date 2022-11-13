@@ -1,0 +1,1 @@
+function main(target) end
