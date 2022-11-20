@@ -21,24 +21,17 @@
 set_xmakever("2.7.2")
 
 target("drivers_hal")
+do
     set_kind("static")
-    add_includedirs(
-        "cmsis/Include",
-        "hal/Inc",
-        "cmsis_core/Include",
-        "$(buildir)",
-        {public = true}
-    )
-    add_files(
-        "cmsis/Source/Templates/system_stm32f1xx.c",
-        "hal/Src/*.c"
-    )
-    remove_files(
-        "hal/Src/*_template.c"
-    )
-    if(is_config("CSP_MCU", "apm32f103zet6")) then
-        if(is_config("compiler", "gcc")) then
+    add_includedirs("cmsis/Include", "hal/Inc", "cmsis_core/Include", "$(buildir)", {public = true})
+    add_files("cmsis/Source/Templates/system_stm32f1xx.c", "hal/Src/*.c")
+    remove_files("hal/Src/*_template.c")
+
+    if (is_config("CSP_MCU", "apm32f103zet6")) then
+        if (is_config("compiler", "gcc")) then
             add_files("cmsis/Source/Templates/gcc/startup_stm32f103xe.s")
         end
         add_defines("STM32F103xE")
     end
+end
+target_end()
