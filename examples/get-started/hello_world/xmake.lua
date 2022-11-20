@@ -1,67 +1,89 @@
-set_project("blink") -- set project name
-set_version("0.0.0")  -- set version       
-set_xmakever("2.7.2")
+--!csp build system based on xmake
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--     http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+--
+-- Copyright (C) 2022-present xqyjlj<xqyjlj@126.com>, csplink.github.io
+--
+-- @author      xqyjlj
+-- @file        xmake.lua
+--
+
+--! In order to build this project, you need to set CSP_REPO in your env,
+-- e.g. :
+--      powershell: $env:CSP_REPO="D:\Users\xqyjlj\Documents\git\github\csplink\csp_repo"
+--      cmd:        set CSP_REPO="D:\Users\xqyjlj\Documents\git\github\csplink\csp_repo"
+--      bash:       export CSP_REPO="home/csplink/git/github/csplink/csp_repo"
+-- see more: //TODO need add url
 
 add_rules("mode.debug", "mode.release")
 
-includes("../../../tools/xmake/toolchains/cortex-m3.gcc.lua")
-includes("../../../project/xmake/project.lua")
+set_project("hello_world") -- set project name
+set_version("0.0.0") -- set version
+set_xmakever("2.7.2")
 
-set_config("mcu", "apm32f103zet6")
+local csp_repo = os.getenv("CSP_REPO")
+if not csp_repo then
+    print("please check 'CSP_REPO' in your path")
+end
 
-local default_path = "/opt/gcc-arm-none-eabi-10-2020-q4-major"
-local target_name = "rtt_thread"
-use_toolchain(default_path)
-
-add_defines(
-    "APM32F103ZET6"
-)
+includes(csp_repo .. "/xmake.lua")
 
 add_cflags(
-    "-Og",
     "-mcpu=cortex-m3",
     "-mthumb",
-    "-Wall",
-    "-fdata-sections",
+    "-mthumb-interwork",
     "-ffunction-sections",
-    "-g3 -gdwarf-2",
-    "--specs=nano.specs", 
+    "-fdata-sections",
+    "-fno-common",
+    "-fmessage-length=0",
+    "-Wall",
+    "-Werror",
     {force = true}
 )
 
 add_asflags(
-    "-Og",
     "-mcpu=cortex-m3",
     "-mthumb",
-    "-x assembler-with-cpp",
-    "-Wall",
-    "-fdata-sections", 
+    "-mthumb-interwork",
     "-ffunction-sections",
-    "-g3 -gdwarf-2",
+    "-fdata-sections",
+    "-fno-common",
+    "-fmessage-length=0",
+    "-Wall",
+    "-Werror",
+    "-x assembler-with-cpp",
     {force = true}
 )
 
 add_ldflags(
-    "-Og",
     "-mcpu=cortex-m3",
-    "-T../../../linkscripts/APM32F103xE.lds",  -- 不同芯片需要修改链接脚本 STM32F103XE_FLASH.ld STM32F103C8Tx_FLASH.ld
+    "-mthumb",
+    "-mthumb-interwork",
     "-Wl,--gc-sections",
-    "-Wl,--print-memory-usage,-Map=".."$(buildir)/"..target_name..".map",
+    "-T../../../linkscripts/APM32F103xE.lds",
     {force = true}
 )
 
-target(target_name)
+target("hello_world")
+do
     set_kind("binary")
     set_languages("c99")
     set_extension(".elf")
-    add_deps(
-        "apm32f1"
-    )
-    add_rules("build_binary")
-
-    add_files(
-        "main.c"
-    )
-    add_includedirs(
-        "."
-    )
+    set_values("hal", "csp_hal_apm32f1|v0.0.1")
+    set_values("haldir", path.absolute(os.curdir() .. "/../../../"))
+    set_values("toolchain", "arm-none-eabi")
+    add_deps("csp_target")
+    add_rules("csp_rule")
+    add_files("main.c")
+end
+target_end()
