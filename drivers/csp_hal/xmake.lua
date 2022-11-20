@@ -1,6 +1,6 @@
 set_xmakever("2.7.2")
 
-target("csp_hal")
+target("drivers_csp")
 	set_kind("static")
 	add_files(
         "chal/src/*.c",
@@ -9,6 +9,6 @@ target("csp_hal")
     add_includedirs(
         "chal/inc",
         "port/inc",
-        "$(projectdir)",
+        "$(buildir)",
         {public = true}
     )
