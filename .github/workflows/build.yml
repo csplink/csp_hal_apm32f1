@@ -29,7 +29,10 @@ jobs:
       - name: build
         shell: bash
         run: |
+          ls /opt
           su csplink
+          source ~/.xmake/profile 
+          xmake --version
           pushd ${{ matrix.target }}
           export CSP_REPO=../../../cache/csp_repo
           xmake csp -i
