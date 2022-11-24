@@ -29,6 +29,7 @@ jobs:
       - name: install xmake
         shell: bash
         run: |
+          su csplink
           wget https://github.com/xmake-io/xmake/releases/download/v2.7.3/xmake-v2.7.3.amd64.deb
           dpkg -i xmake-v2.7.3.amd64.deb
 
