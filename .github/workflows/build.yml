@@ -9,10 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: csplink/geehy:apm32f103
-      options: --user csplink
     strategy:
       matrix:
-        target: 
+        target:
           - examples/get-started/blink
           - examples/get-started/hello_world
           - examples/get-started/sample_project
@@ -20,6 +19,8 @@ jobs:
     steps:
       - name: checkout csp_hal_apm32f1
         uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - name: checkout csp_repo
         uses: actions/checkout@v3
@@ -27,11 +28,8 @@ jobs:
           repository: csplink/csp_repo
           path: cache/csp_repo
 
-      # - name: install xmake
-      #   shell: bash
-      #   run: |
-      #     wget https://github.com/xmake-io/xmake/releases/download/v2.7.3/xmake-v2.7.3.amd64.deb
-      #     dpkg -i xmake-v2.7.3.amd64.deb
+      - name: install xmake
+        uses: xmake-io/github-action-setup-xmake@v1
 
       - name: build
         shell: bash
@@ -40,7 +38,6 @@ jobs:
           xmake --version
           pushd ${{ matrix.target }}
           export CSP_REPO=../../../cache/csp_repo
-          xmake csp -i
-          xmake -j$(nproc)
+          xmake csp -i --root
+          xmake -j$(nproc) --root
           popd
-
