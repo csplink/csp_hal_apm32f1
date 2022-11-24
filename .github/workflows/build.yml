@@ -1,0 +1,38 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build_examples:
+    runs-on: ubuntu-latest
+    container:
+      image: csplink/geehy:apm32f103
+    strategy:
+      matrix:
+        target: 
+          - examples/get-started/blink
+          - examples/get-started/hello_world
+          - examples/get-started/sample_project
+
+    steps:
+      - name: checkout csp_hal_apm32f1
+        uses: actions/checkout@v3
+
+      - name: checkout csp_repo
+        uses: actions/checkout@v3
+        with:
+          repository: csplink/csp_repo
+          path: cache/csp_repo
+
+      - name: build
+        shell: bash
+        run: |
+          su csplink
+          pushd ${{ matrix.target }}
+          export CSP_REPO=../../../cache/csp_repo
+          xmake csp -i
+          xmake -j$(nproc)
+          popd
+
