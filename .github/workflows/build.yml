@@ -38,6 +38,6 @@ jobs:
           xmake --version
           pushd ${{ matrix.target }}
           export CSP_REPO=../../../cache/csp_repo
-          xmake csp -i --root
-          xmake -j$(nproc) --root
+          xmake csp -i
+          xmake -j$(nproc)
           popd
