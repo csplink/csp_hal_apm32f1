@@ -26,12 +26,16 @@ jobs:
           repository: csplink/csp_repo
           path: cache/csp_repo
 
+      - name: install xmake
+        shell: bash
+        run: |
+          wget https://github.com/xmake-io/xmake/releases/download/v2.7.3/xmake-v2.7.3.amd64.deb
+          dpkg -i xmake-v2.7.3.amd64.deb
+
       - name: build
         shell: bash
         run: |
           ls /opt
-          su csplink
-          source ~/.xmake/profile 
           xmake --version
           pushd ${{ matrix.target }}
           export CSP_REPO=../../../cache/csp_repo
