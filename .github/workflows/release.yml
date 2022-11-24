@@ -1,4 +1,4 @@
-name: Create compressed file with recursive clone for release
+name: release
 
 on:
   push:
