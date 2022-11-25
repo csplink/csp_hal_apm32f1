@@ -41,3 +41,11 @@ jobs:
           xmake csp -i --root # Only need to use "--root" in CI
           xmake -j$(nproc) --root # Only need to use "--root" in CI
           popd
+          mkdir -p build/${{ matrix.target }}/
+          cp -rf ${{ matrix.target }}/build/artifact/release build/${{ matrix.target }}/
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: csp_hal_apm32f1-${{ github.run_number }}
+          path: build
