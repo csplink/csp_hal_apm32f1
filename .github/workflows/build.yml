@@ -42,7 +42,8 @@ jobs:
           xmake -j$(nproc) --root # Only need to use "--root" in CI
           popd
           mkdir -p build/${{ matrix.target }}/
-          cp -rf ${{ matrix.target }}/build/artifact/release build/${{ matrix.target }}/
+          cp -rf ${{ matrix.target }}/build/artifact build/${{ matrix.target }}/
+          cp -rf ${{ matrix.target }}/build/cross build/${{ matrix.target }}/
 
       - name: upload artifact
         uses: actions/upload-artifact@v3
