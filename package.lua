@@ -35,14 +35,9 @@ for _, dir in ipairs(os.dirs(os.scriptdir() .. "/*")) do
     end
 end
 
-if has_config("CSP_MCU") then
-    add_defines(get_config("CSP_MCU"):upper()) --and "mcu" to defines
-end
-
 target("csp_hal_apm32f1")
 do
     set_kind("static")
-    add_deps("drivers_hal") -- apm32f1xx hal library
     add_deps("drivers_csp") -- csp hal library
 end
 target_end()
