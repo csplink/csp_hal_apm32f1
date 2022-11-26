@@ -18,6 +18,22 @@
 -- @file        options.lua
 --
 
+option("csp_hal_apm32f1")
+do
+    set_default(true)
+    set_showmenu(false)
+    add_deps("CSP_MCU")
+    add_deps("CSP_COMPONENTS_RTOS")
+    after_check(
+        function(option)
+            for _, dep_opt in pairs(option:orderdeps()) do
+                option:add("defines", dep_opt:get("defines"))
+            end
+        end
+    )
+end
+option_end()
+
 option("CSP_MCU")
 do
     set_default("apm32f103zet6")
@@ -25,6 +41,15 @@ do
     set_values("apm32f103c8t6", "apm32f103zet6")
     set_category("configuration")
     set_description("mcu name")
+    add_defines("USE_FULL_LL_DRIVER")
+    after_check(
+        function(option)
+            option:add("defines", option:value():upper())
+            if string.find(option:value(), "apm32f103ze") then
+                option:add("defines", "STM32F103xE")
+            end
+        end
+    )
 end
 option_end()
 
