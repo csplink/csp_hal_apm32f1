@@ -20,10 +20,15 @@
 
 set_xmakever("2.7.2")
 
+includes("../apm32f1/xmake.lua")
+includes("../../projects/xmake/options.lua")
+
 target("drivers_csp")
 do
     set_kind("static")
+    add_deps("drivers_apm32f1") -- apm32f1xx hal library
     add_files("chal/src/*.c", "port/src/*.c")
     add_includedirs("chal/inc", "port/inc", "$(buildir)", {public = true})
+    add_options("csp_hal_apm32f1")
 end
 target_end()
