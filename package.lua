@@ -37,7 +37,7 @@ end
 
 target("csp_hal_apm32f1")
 do
-    set_kind("static")
+    set_kind("object")
     add_deps("drivers_csp") -- csp hal library
 end
 target_end()
