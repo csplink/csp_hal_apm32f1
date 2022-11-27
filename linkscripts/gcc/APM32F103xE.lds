@@ -1,0 +1,151 @@
+/* linker script for APM32F103xE Device
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Copyright (C) 2022-present xqyjlj<xqyjlj@126.com>, csplink.github.io
+ *
+ * @author      xqyjlj
+ * @file        APM32F103xE.lds
+ *
+ */
+
+ENTRY(Reset_Handler)
+
+_system_stack_size = 0x400; /* system stack size */
+
+MEMORY
+{
+    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 512K
+    RAM (xrw)   : ORIGIN = 0x20000000, LENGTH = 128k
+}
+
+SECTIONS
+{
+    .isr_vector :
+    {
+        . = ALIGN(4);
+        __isr_vector_start = .;
+        KEEP(*(.isr_vector))    /* isr vector table */
+        . = ALIGN(4);
+        __isr_vector_end = .;
+    } >FLASH
+
+    .text :
+    {
+        . = ALIGN(4);
+        _stext = .;
+        *(.text)                /* remaining code */
+        *(.text.*)              /* remaining code */ 
+        *(.rodata)              /* read-only data */
+        *(.rodata*)             /* read-only data */
+        *(.glue_7)              /* glue arm to thumb code */
+        *(.glue_7t)             /* glue thumb to arm code */
+        *(.eh_frame)            /* unwind the stack */
+        *(.gnu.linkonce.t*)
+
+        KEEP (*(.init))
+        KEEP (*(.fini))
+
+        . = ALIGN(4);
+        _etext = .;             /* end text */
+    } >FLASH
+
+    .ARM.extab :
+    {
+        __extab_start = .;
+        *(.ARM.extab* .gnu.linkonce.armextab.*)
+        __extab_end = .;
+    } >FLASH
+
+    .ARM.exidx :
+    {
+        __exidx_start = .;
+        *(.ARM.exidx*)
+        __exidx_end = .;
+    } >FLASH
+
+    .preinit_array :
+    {
+        PROVIDE_HIDDEN (__preinit_array_start = .);
+        KEEP (*(.preinit_array*))
+        PROVIDE_HIDDEN (__preinit_array_end = .);
+    } >FLASH
+
+    .init_array :
+    {
+        PROVIDE_HIDDEN (__init_array_start = .);
+        KEEP (*(SORT(.init_array.*)))
+        KEEP (*(.init_array*))
+        PROVIDE_HIDDEN (__init_array_end = .);
+    } >FLASH
+
+    .fini_array :
+    {
+        PROVIDE_HIDDEN (__fini_array_start = .);
+        KEEP (*(SORT(.fini_array.*)))
+        KEEP (*(.fini_array*))
+        PROVIDE_HIDDEN (__fini_array_end = .);
+    } >FLASH
+
+    /**************************************************************/
+
+    _sidata = LOADADDR(.data);
+    .data :
+    {
+        . = ALIGN(4);
+        _sdata = .;
+        *(.data)
+        *(.data*)
+        *(.gnu.linkonce.d*)
+
+        PROVIDE(__dtors_start__ = .);
+        KEEP(*(SORT(.dtors.*)))
+        KEEP(*(.dtors))
+        PROVIDE(__dtors_end__ = .);
+
+        . = ALIGN(4);
+        _edata = .;            
+    } >RAM AT> FLASH
+
+    .system_stack :
+    {
+        . = ALIGN(4);
+        _sstack = .;
+        . = . + _system_stack_size;
+        . = ALIGN(4);
+        _estack = .;
+    } >RAM
+
+    .bss :
+    {
+        . = ALIGN(4);
+        _sbss = .;
+        __bss_start__ = .;
+        *(.bss)
+        *(.bss.*)
+        *(COMMON)
+
+        . = ALIGN(4);
+        _ebss = .;
+        __bss_end__ = .;
+    } >RAM
+
+    /DISCARD/ :
+    {
+        libc.a ( * )
+        libm.a ( * )
+        libgcc.a ( * )
+    }
+
+    .ARM.attributes 0 :{ *(.ARM.attributes) }
+}
