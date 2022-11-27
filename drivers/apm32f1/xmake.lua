@@ -25,6 +25,7 @@ includes("../../projects/xmake/options.lua")
 target("drivers_apm32f1")
 do
     set_kind("static")
+    set_values("targetdir", os.scriptdir())
     add_includedirs("cmsis/Include", "hal/Inc", "cmsis_core/Include", "$(buildir)", {public = true})
     add_files("cmsis/Source/Templates/system_stm32f1xx.c", "hal/Src/stm32f1xx_ll_*.c")
     remove_files("hal/Src/*_template.c")
@@ -37,5 +38,10 @@ do
         end
     end
     add_options("csp_hal_apm32f1")
+    on_build_files(
+        function(target, sourcebatch, opt)
+            import("csp.build.change_objdir").main(target, sourcebatch, opt)
+        end
+    )
 end
 target_end()
