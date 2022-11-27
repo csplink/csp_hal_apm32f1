@@ -39,6 +39,9 @@ jobs:
           pushd ${{ matrix.target }}
           export CSP_REPO=../../../cache/csp_repo
           xmake csp -i --root # Only need to use "--root" in CI
+          xmake f -m release
+          xmake -j$(nproc) --root # Only need to use "--root" in CI
+          xmake f -m debug
           xmake -j$(nproc) --root # Only need to use "--root" in CI
           popd
           mkdir -p build/${{ matrix.target }}/
