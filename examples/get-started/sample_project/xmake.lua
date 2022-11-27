@@ -27,7 +27,7 @@
 
 add_rules("mode.debug", "mode.release")
 
-set_project("blink") -- set project name
+set_project("sample_project") -- set project name
 set_version("0.0.0") -- set version
 set_xmakever("2.7.2")
 
@@ -70,11 +70,11 @@ add_ldflags(
     "-mthumb",
     "-mthumb-interwork",
     "-Wl,--gc-sections",
-    "-T../../../linkscripts/APM32F103xE.lds",
+    "-T../../../linkscripts/gcc/APM32F103xE.lds",
     {force = true}
 )
 
-target("blink")
+target("sample_project")
 do
     set_kind("binary")
     set_languages("c99")
@@ -84,6 +84,7 @@ do
     set_values("toolchain", "arm-none-eabi")
     add_deps("csp_target")
     add_rules("csp_rule")
+    add_options("csp_option")
     add_files("main.c")
 end
 target_end()

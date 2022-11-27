@@ -70,7 +70,7 @@ add_ldflags(
     "-mthumb",
     "-mthumb-interwork",
     "-Wl,--gc-sections",
-    "-T../../../linkscripts/APM32F103xE.lds",
+    "-T../../../linkscripts/gcc/APM32F103xE.lds",
     {force = true}
 )
 
@@ -84,6 +84,7 @@ do
     set_values("toolchain", "arm-none-eabi")
     add_deps("csp_target")
     add_rules("csp_rule")
+    add_options("csp_option")
     add_files("main.c")
 end
 target_end()
