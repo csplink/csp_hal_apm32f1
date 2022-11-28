@@ -44,6 +44,7 @@ SECTIONS
     {
         . = ALIGN(4);
         _stext = .;
+        __text_start = .;
         *(.text)                /* remaining code */
         *(.text.*)              /* remaining code */ 
         *(.rodata)              /* read-only data */
@@ -57,7 +58,8 @@ SECTIONS
         KEEP (*(.fini))
 
         . = ALIGN(4);
-        _etext = .;             /* end text */
+        _etext = .;
+        __text_end = .;
     } >FLASH
 
     .ARM.extab :
@@ -104,6 +106,7 @@ SECTIONS
     {
         . = ALIGN(4);
         _sdata = .;
+        __data_start = .;
         *(.data)
         *(.data*)
         *(.gnu.linkonce.d*)
@@ -114,30 +117,33 @@ SECTIONS
         PROVIDE(__dtors_end__ = .);
 
         . = ALIGN(4);
-        _edata = .;            
+        _edata = .;
+        __data_end = .;
     } >RAM AT> FLASH
 
     .system_stack :
     {
         . = ALIGN(4);
         _sstack = .;
+        __system_stack_start = .;
         . = . + _system_stack_size;
         . = ALIGN(4);
         _estack = .;
+        __system_stack_end = .;
     } >RAM
 
     .bss :
     {
         . = ALIGN(4);
         _sbss = .;
-        __bss_start__ = .;
+        __bss_start = .;
         *(.bss)
         *(.bss.*)
         *(COMMON)
 
         . = ALIGN(4);
         _ebss = .;
-        __bss_end__ = .;
+        __bss_end = .;
     } >RAM
 
     /DISCARD/ :
