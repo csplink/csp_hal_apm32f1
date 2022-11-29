@@ -52,6 +52,8 @@ extern "C" {
 #define __chal_inline __STATIC_INLINE
 #define __chal_weak   __weak
 
+#define CHAL_UNUSED   UNUSED
+
 /**
  * @brief chal error code enumeration
  */

@@ -185,15 +185,54 @@ typedef enum
 } chal_gpio_level_t;
 
 /**
+ * @brief GPIO mode enumeration
+ */
+typedef enum
+{
+    CHAL_GPIO_MODE_ANALOG    = LL_GPIO_MODE_ANALOG,   /* analog mode */
+    CHAL_GPIO_MODE_FLOATING  = LL_GPIO_MODE_FLOATING, /* floating mode */
+    CHAL_GPIO_MODE_INPUT     = LL_GPIO_MODE_INPUT,    /* input mode */
+    CHAL_GPIO_MODE_OUTPUT    = LL_GPIO_MODE_OUTPUT,   /* general purpose output mode */
+    CHAL_GPIO_MODE_ALTERNATE = LL_GPIO_MODE_ALTERNATE /* alternate function mode */
+} chal_gpio_mode_t;
+
+/**
+ * @brief GPIO speed enumeration
+ */
+typedef enum
+{
+    CHAL_GPIO_SPEED_10MHz = LL_GPIO_SPEED_FREQ_LOW,    /* output mode, max speed 10 MHz */
+    CHAL_GPIO_SPEED_20MHz = LL_GPIO_SPEED_FREQ_MEDIUM, /* output mode, max speed 20 MHz */
+    CHAL_GPIO_SPEED_50MHz = LL_GPIO_SPEED_FREQ_HIGH    /* output mode, max speed 50 MHz */
+} chal_gpio_speed_t;
+
+/**
+ * @brief GPIO output type enumeration
+ */
+typedef enum
+{
+    CHAL_GPIO_OUTPUT_PP = LL_GPIO_OUTPUT_PUSHPULL, /* push-pull as output type */
+    CHAL_GPIO_OUTPUT_OD = LL_GPIO_OUTPUT_OPENDRAIN /* open-drain as output type */
+} chal_gpio_outputtype_t;
+
+/**
+ * @brief GPIO pull enumeration
+ */
+typedef enum
+{
+    CHAL_GPIO_PULL_DOWN = LL_GPIO_PULL_DOWN, /* I/O pull down */
+    CHAL_GPIO_PULL_UP   = LL_GPIO_PULL_UP    /* I/O pull up */
+} chal_gpio_pull_t;
+
+/**
  * @brief GPIO init structure definition
  */
 typedef struct
 {
-    uint32_t pin;
-    uint32_t mode;
-    uint32_t speed;
-    uint32_t output_type;
-    uint32_t pull;
+    chal_gpio_mode_t       mode;
+    chal_gpio_speed_t      speed;
+    chal_gpio_outputtype_t outputtype;
+    chal_gpio_pull_t       pull;
 } chal_gpio_config_t;
 
 __chal_inline void chal_gpio_enable_clk(uint32_t periphs)
@@ -230,6 +269,11 @@ __chal_inline chal_gpio_level_t chal_gpio_get_level(GPIO_TypeDef *gpiox, uint32_
         bitstatus = CHAL_GPIO_LEVEL_LOW;
     }
     return bitstatus;
+}
+
+__chal_inline void chal_gpio_toggle_pin(GPIO_TypeDef *gpiox, uint32_t pinmask)
+{
+    LL_GPIO_TogglePin(gpiox, pinmask);
 }
 
 chal_status_t chal_gpio_deinit(GPIO_TypeDef *gpiox, uint32_t pinmask);
