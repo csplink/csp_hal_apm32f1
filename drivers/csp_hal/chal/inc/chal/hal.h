@@ -52,6 +52,15 @@ extern "C" {
 #define __chal_inline __STATIC_INLINE
 #define __chal_weak   __weak
 
+/**
+ * @brief chal error code enumeration
+ */
+typedef enum
+{
+    CHAL_OK = 0U,
+    CHAL_ERROR
+} chal_status_t;
+
 #ifdef __cplusplus
 }
 #endif

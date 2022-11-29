@@ -182,7 +182,19 @@ typedef enum
 {
     CHAL_GPIO_LEVEL_LOW = 0u,
     CHAL_GPIO_LEVEL_HIGH
-} chal_gpio_level;
+} chal_gpio_level_t;
+
+/**
+ * @brief GPIO init structure definition
+ */
+typedef struct
+{
+    uint32_t pin;
+    uint32_t mode;
+    uint32_t speed;
+    uint32_t output_type;
+    uint32_t pull;
+} chal_gpio_config_t;
 
 __chal_inline void chal_gpio_enable_clk(uint32_t periphs)
 {
@@ -199,13 +211,29 @@ __chal_inline void chal_gpio_disable_clk(uint32_t periphs)
     LL_APB2_GRP1_DisableClock(periphs);
 }
 
-__chal_inline void chal_gpio_set_level(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_level level)
+__chal_inline void chal_gpio_set_level(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_level_t level)
 {
-    if (level == CHAL_GPIO_LEVEL_LOW)
-        LL_GPIO_ResetOutputPin(gpiox, pinmask);
-    else
+    if (level != CHAL_GPIO_LEVEL_LOW)
         LL_GPIO_SetOutputPin(gpiox, pinmask);
+    else
+        LL_GPIO_ResetOutputPin(gpiox, pinmask);
 }
+
+__chal_inline chal_gpio_level_t chal_gpio_get_level(GPIO_TypeDef *gpiox, uint32_t pinmask)
+{
+    chal_gpio_level_t bitstatus;
+
+    if (LL_GPIO_IsInputPinSet(gpiox, pinmask) != (uint32_t)CHAL_GPIO_LEVEL_LOW) {
+        bitstatus = CHAL_GPIO_LEVEL_HIGH;
+    }
+    else {
+        bitstatus = CHAL_GPIO_LEVEL_LOW;
+    }
+    return bitstatus;
+}
+
+chal_status_t chal_gpio_deinit(GPIO_TypeDef *gpiox, uint32_t pinmask);
+chal_status_t chal_gpio_init(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_config_t *config);
 
 #ifdef __cplusplus
 }
