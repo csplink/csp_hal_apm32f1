@@ -28,6 +28,14 @@
 extern "C" {
 #endif
 
+typedef enum
+{
+    CHAL_FLASH_LATENCY_0 = LL_FLASH_LATENCY_0,
+    CHAL_FLASH_LATENCY_1 = LL_FLASH_LATENCY_1,
+    CHAL_FLASH_LATENCY_2 = LL_FLASH_LATENCY_2,
+    CHAL_FLASH_LATENCY_3 = 3
+} chal_flash_latency_t;
+
 #ifdef __cplusplus
 }
 #endif
