@@ -20,3 +20,40 @@
  */
 
 #include <chal/clock.h>
+#include <chal/flash.h>
+
+__chal_weak void chal_clock_init(void)
+{
+#if (CGEN_HCLK_FREQ > 0 && CGEN_HCLK_FREQ <= 24000000)
+    chal_flash_latency_t latency = CHAL_FLASH_LATENCY_0;
+#elif (CGEN_HCLK_FREQ > 24000000 && CGEN_HCLK_FREQ <= 48000000)
+    chal_flash_latency_t latency = CHAL_FLASH_LATENCY_1;
+#elif (CGEN_HCLK_FREQ > 48000000 && CGEN_HCLK_FREQ <= 72000000)
+    chal_flash_latency_t latency = CHAL_FLASH_LATENCY_2;
+#elif (CGEN_HCLK_FREQ > 72000000 && CGEN_HCLK_FREQ <= 96000000)
+    chal_flash_latency_t latency = CHAL_FLASH_LATENCY_3;
+#else
+#error "overclocking can cause some unexpected results, comment this line to enable overclocking"
+    chal_flash_latency_t latency = CHAL_FLASH_LATENCY_3;
+#endif
+    LL_FLASH_SetLatency((uint32_t)latency);
+    while (LL_FLASH_GetLatency() != (uint32_t)latency) {
+    }
+
+    LL_RCC_HSI_SetCalibTrimming(16);
+    LL_RCC_HSI_Enable();
+
+    /* Wait till HSI is ready */
+    while (LL_RCC_HSI_IsReady() != 1) {
+    }
+    LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
+    LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_2);
+    LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
+    LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
+
+    /* Wait till System clock is ready */
+    while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI) {
+    }
+    LL_Init1msTick(CGEN_HCLK_FREQ);
+    LL_SetSystemCoreClock(CGEN_HCLK_FREQ);
+}

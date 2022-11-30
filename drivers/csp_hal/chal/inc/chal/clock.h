@@ -28,6 +28,12 @@
 extern "C" {
 #endif
 
+#ifndef CGEN_HCLK_FREQ
+#define CGEN_HCLK_FREQ (8000000UL) /* the default HCLK frequency is 8MHz. */
+#endif
+
+void chal_clock_init(void);
+
 #ifdef __cplusplus
 }
 #endif
