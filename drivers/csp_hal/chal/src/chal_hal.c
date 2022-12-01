@@ -19,5 +19,4 @@
  *
  */
 
-#include <chal/clock.h>
 #include <chal/hal.h>
