@@ -57,3 +57,8 @@ __chal_weak void chal_clock_init(void)
     LL_Init1msTick(CGEN_HCLK_FREQ);
     LL_SetSystemCoreClock(CGEN_HCLK_FREQ);
 }
+
+void chal_clock_mdelay(uint32_t delay)
+{
+    LL_mDelay(delay);
+}
