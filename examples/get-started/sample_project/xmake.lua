@@ -79,7 +79,7 @@ do
     set_kind("binary")
     set_languages("c99")
     set_extension(".elf")
-    set_values("hal", "csp_hal_apm32f1|v0.0.1")
+    set_values("hal", "csp_hal_apm32f1@v0.0.1")
     set_values("haldir", path.absolute(os.curdir() .. "/../../../"))
     set_values("toolchain", "arm-none-eabi")
     add_deps("csp_target")
