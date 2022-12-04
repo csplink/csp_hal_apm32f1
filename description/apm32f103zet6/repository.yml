@@ -1,0 +1,27 @@
+Geehy:
+  APM32F1:
+    APM32F103:
+      APM32F103ZET6:
+        Package: "LQFP144"
+        Core: "Arm Cortex-M3"
+        Frequency: 96
+        Ram: 128
+        Flash: 512
+        IO: 112
+        Voltage: { Max: 3.6, Min: 2.0 }
+        Current: { Lowest: 1.9, Run: 421.0 }
+        Temperature: { Max: 105.0, Min: -40.0 }
+        Peripherals:
+          - { Type: "ADC 12-bit", Count: 21 }
+          - { Type: "CAN", Count: 1 }
+          - { Type: "DAC 12-bit", Count: 2 }
+          - { Type: "FSMC", Count: 1 }
+          - { Type: "I2C", Count: 2 }
+          - { Type: "I2S", Count: 2 }
+          - { Type: "RTC", Count: 1 }
+          - { Type: "SDIO", Count: 1 }
+          - { Type: "SPI", Count: 3 }
+          - { Type: "Timer 16-bit", Count: 8 }
+          - { Type: "UART", Count: 2 }
+          - { Type: "USART", Count: 3 }
+          - { Type: "USB Device", Count: 1 }
