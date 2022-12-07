@@ -213,7 +213,7 @@ typedef enum
 {
     CHAL_GPIO_OUTPUT_PP = LL_GPIO_OUTPUT_PUSHPULL, /* push-pull as output type */
     CHAL_GPIO_OUTPUT_OD = LL_GPIO_OUTPUT_OPENDRAIN /* open-drain as output type */
-} chal_gpio_outputtype_t;
+} chal_gpio_output_type_t;
 
 /**
  * @brief GPIO pull enumeration
@@ -229,10 +229,10 @@ typedef enum
  */
 typedef struct
 {
-    chal_gpio_mode_t       mode;
-    chal_gpio_speed_t      speed;
-    chal_gpio_outputtype_t outputtype;
-    chal_gpio_pull_t       pull;
+    chal_gpio_mode_t        mode;
+    chal_gpio_speed_t       speed;
+    chal_gpio_output_type_t outputtype;
+    chal_gpio_pull_t        pull;
 } chal_gpio_config_t;
 
 __chal_inline void chal_gpio_enable_clk(uint32_t periphs)
