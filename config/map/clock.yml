@@ -1,0 +1,76 @@
+Groups:
+  chal_clock_osc_t:
+    Comment:
+      Chinese: HSE时钟输入源类型
+      English:
+    Values:
+      CHAL_CLOCK_OSC_DISABLE:
+        Comment:
+          Chinese: 禁用
+          English:
+      CHAL_CLOCK_OSC_BYPASS:
+        Comment:
+          Chinese: 有源晶振模式
+          English:
+      CHAL_CLOCK_OSC_NO_BYPASS:
+        Comment:
+          Chinese: 无源晶振模式
+          English:
+  chal_clock_osc32_t:
+    Comment:
+      Chinese: HSI时钟输入源类型
+      English:
+    Values:
+      CHAL_CLOCK_OSC32_DISABLE:
+        Comment:
+          Chinese: 禁用
+          English:
+      CHAL_CLOCK_OSC32_BYPASS:
+        Comment:
+          Chinese: 有源晶振模式
+          English:
+      CHAL_CLOCK_OSC32_NO_BYPASS:
+        Comment:
+          Chinese: 无源晶振模式
+          English:
+  chal_clock_css_t:
+    Comment:
+      Chinese: CSS时钟安全系统
+      English:
+    Values:
+      CHAL_CLOCK_CSS_DISABLE:
+        Comment:
+          Chinese: 禁用
+          English:
+      CHAL_CLOCK_CSS_ENABLE:
+        Comment:
+          Chinese: 启用
+          English:
+Properties:
+  chal_clock_osc_t:
+    DisplayName:
+      Chinese: HSE时钟输入源
+      English:
+    Description:
+      Chinese: Clock-HSE时钟输入源
+      English:
+    Category: Clock
+    ReadOnly: false
+  chal_clock_osc32_t:
+    DisplayName:
+      Chinese: HSI时钟输入源
+      English:
+    Description:
+      Chinese: Clock-HSI时钟输入源
+      English:
+    Category: Clock
+    ReadOnly: false
+  chal_clock_css_t:
+    DisplayName:
+      Chinese: CSS时钟安全系统
+      English:
+    Description:
+      Chinese: Clock-CSS时钟安全系统
+      English:
+    Category: Clock
+    ReadOnly: false
