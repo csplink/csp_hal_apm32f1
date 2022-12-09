@@ -1,0 +1,325 @@
+Width: 1603.0
+Height: 903.0
+Controls:
+  1:
+    Base:
+      Name: LSE-Input
+      Type: TextBox
+      Multiple: 1000
+      DefaultValue: 32.768
+  2:
+    Base:
+      Name: HSE-Input
+      Type: TextBox
+      Multiple: 1000000
+      DefaultValue: 8.0
+  3:
+    Base:
+      Name: MCO-Output
+      Type: Label
+      Multiple: 1000000
+  4:
+    Base:
+      Name: LSE-Is-Bypass
+      Type: Label
+  5:
+    Base:
+      Name: HSE-Is-Bypass
+      Type: Label
+  6:
+    Base:
+      Name: HSI-Calibration
+      Type: TextBox
+      Multiple: 1
+      DefaultValue: 16.0
+  7:
+    Base:
+      Name: MCO-Out
+      Type: Label
+      Multiple: 1000000
+  8:
+    Base:
+      Name: HSE-Psc
+      Type: ComboBox
+      DefaultIndex: 1
+  9:
+    Base:
+      Name: PLL
+      Type: Label
+      Multiple: 1000000
+  10:
+    Base:
+      Name: PLL-HSE-Mul
+      Type: ComboBox
+      Multiple: 1
+      DefaultIndex: 0
+  11:
+    Base:
+      Name: RTC-Clk-Out
+      Type: Label
+      Multiple: 1000
+  12:
+    Base:
+      Name: CSS
+      Type: Label
+  13:
+    Base:
+      Name: USB-Clk-Psc
+      Type: ComboBox
+      Multiple: 1
+      DefaultIndex: 0
+  14:
+    Base:
+      Name: SYS-Clk
+      Type: Label
+      Multiple: 1000000
+  15:
+    Base:
+      Name: USB-Clk-Out
+      Type: Label
+      Multiple: 1000000
+  16:
+    Base:
+      Name: AHB-Psc
+      Type: ComboBox
+      Multiple: 1
+      DefaultIndex: 0
+  17:
+    Base:
+      Name: Flash-Latency
+      Type: Label
+  18:
+    Base:
+      Name: CLK
+      Type: Label
+      Multiple: 1000000
+  19:
+    Base:
+      Name: SysTick-Clk-Psc
+      Type: ComboBox
+      Multiple: 1
+      DefaultIndex: 0
+  20:
+    Base:
+      Name: APB1-Psc
+      Type: ComboBox
+      Multiple: 1
+      DefaultIndex: 0
+  21:
+    Base:
+      Name: APB2-Psc
+      Type: ComboBox
+      Multiple: 1
+      DefaultIndex: 0
+  22:
+    Base:
+      Name: APB1-Timers-Mul
+      Type: Label
+  23:
+    Base:
+      Name: APB2-Timers-Mul
+      Type: Label
+  24:
+    Base:
+      Name: ADC-Clk-Psc
+      Type: ComboBox
+      Multiple: 1
+      DefaultIndex: 0
+  25:
+    Base:
+      Name: I2S3-Clk-Out
+      Type: Label
+      Multiple: 1000000
+  26:
+    Base:
+      Name: I2S2-Clk-Out
+      Type: Label
+      Multiple: 1000000
+  27:
+    Base:
+      Name: EMMC-Clk-Out
+      Type: Label
+      Multiple: 1000000
+  28:
+    Base:
+      Name: SDIO-Clk-Out
+      Type: Label
+      Multiple: 1000000
+  29:
+    Base:
+      Name: HCLK-Out
+      Type: Label
+      Multiple: 1000000
+  30:
+    Base:
+      Name: SysTick-Clk-Out
+      Type: Label
+      Multiple: 1000000
+  31:
+    Base:
+      Name: FCLK-Out
+      Type: Label
+      Multiple: 1000000
+  32:
+    Base:
+      Name: APB1-Peripherals-Out
+      Type: Label
+      Multiple: 1000000
+  33:
+    Base:
+      Name: APB1-Timers-Out
+      Type: Label
+      Multiple: 1000000
+  34:
+    Base:
+      Name: APB2-Peripherals-Out
+      Type: Label
+      Multiple: 1000000
+  35:
+    Base:
+      Name: APB2-Timers-Out
+      Type: Label
+      Multiple: 1000000
+  36:
+    Base:
+      Name: ADC1,2,3-Timers-Out
+      Type: Label
+      Multiple: 1000000
+  37:
+    Base:
+      Name: SDIO-AHB-Clk-Out
+      Type: Label
+      Multiple: 1000000
+  38:
+    Base:
+      Name: FPU-Clk-Out
+      Type: Label
+      Multiple: 1000000
+  39:
+    Base:
+      Name: MCO-PLL/2
+      GroupName: MCO-Clk-Selector
+      Macro: CLOCK_MCO_PLL_DIV2
+      Type: RadioButton
+      IsChecked: true
+  40:
+    Base:
+      Name: MCO-HSI
+      GroupName: MCO-Clk-Selector
+      Macro: CLOCK_MCO_HSI
+      Type: RadioButton
+  41:
+    Base:
+      Name: MCO-HSE
+      GroupName: MCO-Clk-Selector
+      Macro: CLOCK_MCO_HSE
+      Type: RadioButton
+  42:
+    Base:
+      Name: MCO-System-Clk
+      GroupName: MCO-Clk-Selector
+      Macro: CLOCK_MCO_SYSTEM_CLK
+      Type: RadioButton
+  43:
+    Base:
+      Name: PLL-HSI/2
+      GroupName: PLL-Selector
+      Macro: CLOCK_PLL_HSI_DIV2
+      Type: RadioButton
+      IsChecked: true
+  44:
+    Base:
+      Name: PLL-HSE
+      GroupName: PLL-Selector
+      Macro: CLOCK_PLL_HSE
+      Type: RadioButton
+  45:
+    Base:
+      Name: RTC-HSE/128
+      GroupName: RTC-Clk-Selector
+      Macro: CLOCK_RTC_HSE_DIV128
+      Type: RadioButton
+      IsChecked: true
+  46:
+    Base:
+      Name: RTC-LSE
+      GroupName: RTC-Clk-Selector
+      Macro: CLOCK_RTC_LSE
+      Type: RadioButton
+  47:
+    Base:
+      Name: RTC-LSI
+      GroupName: RTC-Clk-Selector
+      Macro: CLOCK_RTC_LSI
+      Type: RadioButton
+  48:
+    Base:
+      Name: System-HSI
+      GroupName: System-Clk-Selector
+      Macro: CLOCK_SYSTEM_HSI
+      Type: RadioButton
+      IsChecked: true
+  49:
+    Base:
+      Name: System-HSE
+      GroupName: System-Clk-Selector
+      Macro: CLOCK_SYSTEM_HSE
+      Type: RadioButton
+  50:
+    Base:
+      Name: System-PLL
+      GroupName: System-Clk-Selector
+      Macro: CLOCK_SYSTEM_PLL
+      Type: RadioButton
+Rects:
+  1: { X: 25.5, Y: 135.5, Width: 56.0, Height: 31.0 }
+  2: { X: 25.5, Y: 475.5, Width: 56.0, Height: 31.0 }
+  3: { X: 25.5, Y: 665.5, Width: 56.0, Height: 31.0 }
+  4: { X: 110.5, Y: 90.5, Width: 81.0, Height: 31.0 }
+  5: { X: 110.5, Y: 430.5, Width: 81.0, Height: 31.0 }
+  6: { X: 120.5, Y: 270.5, Width: 56.0, Height: 31.0 }
+  7: { X: 120.5, Y: 665.5, Width: 56.0, Height: 31.0 }
+  8: { X: 220.5, Y: 475.5, Width: 56.0, Height: 31.0 }
+  9: { X: 380.5, Y: 454.06, Width: 56.0, Height: 31.0 }
+  10: { X: 462.5, Y: 454.06, Width: 56.0, Height: 31.0 }
+  11: { X: 520.5, Y: 134.32, Width: 56.0, Height: 31.0 }
+  12: { X: 602.3, Y: 505.5, Width: 119.2, Height: 31.0 }
+  13: { X: 602.3, Y: 561.23, Width: 56.0, Height: 31.0 }
+  14: { X: 672.5, Y: 385.5, Width: 56.0, Height: 31.0 }
+  15: { X: 700.5, Y: 561.23, Width: 56.0, Height: 31.0 }
+  16: { X: 790.5, Y: 385.5, Width: 56.0, Height: 31.0 }
+  17: { X: 790.5, Y: 460.5, Width: 56.0, Height: 31.0 }
+  18: { X: 905.5, Y: 385.5, Width: 56.0, Height: 31.0 }
+  19: { X: 1022.5, Y: 285.5, Width: 56.0, Height: 31.0 }
+  20: { X: 1022.5, Y: 385.5, Width: 56.0, Height: 31.0 }
+  21: { X: 1022.5, Y: 485.52, Width: 56.0, Height: 31.0 }
+  22: { X: 1160.5, Y: 435.5, Width: 56.0, Height: 31.0 }
+  23: { X: 1160.5, Y: 535.5, Width: 56.0, Height: 31.0 }
+  24: { X: 1160.5, Y: 590.5, Width: 56.0, Height: 31.0 }
+  25: { X: 1280.5, Y: 35.5, Width: 56.0, Height: 31.0 }
+  26: { X: 1280.5, Y: 85.5, Width: 56.0, Height: 31.0 }
+  27: { X: 1280.5, Y: 135.5, Width: 56.0, Height: 31.0 }
+  28: { X: 1280.5, Y: 185.5, Width: 56.0, Height: 31.0 }
+  29: { X: 1280.5, Y: 235.5, Width: 56.0, Height: 31.0 }
+  30: { X: 1280.5, Y: 285.5, Width: 56.0, Height: 31.0 }
+  31: { X: 1280.5, Y: 335.5, Width: 56.0, Height: 31.0 }
+  32: { X: 1280.5, Y: 385.5, Width: 56.0, Height: 31.0 }
+  33: { X: 1280.5, Y: 435.5, Width: 56.0, Height: 31.0 }
+  34: { X: 1280.5, Y: 484.79, Width: 56.0, Height: 31.0 }
+  35: { X: 1280.5, Y: 535.5, Width: 56.0, Height: 31.0 }
+  36: { X: 1280.5, Y: 590.5, Width: 56.0, Height: 31.0 }
+  37: { X: 1280.5, Y: 645.5, Width: 56.0, Height: 31.0 }
+  38: { X: 1280.5, Y: 700.5, Width: 56.0, Height: 31.0 }
+Ellipses:
+  39: { X: 249.20000000000002, Y: 619.2, Width: 14.0, Height: 14.0 }
+  40: { X: 249.20000000000002, Y: 654.2, Width: 14.0, Height: 14.0 }
+  41: { X: 249.20000000000002, Y: 689.2, Width: 14.0, Height: 14.0 }
+  42: { X: 249.20000000000002, Y: 729.2, Width: 14.0, Height: 14.0 }
+  43: { X: 330.84, Y: 439.2, Width: 14.0, Height: 14.0 }
+  44: { X: 330.84, Y: 484.2, Width: 14.0, Height: 14.0 }
+  45: { X: 429.46, Y: 89.2, Width: 14.0, Height: 14.0 }
+  46: { X: 429.46, Y: 143.01, Width: 14.0, Height: 14.0 }
+  47: { X: 429.46, Y: 199.2, Width: 14.0, Height: 14.0 }
+  48: { X: 623.6999999999999, Y: 344.2, Width: 14.0, Height: 14.0 }
+  49: { X: 623.6999999999999, Y: 394.56, Width: 14.0, Height: 14.0 }
+  50: { X: 623.6999999999999, Y: 449.2, Width: 14.0, Height: 14.0 }
