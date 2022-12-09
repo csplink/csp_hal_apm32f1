@@ -30,14 +30,10 @@ extern "C" {
 
 typedef enum
 {
-    /* SW-DP Enabled and JTAG-DP Enabled */
-    CHAL_DEBUG_PORT_SWJ_ENABEL      = AFIO_MAPR_SWJ_CFG_RESET,
-    /* SW-DP Enabled and JTAG-DP Enabled but without NJTRST */
-    CHAL_DEBUG_PORT_SWJ_NOJNTRST    = AFIO_MAPR_SWJ_CFG_NOJNTRST,
-    /* SW-DP Enabled and JTAG-DP Disabled  */
-    CHAL_DEBUG_PORT_SWJ_JTAGDISABLE = AFIO_MAPR_SWJ_CFG_JTAGDISABLE,
-    /* SW-DP Disabled and JTAG-DP Disabled */
-    CHAL_DEBUG_PORT_SWJ_DISABLE     = AFIO_MAPR_SWJ_CFG_DISABLE
+    CHAL_DEBUG_PORT_SWJ_ENABEL      = AFIO_MAPR_SWJ_CFG_RESET,       /* SW Enabled, JTAG Enabled */
+    CHAL_DEBUG_PORT_SWJ_NOJNTRST    = AFIO_MAPR_SWJ_CFG_NOJNTRST,    /* SW Enabled, JTAG Enabled but without NJTRST */
+    CHAL_DEBUG_PORT_SWJ_JTAGDISABLE = AFIO_MAPR_SWJ_CFG_JTAGDISABLE, /* SW Enabled, JTAG Disabled  */
+    CHAL_DEBUG_PORT_SWJ_DISABLE     = AFIO_MAPR_SWJ_CFG_DISABLE      /* SW Disabled, JTAG Disabled */
 } chal_debug_port_t;
 
 __chal_inline void chal_debug_init(chal_debug_port_t port)

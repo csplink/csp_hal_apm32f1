@@ -189,16 +189,11 @@ typedef enum
  */
 typedef enum
 {
-    /* analog mode */
-    CHAL_GPIO_MODE_ANALOG    = LL_GPIO_MODE_ANALOG,
-    /* floating mode */
-    CHAL_GPIO_MODE_FLOATING  = LL_GPIO_MODE_FLOATING,
-    /* input mode */
-    CHAL_GPIO_MODE_INPUT     = LL_GPIO_MODE_INPUT,
-    /* general purpose output mode */
-    CHAL_GPIO_MODE_OUTPUT    = LL_GPIO_MODE_OUTPUT,
-    /* alternate function mode */
-    CHAL_GPIO_MODE_ALTERNATE = LL_GPIO_MODE_ALTERNATE
+    CHAL_GPIO_MODE_ANALOG    = LL_GPIO_MODE_ANALOG,   /* analog mode */
+    CHAL_GPIO_MODE_FLOATING  = LL_GPIO_MODE_FLOATING, /* floating mode */
+    CHAL_GPIO_MODE_INPUT     = LL_GPIO_MODE_INPUT,    /* input mode */
+    CHAL_GPIO_MODE_OUTPUT    = LL_GPIO_MODE_OUTPUT,   /* general purpose output mode */
+    CHAL_GPIO_MODE_ALTERNATE = LL_GPIO_MODE_ALTERNATE /* alternate function mode */
 } chal_gpio_mode_t;
 
 /**
@@ -206,12 +201,9 @@ typedef enum
  */
 typedef enum
 {
-    /* output mode, max speed 10 MHz */
-    CHAL_GPIO_SPEED_10MHz = LL_GPIO_SPEED_FREQ_LOW,
-    /* output mode, max speed 20 MHz */
-    CHAL_GPIO_SPEED_20MHz = LL_GPIO_SPEED_FREQ_MEDIUM,
-    /* output mode, max speed 50 MHz */
-    CHAL_GPIO_SPEED_50MHz = LL_GPIO_SPEED_FREQ_HIGH
+    CHAL_GPIO_SPEED_10MHz = LL_GPIO_SPEED_FREQ_LOW,    /* output mode, max speed 10 MHz */
+    CHAL_GPIO_SPEED_20MHz = LL_GPIO_SPEED_FREQ_MEDIUM, /* output mode, max speed 20 MHz */
+    CHAL_GPIO_SPEED_50MHz = LL_GPIO_SPEED_FREQ_HIGH    /* output mode, max speed 50 MHz */
 } chal_gpio_speed_t;
 
 /**
@@ -219,10 +211,8 @@ typedef enum
  */
 typedef enum
 {
-    /* push-pull as output type */
-    CHAL_GPIO_OUTPUT_PP = LL_GPIO_OUTPUT_PUSHPULL,
-    /* open-drain as output type */
-    CHAL_GPIO_OUTPUT_OD = LL_GPIO_OUTPUT_OPENDRAIN
+    CHAL_GPIO_OUTPUT_PP = LL_GPIO_OUTPUT_PUSHPULL, /* open-drain as output type */
+    CHAL_GPIO_OUTPUT_OD = LL_GPIO_OUTPUT_OPENDRAIN /* push-pull as output type */
 } chal_gpio_output_type_t;
 
 /**
@@ -260,9 +250,7 @@ __chal_inline void chal_gpio_disable_clk(uint32_t periphs)
     LL_APB2_GRP1_DisableClock(periphs);
 }
 
-__chal_inline void chal_gpio_set_level(GPIO_TypeDef     *gpiox,
-                                       uint32_t          pinmask,
-                                       chal_gpio_level_t level)
+__chal_inline void chal_gpio_set_level(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_level_t level)
 {
     if (level != CHAL_GPIO_LEVEL_LOW)
         LL_GPIO_SetOutputPin(gpiox, pinmask);
@@ -270,13 +258,11 @@ __chal_inline void chal_gpio_set_level(GPIO_TypeDef     *gpiox,
         LL_GPIO_ResetOutputPin(gpiox, pinmask);
 }
 
-__chal_inline chal_gpio_level_t chal_gpio_get_level(GPIO_TypeDef *gpiox,
-                                                    uint32_t      pinmask)
+__chal_inline chal_gpio_level_t chal_gpio_get_level(GPIO_TypeDef *gpiox, uint32_t pinmask)
 {
     chal_gpio_level_t bitstatus;
 
-    if (LL_GPIO_IsInputPinSet(gpiox, pinmask) !=
-        (uint32_t)CHAL_GPIO_LEVEL_LOW) {
+    if (LL_GPIO_IsInputPinSet(gpiox, pinmask) != (uint32_t)CHAL_GPIO_LEVEL_LOW) {
         bitstatus = CHAL_GPIO_LEVEL_HIGH;
     }
     else {
@@ -291,9 +277,7 @@ __chal_inline void chal_gpio_toggle_pin(GPIO_TypeDef *gpiox, uint32_t pinmask)
 }
 
 chal_status_t chal_gpio_deinit(GPIO_TypeDef *gpiox, uint32_t pinmask);
-chal_status_t chal_gpio_init(GPIO_TypeDef       *gpiox,
-                             uint32_t            pinmask,
-                             chal_gpio_config_t *config);
+chal_status_t chal_gpio_init(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_config_t *config);
 
 #ifdef __cplusplus
 }
