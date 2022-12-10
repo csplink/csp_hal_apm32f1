@@ -1,76 +1,76 @@
 Groups:
   chal_clock_osc_t:
     Comment:
-      Chinese: HSE时钟输入源类型
-      English:
+      zh-cn: HSE时钟输入源类型
+      en-us:
     Values:
       CHAL_CLOCK_OSC_DISABLE:
         Comment:
-          Chinese: 禁用
-          English:
+          zh-cn: 禁用
+          en-us:
       CHAL_CLOCK_OSC_BYPASS:
         Comment:
-          Chinese: 有源晶振模式
-          English:
+          zh-cn: 有源晶振模式
+          en-us:
       CHAL_CLOCK_OSC_NO_BYPASS:
         Comment:
-          Chinese: 无源晶振模式
-          English:
+          zh-cn: 无源晶振模式
+          en-us:
   chal_clock_osc32_t:
     Comment:
-      Chinese: HSI时钟输入源类型
-      English:
+      zh-cn: HSI时钟输入源类型
+      en-us:
     Values:
       CHAL_CLOCK_OSC32_DISABLE:
         Comment:
-          Chinese: 禁用
-          English:
+          zh-cn: 禁用
+          en-us:
       CHAL_CLOCK_OSC32_BYPASS:
         Comment:
-          Chinese: 有源晶振模式
-          English:
+          zh-cn: 有源晶振模式
+          en-us:
       CHAL_CLOCK_OSC32_NO_BYPASS:
         Comment:
-          Chinese: 无源晶振模式
-          English:
+          zh-cn: 无源晶振模式
+          en-us:
   chal_clock_css_t:
     Comment:
-      Chinese: CSS时钟安全系统
-      English:
+      zh-cn: CSS时钟安全系统
+      en-us:
     Values:
       CHAL_CLOCK_CSS_DISABLE:
         Comment:
-          Chinese: 禁用
-          English:
+          zh-cn: 禁用
+          en-us:
       CHAL_CLOCK_CSS_ENABLE:
         Comment:
-          Chinese: 启用
-          English:
+          zh-cn: 启用
+          en-us:
 Properties:
   chal_clock_osc_t:
     DisplayName:
-      Chinese: HSE时钟输入源
-      English:
+      zh-cn: HSE时钟输入源
+      en-us:
     Description:
-      Chinese: Clock-HSE时钟输入源
-      English:
+      zh-cn: Clock-HSE时钟输入源
+      en-us:
     Category: Clock
     ReadOnly: false
   chal_clock_osc32_t:
     DisplayName:
-      Chinese: HSI时钟输入源
-      English:
+      zh-cn: HSI时钟输入源
+      en-us:
     Description:
-      Chinese: Clock-HSI时钟输入源
-      English:
+      zh-cn: Clock-HSI时钟输入源
+      en-us:
     Category: Clock
     ReadOnly: false
   chal_clock_css_t:
     DisplayName:
-      Chinese: CSS时钟安全系统
-      English:
+      zh-cn: CSS时钟安全系统
+      en-us:
     Description:
-      Chinese: Clock-CSS时钟安全系统
-      English:
+      zh-cn: Clock-CSS时钟安全系统
+      en-us:
     Category: Clock
     ReadOnly: false
