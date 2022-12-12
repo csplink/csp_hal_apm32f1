@@ -36,7 +36,7 @@ if not csp_repo then
     print("please check 'CSP_REPO' in your path")
 end
 
-includes(csp_repo .. "/xmake.lua")
+includes(csp_repo .. "/csplink.lua")
 
 add_cflags(
     "-mcpu=cortex-m3",
