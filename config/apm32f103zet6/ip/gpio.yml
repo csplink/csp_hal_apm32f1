@@ -1,0 +1,41 @@
+Input-Std:
+  chal_gpio_pull_t:
+    - CHAL_GPIO_PULL_NO
+    - CHAL_GPIO_PULL_UP
+    - CHAL_GPIO_PULL_DOWN
+  chal_gpio_mode_t:
+    - CHAL_GPIO_MODE_INPUT
+Output-Std:
+  chal_gpio_level_t:
+    - CHAL_GPIO_LEVEL_LOW
+    - CHAL_GPIO_LEVEL_HIGH
+  chal_gpio_speed_t:
+    - CHAL_GPIO_SPEED_10MHz
+    - CHAL_GPIO_SPEED_20MHz
+    - CHAL_GPIO_SPEED_50MHz
+  chal_gpio_mode_t:
+    - CHAL_GPIO_MODE_OUTPUT
+  chal_gpio_output_type_t:
+    - CHAL_GPIO_OUTPUT_PP
+    - CHAL_GPIO_OUTPUT_OD
+Analog-Std:
+  chal_gpio_mode_t:
+    - CHAL_GPIO_MODE_ANALOG
+Eventout-Std:
+  chal_gpio_pull_t:
+    - CHAL_GPIO_PULL_NO
+    - CHAL_GPIO_PULL_UP
+    - CHAL_GPIO_PULL_DOWN
+  chal_gpio_speed_t:
+    - CHAL_GPIO_SPEED_10MHz
+    - CHAL_GPIO_SPEED_20MHz
+    - CHAL_GPIO_SPEED_50MHz
+  chal_gpio_mode_t:
+    - CHAL_GPIO_MODE_ALTERNATE
+  chal_gpio_output_type_t:
+    - CHAL_GPIO_OUTPUT_PP
+Exti-Std:
+  chal_gpio_pull_t:
+    - CHAL_GPIO_PULL_NO
+    - CHAL_GPIO_PULL_UP
+    - CHAL_GPIO_PULL_DOWN

@@ -1,0 +1,14 @@
+Clock-OSC:
+  chal_clock_osc_t:
+    - CHAL_CLOCK_OSC_DISABLE
+    - CHAL_CLOCK_OSC_BYPASS
+    - CHAL_CLOCK_OSC_NO_BYPASS
+Clock-OSC32:
+  chal_clock_osc32_t:
+    - CHAL_CLOCK_OSC32_DISABLE
+    - CHAL_CLOCK_OSC32_BYPASS
+    - CHAL_CLOCK_OSC32_NO_BYPASS
+Clock-CSS:
+  chal_clock_css_t:
+    - CHAL_CLOCK_CSS_DISABLE
+    - CHAL_CLOCK_CSS_ENABLE
