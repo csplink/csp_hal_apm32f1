@@ -1,4 +1,4 @@
-name: build
+name: 👷 build
 
 on:
   push:
@@ -17,38 +17,38 @@ jobs:
           - examples/get-started/sample_project
 
     steps:
-      - name: checkout csp_hal_apm32f1
+      - name: ⬇️ checkout csp_hal_apm32f1
         uses: actions/checkout@v3
         with:
           submodules: true
 
-      - name: checkout csp_repo
+      - name: ⬇️ checkout csp_repo
         uses: actions/checkout@v3
         with:
           repository: csplink/csp_repo
           path: cache/csp_repo
 
-      - name: install xmake
+      - name: ⬇️ install xmake
         uses: xmake-io/github-action-setup-xmake@v1
 
-      - name: build
+      - name: 👷 build
         shell: bash
-        run: |
+        run: | # Only need to use "--root" in CI
           ls /opt
           xmake --version
           pushd ${{ matrix.target }}
           export CSP_REPO=../../../cache/csp_repo
-          xmake csp -i --root         # Only need to use "--root" in CI
-          xmake f -m release --root   # Only need to use "--root" in CI
-          xmake -j$(nproc) -v --root  # Only need to use "--root" in CI
-          xmake f -m debug --root     # Only need to use "--root" in CI
-          xmake -j$(nproc) -v --root  # Only need to use "--root" in CI
+          xmake csp -i --root
+          xmake f -m release --root
+          xmake -j$(nproc) -v --root
+          xmake f -m debug --root
+          xmake -j$(nproc) -v --root
           popd
           mkdir -p build/${{ matrix.target }}/
           cp -rf ${{ matrix.target }}/build/artifact build/${{ matrix.target }}/
           cp -rf ${{ matrix.target }}/build/cross build/${{ matrix.target }}/
 
-      - name: upload artifact
+      - name: ⬆️ upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: csp_hal_apm32f1-${{ github.run_number }}
