@@ -42,15 +42,15 @@
             <img src="https://img.shields.io/badge/video-bilibili-FB7299?style=flat" alt="bilibili" />
         </a>
     </div>
-    <b>CSP: Tools for flexible configuration of chips and boards.</b><br/>
-    <i>APM32F1 SDK based on STM32CubeF1 HAL Driver.</i><br/>
+    <b>CSP：用于灵活配置芯片与板卡的工具</b><br/>
+    <i>基于STM32CubeF1 HAL Driver的 APM32F1 SDK</i><br/>
 </div>
 
-**English** | [中文](README-zh_CN.md)
+[English](README.md) | **中文**
 
-## ✨ Features
+## ✨ 特性
 
-- 🧱 Based on STM32CubeF1
-- 🎹 Cross-platform (windows, linux)
-- 🔧 Xmake build tool
-- 📦️ Embedded RTOS (rt-thread)
+- 🧱 基于 STM32CubeF1
+- 🎹 跨平台（windows，linux）
+- 🔧 Xmake 构建工具
+- 📦️ 内嵌实时操作系统（rt-thread）
