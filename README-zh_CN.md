@@ -5,13 +5,13 @@
     <h1>CSP HAL APM32F1</h1>
     <div>
         <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow%3A%F0%9F%91%B7build">
-            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/build.yml?branch=master&style=flat&label=build" alt="github-ci" />
+            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/build.yml?style=flat&label=build" alt="github-ci" />
         </a>
         <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow%3A%F0%9F%92%95mirror">
-            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/mirror.yml?branch=master&style=flat&label=mirror" alt="github-ci" />
+            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/mirror.yml?style=flat&label=mirror" alt="github-ci" />
         </a>
         <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow%3A%F0%9F%94%96release">
-            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/release.yml?branch=master&style=flat&label=release" alt="github-ci" />
+            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/release.yml?style=flat&label=release" alt="github-ci" />
         </a>
     </div>
     <div>
