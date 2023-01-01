@@ -15,13 +15,26 @@
 -- Copyright (C) 2022-present xqyjlj<xqyjlj@126.com>
 --
 -- @author      xqyjlj
--- @file        xmake.lua
+-- @file        csplink.lua
 --
 
 set_xmakever("2.7.2")
 
-for _, dir in ipairs(os.dirs(os.scriptdir() .. "/*")) do
-    if os.exists(dir .. "/xmake.lua") then
-        includes(dir)
-    end
+includes("../apm32f1/csplink.lua")
+includes("../../projects/xmake/options.lua")
+
+target("drivers_csp_hal")
+do
+    set_kind("object")
+    set_values("targetdir", os.scriptdir())
+    add_deps("drivers_apm32f1") -- apm32f1xx hal library
+    add_files("chal/src/*.c")
+    add_includedirs("chal/inc", "$(buildir)", {public = true})
+    add_options("csp_hal_apm32f1")
+    on_build_files(
+        function(target, sourcebatch, opt)
+            import("csp.build.change_objdir").main(target, sourcebatch, opt)
+        end
+    )
 end
+target_end()

@@ -15,7 +15,7 @@
 -- Copyright (C) 2022-present xqyjlj<xqyjlj@126.com>
 --
 -- @author      xqyjlj
--- @file        xmake.lua
+-- @file        csplink.lua
 --
 
 set_xmakever("2.7.2")
@@ -24,7 +24,7 @@ includes("../../projects/xmake/options.lua")
 
 target("drivers_apm32f1")
 do
-    set_kind("static")
+    set_kind("object")
     set_values("targetdir", os.scriptdir())
     add_includedirs("cmsis/Include", "hal/Inc", "cmsis_core/Include", "$(buildir)", {public = true})
     add_files("cmsis/Source/Templates/system_stm32f1xx.c", "hal/Src/stm32f1xx_ll_*.c")

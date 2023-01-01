@@ -1,4 +1,4 @@
---!csp build system based on xmake
+--!csplink build system based on xmake
 --
 -- Licensed under the Apache License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
@@ -15,21 +15,18 @@
 -- Copyright (C) 2022-present xqyjlj<xqyjlj@126.com>
 --
 -- @author      xqyjlj
--- @file        package.lua
+-- @file        csplink.lua
 --
 
 set_xmakever("2.7.2")
 
 set_config("arch", "cortex-m3")
 
-add_includedirs("drivers/csp_hal/port/inc") -- public include dir
-
 includes("projects/xmake/rules.lua")
 includes("projects/xmake/options.lua")
-includes("tools/xmake/rules/csp_rule_sys_config.lua")
 
 for _, dir in ipairs(os.dirs(os.scriptdir() .. "/*")) do
-    file = dir .. "/xmake.lua"
+    file = dir .. "/csplink.lua"
     if os.exists(file) then
         includes(file)
     end
@@ -37,14 +34,13 @@ end
 
 target("csp_hal_apm32f1")
 do
-    set_kind("object")
-    add_deps("drivers_csp") -- csp hal library
+    set_kind("static")
+    add_deps("drivers") -- drivers library
 end
 target_end()
 
 rule("csp_hal_apm32f1")
 do
-    add_deps("csp_rule_sys_config") -- auto generate csp.conf, build/csp_conf.h
     add_deps("csp_rule_build_binary") -- auto generate .hex .bin .map .s .list
 end
 rule_end()
