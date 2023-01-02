@@ -1,7 +1,13 @@
-/* header for chal_power.c.
+/**
+ *****************************************************************************
+ * @author      xqyjlj
+ * @file        power.h
+ * @brief       header for chal_power.c
  *
+ *****************************************************************************
+ * @attention
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,11 +18,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Copyright (C) 2022-present xqyjlj<xqyjlj@126.com>
+ * Copyright (C) 2022-2023 xqyjlj<xqyjlj@126.com>
  *
- * @author      xqyjlj
- * @file        power.h
- *
+ *****************************************************************************
+ * Change Logs:
+ * Date           Author       Notes
+ * ------------   ----------   -----------------------------------------------
+ * 2023-01-02     xqyjlj       initial version
  */
 
 #ifndef __CHAL_POWER_H__
