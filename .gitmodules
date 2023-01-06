@@ -1,6 +1,3 @@
-[submodule "tools"]
-	path = tools
-	url = ../../csplink/csp_hal_tools.git
 [submodule "components/rtos_rtthread_nano"]
 	path = components/rtos_rtthread_nano
 	url = ../../csplink/rtos_rtthread_nano.git
