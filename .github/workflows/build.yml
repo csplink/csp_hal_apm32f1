@@ -33,16 +33,17 @@ jobs:
 
       - name: 👷 build
         shell: bash
-        run: | # Only need to use "--root" in CI
+        run: |
+          export XMAKE_ROOT=y # Only need to use "--root" in CI
           ls /opt
           xmake --version
           pushd ${{ matrix.target }}
           export CSP_REPO=../../../cache/csp_repo
-          xmake csp -i --root
-          xmake f -m release --root
-          xmake -j$(nproc) -v --root
-          xmake f -m debug --root
-          xmake -j$(nproc) -v --root
+          xmake csp -i
+          xmake f -m release
+          xmake -j$(nproc) -v
+          xmake f -m debug
+          xmake -j$(nproc) -v
           popd
           mkdir -p build/${{ matrix.target }}/
           cp -rf ${{ matrix.target }}/build/artifact build/${{ matrix.target }}/
