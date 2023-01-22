@@ -24,128 +24,128 @@
 Groups:
   chal_gpio_level_t:
     Comment:
-      zh-cn: GPIO电平类型
+      zh-hans: GPIO电平类型
       en-us:
     Values:
       CHAL_GPIO_LEVEL_LOW:
         Comment:
-          zh-cn: 低电平
+          zh-hans: 低电平
           en-us:
       CHAL_GPIO_LEVEL_HIGH:
         Comment:
-          zh-cn: 高电平
+          zh-hans: 高电平
           en-us:
   chal_gpio_mode_t:
     Comment:
-      zh-cn: GPIO模式类型
+      zh-hans: GPIO模式类型
       en-us:
     Values:
       CHAL_GPIO_MODE_ANALOG:
         Comment:
-          zh-cn: 模拟模式
+          zh-hans: 模拟模式
           en-us:
       CHAL_GPIO_MODE_FLOATING:
         Comment:
-          zh-cn: 浮空模式
+          zh-hans: 浮空模式
           en-us:
       CHAL_GPIO_MODE_INPUT:
         Comment:
-          zh-cn: 输入模式
+          zh-hans: 输入模式
           en-us:
       CHAL_GPIO_MODE_OUTPUT:
         Comment:
-          zh-cn: 输出模式
+          zh-hans: 输出模式
           en-us:
       CHAL_GPIO_MODE_ALTERNATE:
         Comment:
-          zh-cn: 复用模式
+          zh-hans: 复用模式
           en-us:
   chal_gpio_output_type_t:
     Comment:
-      zh-cn: GPIO输出类型
+      zh-hans: GPIO输出类型
       en-us:
     Values:
       CHAL_GPIO_OUTPUT_PP:
         Comment:
-          zh-cn: 推挽输出
+          zh-hans: 推挽输出
           en-us:
       CHAL_GPIO_OUTPUT_OD:
         Comment:
-          zh-cn: 开漏输出
+          zh-hans: 开漏输出
           en-us:
   chal_gpio_pull_t:
     Comment:
-      zh-cn: GPIO钳位类型
+      zh-hans: GPIO钳位类型
       en-us:
     Values:
       CHAL_GPIO_PULL_DOWN:
         Comment:
-          zh-cn: 下拉
+          zh-hans: 下拉
           en-us:
       CHAL_GPIO_PULL_UP:
         Comment:
-          zh-cn: 上拉
+          zh-hans: 上拉
           en-us:
   chal_gpio_speed_t:
     Comment:
-      zh-cn: GPIO速度类型
+      zh-hans: GPIO速度类型
       en-us:
     Values:
       CHAL_GPIO_SPEED_10MHz:
         Comment:
-          zh-cn: 10MHz
+          zh-hans: 10MHz
           en-us:
       CHAL_GPIO_SPEED_20MHz:
         Comment:
-          zh-cn: 20MHz
+          zh-hans: 20MHz
           en-us:
       CHAL_GPIO_SPEED_50MHz:
         Comment:
-          zh-cn: 50MHz
+          zh-hans: 50MHz
           en-us:
 Properties:
   chal_gpio_level_t:
     DisplayName:
-      zh-cn: 电平
+      zh-hans: 电平
       en-us:
     Description:
-      zh-cn: GPIO-电平
+      zh-hans: GPIO-电平
       en-us:
     Category: GPIO
     ReadOnly: false
   chal_gpio_mode_t:
     DisplayName:
-      zh-cn: 模式
+      zh-hans: 模式
       en-us:
     Description:
-      zh-cn: GPIO-模式
+      zh-hans: GPIO-模式
       en-us:
     Category: GPIO
     ReadOnly: false
   chal_gpio_output_type_t:
     DisplayName:
-      zh-cn: 输出类型
+      zh-hans: 输出类型
       en-us:
     Description:
-      zh-cn: GPIO-输出类型
+      zh-hans: GPIO-输出类型
       en-us:
     Category: GPIO
     ReadOnly: false
   chal_gpio_pull_t:
     DisplayName:
-      zh-cn: 钳位
+      zh-hans: 钳位
       en-us:
     Description:
-      zh-cn: GPIO-钳位
+      zh-hans: GPIO-钳位
       en-us:
     Category: GPIO
     ReadOnly: false
   chal_gpio_speed_t:
     DisplayName:
-      zh-cn: 速度
+      zh-hans: 速度
       en-us:
     Description:
-      zh-cn: GPIO-速度
+      zh-hans: GPIO-速度
       en-us:
     Category: GPIO
     ReadOnly: false

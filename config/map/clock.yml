@@ -24,76 +24,76 @@
 Groups:
   chal_clock_osc_t:
     Comment:
-      zh-cn: HSE时钟输入源类型
+      zh-hans: HSE时钟输入源类型
       en-us:
     Values:
       CHAL_CLOCK_OSC_DISABLE:
         Comment:
-          zh-cn: 禁用
+          zh-hans: 禁用
           en-us:
       CHAL_CLOCK_OSC_BYPASS:
         Comment:
-          zh-cn: 有源晶振模式
+          zh-hans: 有源晶振模式
           en-us:
       CHAL_CLOCK_OSC_NO_BYPASS:
         Comment:
-          zh-cn: 无源晶振模式
+          zh-hans: 无源晶振模式
           en-us:
   chal_clock_osc32_t:
     Comment:
-      zh-cn: HSI时钟输入源类型
+      zh-hans: HSI时钟输入源类型
       en-us:
     Values:
       CHAL_CLOCK_OSC32_DISABLE:
         Comment:
-          zh-cn: 禁用
+          zh-hans: 禁用
           en-us:
       CHAL_CLOCK_OSC32_BYPASS:
         Comment:
-          zh-cn: 有源晶振模式
+          zh-hans: 有源晶振模式
           en-us:
       CHAL_CLOCK_OSC32_NO_BYPASS:
         Comment:
-          zh-cn: 无源晶振模式
+          zh-hans: 无源晶振模式
           en-us:
   chal_clock_css_t:
     Comment:
-      zh-cn: CSS时钟安全系统
+      zh-hans: CSS时钟安全系统
       en-us:
     Values:
       CHAL_CLOCK_CSS_DISABLE:
         Comment:
-          zh-cn: 禁用
+          zh-hans: 禁用
           en-us:
       CHAL_CLOCK_CSS_ENABLE:
         Comment:
-          zh-cn: 启用
+          zh-hans: 启用
           en-us:
 Properties:
   chal_clock_osc_t:
     DisplayName:
-      zh-cn: HSE时钟输入源
+      zh-hans: HSE时钟输入源
       en-us:
     Description:
-      zh-cn: Clock-HSE时钟输入源
+      zh-hans: Clock-HSE时钟输入源
       en-us:
     Category: Clock
     ReadOnly: false
   chal_clock_osc32_t:
     DisplayName:
-      zh-cn: HSI时钟输入源
+      zh-hans: HSI时钟输入源
       en-us:
     Description:
-      zh-cn: Clock-HSI时钟输入源
+      zh-hans: Clock-HSI时钟输入源
       en-us:
     Category: Clock
     ReadOnly: false
   chal_clock_css_t:
     DisplayName:
-      zh-cn: CSS时钟安全系统
+      zh-hans: CSS时钟安全系统
       en-us:
     Description:
-      zh-cn: Clock-CSS时钟安全系统
+      zh-hans: Clock-CSS时钟安全系统
       en-us:
     Category: Clock
     ReadOnly: false

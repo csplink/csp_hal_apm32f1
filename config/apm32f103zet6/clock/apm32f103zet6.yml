@@ -52,21 +52,21 @@ Controls:
         IsEnabled: false
         Dependencies: [CHAL_CLOCK_OSC32_DISABLE]
         Text:
-          zh-cn: 关闭
+          zh-hans: 关闭
           en-us: close
         Status: Disable
       osc32_bypass:
         IsEnabled: true
         Dependencies: [CHAL_CLOCK_OSC32_BYPASS]
         Text:
-          zh-cn: 旁路模式
+          zh-hans: 旁路模式
           en-us: bypass
         Status: Enable
       osc32_no_bypass:
         IsEnabled: true
         Dependencies: [CHAL_CLOCK_OSC32_NO_BYPASS]
         Text:
-          zh-cn: 晶体模式
+          zh-hans: 晶体模式
           en-us: no_bypass
         Status: Enable
   5:
@@ -78,21 +78,21 @@ Controls:
         IsEnabled: false
         Dependencies: [CHAL_CLOCK_OSC_DISABLE]
         Text:
-          zh-cn: 关闭
+          zh-hans: 关闭
           en-us: close
         Status: Disable
       osc_bypass:
         IsEnabled: true
         Dependencies: [CHAL_CLOCK_OSC_BYPASS]
         Text:
-          zh-cn: 旁路模式
+          zh-hans: 旁路模式
           en-us: bypass
         Status: Enable
       osc_no_bypass:
         IsEnabled: true
         Dependencies: [CHAL_CLOCK_OSC_NO_BYPASS]
         Text:
-          zh-cn: 晶体模式
+          zh-hans: 晶体模式
           en-us: no_bypass
         Status: Enable
   6:
@@ -216,14 +216,14 @@ Controls:
         IsEnabled: false
         Dependencies: [CHAL_CLOCK_CSS_DISABLE]
         Text:
-          zh-cn: 禁用 CSS
+          zh-hans: 禁用 CSS
           en-us: disable CSS
         Status: Disable
       css_enable:
         IsEnabled: true
         Dependencies: [CHAL_CLOCK_CSS_ENABLE]
         Text:
-          zh-cn: 使能 CSS
+          zh-hans: 使能 CSS
           en-us: enable CSS
         Status: Enable
   13:
