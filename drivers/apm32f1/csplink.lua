@@ -43,10 +43,5 @@ do
         end
     end
     add_options("csp_hal_apm32f1")
-    on_build_files(
-        function(target, sourcebatch, opt)
-            import("csp.build.change_objdir").main(target, sourcebatch, opt)
-        end
-    )
 end
 target_end()
