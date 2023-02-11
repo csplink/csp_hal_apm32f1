@@ -270,10 +270,12 @@ __chal_inline chal_gpio_level_t chal_gpio_get_level(GPIO_TypeDef *gpiox, uint32_
 {
     chal_gpio_level_t bitstatus;
 
-    if (LL_GPIO_IsInputPinSet(gpiox, pinmask) != (uint32_t)CHAL_GPIO_LEVEL_LOW) {
+    if (LL_GPIO_IsInputPinSet(gpiox, pinmask) != (uint32_t)CHAL_GPIO_LEVEL_LOW)
+    {
         bitstatus = CHAL_GPIO_LEVEL_HIGH;
     }
-    else {
+    else
+    {
         bitstatus = CHAL_GPIO_LEVEL_LOW;
     }
     return bitstatus;

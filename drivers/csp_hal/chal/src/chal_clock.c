@@ -45,14 +45,16 @@ __chal_weak void chal_clock_init(void)
     chal_flash_latency_t latency = CHAL_FLASH_LATENCY_3;
 #endif
     LL_FLASH_SetLatency((uint32_t)latency);
-    while (LL_FLASH_GetLatency() != (uint32_t)latency) {
+    while (LL_FLASH_GetLatency() != (uint32_t)latency)
+    {
     }
 
     LL_RCC_HSI_SetCalibTrimming(16);
     LL_RCC_HSI_Enable();
 
     /* Wait till HSI is ready */
-    while (LL_RCC_HSI_IsReady() != 1) {
+    while (LL_RCC_HSI_IsReady() != 1)
+    {
     }
     LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
     LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_2);
@@ -60,7 +62,8 @@ __chal_weak void chal_clock_init(void)
     LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
 
     /* Wait till System clock is ready */
-    while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI) {
+    while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
+    {
     }
     LL_Init1msTick(CGEN_HCLK_FREQ);
     LL_SetSystemCoreClock(CGEN_HCLK_FREQ);
