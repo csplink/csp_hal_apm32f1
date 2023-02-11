@@ -22,12 +22,6 @@ jobs:
         with:
           submodules: true
 
-      - name: ⬇️ checkout csp_repo
-        uses: actions/checkout@v3
-        with:
-          repository: csplink/csp_repo
-          path: cache/csp_repo
-
       - name: ⬇️ install xmake
         uses: xmake-io/github-action-setup-xmake@v1
 
@@ -40,11 +34,10 @@ jobs:
           pushd ${{ matrix.target }}
           export CSP_REPO=../../../cache/csp_repo
           xmake csp -i
-          xmake f -m release
-          xmake -j$(nproc) -v
-          xmake f -m debug
+          xmake f -m release --sdk=/opt/gcc-arm-none-eabi-10-2020-q4-major
+          xmake -j$(nproc) -v 
+          xmake f -m debug --sdk=/opt/gcc-arm-none-eabi-10-2020-q4-major
           xmake -j$(nproc) -v
           popd
           mkdir -p build/${{ matrix.target }}/
-          cp -rf ${{ matrix.target }}/build/artifact build/${{ matrix.target }}/
-          cp -rf ${{ matrix.target }}/build/cross build/${{ matrix.target }}/
+          cp -rf ${{ matrix.target }}/build/cross/arm build/${{ matrix.target }}/
