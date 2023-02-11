@@ -30,7 +30,7 @@
 #ifndef __CHAL_HAL_H__
 #define __CHAL_HAL_H__
 
-#include "config.h"
+#include "csp_hal_apm32f1_config.h"
 
 #include "stm32f1xx_ll_adc.h"
 #include "stm32f1xx_ll_bus.h"

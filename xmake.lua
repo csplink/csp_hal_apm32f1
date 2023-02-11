@@ -18,6 +18,7 @@
 -- Change Logs:
 -- Date           Author       Notes
 -- ------------   ----------   -----------------------------------------------
+-- 2023-02-12     xqyjlj       add __csplink_debug__
 -- 2023-02-09     xqyjlj       adapt to xamke repository
 -- 2023-01-02     xqyjlj       initial version
 --
@@ -60,7 +61,7 @@ do
     set_configdir("$(buildir)/$(plat)/$(arch)/$(mode)")
     set_installdir("$(buildir)/install")
 
-    add_configfiles("config.h.in")
+    add_configfiles("csp_hal_apm32f1_config.h.in")
     add_imports("core.project.project")
     add_rules("asm")
     add_options("mcu")
@@ -79,10 +80,15 @@ do
     remove_files("drivers/apm32f1/hal/Src/stm32f1xx_ll_sdmmc.c")
     remove_files("drivers/apm32f1/hal/Src/stm32f1xx_ll_fsmc.c")
 
+    add_installfiles("$(buildir)/$(plat)/$(arch)/$(mode)/csp_hal_apm32f1_config.h",
+                     {prefixdir = "include/csp_hal_apm32f1"})
     add_installfiles("drivers/apm32f1/cmsis/Include/*.h", "drivers/apm32f1/hal/Inc/*.h",
                      "drivers/apm32f1/cmsis_core/Include/*.h", {prefixdir = "include/csp_hal_apm32f1"})
-
     add_installfiles("drivers/csp_hal/chal/inc/(chal/*.h)", {prefixdir = "include/csp_hal_apm32f1"})
+
+    if is_mode("debug") then
+        add_defines("__csplink_debug__")
+    end
 
     on_config(function(target)
         if project.option("use_default_startup"):value() then
