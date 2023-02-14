@@ -30,6 +30,14 @@
 #ifndef __CSP_CONFIG_H__
 #define __CSP_CONFIG_H__
 
+/* version */
+#define CSP_VERSION         "${VERSION}"
+// clang-format off
+#define CSP_VERSION_MAJOR   ${VERSION_MAJOR}
+#define CSP_VERSION_MINOR   ${VERSION_MINOR}
+#define CSP_VERSION_ALTER   ${VERSION_ALTER}
+// clang-format on
+
 /* git */
 #define CSP_GIT_COMMIT      "${GIT_COMMIT}"
 #define CSP_GIT_COMMIT_LONG "${GIT_COMMIT_LONG}"

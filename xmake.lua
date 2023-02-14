@@ -23,6 +23,7 @@
 -- 2023-01-02     xqyjlj       initial version
 --
 set_xmakever("2.7.2")
+set_version("0.0.2")
 set_project("csp_hal_apm32f1") -- set project name
 
 option("mcu")
