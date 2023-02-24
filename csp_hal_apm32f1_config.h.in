@@ -27,25 +27,28 @@
  * 2023-02-11     xqyjlj       initial version
  */
 
-#ifndef __CSP_CONFIG_H__
-#define __CSP_CONFIG_H__
+#ifndef __CSP_HAL_APM32F1_CONFIG_H__
+#define __CSP_HAL_APM32F1_CONFIG_H__
 
 /* version */
-#define CSP_VERSION         "${VERSION}"
+#define CSP_HAL_APM32F1_VERSION         "${VERSION}"
 // clang-format off
-#define CSP_VERSION_MAJOR   ${VERSION_MAJOR}
-#define CSP_VERSION_MINOR   ${VERSION_MINOR}
-#define CSP_VERSION_ALTER   ${VERSION_ALTER}
+#define CSP_HAL_APM32F1_VERSION_MAJOR    ${VERSION_MAJOR}
+#define CSP_HAL_APM32F1_VERSION_MINOR    ${VERSION_MINOR}
+#define CSP_HAL_APM32F1_VERSION_ALTER    ${VERSION_ALTER}
 // clang-format on
 
 /* git */
-#define CSP_GIT_COMMIT      "${GIT_COMMIT}"
-#define CSP_GIT_COMMIT_LONG "${GIT_COMMIT_LONG}"
-#define CSP_GIT_COMMIT_DATE "${GIT_COMMIT_DATE}"
-#define CSP_GIT_BRANCH      "${GIT_BRANCH}"
-#define CSP_GIT_TAG         "${GIT_TAG}"
-#define CSP_GIT_TAG_LONG    "${GIT_TAG_LONG}"
-#define CSP_GIT_CUSTOM      "${GIT_TAG}-${GIT_COMMIT}"
+#define CSP_HAL_APM32F1_GIT_COMMIT      "${GIT_COMMIT}"
+#define CSP_HAL_APM32F1_GIT_COMMIT_LONG "${GIT_COMMIT_LONG}"
+#define CSP_HAL_APM32F1_GIT_COMMIT_DATE "${GIT_COMMIT_DATE}"
+#define CSP_HAL_APM32F1_GIT_BRANCH      "${GIT_BRANCH}"
+#define CSP_HAL_APM32F1_GIT_TAG         "${GIT_TAG}"
+#define CSP_HAL_APM32F1_GIT_TAG_LONG    "${GIT_TAG_LONG}"
+#define CSP_HAL_APM32F1_GIT_CUSTOM      "${GIT_TAG}-${GIT_COMMIT}"
+
+/* toolchain */
+#define CSP_HAL_APM32F1_PREFIX          "arm-none-eabi"
 
 #ifndef USE_FULL_LL_DRIVER
 #define USE_FULL_LL_DRIVER
