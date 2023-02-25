@@ -3,10 +3,10 @@
 	url = ../../csplink/rtos_rtthread_nano.git
 [submodule "drivers/apm32f1/hal"]
 	path = drivers/apm32f1/hal
-	url = ../../csplink/driver_apm32f1_hal.git
+	url = ../../csplink/driver_stm32f1_hal.git
 [submodule "drivers/apm32f1/cmsis"]
 	path = drivers/apm32f1/cmsis
-	url = ../../csplink/driver_apm32f1_cmsis.git
+	url = ../../csplink/driver_stm32f1_cmsis.git
 [submodule "drivers/apm32f1/cmsis_core"]
 	path = drivers/apm32f1/cmsis_core
 	url = ../../csplink/driver_cmsis_core.git
