@@ -67,3 +67,11 @@ chal_status_t chal_gpio_init(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_co
 
     return status;
 }
+
+void chal_gpio_config_init(chal_gpio_config_t *config)
+{
+    config->mode       = CHAL_GPIO_MODE_FLOATING;
+    config->speed      = CHAL_GPIO_SPEED_10MHz;
+    config->outputtype = CHAL_GPIO_OUTPUT_OD;
+    config->pull       = CHAL_GPIO_PULL_DOWN;
+}

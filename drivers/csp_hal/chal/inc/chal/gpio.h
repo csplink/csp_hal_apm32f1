@@ -268,17 +268,7 @@ __chal_inline void chal_gpio_set_level(GPIO_TypeDef *gpiox, uint32_t pinmask, ch
 
 __chal_inline chal_gpio_level_t chal_gpio_get_level(GPIO_TypeDef *gpiox, uint32_t pinmask)
 {
-    chal_gpio_level_t bitstatus;
-
-    if(LL_GPIO_IsInputPinSet(gpiox, pinmask) != (uint32_t)CHAL_GPIO_LEVEL_LOW)
-    {
-        bitstatus = CHAL_GPIO_LEVEL_HIGH;
-    }
-    else
-    {
-        bitstatus = CHAL_GPIO_LEVEL_LOW;
-    }
-    return bitstatus;
+    return (chal_gpio_level_t)LL_GPIO_IsInputPinSet(gpiox, pinmask);
 }
 
 __chal_inline void chal_gpio_toggle_pin(GPIO_TypeDef *gpiox, uint32_t pinmask)
@@ -288,6 +278,7 @@ __chal_inline void chal_gpio_toggle_pin(GPIO_TypeDef *gpiox, uint32_t pinmask)
 
 chal_status_t chal_gpio_deinit(GPIO_TypeDef *gpiox, uint32_t pinmask);
 chal_status_t chal_gpio_init(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_config_t *config);
+void          chal_gpio_config_init(chal_gpio_config_t *config);
 
 #ifdef __cplusplus
 }
