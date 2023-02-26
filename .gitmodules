@@ -1,6 +1,3 @@
-[submodule "components/rtos_rtthread_nano"]
-	path = components/rtos_rtthread_nano
-	url = ../../csplink/rtos_rtthread_nano.git
 [submodule "drivers/apm32f1/hal"]
 	path = drivers/apm32f1/hal
 	url = ../../csplink/driver_stm32f1_hal.git
