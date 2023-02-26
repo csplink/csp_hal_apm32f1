@@ -61,6 +61,8 @@ do
     set_kind("static")
     set_configdir("$(buildir)/$(plat)/$(arch)/$(mode)")
     set_installdir("$(buildir)/install")
+    set_warnings("all", "error")
+    set_languages("c99", "cxx11")
 
     add_configfiles("csp_hal_apm32f1_config.h.in")
     add_imports("core.project.project")
