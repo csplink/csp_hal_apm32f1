@@ -55,8 +55,8 @@ jobs:
           ls /opt
           xmake --version
           pushd ${{ matrix.target }}
-          xmake f -m release --sdk=/opt/gcc-arm-none-eabi-10-2020-q4-major
-          xmake -j$(nproc) -v 
-          xmake f -m debug --sdk=/opt/gcc-arm-none-eabi-10-2020-q4-major
-          xmake -j$(nproc) -v
+          xmake f -m release --sdk=/opt/gcc-arm-none-eabi-10-2020-q4-major -P .
+          xmake -j$(nproc) -v -P .
+          xmake f -m debug --sdk=/opt/gcc-arm-none-eabi-10-2020-q4-major -P .
+          xmake -j$(nproc) -v -P .
           popd
