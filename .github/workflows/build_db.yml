@@ -1,0 +1,60 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# You may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright (C) 2022-2023 xqyjlj<xqyjlj@126.com>
+#
+# @author      xqyjlj
+# @file        build_db.yml
+#
+# Change Logs:
+# Date           Author       Notes
+# ------------   ----------   -----------------------------------------------
+# 2023-02-12     xqyjlj       initial version
+#
+
+name: 👷 build db
+
+on:
+  push:
+
+jobs:
+  build_db:
+    runs-on: ubuntu-latest
+    container:
+      image: csplink/ubuntu_ci:22.04
+
+    steps:
+      - name: ⬇️ checkout csp_hal_apm32f1
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      
+      - name: ⬇️ checkout csp_repo
+        uses: actions/checkout@v3
+        with:
+          repository: csplink/csp_repo
+          path: build/csp_repo
+      
+      - name: install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_rsa # optional
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: 👷 build
+        shell: bash
+        working-directory: build/tools/hal
+        run: |
+          python3 ./build.py -t chips -d $(pwd)/../../../config
+          python3 ./build.py -t hal -d $(pwd)/../../../config
+          python3 ./build.py -t update -d $(pwd)/../../../config
