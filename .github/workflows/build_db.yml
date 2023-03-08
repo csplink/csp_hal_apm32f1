@@ -55,6 +55,6 @@ jobs:
         shell: bash
         working-directory: build/tools/hal
         run: |
-          python3 ./build.py -t chips -d $(pwd)/../../../config
-          python3 ./build.py -t hal -d $(pwd)/../../../config
-          python3 ./build.py -t update -d $(pwd)/../../../config
+          python3 ./build.py -t chips -d ../../../config
+          python3 ./build.py -t hal -d ../../../config
+          python3 ./build.py -t update -d ../../../config
