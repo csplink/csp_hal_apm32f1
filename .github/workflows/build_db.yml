@@ -29,8 +29,6 @@ on:
 jobs:
   build_db:
     runs-on: ubuntu-latest
-    container:
-      image: csplink/ubuntu_ci:22.04
 
     steps:
       - name: ⬇️ checkout csp_hal_apm32f1
