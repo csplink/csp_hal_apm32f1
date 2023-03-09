@@ -53,6 +53,7 @@ jobs:
         shell: bash
         working-directory: build/csp_repo/tools/hal
         run: |
+          pip install PyGithub
           python3 ./build.py -t chips -d $(pwd)/../../../../config
           python3 ./build.py -t hal -d $(pwd)/../../../../config
           python3 ./build.py -t update -d $(pwd)/../../../../config
