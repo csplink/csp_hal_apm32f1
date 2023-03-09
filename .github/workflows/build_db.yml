@@ -54,6 +54,8 @@ jobs:
         working-directory: build/csp_repo/tools/hal
         run: |
           pip install PyGithub
+          git config --global user.email "csplink@126.com"
+          git config --global user.name "csplinkbot"
           python3 ./build.py -t chips -d $(pwd)/../../../../config
           python3 ./build.py -t hal -d $(pwd)/../../../../config
           python3 ./build.py -t update -d $(pwd)/../../../../config
