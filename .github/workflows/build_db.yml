@@ -37,10 +37,12 @@ jobs:
           submodules: true
       
       - name: ⬇️ checkout csp_repo
-        uses: actions/checkout@v3
-        with:
-          repository: csplink/csp_repo
-          path: build/csp_repo
+        shell: bash
+        run: |
+          mkdir -p build
+          pushd build
+          git clone git@github.com:csplink/csp_repo.git
+          popd
       
       - name: install SSH key
         uses: shimataro/ssh-key-action@v2
