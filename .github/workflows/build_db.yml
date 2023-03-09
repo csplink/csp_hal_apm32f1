@@ -51,8 +51,8 @@ jobs:
 
       - name: 👷 build
         shell: bash
-        working-directory: build/tools/hal
+        working-directory: build/csp_repo/tools/hal
         run: |
-          python3 ./build.py -t chips -d $(pwd)/../../../config
-          python3 ./build.py -t hal -d $(pwd)/../../../config
-          python3 ./build.py -t update -d $(pwd)/../../../config
+          python3 ./build.py -t chips -d $(pwd)/../../../../config
+          python3 ./build.py -t hal -d $(pwd)/../../../../config
+          python3 ./build.py -t update -d $(pwd)/../../../../config
