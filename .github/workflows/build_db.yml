@@ -35,7 +35,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: true
-      
+
+      - name: install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_rsa # optional
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
       - name: ⬇️ checkout csp_repo
         shell: bash
         run: |
@@ -43,13 +50,6 @@ jobs:
           pushd build
           git clone git@github.com:csplink/csp_repo.git
           popd
-      
-      - name: install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          name: id_rsa # optional
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
       - name: 👷 build
         shell: bash
