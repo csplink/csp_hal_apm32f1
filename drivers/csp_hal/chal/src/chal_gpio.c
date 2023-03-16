@@ -38,7 +38,7 @@ chal_status_t chal_gpio_deinit(GPIO_TypeDef *gpiox, uint32_t pinmask)
 
     ll_status = LL_GPIO_DeInit(gpiox);
 
-    if(ll_status != SUCCESS)
+    if (ll_status != SUCCESS)
         status = CHAL_ERROR;
     else
         status = CHAL_OK;
@@ -60,7 +60,7 @@ chal_status_t chal_gpio_init(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_co
 
     ll_status = LL_GPIO_Init(gpiox, &gpio_initstruct);
 
-    if(ll_status != SUCCESS)
+    if (ll_status != SUCCESS)
         status = CHAL_ERROR;
     else
         status = CHAL_OK;

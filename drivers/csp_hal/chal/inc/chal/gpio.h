@@ -260,7 +260,7 @@ __chal_inline void chal_gpio_disable_clk(uint32_t periphs)
 
 __chal_inline void chal_gpio_set_level(GPIO_TypeDef *gpiox, uint32_t pinmask, chal_gpio_level_t level)
 {
-    if(level != CHAL_GPIO_LEVEL_LOW)
+    if (level != CHAL_GPIO_LEVEL_LOW)
         LL_GPIO_SetOutputPin(gpiox, pinmask);
     else
         LL_GPIO_ResetOutputPin(gpiox, pinmask);

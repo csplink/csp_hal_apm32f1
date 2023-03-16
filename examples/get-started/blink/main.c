@@ -56,7 +56,7 @@ int main(void)
     config.outputtype = CHAL_GPIO_OUTPUT_PP;
     chal_gpio_init(LED2, &config);
     chal_gpio_init(LED3, &config);
-    while(1)
+    while (1)
     {
         chal_clock_mdelay(200);
         chal_gpio_toggle_pin(LED2);
