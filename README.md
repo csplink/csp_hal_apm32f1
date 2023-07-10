@@ -4,14 +4,8 @@
     </a>
     <h1>CSP HAL APM32F1</h1>
     <div>
-        <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow%3A%F0%9F%91%B7build">
-            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/build.yml?style=flat&label=build" alt="github-ci" />
-        </a>
-        <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow%3A%F0%9F%92%95mirror">
+        <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow/mirror.yml">
             <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/mirror.yml?style=flat&label=mirror" alt="github-ci" />
-        </a>
-        <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow%3A%F0%9F%94%96release">
-            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/release.yml?style=flat&label=release" alt="github-ci" />
         </a>
     </div>
     <div>
@@ -43,14 +37,13 @@
         </a>
     </div>
     <b>CSP: Tools for flexible configuration of chips and boards.</b><br/>
-    <i>APM32F1 SDK based on STM32CubeF1 HAL Driver.</i><br/>
+    <i>Chip Support Package for APM32F1 Series.</i><br/>
 </div>
 
 **English** | [中文](README-zh_CN.md)
 
 ## ✨ Features
 
-- 🧱 Based on STM32CubeF1
 - 🎹 Cross-platform (windows, linux)
 - 🔧 Xmake build tool
 - 📦️ Embedded RTOS (rt-thread)
