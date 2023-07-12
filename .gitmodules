@@ -1,0 +1,3 @@
+[submodule "components/rtthread_nano"]
+	path = components/rtthread_nano
+	url = https://github.com/csplink/rtos_rtthread_nano.git
