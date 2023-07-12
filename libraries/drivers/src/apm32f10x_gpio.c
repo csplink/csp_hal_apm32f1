@@ -79,6 +79,10 @@ void GPIO_Reset(GPIO_T* port)
     {
         APB2Periph = RCM_APB2_PERIPH_GPIOG;
     }
+    else
+    {
+        return;
+    }
 
     RCM_EnableAPB2PeriphReset(APB2Periph);
     RCM_DisableAPB2PeriphReset(APB2Periph);

@@ -472,6 +472,7 @@ uint16_t ADC_ReadConversionValue(ADC_T* adc)
  */
 uint32_t ADC_ReadDualModeConversionValue(ADC_T* adc)
 {
+    ((void)adc);
     return (*(__IOM uint32_t*) RDG_ADDRESS);
 }
 

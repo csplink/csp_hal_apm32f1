@@ -556,6 +556,7 @@ uint8_t SPI_I2S_ReadStatusFlag(SPI_T* spi, SPI_FLAG_T flag)
  */
 void SPI_I2S_ClearStatusFlag(SPI_T* spi, SPI_FLAG_T flag)
 {
+    ((void)flag);
     spi->STS_B.CRCEFLG = BIT_RESET;
 }
 
@@ -611,6 +612,7 @@ uint8_t SPI_I2S_ReadIntFlag(SPI_T* spi, SPI_I2S_INT_T flag)
  */
 void SPI_I2S_ClearIntFlag(SPI_T* spi, SPI_I2S_INT_T flag)
 {
+    ((void)flag);
     spi->STS_B.CRCEFLG = BIT_RESET;
 }
 
