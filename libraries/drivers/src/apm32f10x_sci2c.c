@@ -273,6 +273,8 @@ void SCI2C_ClearIntFlag(SCI2C_T* i2c, SCI2C_INT_T flag)
     {
         dummy = i2c->GCIC;
     }
+
+    ((void) dummy);
 }
 
 /*!
