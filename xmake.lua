@@ -10,7 +10,7 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 --
--- Copyright (C) 2022-2023 xqyjlj<xqyjlj@126.com>
+-- Copyright (C) 2023-2023 xqyjlj<xqyjlj@126.com>
 --
 -- @author      xqyjlj
 -- @file        xmake.lua
@@ -18,79 +18,53 @@
 -- Change Logs:
 -- Date           Author       Notes
 -- ------------   ----------   -----------------------------------------------
--- 2023-02-12     xqyjlj       add __csplink_debug__
--- 2023-02-09     xqyjlj       adapt to xamke repository
--- 2023-01-02     xqyjlj       initial version
+-- 2023-07-12     xqyjlj       initial version
 --
-set_xmakever("2.7.2")
+set_xmakever("2.7.9")
 set_version("0.0.2")
 set_project("csp_hal_apm32f1") -- set project name
 
-option("mcu")
-do
-    set_default("APM32F103ZET6")
-    set_showmenu(true)
-    set_values("APM32F103C8T6", "APM32F103ZET6")
-    set_category("configuration")
-    set_description("mcu name")
-    add_imports("core.project.config")
-    set_configvar("MCU", "$(mcu)")
-    add_defines("USE_FULL_LL_DRIVER")
-    add_defines("$(mcu)")
-    after_check(function(option)
-        if string.find(option:value(), "APM32F103ZE") then
-            option:add("defines", "STM32F103xE")
-            option:set("configvar", "STM32_MCU", "STM32F103xE")
-        end
-    end)
-end
-option_end()
+includes("xmake/option.lua")
 
-option("use_default_startup")
-do
-    set_default(true)
-    set_showmenu(true)
-    set_category("configuration/build")
-    set_description("use default startup asm file")
-    set_configvar("USE_DEFAULT_STARTUP", 1)
-end
-option_end()
+add_requires("arm-none-eabi")
+set_toolchains("@arm-none-eabi")
+
+add_cflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common",
+           "-fmessage-length=0", "-Wall", "-Werror", {force = true})
+
+add_asflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common",
+            "-fmessage-length=0", "-Wall", "-Werror", "-x assembler-with-cpp", {force = true})
 
 target("csp_hal_apm32f1")
 do
     set_kind("static")
-    set_configdir("$(buildir)/$(plat)/$(arch)/$(mode)")
-    set_installdir("$(buildir)/install")
     set_warnings("all", "error")
     set_languages("c99", "cxx11")
+    set_installdir("$(buildir)/install")
 
-    add_configfiles("csp_hal_apm32f1_config.h.in")
+    add_configfiles("chal_config.h.in")
     add_imports("core.project.project")
     add_rules("asm")
     add_options("mcu")
     add_options("use_default_startup")
 
-    add_includedirs("$(buildir)/$(plat)/$(arch)/$(mode)", {public = true})
-    add_includedirs("drivers/apm32f1/cmsis/Include", "drivers/apm32f1/hal/Inc", "drivers/apm32f1/cmsis_core/Include",
-                    {public = true})
-    add_includedirs("drivers/csp_hal/chal/inc", {public = true})
+    add_includedirs("libraries/chal/inc")
+    add_includedirs("libraries/cmsis/Include")
+    add_includedirs("libraries/cmsis_core/Include")
+    add_includedirs("libraries/drivers/inc")
 
-    add_files("drivers/apm32f1/cmsis/Source/Templates/system_stm32f1xx.c", "drivers/apm32f1/hal/Src/stm32f1xx_ll_*.c")
-    add_files("drivers/csp_hal/chal/src/*.c")
+    -- add_files("libraries/chal/src/*.c")
+    add_files("libraries/cmsis/Source/*.c")
+    add_files("libraries/drivers/src/*.c")
 
-    remove_files("drivers/apm32f1/hal/Src/*_template.c")
-    remove_files("drivers/apm32f1/hal/Src/stm32f1xx_ll_usb.c")
-    remove_files("drivers/apm32f1/hal/Src/stm32f1xx_ll_sdmmc.c")
-    remove_files("drivers/apm32f1/hal/Src/stm32f1xx_ll_fsmc.c")
-
-    add_installfiles("$(buildir)/$(plat)/$(arch)/$(mode)/csp_hal_apm32f1_config.h",
-                     {prefixdir = "include/csp_hal_apm32f1"})
-    add_installfiles("drivers/apm32f1/cmsis/Include/*.h", "drivers/apm32f1/hal/Inc/*.h",
-                     "drivers/apm32f1/cmsis_core/Include/*.h", {prefixdir = "include/csp_hal_apm32f1"})
-    add_installfiles("drivers/csp_hal/chal/inc/(chal/*.h)", {prefixdir = "include/csp_hal_apm32f1"})
+    add_installfiles("$(buildir)/chal_config.h", {prefixdir = "include"})
+    add_installfiles("libraries/cmsis/Include/*.h", {prefixdir = "include"})
+    add_installfiles("libraries/cmsis_core/Include/*.h", {prefixdir = "include"})
+    add_installfiles("libraries/drivers/inc/*.h", {prefixdir = "include"})
+    add_installfiles("libraries/chal/inc/(chal/*.h)", {prefixdir = "include"})
 
     if is_mode("debug") then
-        add_defines("__csplink_debug__")
+        add_defines("__CSPLINK_DEBUG__")
     end
 
     on_config(function(target)
@@ -98,7 +72,7 @@ do
             local mcu = project.option("mcu"):value()
             if string.find(mcu, "APM32F103ZE") then
                 if target:has_tool("cc", "gcc") then
-                    target:add("files", "$(scriptdir)/drivers/apm32f1/cmsis/Source/Templates/gcc/startup_stm32f103xe.s")
+                    target:add("files", "$(scriptdir)/libraries/cmsis/Source/gcc/startup_apm32f10x_hd.S")
                 end
             end
         end
