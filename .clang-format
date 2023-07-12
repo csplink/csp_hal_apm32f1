@@ -58,7 +58,16 @@ Cpp11BracedListStyle: true
 DerivePointerAlignment: false
 DisableFormat: false
 ExperimentalAutoDetectBinPacking: false
-ForEachMacros: [foreach, Q_FOREACH, BOOST_FOREACH]
+ForEachMacros:
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
+  - rt_list_for_each
+  - rt_list_for_each_safe
+  - rt_list_for_each_entry
+  - rt_list_for_each_entry_safe
+  - rt_slist_for_each
+  - rt_slist_for_each_entry
 IncludeCategories:
   - Regex: '^"(llvm|llvm-c|clang|clang-c)/'
     Priority: 2
