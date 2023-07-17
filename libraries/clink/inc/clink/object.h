@@ -73,7 +73,7 @@ struct clink_object_information
 {
     enum clink_object_class_type type;        /**< object class type */
     clink_list_t                 object_list; /**< object list */
-    clink_list_t                 object_size; /**< object size */
+    size_t                       object_size; /**< object size */
 };
 
 /**@}*/
