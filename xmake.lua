@@ -25,6 +25,7 @@ set_version("0.0.2")
 set_project("csp_hal_apm32f1") -- set project name
 
 includes("xmake/option.lua")
+includes("libraries/clink/xmake.lua")
 
 add_requires("arm-none-eabi")
 set_toolchains("@arm-none-eabi")
@@ -62,6 +63,8 @@ do
     add_installfiles("libraries/cmsis_core/Include/*.h", {prefixdir = "include"})
     add_installfiles("libraries/drivers/inc/*.h", {prefixdir = "include"})
     add_installfiles("libraries/chal/inc/(chal/*.h)", {prefixdir = "include"})
+
+    add_deps("clink")
 
     if is_mode("debug") then
         add_defines("__CSPLINK_DEBUG__")
