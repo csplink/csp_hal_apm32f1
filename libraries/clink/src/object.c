@@ -37,22 +37,13 @@ struct clink_custom_object
     void               *data;
 };
 
-/*
- * define object_info for the number of _object_container items.
- */
-enum clink_object_info_type
-{
-    CLINK_Object_Info_Device = 0, /**< The object is a device. */
-    CLINK_Object_Info_Unknown,    /**< The object is unknown. */
-};
-
 #define _OBJ_CONTAINER_LIST_INIT(c)                                                                                    \
     {                                                                                                                  \
         &(_object_container[c].object_list), &(_object_container[c].object_list)                                       \
     }
 
-static struct clink_object_information _object_container[CLINK_Object_Info_Unknown] = {
-    {CLINK_Object_Class_Device, _OBJ_CONTAINER_LIST_INIT(CLINK_Object_Info_Device), sizeof(struct clink_device)},
+static struct clink_object_information _object_container[CLINK_Object_Class_Unknown] = {
+    {_OBJ_CONTAINER_LIST_INIT(CLINK_Object_Class_Device)},
 };
 
 /**
@@ -69,13 +60,10 @@ static struct clink_object_information _object_container[CLINK_Object_Info_Unkno
  *
  * @return the object type information or CLINK_NULL
  */
-struct clink_object_information *clink_object_get_information(enum clink_object_class_type type)
+struct clink_object_information *clink_object_get_information(uint8_t type)
 {
-    int index;
-
-    for (index = 0; index < CLINK_Object_Info_Unknown; index++)
-        if (_object_container[index].type == type)
-            return &_object_container[index];
+    if (type > CLINK_Object_Class_Null && type < CLINK_Object_Class_Unknown)
+        return &_object_container[type];
 
     return CLINK_NULL;
 }
@@ -84,18 +72,18 @@ struct clink_object_information *clink_object_get_information(enum clink_object_
  * @brief This function will return the length of object list in object container.
  *
  * @param type is the type of object, which can be
- *             CLINK_Object_Class_Thread/Semaphore/Mutex... etc
+ *             CLINK_Object_Class_Device/... etc
  *
  * @return the length of object list
  */
-int clink_object_get_length(enum clink_object_class_type type)
+int clink_object_get_length(uint8_t type)
 {
     int                              count = 0;
     clink_base_t                     level;
     struct clink_list_node          *node        = CLINK_NULL;
     struct clink_object_information *information = CLINK_NULL;
 
-    information = clink_object_get_information((enum clink_object_class_type)type);
+    information = clink_object_get_information(type);
     if (information == CLINK_NULL)
         return 0;
 
@@ -115,7 +103,7 @@ int clink_object_get_length(enum clink_object_class_type type)
  *        with the maximum size specified by maxlen.
  *
  * @param type is the type of object, which can be
- *             CLINK_Object_Class_Thread/Semaphore/Mutex... etc
+ *             CLINK_Object_Class_Device/... etc
  *
  * @param pointers is the pointer will be saved to.
  *
@@ -123,7 +111,7 @@ int clink_object_get_length(enum clink_object_class_type type)
  *
  * @return the copied number of object pointers.
  */
-int clink_object_get_pointers(enum clink_object_class_type type, clink_object_t *pointers, int maxlen)
+int clink_object_get_pointers(uint8_t type, clink_object_t *pointers, int maxlen)
 {
     int          index = 0;
     clink_base_t level;
@@ -135,7 +123,7 @@ int clink_object_get_pointers(enum clink_object_class_type type, clink_object_t 
     if (maxlen <= 0)
         return 0;
 
-    information = clink_object_get_information((enum clink_object_class_type)type);
+    information = clink_object_get_information(type);
     if (information == CLINK_NULL)
         return 0;
 
@@ -167,7 +155,7 @@ int clink_object_get_pointers(enum clink_object_class_type type, clink_object_t 
  * @param name is the object name. In system, the object's name must be unique.
  */
 #if defined(CLINK_NAME_MAX) && CLINK_NAME_MAX > 0
-void clink_object_init_byname(struct clink_object *object, enum clink_object_class_type type, const char *name)
+void clink_object_init_byname(struct clink_object *object, uint8_t type, const char *name)
 {
     clink_base_t                     level;
     struct clink_object_information *information;
@@ -177,7 +165,6 @@ void clink_object_init_byname(struct clink_object *object, enum clink_object_cla
     CLINK_ASSERT(information != CLINK_NULL);
 
     /* initialize object's parameters */
-    /* set object type to static */
     object->type = type;
 
     clink_strncpy(object->name, name, CLINK_NAME_MAX); /* copy name */
@@ -220,8 +207,7 @@ void clink_object_detach(clink_object_t object)
 }
 
 /**
- * @brief This function will return the type of object without
- *        CLINK_Object_Class_Static flag.
+ * @brief This function will return the type of object.
  *
  * @param object is the specified object to be get type.
  *
@@ -255,7 +241,7 @@ clink_object_t clink_object_find_byname(const char *name, uint8_t type)
     struct clink_list_node          *node        = CLINK_NULL;
     struct clink_object_information *information = CLINK_NULL;
 
-    information = clink_object_get_information((enum clink_object_class_type)type);
+    information = clink_object_get_information(type);
 
     /* parameter check */
     if ((name == CLINK_NULL) || (information == CLINK_NULL))

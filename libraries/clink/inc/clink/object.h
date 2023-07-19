@@ -61,9 +61,9 @@ typedef struct clink_object
 
 enum clink_object_class_type
 {
-    CLINK_Object_Class_Null = 0x00, /**< The object is not used. */
-    CLINK_Object_Class_Device,      /**< The object is a device. */
-    CLINK_Object_Class_Unknown,     /**< The object is unknown. */
+    CLINK_Object_Class_Null   = -1,   /**< The object is not used. */
+    CLINK_Object_Class_Device = 0x00, /**< The object is a device. */
+    CLINK_Object_Class_Unknown,       /**< The object is unknown. */
 };
 
 /**
@@ -71,9 +71,7 @@ enum clink_object_class_type
  */
 struct clink_object_information
 {
-    enum clink_object_class_type type;        /**< object class type */
-    clink_list_t                 object_list; /**< object list */
-    size_t                       object_size; /**< object size */
+    clink_list_t object_list; /**< object list */
 };
 
 /**@}*/
