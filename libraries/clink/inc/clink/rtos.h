@@ -30,6 +30,12 @@
 #ifndef __CLINK_RTOS_H__
 #define __CLINK_RTOS_H__
 
+#include <clink/def.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @addtogroup debug
  */
@@ -39,10 +45,14 @@
 #if defined(CLINK_USE_RTTHREAD) && CLINK_USE_RTTHREAD > 0
 
 #include <rtthread.h>
+#define clink_enter_critical       rt_enter_critical
+#define clink_exit_critical        rt_exit_critical
 #define clink_hw_interrupt_disable rt_hw_interrupt_disable
 #define clink_hw_interrupt_enable  rt_hw_interrupt_enable
 
 #else
+#define clink_enter_critical()
+#define clink_exit_critical()
 #define clink_hw_interrupt_disable() (0)
 #define clink_hw_interrupt_enable(X) ((void)(X))
 
