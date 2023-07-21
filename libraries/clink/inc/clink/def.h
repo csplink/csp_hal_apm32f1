@@ -32,6 +32,7 @@
 #ifndef __CLINK_DEF_H__
 #define __CLINK_DEF_H__
 
+#include "clink_config.h"
 #include <clink/compiler.h>
 #include <clink/rtos.h>
 #include <stddef.h>
@@ -70,7 +71,7 @@ extern "C" {
 #define CLINK_ENOENT    12           /**< No entry */
 #define CLINK_ENOSPC    13           /**< No space left */
 
-typedef size_t        clink_err_t;   /**< Type for error number */
+typedef int           clink_err_t;   /**< Type for error number */
 typedef int           clink_bool_t;  /**< boolean type */
 typedef signed long   clink_base_t;  /**< Nbit CPU related date type */
 typedef unsigned long clink_ubase_t; /**< Nbit unsigned CPU related data type */
