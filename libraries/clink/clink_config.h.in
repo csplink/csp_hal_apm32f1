@@ -33,9 +33,9 @@
 /* version */
 #define CLINK_VERSION         "${VERSION}"
 
-#define CLINK_VERSION_MAJOR   ${VERSION_MAJOR}
-#define CLINK_VERSION_MINOR   ${VERSION_MINOR}
-#define CLINK_VERSION_ALTER   ${VERSION_ALTER}
+#define CLINK_VERSION_MAJOR   (${VERSION_MAJOR})
+#define CLINK_VERSION_MINOR   (${VERSION_MINOR})
+#define CLINK_VERSION_ALTER   (${VERSION_ALTER})
 
 /* git */
 #define CLINK_GIT_COMMIT      "${GIT_COMMIT}"
@@ -45,5 +45,12 @@
 #define CLINK_GIT_TAG         "${GIT_TAG}"
 #define CLINK_GIT_TAG_LONG    "${GIT_TAG_LONG}"
 #define CLINK_GIT_CUSTOM      "${GIT_TAG}-${GIT_COMMIT}"
+
+#define CLINK_DEBUG           (${DEBUG})
+
+#define CLINK_NAME_MAX        (${CLINK_NAME_MAX})
+${define CLINK_USING_RTTHREAD}
+${define CLINK_USING_STDLIB}
+${define CLINK_USING_TINY_SIZE}
 
 #endif
