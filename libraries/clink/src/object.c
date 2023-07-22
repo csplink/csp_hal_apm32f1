@@ -33,12 +33,6 @@
 #include <clink/libc.h>
 #include <clink/object.h>
 
-struct clink_custom_object
-{
-    struct clink_object parent;
-    void               *data;
-};
-
 #define _OBJ_CONTAINER_LIST_INIT(c)                                                                                    \
     {                                                                                                                  \
         &(_object_container[c].object_list), &(_object_container[c].object_list)                                       \
@@ -196,5 +190,3 @@ clink_object_t clink_object_find(const char *name, uint8_t type)
 
     return CLINK_NULL;
 }
-
-/**@}*/
