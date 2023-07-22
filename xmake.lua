@@ -39,7 +39,7 @@ add_asflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-secti
 target("csp_hal_apm32f1")
 do
     set_kind("static")
-    set_warnings("all", "error")
+    set_warnings("allextra", "error")
     set_languages("c99", "cxx11")
     set_installdir("$(buildir)/install")
 
