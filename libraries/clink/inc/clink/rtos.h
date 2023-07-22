@@ -42,7 +42,7 @@ extern "C" {
 
 /**@{*/
 
-#if defined(CLINK_USE_RTTHREAD) && CLINK_USE_RTTHREAD > 0
+#if defined(CLINK_USING_RTTHREAD) && CLINK_USING_RTTHREAD > 0
 
 #include <rtthread.h>
 #define clink_enter_critical       rt_enter_critical
