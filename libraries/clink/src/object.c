@@ -28,7 +28,9 @@
  *  2023-07-15     xqyjlj       copy from RT-Thread
  *  2023-07-15     xqyjlj       initial version
  */
+
 #include <clink/debug.h>
+#include <clink/libc.h>
 #include <clink/object.h>
 
 struct clink_custom_object
@@ -42,46 +44,24 @@ struct clink_custom_object
         &(_object_container[c].object_list), &(_object_container[c].object_list)                                       \
     }
 
-static struct clink_object_information _object_container[CLINK_Object_Class_Unknown] = {
-    {_OBJ_CONTAINER_LIST_INIT(CLINK_Object_Class_Device)},
+static struct clink_object_information _object_container[Clink_Object_Class_Unknown] = {
+    {_OBJ_CONTAINER_LIST_INIT(Clink_Object_Class_Device)},
 };
 
-/**
- * @addtogroup KernelObject
- */
-
-/**@{*/
-
-/**
- * @brief This function will return the specified type of object information.
- *
- * @param type is the type of object, which can be
- *             CLINK_Object_Class_Device/... etc
- *
- * @return the object type information or CLINK_NULL
- */
-struct clink_object_information *clink_object_get_information(uint8_t type)
+clink_object_information_t clink_object_get_information(uint8_t type)
 {
-    if (type > CLINK_Object_Class_Null && type < CLINK_Object_Class_Unknown)
+    if (type < Clink_Object_Class_Unknown)
         return &_object_container[type];
 
     return CLINK_NULL;
 }
 
-/**
- * @brief This function will return the length of object list in object container.
- *
- * @param type is the type of object, which can be
- *             CLINK_Object_Class_Device/... etc
- *
- * @return the length of object list
- */
 int clink_object_get_length(uint8_t type)
 {
-    int                              count = 0;
-    clink_base_t                     level;
-    struct clink_list_node          *node        = CLINK_NULL;
-    struct clink_object_information *information = CLINK_NULL;
+    int                        count = 0;
+    clink_base_t               level;
+    struct clink_list_node    *node        = CLINK_NULL;
+    clink_object_information_t information = CLINK_NULL;
 
     information = clink_object_get_information(type);
     if (information == CLINK_NULL)
@@ -98,27 +78,14 @@ int clink_object_get_length(uint8_t type)
     return count;
 }
 
-/**
- * @brief This function will copy the object pointer of the specified type,
- *        with the maximum size specified by maxlen.
- *
- * @param type is the type of object, which can be
- *             CLINK_Object_Class_Device/... etc
- *
- * @param pointers is the pointer will be saved to.
- *
- * @param maxlen is the maximum number of pointers can be saved.
- *
- * @return the copied number of object pointers.
- */
 int clink_object_get_pointers(uint8_t type, clink_object_t *pointers, int maxlen)
 {
     int          index = 0;
     clink_base_t level;
 
-    struct clink_object             *object;
-    struct clink_list_node          *node        = CLINK_NULL;
-    struct clink_object_information *information = CLINK_NULL;
+    struct clink_object       *object;
+    struct clink_list_node    *node        = CLINK_NULL;
+    clink_object_information_t information = CLINK_NULL;
 
     if (maxlen <= 0)
         return 0;
@@ -144,48 +111,6 @@ int clink_object_get_pointers(uint8_t type, clink_object_t *pointers, int maxlen
     return index;
 }
 
-/**
- * @brief This function will initialize an object and add it to object system
- *        management.
- *
- * @param object is the specified object to be initialized.
- *
- * @param type is the object type.
- *
- * @param name is the object name. In system, the object's name must be unique.
- */
-#if defined(CLINK_NAME_MAX) && CLINK_NAME_MAX > 0
-void clink_object_init_byname(struct clink_object *object, uint8_t type, const char *name)
-{
-    clink_base_t                     level;
-    struct clink_object_information *information;
-
-    /* get object information */
-    information = clink_object_get_information(type);
-    CLINK_ASSERT(information != CLINK_NULL);
-
-    /* initialize object's parameters */
-    object->type = type;
-
-    clink_strncpy(object->name, name, CLINK_NAME_MAX); /* copy name */
-
-    /* lock interrupt */
-    level = clink_hw_interrupt_disable();
-
-    /* insert object into information object list */
-    clink_list_insert_after(&(information->object_list), &(object->list));
-
-    /* unlock interrupt */
-    clink_hw_interrupt_enable(level);
-}
-#endif
-
-/**
- * @brief This function will detach a static object from object system,
- *        and the memory of static object is not freed.
- *
- * @param object the specified object to be detached.
- */
 void clink_object_detach(clink_object_t object)
 {
     clink_base_t level;
@@ -206,13 +131,6 @@ void clink_object_detach(clink_object_t object)
     clink_hw_interrupt_enable(level);
 }
 
-/**
- * @brief This function will return the type of object.
- *
- * @param object is the specified object to be get type.
- *
- * @return the type of object.
- */
 uint8_t clink_object_get_type(clink_object_t object)
 {
     /* object check */
@@ -221,25 +139,35 @@ uint8_t clink_object_get_type(clink_object_t object)
     return object->type;
 }
 
-/**
- * @brief This function will find specified name object from object
- *        container.
- *
- * @param name is the specified name of object.
- *
- * @param type is the type of object
- *
- * @return the found object or CLINK_NULL if there is no this object
- * in object container.
- *
- * @note this function shall not be invoked in interrupt status.
- */
-#if defined(CLINK_NAME_MAX) && CLINK_NAME_MAX > 0
-clink_object_t clink_object_find_byname(const char *name, uint8_t type)
+void clink_object_init(struct clink_object *object, uint8_t type, const char *name)
 {
-    struct clink_object             *object      = CLINK_NULL;
-    struct clink_list_node          *node        = CLINK_NULL;
-    struct clink_object_information *information = CLINK_NULL;
+    clink_base_t               level;
+    clink_object_information_t information;
+
+    /* get object information */
+    information = clink_object_get_information(type);
+    CLINK_ASSERT(information != CLINK_NULL);
+
+    /* initialize object's parameters */
+    object->type = type;
+
+    clink_strncpy(object->name, name, CLINK_NAME_MAX); /* copy name */
+
+    /* lock interrupt */
+    level = clink_hw_interrupt_disable();
+
+    /* insert object into information object list */
+    clink_list_insert_after(&(information->object_list), &(object->list));
+
+    /* unlock interrupt */
+    clink_hw_interrupt_enable(level);
+}
+
+clink_object_t clink_object_find(const char *name, uint8_t type)
+{
+    struct clink_object       *object      = CLINK_NULL;
+    struct clink_list_node    *node        = CLINK_NULL;
+    clink_object_information_t information = CLINK_NULL;
 
     information = clink_object_get_information(type);
 
@@ -268,6 +196,5 @@ clink_object_t clink_object_find_byname(const char *name, uint8_t type)
 
     return CLINK_NULL;
 }
-#endif
 
 /**@}*/
