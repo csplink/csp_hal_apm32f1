@@ -17,18 +17,16 @@ CLINK_WEAK void *clink_memset(void *s, int c, size_t count)
     char          *m            = (char *)s;
     unsigned long  buffer       = 0;
     unsigned long *aligned_addr = CLINK_NULL;
-    unsigned char  d =
-        (unsigned int)c & (unsigned char)(-1); /* To avoid sign extension, copy C to an
-                 unsigned variable. (unsigned)((char)(-1))=0xFF for 8bit and =0xFFFF for 16bit: word independent */
+    unsigned char  d            = (unsigned int)c & (unsigned char)(-1);
+    /* To avoid sign extension, copy C to an unsigned variable. (unsigned)((char)(-1))=0xFF for 8bit and =0xFFFF for
+     * 16bit: word independent */
 
     if (!TOO_SMALL(count) && !UNALIGNED(s))
     {
         /* If we get this far, we know that count is large and s is word-aligned. */
         aligned_addr = (unsigned long *)s;
 
-        /* Store d into each char sized location in buffer so that
-         * we can set large blocks quickly.
-         */
+        /* Store d into each char sized location in buffer so that we can set large blocks quickly. */
         for (i = 0; i < LBLOCKSIZE; i++)
         {
             *(((unsigned char *)&buffer) + i) = d;
@@ -170,7 +168,7 @@ CLINK_WEAK int clink_memcmp(const void *cs, const void *ct, size_t count)
 
 CLINK_WEAK char *clink_strstr(const char *s1, const char *s2)
 {
-    int l1 = 0, l2 = 0;
+    size_t l1 = 0, l2 = 0;
 
     l2 = clink_strlen(s2);
     if (!l2)
@@ -252,7 +250,7 @@ CLINK_WEAK char *clink_strcpy(char *dst, const char *src)
 
 CLINK_WEAK int clink_strncmp(const char *cs, const char *ct, size_t count)
 {
-    signed char __res = 0;
+    char __res = 0;
 
     while (count)
     {
