@@ -36,6 +36,7 @@
 #include <clink/compiler.h>
 #include <clink/rtos.h>
 #include <stddef.h>
+#include <sys/types.h>
 
 #ifdef __cplusplus
 extern "C" {
