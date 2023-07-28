@@ -34,7 +34,7 @@
 
 static struct clink_device _hw_pin = {0};
 
-int clink_device_pin_register(const char *name, const struct clink_device_ops *ops, void *user_data)
+int clink_device_pin_register(const struct clink_device_ops *ops, void *user_data)
 {
     _hw_pin.type        = Clink_Device_Class_Pin;
     _hw_pin.rx_indicate = CLINK_NULL;
@@ -43,7 +43,7 @@ int clink_device_pin_register(const char *name, const struct clink_device_ops *o
     _hw_pin.user_data   = user_data;
 
     /* register a pin device */
-    clink_device_register(&_hw_pin, name, CLINK_DEVICE_FLAG_RDWR);
+    clink_device_register(&_hw_pin, CLINK_DEVICE_FLAG_RDWR);
 
     return 0;
 }

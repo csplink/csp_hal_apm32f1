@@ -73,7 +73,7 @@ extern "C" {
 #define CLINK_ENOSPC    13           /**< No space left */
 
 typedef int           clink_err_t;   /**< Type for error number */
-typedef int           clink_bool_t;  /**< boolean type */
+typedef uint8_t       clink_bool_t;  /**< boolean type */
 typedef signed long   clink_base_t;  /**< Nbit CPU related date type */
 typedef unsigned long clink_ubase_t; /**< Nbit unsigned CPU related data type */
 

@@ -76,7 +76,7 @@ typedef struct clink_device_pin_irq_hdr
     void *args;
 } *clink_device_pin_irq_hdr_t;
 
-int         clink_device_pin_register(const char *name, const struct clink_device_ops *ops, void *user_data);
+int         clink_device_pin_register(const struct clink_device_ops *ops, void *user_data);
 clink_err_t clink_device_pin_attach_irq(clink_base_t pin, uint8_t mode, void (*hdr)(void *args), void *args);
 clink_err_t clink_device_pin_detach_irq(clink_base_t pin);
 clink_err_t clink_device_pin_irq_enable(clink_base_t pin, uint8_t enabled);

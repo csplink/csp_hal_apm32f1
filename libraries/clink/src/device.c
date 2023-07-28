@@ -32,15 +32,11 @@
 #include <clink/debug.h>
 #include <clink/device.h>
 
-clink_err_t clink_device_register(clink_device_t dev, const char *name, uint16_t flags)
+clink_err_t clink_device_register(clink_device_t dev, uint16_t flags)
 {
     if (dev == CLINK_NULL)
         return -CLINK_ERROR;
 
-    if (clink_device_find(name) != CLINK_NULL)
-        return -CLINK_ERROR;
-
-    clink_object_init(&(dev->parent), Clink_Object_Class_Device, name);
     dev->flag      = flags;
     dev->ref_count = 0;
     dev->open_flag = 0;
@@ -52,16 +48,12 @@ clink_err_t clink_device_unregister(clink_device_t dev)
 {
     /* parameter check */
     CLINK_ASSERT(dev != CLINK_NULL);
-    CLINK_ASSERT(clink_object_get_type(&dev->parent) == Clink_Object_Class_Device);
 
-    clink_object_detach(&(dev->parent));
+    dev->flag      = 0;
+    dev->ref_count = 0;
+    dev->open_flag = 0;
 
     return CLINK_EOK;
-}
-
-clink_device_t clink_device_find(const char *name)
-{
-    return (clink_device_t)clink_object_find(name, Clink_Object_Class_Device);
 }
 
 clink_err_t clink_device_init(clink_device_t dev)
@@ -91,7 +83,6 @@ clink_err_t clink_device_open(clink_device_t dev, int oflag)
 
     /* parameter check */
     CLINK_ASSERT(dev != CLINK_NULL);
-    CLINK_ASSERT(clink_object_get_type(&dev->parent) == Clink_Object_Class_Device);
 
     /* if device is not initialized, initialize it. */
     if (!(dev->flag & CLINK_DEVICE_FLAG_ACTIVATED))
@@ -149,7 +140,6 @@ clink_err_t clink_device_close(clink_device_t dev)
 
     /* parameter check */
     CLINK_ASSERT(dev != CLINK_NULL);
-    CLINK_ASSERT(clink_object_get_type(&dev->parent) == Clink_Object_Class_Device);
 
     if (dev->ref_count == 0)
         return -CLINK_ERROR;
@@ -175,7 +165,6 @@ ssize_t clink_device_read(clink_device_t dev, off_t pos, void *buffer, size_t si
 {
     /* parameter check */
     CLINK_ASSERT(dev != CLINK_NULL);
-    CLINK_ASSERT(clink_object_get_type(&dev->parent) == Clink_Object_Class_Device);
 
     if (dev->ref_count == 0)
     {
@@ -194,7 +183,6 @@ ssize_t clink_device_write(clink_device_t dev, off_t pos, const void *buffer, si
 {
     /* parameter check */
     CLINK_ASSERT(dev != CLINK_NULL);
-    CLINK_ASSERT(clink_object_get_type(&dev->parent) == Clink_Object_Class_Device);
 
     if (dev->ref_count == 0)
     {
@@ -213,7 +201,6 @@ clink_err_t clink_device_control(clink_device_t dev, int cmd, void *arg)
 {
     /* parameter check */
     CLINK_ASSERT(dev != CLINK_NULL);
-    CLINK_ASSERT(clink_object_get_type(&dev->parent) == Clink_Object_Class_Device);
 
     if (dev->ops->control != CLINK_NULL)
     {
@@ -227,7 +214,6 @@ clink_err_t clink_device_set_rx_indicate(clink_device_t dev, clink_err_t (*rx_in
 {
     /* parameter check */
     CLINK_ASSERT(dev != CLINK_NULL);
-    CLINK_ASSERT(clink_object_get_type(&dev->parent) == Clink_Object_Class_Device);
 
     dev->rx_indicate = rx_ind;
 
@@ -238,7 +224,6 @@ clink_err_t clink_device_set_tx_complete(clink_device_t dev, clink_err_t (*tx_do
 {
     /* parameter check */
     CLINK_ASSERT(dev != CLINK_NULL);
-    CLINK_ASSERT(clink_object_get_type(&dev->parent) == Clink_Object_Class_Device);
 
     dev->tx_complete = tx_done;
 

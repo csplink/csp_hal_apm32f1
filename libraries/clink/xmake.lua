@@ -44,7 +44,7 @@ do
     add_includedirs("inc", {public = true})
 
     add_files("src/*.c")
-    add_files("src/libc/*.c")
+    add_files("src/devices/*.c")
 
     add_installfiles("$(buildir)/clink_config.h", {prefixdir = "include"})
     add_installfiles("inc/(clink/*.h)", {prefixdir = "include"})

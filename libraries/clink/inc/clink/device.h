@@ -33,7 +33,6 @@
 #define __CLINK_DEVICE_H__
 
 #include <clink/def.h>
-#include <clink/object.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -100,7 +99,6 @@ enum clink_device_class_type
  */
 struct clink_device
 {
-    struct clink_object            parent;    /**< inherit from object */
     enum clink_device_class_type   type;      /**< device type */
     uint16_t                       flag;      /**< device flag */
     uint16_t                       open_flag; /**< device open flag */
@@ -118,7 +116,7 @@ struct clink_device
  * @param flags is the capabilities flag of device.
  * @return the error code, CLINK_EOK on initialization successfully.
  */
-clink_err_t clink_device_register(clink_device_t dev, const char *name, uint16_t flags);
+clink_err_t clink_device_register(clink_device_t dev, uint16_t flags);
 
 /**
  * @brief This function removes a previously registered device driver.
@@ -126,13 +124,6 @@ clink_err_t clink_device_register(clink_device_t dev, const char *name, uint16_t
  * @return the error code, CLINK_EOK on successfully.
  */
 clink_err_t clink_device_unregister(clink_device_t dev);
-
-/**
- * @brief This function finds a device driver by specified name.
- * @param name is the device driver's name.
- * @return the registered device driver on successful, or CLINK_NULL on failure.
- */
-clink_device_t clink_device_find(const char *name);
 
 /**
  * @brief This function will initialize the specified device.
