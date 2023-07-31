@@ -54,7 +54,7 @@ SECTIONS
         _stext = .;
         __text_start = .;
         *(.text)                /* remaining code */
-        *(.text.*)              /* remaining code */ 
+        *(.text.*)              /* remaining code */
         *(.rodata)              /* read-only data */
         *(.rodata*)             /* read-only data */
         *(.glue_7)              /* glue arm to thumb code */
@@ -87,11 +87,13 @@ SECTIONS
     /**************************************************************/
 
     _sidata = LOADADDR(.data);
+    _start_address_init_data = _sidata;
     .data :
     {
         . = ALIGN(4);
         _sdata = .;
-        __data_start = .;
+        __data_start = _sdata;
+        _start_address_data = _sdata;
         *(.data)
         *(.data*)
         *(.gnu.linkonce.d*)
@@ -103,32 +105,35 @@ SECTIONS
 
         . = ALIGN(4);
         _edata = .;
-        __data_end = .;
+        __data_end = _edata;
+        _end_address_data = _edata;
     } >RAM AT> FLASH
-
-    .system_stack :
-    {
-        . = ALIGN(4);
-        _sstack = .;
-        __system_stack_start = .;
-        . = . + _system_stack_size;
-        . = ALIGN(4);
-        _estack = .;
-        __system_stack_end = .;
-    } >RAM
 
     .bss :
     {
         . = ALIGN(4);
         _sbss = .;
-        __bss_start = .;
+        __bss_start = _sbss;
+        _start_address_bss = _sbss;
         *(.bss)
         *(.bss.*)
         *(COMMON)
 
         . = ALIGN(4);
         _ebss = .;
-        __bss_end = .;
+        __bss_end = _ebss;
+        _end_address_bss = _ebss;
+    } >RAM
+
+    .system_stack :
+    {
+        . = ALIGN(4);
+        _sstack = .;
+        __system_stack_start = _sstack;
+        . = . + _system_stack_size;
+        . = ALIGN(4);
+        _estack = .;
+        __system_stack_end = _estack;
     } >RAM
 
     /DISCARD/ :
