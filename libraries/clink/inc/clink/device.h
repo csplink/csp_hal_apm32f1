@@ -85,21 +85,10 @@ struct clink_device_ops
 };
 
 /**
- * device (I/O) class type
- */
-enum clink_device_class_type
-{
-    Clink_Device_Class_Char = 0, /**< character device */
-    Clink_Device_Class_Pin,      /**< Pin device */
-    Clink_Device_Class_Unknown   /**< unknown device */
-};
-
-/**
  * device structure
  */
 typedef struct clink_device
 {
-    enum clink_device_class_type   type;      /**< device type */
     uint16_t                       flag;      /**< device flag */
     uint16_t                       open_flag; /**< device open flag */
     uint8_t                        ref_count; /**< reference count */

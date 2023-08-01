@@ -44,13 +44,15 @@ extern "C" {
 
 /**@{*/
 
-enum clink_device_pin_value_type
+#if defined(CLINK_USING_DEVICES_PIN) && CLINK_USING_DEVICES_PIN > 0
+
+enum clink_pin_value_type
 {
     CLINK_PIN_VALUE_LOW = 0x00,
     CLINK_PIN_VALUE_HIGH
 };
 
-enum clink_device_pin_mode_type
+enum clink_pin_mode_type
 {
     CLINK_PIN_MODE_OUTPUT = 0x00,
     CLINK_PIN_MODE_OUTPUT_PP,
@@ -60,7 +62,7 @@ enum clink_device_pin_mode_type
     CLINK_PIN_MODE_INPUT_PULLDOWN
 };
 
-enum clink_device_pin_speed_type
+enum clink_pin_speed_type
 {
     CLINK_PIN_SPEED_LOW = 0x00,
     CLINK_PIN_SPEED_MEDIUM,
@@ -68,7 +70,7 @@ enum clink_device_pin_speed_type
     CLINK_PIN_SPEED_VERY_HIGH
 };
 
-enum clink_device_pin_ctrl_cmd_type
+enum clink_pin_ctrl_cmd_type
 {
     CLINK_PIN_CTRL_SET_MODE = 0x00,
     CLINK_PIN_CTRL_WRITE_VALUE,
@@ -79,7 +81,7 @@ enum clink_device_pin_ctrl_cmd_type
     CLINK_PIN_CTRL_DISABLE_IRQ
 };
 
-enum clink_device_pin_irq_mode_type
+enum clink_pin_irq_mode_type
 {
     CLINK_PIN_IRQ_MODE_RISING = 0x00,
     CLINK_PIN_IRQ_MODE_FALLING,
@@ -88,42 +90,44 @@ enum clink_device_pin_irq_mode_type
     CLINK_PIN_IRQ_MODE_LOW_LEVEL
 };
 
-typedef struct clink_device_pin_mode
+typedef struct clink_pin_mode
 {
     clink_base_t pin;
     uint8_t      mode;  /* e.g. CLINK_PIN_MODE_OUTPUT */
     uint8_t      speed; /* e.g. CLINK_PIN_SPEED_LOW */
-} *clink_device_pin_mode_t;
+} *clink_pin_mode_t;
 
-typedef struct clink_device_pin_value
+typedef struct clink_pin_value
 {
     clink_base_t pin;
     uint8_t      value; /* CLINK_PIN_LOW or CLINK_PIN_HIGH */
-} *clink_device_pin_value_t;
+} *clink_pin_value_t;
 
-typedef struct clink_device_pin_irq_hdr
+typedef struct clink_pin_irq_hdr
 {
     clink_base_t pin;
     void (*hdr)(void *args);
     void *args;
-} *clink_device_pin_irq_hdr_t;
+} *clink_pin_irq_hdr_t;
 
-typedef struct clink_device_pin_irq
+typedef struct clink_pin_irq
 {
     clink_base_t pin;
     uint8_t      mode;  /* e.g. PIN_IRQ_MODE_RISING */
     uint8_t      speed; /* e.g. CLINK_PIN_SPEED_LOW */
-} *clink_device_pin_irq_t;
+} *clink_pin_irq_t;
 
-int            clink_device_pin_register(const struct clink_device_ops *ops, void *user_data);
-clink_err_t    clink_device_pin_attach_irq(clink_base_t pin, void (*hdr)(void *args), void *args);
-clink_err_t    clink_device_pin_detach_irq(clink_base_t pin);
-clink_err_t    clink_device_pin_irq_enable(clink_base_t pin, uint8_t mode, uint8_t speed);
-clink_err_t    clink_device_pin_irq_disable(clink_base_t pin);
-void           clink_device_pin_mode(clink_base_t pin, uint8_t mode, uint8_t speed);
-void           clink_device_pin_write(clink_base_t pin, uint8_t value);
-int8_t         clink_device_pin_read(clink_base_t pin);
-clink_device_t clink_device_pin_get_device();
+int            clink_pin_register(const struct clink_device_ops *ops, void *user_data);
+clink_err_t    clink_pin_attach_irq(clink_base_t pin, void (*hdr)(void *args), void *args);
+clink_err_t    clink_pin_detach_irq(clink_base_t pin);
+clink_err_t    clink_pin_irq_enable(clink_base_t pin, uint8_t mode, uint8_t speed);
+clink_err_t    clink_pin_irq_disable(clink_base_t pin);
+void           clink_pin_mode(clink_base_t pin, uint8_t mode, uint8_t speed);
+void           clink_pin_write(clink_base_t pin, uint8_t value);
+int8_t         clink_pin_read(clink_base_t pin);
+clink_device_t clink_pin_get_device();
+
+#endif  // CLINK_USING_DEVICES_PIN
 
 /**@}*/
 

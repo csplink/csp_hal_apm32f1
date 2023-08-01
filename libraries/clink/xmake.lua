@@ -33,7 +33,6 @@ do
     set_warnings("allextra", "error")
     set_languages("c99", "cxx11")
     set_installdir("$(buildir)/install")
-    -- print(get_clink_options())
     for _, name in ipairs(get_clink_options()) do
         add_options(name)
     end
@@ -48,9 +47,5 @@ do
 
     add_installfiles("$(buildir)/clink_config.h", {prefixdir = "include"})
     add_installfiles("inc/(clink/*.h)", {prefixdir = "include"})
-
-    if is_mode("debug") then
-        add_defines("CLINK_DEBUG=1")
-    end
 end
 target_end()

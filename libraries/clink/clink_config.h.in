@@ -48,9 +48,8 @@
 
 #define CLINK_DEBUG           (${DEBUG})
 
-#define CLINK_NAME_MAX        (${CLINK_NAME_MAX})
 ${define CLINK_USING_RTTHREAD}
-${define CLINK_USING_STDLIB}
-${define CLINK_USING_TINY_SIZE}
+${define CLINK_USING_DEVICES_PIN}
+${define CLINK_USING_DEVICES_PIN_IRQ}
 
 #endif

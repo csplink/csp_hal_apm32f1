@@ -24,10 +24,13 @@
 category = "components/clink"
 
 config = {
-    CLINK_NAME_MAX = {default = "8", description = "The maximal size of object name", category = category},
     CLINK_USING_RTTHREAD = {default = false, description = "Enable RT-Thread RTOS", category = category},
-    CLINK_USING_STDLIB = {default = false, description = "Enable use standard C library", category = category},
-    CLINK_USING_TINY_SIZE = {default = false, description = "Enable use tiny size", category = category}
+    CLINK_USING_DEVICES_PIN = {default = false, description = "Enable PIN Devices", category = category .. "/devices"},
+    CLINK_USING_DEVICES_PIN_IRQ = {
+        default = false,
+        description = "Enable PIN IRQ Devices",
+        category = category .. "/devices"
+    }
 }
 
 function get_clink_options()
