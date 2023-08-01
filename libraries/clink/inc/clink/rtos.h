@@ -45,16 +45,16 @@ extern "C" {
 #if defined(CLINK_USING_RTTHREAD) && CLINK_USING_RTTHREAD > 0
 
 #include <rtthread.h>
-#define clink_enter_critical       rt_enter_critical
-#define clink_exit_critical        rt_exit_critical
-#define clink_hw_interrupt_disable rt_hw_interrupt_disable
-#define clink_hw_interrupt_enable  rt_hw_interrupt_enable
+#define clink_lock      rt_enter_critical
+#define clink_unlock    rt_exit_critical
+#define clink_lockirq   rt_hw_interrupt_disable
+#define clink_unlockirq rt_hw_interrupt_enable
 
 #else
-#define clink_enter_critical()
-#define clink_exit_critical()
-#define clink_hw_interrupt_disable() (0)
-#define clink_hw_interrupt_enable(X) ((void)(X))
+#define clink_lock()
+#define clink_unlock()
+#define clink_lockirq()    (0)
+#define clink_unlockirq(X) ((void)(X))
 
 #endif
 

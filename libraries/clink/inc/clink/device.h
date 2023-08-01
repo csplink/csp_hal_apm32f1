@@ -97,7 +97,7 @@ enum clink_device_class_type
 /**
  * device structure
  */
-struct clink_device
+typedef struct clink_device
 {
     enum clink_device_class_type   type;      /**< device type */
     uint16_t                       flag;      /**< device flag */
@@ -107,7 +107,7 @@ struct clink_device
     clink_err_t (*rx_indicate)(clink_device_t dev, size_t size);
     clink_err_t (*tx_complete)(clink_device_t dev, void *buffer);
     void *user_data; /**< device private data */
-};
+} *clink_device_t;
 
 /**
  * @brief This function registers a device driver with a specified name.

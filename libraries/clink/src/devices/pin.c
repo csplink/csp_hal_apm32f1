@@ -32,82 +32,95 @@
 #include <clink/debug.h>
 #include <clink/devices/pin.h>
 
-static struct clink_device _hw_pin = {0};
+struct clink_device chal_pin_device = {0};
 
 int clink_device_pin_register(const struct clink_device_ops *ops, void *user_data)
 {
-    _hw_pin.type        = Clink_Device_Class_Pin;
-    _hw_pin.rx_indicate = CLINK_NULL;
-    _hw_pin.tx_complete = CLINK_NULL;
-    _hw_pin.ops         = ops;
-    _hw_pin.user_data   = user_data;
+    chal_pin_device.type        = Clink_Device_Class_Pin;
+    chal_pin_device.rx_indicate = CLINK_NULL;
+    chal_pin_device.tx_complete = CLINK_NULL;
+    chal_pin_device.ops         = ops;
+    chal_pin_device.user_data   = user_data;
 
     /* register a pin device */
-    clink_device_register(&_hw_pin, CLINK_DEVICE_FLAG_RDWR);
+    clink_device_register(&chal_pin_device, CLINK_DEVICE_FLAG_RDWR);
 
     return 0;
 }
 
-clink_err_t clink_device_pin_attach_irq(clink_base_t pin, uint8_t mode, void (*hdr)(void *args), void *args)
+clink_err_t clink_device_pin_attach_irq(clink_base_t pin, void (*hdr)(void *args), void *args)
 {
-    CLINK_ASSERT(_hw_pin.ops != CLINK_NULL);
+    CLINK_ASSERT(chal_pin_device.ops != CLINK_NULL);
     struct clink_device_pin_irq_hdr irq_hdr = {0};
 
     irq_hdr.pin  = pin;
-    irq_hdr.mode = mode;
     irq_hdr.hdr  = hdr;
     irq_hdr.args = args;
-    return clink_device_control(&_hw_pin, CLINK_PIN_CTRL_SET_IRQ_HDR, (void *)&irq_hdr);
+    return clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_SET_IRQ, (void *)&irq_hdr);
 }
 
 clink_err_t clink_device_pin_detach_irq(clink_base_t pin)
 {
-    CLINK_ASSERT(_hw_pin.ops != CLINK_NULL);
+    CLINK_ASSERT(chal_pin_device.ops != CLINK_NULL);
     struct clink_device_pin_irq_hdr irq_hdr = {0};
 
     irq_hdr.pin  = pin;
-    irq_hdr.mode = 0;
     irq_hdr.hdr  = CLINK_NULL;
     irq_hdr.args = CLINK_NULL;
-    return clink_device_control(&_hw_pin, CLINK_PIN_CTRL_SET_IRQ_HDR, (void *)&irq_hdr);
+    return clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_SET_IRQ, (void *)&irq_hdr);
 }
 
-clink_err_t clink_device_pin_irq_enable(clink_base_t pin, uint8_t enabled)
+clink_err_t clink_device_pin_irq_enable(clink_base_t pin, uint8_t mode, uint8_t speed)
 {
-    CLINK_ASSERT(_hw_pin.ops != CLINK_NULL);
-    if (enabled)
-        return clink_device_control(&_hw_pin, CLINK_PIN_CTRL_ENABLE_IRQ, (void *)&pin);
-    else
-        return clink_device_control(&_hw_pin, CLINK_PIN_CTRL_DISABLE_IRQ, (void *)&pin);
+    CLINK_ASSERT(chal_pin_device.ops != CLINK_NULL);
+    struct clink_device_pin_irq irq;
+
+    irq.pin   = pin;
+    irq.mode  = mode;
+    irq.speed = speed;
+
+    return clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_ENABLE_IRQ, (void *)&irq);
 }
 
-void clink_device_pin_mode(clink_base_t pin, uint8_t mode)
+clink_err_t clink_device_pin_irq_disable(clink_base_t pin)
 {
-    CLINK_ASSERT(_hw_pin.ops != CLINK_NULL);
+    CLINK_ASSERT(chal_pin_device.ops != CLINK_NULL);
+    struct clink_device_pin_irq irq;
+
+    irq.pin   = pin;
+    irq.mode  = 0;
+    irq.speed = 0;
+    return clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_DISABLE_IRQ, (void *)&irq);
+}
+
+void clink_device_pin_mode(clink_base_t pin, uint8_t mode, uint8_t speed)
+{
+    CLINK_ASSERT(chal_pin_device.ops != CLINK_NULL);
     struct clink_device_pin_mode pin_mode = {0};
 
-    pin_mode.pin  = pin;
-    pin_mode.mode = mode;
-    clink_device_control(&_hw_pin, CLINK_PIN_CTRL_SET_MODE, (void *)&pin_mode);
+    pin_mode.pin   = pin;
+    pin_mode.mode  = mode;
+    pin_mode.speed = speed;
+    clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_SET_MODE, (void *)&pin_mode);
 }
 
 void clink_device_pin_write(clink_base_t pin, uint8_t value)
 {
-    CLINK_ASSERT(_hw_pin.ops != CLINK_NULL);
+    CLINK_ASSERT(chal_pin_device.ops != CLINK_NULL);
     struct clink_device_pin_value pin_value = {0};
 
     pin_value.pin   = pin;
     pin_value.value = value;
-    clink_device_control(&_hw_pin, CLINK_PIN_CTRL_WRITE_VALUE, (void *)&pin_value);
+    clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_WRITE_VALUE, (void *)&pin_value);
 }
 
 int8_t clink_device_pin_read(clink_base_t pin)
 {
-    CLINK_ASSERT(_hw_pin.ops != CLINK_NULL);
+    CLINK_ASSERT(chal_pin_device.ops != CLINK_NULL);
     struct clink_device_pin_value pin_value = {0};
 
     pin_value.pin = pin;
-    if (clink_device_control(&_hw_pin, CLINK_PIN_CTRL_READ_VALUE, (void *)&pin_value) != CLINK_EOK)
+    if (clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_READ_VALUE, (void *)&pin_value) != CLINK_EOK)
     {
         return (int8_t)pin_value.value;
     }
@@ -115,4 +128,18 @@ int8_t clink_device_pin_read(clink_base_t pin)
     {
         return -1;
     }
+}
+
+void clink_device_pin_toggle(clink_base_t pin)
+{
+    CLINK_ASSERT(chal_pin_device.ops != CLINK_NULL);
+    struct clink_device_pin_value pin_value = {0};
+
+    pin_value.pin = pin;
+    clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_TOGGLE, (void *)&pin_value);
+}
+
+clink_device_t clink_device_pin_get_device()
+{
+    return &chal_pin_device;
 }
