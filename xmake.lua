@@ -24,17 +24,16 @@ set_xmakever("2.7.9")
 set_version("0.0.2")
 set_project("csp_hal_apm32f1") -- set project name
 
+add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
+
 includes("xmake/option.lua")
 includes("libraries/clink/xmake.lua")
 
 add_requires("arm-none-eabi")
 set_toolchains("@arm-none-eabi")
 
-add_cflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common",
-           "-fmessage-length=0", "-Wall", "-Werror", {force = true})
-
-add_asflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common",
-            "-fmessage-length=0", "-Wall", "-Werror", "-x assembler-with-cpp", {force = true})
+set_config("arch", "arm")
+set_config("cpu", "cortex-m3")
 
 target("csp_hal_apm32f1")
 do
@@ -49,12 +48,12 @@ do
     add_options("mcu")
     add_options("use_default_startup")
 
-    add_includedirs("libraries/chal/inc")
-    add_includedirs("libraries/cmsis/Include")
-    add_includedirs("libraries/cmsis_core/Include")
-    add_includedirs("libraries/drivers/inc")
+    add_includedirs("libraries/chal/inc", {public = true})
+    add_includedirs("libraries/cmsis/Include", {public = true})
+    add_includedirs("libraries/cmsis_core/Include", {public = true})
+    add_includedirs("libraries/drivers/inc", {public = true})
 
-    -- add_files("libraries/chal/src/*.c")
+    add_files("libraries/chal/src/*.c")
     add_files("libraries/cmsis/Source/*.c")
     add_files("libraries/drivers/src/*.c")
 
@@ -66,10 +65,6 @@ do
 
     add_deps("clink")
 
-    if is_mode("debug") then
-        add_defines("__CSPLINK_DEBUG__")
-    end
-
     on_config(function(target)
         if project.option("use_default_startup"):value() then
             local mcu = project.option("mcu"):value()
@@ -78,6 +73,15 @@ do
                     target:add("files", "$(scriptdir)/libraries/cmsis/Source/gcc/startup_apm32f10x_hd.S")
                 end
             end
+        end
+        if not target:get("cflags") then
+            target:add("cflags", "-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections",
+                       "-fdata-sections", "-fno-common", "-fmessage-length=0", {force = true})
+        end
+        if not target:get("asflags") then
+            target:add("asflags", "-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections",
+                       "-fdata-sections", "-fno-common", "-fmessage-length=0", "-x", "assembler-with-cpp",
+                       {force = true})
         end
     end)
 end

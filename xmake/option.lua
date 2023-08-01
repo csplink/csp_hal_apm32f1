@@ -28,12 +28,11 @@ do
     set_values("APM32F103C8T6", "APM32F103ZET6")
     set_category("configuration")
     set_description("mcu name")
-    set_configvar("MCU", "$(mcu)")
-    add_defines("$(mcu)")
+    set_configvar("MCU", "$(mcu)", {quote = false})
     after_check(function(option)
         import("core.project.project")
         if string.find(option:value(), "APM32F103ZE") then
-            option:add("defines", "APM32F10X_HD")
+            option:set("configvar", "MCU_DEVICE", "APM32F10X_HD", {quote = false})
         end
     end)
 end

@@ -46,4 +46,9 @@
 #define CHAL_GIT_TAG_LONG    "${GIT_TAG_LONG}"
 #define CHAL_GIT_CUSTOM      "${GIT_TAG}-${GIT_COMMIT}"
 
+#define CHAL_DEBUG           (${DEBUG})
+
+#define ${MCU}
+#define ${MCU_DEVICE}
+
 #endif
