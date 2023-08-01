@@ -29,6 +29,8 @@
 #ifndef __APM32F10X_H
 #define __APM32F10X_H
 
+#include "chal_config.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
