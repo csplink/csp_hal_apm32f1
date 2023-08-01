@@ -47,13 +47,13 @@ extern "C" {
 
 /**@{*/
 
-#ifndef CHAL_PIN_IRQ_NUM
-#define CHAL_PIN_IRQ_NUM 16
-#endif
+#if defined(CLINK_USING_DEVICES_PIN) && CLINK_USING_DEVICES_PIN > 0
 
 #define CHAL_PIN_GET(PORTx, PIN) ((uint32_t)((((GPIO##PORTx##_BASE - GPIOA_BASE) / 0x0400UL) << 4) + PIN))
 
 void chal_pin_register();
+
+#endif  // CLINK_USING_DEVICES_PIN
 
 /**@}*/
 

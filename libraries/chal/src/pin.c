@@ -30,6 +30,8 @@
 #include <chal/pin.h>
 #include <clink/debug.h>
 
+#if defined(CLINK_USING_DEVICES_PIN) && CLINK_USING_DEVICES_PIN > 0
+
 #define __PORT(pin)       ((uint8_t)(((pin) >> 4) & 0xFu))
 #define __PIN(pin)        ((uint8_t)((pin)&0xFu))
 
@@ -44,30 +46,32 @@ struct _pin_irq_hdr
     void *args;
 };
 
-static struct _pin_irq_hdr _pin_irq_hdr_tab[CHAL_PIN_IRQ_NUM] = {{0}};
+#if defined(CLINK_USING_DEVICES_PIN_IRQ) && CLINK_USING_DEVICES_PIN_IRQ > 0
+static struct _pin_irq_hdr _pin_irq_hdr_tab[16] = {{0}};
+#endif  // CLINK_USING_DEVICES_PIN_IRQ
 
-CLINK_WEAK void chal_pin_set_mode_user_callback(GPIO_T *port, uint16_t pin, clink_device_pin_mode_t mode)
+CLINK_WEAK void chal_pin_set_mode_user_callback(GPIO_T *port, uint16_t pin, clink_pin_mode_t mode)
 {
     CLINK_UNUSED(port);
     CLINK_UNUSED(pin);
     CLINK_UNUSED(mode);
 }
 
-CLINK_WEAK void chal_pin_enable_irq_user_callback(GPIO_T *port, uint16_t pin, clink_device_pin_irq_t irq)
+CLINK_WEAK void chal_pin_enable_irq_user_callback(GPIO_T *port, uint16_t pin, clink_pin_irq_t irq)
 {
     CLINK_UNUSED(port);
     CLINK_UNUSED(pin);
     CLINK_UNUSED(irq);
 }
 
-CLINK_WEAK void chal_pin_disable_irq_user_callback(GPIO_T *port, uint16_t pin, clink_device_pin_irq_t irq)
+CLINK_WEAK void chal_pin_disable_irq_user_callback(GPIO_T *port, uint16_t pin, clink_pin_irq_t irq)
 {
     CLINK_UNUSED(port);
     CLINK_UNUSED(pin);
     CLINK_UNUSED(irq);
 }
 
-static clink_err_t pin_set_mode(clink_device_pin_mode_t mode)
+static clink_err_t pin_set_mode(clink_pin_mode_t mode)
 {
     CLINK_ASSERT(mode != CLINK_NULL);
 
@@ -108,7 +112,7 @@ static clink_err_t pin_set_mode(clink_device_pin_mode_t mode)
     return err;
 }
 
-static clink_err_t pin_set_value(clink_device_pin_value_t value)
+static clink_err_t pin_set_value(clink_pin_value_t value)
 {
     CLINK_ASSERT(value != CLINK_NULL);
 
@@ -122,7 +126,7 @@ static clink_err_t pin_set_value(clink_device_pin_value_t value)
     return CLINK_EOK;
 }
 
-static clink_err_t pin_read_value(clink_device_pin_value_t value)
+static clink_err_t pin_read_value(clink_pin_value_t value)
 {
     CLINK_ASSERT(value != CLINK_NULL);
 
@@ -137,12 +141,13 @@ static clink_err_t pin_read_value(clink_device_pin_value_t value)
     return CLINK_EOK;
 }
 
-static clink_err_t pin_set_irq(clink_device_pin_irq_hdr_t irq_hdr)
+#if defined(CLINK_USING_DEVICES_PIN_IRQ) && CLINK_USING_DEVICES_PIN_IRQ > 0
+static clink_err_t pin_set_irq(clink_pin_irq_hdr_t irq_hdr)
 {
     CLINK_ASSERT(irq_hdr != CLINK_NULL);
 
     uint8_t irqindex = __PIN(irq_hdr->pin);
-    if (irqindex >= CHAL_PIN_IRQ_NUM)
+    if (irqindex >= (sizeof(_pin_irq_hdr_tab) / sizeof(_pin_irq_hdr_tab[0])))
     {
         return -CLINK_EINVAL;
     }
@@ -153,7 +158,7 @@ static clink_err_t pin_set_irq(clink_device_pin_irq_hdr_t irq_hdr)
     return CLINK_EOK;
 }
 
-static clink_err_t pin_enable_irq(clink_device_pin_irq_t irq)
+static clink_err_t pin_enable_irq(clink_pin_irq_t irq)
 {
     CLINK_ASSERT(irq != CLINK_NULL);
 
@@ -221,7 +226,7 @@ static clink_err_t pin_enable_irq(clink_device_pin_irq_t irq)
     return CLINK_EOK;
 }
 
-static clink_err_t pin_disable_irq(clink_device_pin_irq_t irq)
+static clink_err_t pin_disable_irq(clink_pin_irq_t irq)
 {
     CLINK_ASSERT(irq != CLINK_NULL);
 
@@ -247,8 +252,9 @@ static clink_err_t pin_disable_irq(clink_device_pin_irq_t irq)
 
     return CLINK_EOK;
 }
+#endif  // CLINK_USING_DEVICES_PIN_IRQ
 
-static clink_err_t pin_toggle(clink_device_pin_value_t value)
+static clink_err_t pin_toggle(clink_pin_value_t value)
 {
     CLINK_ASSERT(value != CLINK_NULL);
 
@@ -272,33 +278,35 @@ static clink_err_t pin_control(clink_device_t dev, int cmd, void *args)
     switch (cmd)
     {
         case CLINK_PIN_CTRL_SET_MODE: {
-            err = pin_set_mode((clink_device_pin_mode_t)args);
+            err = pin_set_mode((clink_pin_mode_t)args);
             break;
         }
         case CLINK_PIN_CTRL_WRITE_VALUE: {
-            err = pin_set_value((clink_device_pin_value_t)args);
+            err = pin_set_value((clink_pin_value_t)args);
             break;
         }
         case CLINK_PIN_CTRL_READ_VALUE: {
-            err = pin_read_value((clink_device_pin_value_t)args);
+            err = pin_read_value((clink_pin_value_t)args);
             break;
         }
         case CLINK_PIN_CTRL_TOGGLE: {
-            err = pin_toggle((clink_device_pin_value_t)args);
+            err = pin_toggle((clink_pin_value_t)args);
             break;
         }
+#if defined(CLINK_USING_DEVICES_PIN_IRQ) && CLINK_USING_DEVICES_PIN_IRQ > 0
         case CLINK_PIN_CTRL_SET_IRQ: {
-            err = pin_set_irq((clink_device_pin_irq_hdr_t)args);
+            err = pin_set_irq((clink_pin_irq_hdr_t)args);
             break;
         }
         case CLINK_PIN_CTRL_ENABLE_IRQ: {
-            err = pin_enable_irq((clink_device_pin_irq_t)args);
+            err = pin_enable_irq((clink_pin_irq_t)args);
             break;
         }
         case CLINK_PIN_CTRL_DISABLE_IRQ: {
-            err = pin_disable_irq((clink_device_pin_irq_t)args);
+            err = pin_disable_irq((clink_pin_irq_t)args);
             break;
         }
+#endif  // CLINK_USING_DEVICES_PIN_IRQ
         default: err = -CLINK_EINVAL; break;
     }
 
@@ -331,9 +339,10 @@ static const struct clink_device_ops _pin_ops = {
 
 void chal_pin_register()
 {
-    clink_device_pin_register(&_pin_ops, CLINK_NULL);
+    clink_pin_register(&_pin_ops, CLINK_NULL);
 }
 
+#if defined(CLINK_USING_DEVICES_PIN_IRQ) && CLINK_USING_DEVICES_PIN_IRQ > 0
 static void _pin_irq_handler(uint8_t line)
 {
     if (EINT_ReadIntFlag((EINT_LINE_T)(1U << line)) != RESET)
@@ -410,3 +419,5 @@ void EINT15_10_IRQHandler(void)
     _pin_irq_handler(15);
     clink_unlockirq(level);
 }
+#endif  // CLINK_USING_DEVICES_PIN_IRQ
+#endif  // CLINK_USING_DEVICES_PIN
