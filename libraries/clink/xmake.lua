@@ -37,7 +37,9 @@ do
         add_options(name)
     end
     add_configfiles("clink_config.h.in")
+
     add_rules("asm")
+    add_rules("csp.cpu")
 
     add_includedirs("$(buildir)", {public = true})
     add_includedirs("inc", {public = true})

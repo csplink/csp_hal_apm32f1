@@ -44,7 +44,10 @@ do
 
     add_configfiles("chal_config.h.in")
     add_imports("core.project.project")
+
     add_rules("asm")
+    add_rules("csp.cpu")
+
     add_options("mcu")
     add_options("use_default_startup")
 
@@ -73,15 +76,6 @@ do
                     target:add("files", "$(scriptdir)/libraries/cmsis/Source/gcc/startup_apm32f10x_hd.S")
                 end
             end
-        end
-        if not target:get("cflags") then
-            target:add("cflags", "-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections",
-                       "-fdata-sections", "-fno-common", "-fmessage-length=0", {force = true})
-        end
-        if not target:get("asflags") then
-            target:add("asflags", "-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections",
-                       "-fdata-sections", "-fno-common", "-fmessage-length=0", "-x", "assembler-with-cpp",
-                       {force = true})
         end
     end)
 end
