@@ -125,6 +125,7 @@ clink_err_t    clink_pin_irq_disable(clink_base_t pin);
 void           clink_pin_mode(clink_base_t pin, uint8_t mode, uint8_t speed);
 void           clink_pin_write(clink_base_t pin, uint8_t value);
 int8_t         clink_pin_read(clink_base_t pin);
+void           clink_pin_toggle(clink_base_t pin);
 clink_device_t clink_pin_get_device();
 
 #endif  // CLINK_USING_DEVICES_PIN

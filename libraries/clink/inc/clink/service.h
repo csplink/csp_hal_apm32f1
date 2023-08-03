@@ -1,7 +1,7 @@
 /*
  * ****************************************************************************
  *  @author      xqyjlj
- *  @file        rtos.h
+ *  @file        service.h
  *  @brief
  *
  * ****************************************************************************
@@ -24,11 +24,11 @@
  *  Change Logs:
  *  Date           Author       Notes
  *  ------------   ----------   -----------------------------------------------
- *  2023-07-17     xqyjlj       initial version
+ *  2023-08-02     xqyjlj       initial version
  */
 
-#ifndef __CLINK_RTOS_H__
-#define __CLINK_RTOS_H__
+#ifndef __CLINK_SERVICE_H__
+#define __CLINK_SERVICE_H__
 
 #include <clink/def.h>
 
@@ -37,30 +37,13 @@ extern "C" {
 #endif
 
 /**
- * @addtogroup debug
+ * @addtogroup service
  */
 
 /**@{*/
 
-#if defined(CLINK_USING_RTTHREAD) && CLINK_USING_RTTHREAD > 0
-
-#include <rtthread.h>
-#define clink_lock            rt_enter_critical
-#define clink_unlock          rt_exit_critical
-#define clink_lockirq         rt_hw_interrupt_disable
-#define clink_unlockirq       rt_hw_interrupt_enable
-
-#define clink_os_sleep_ms(MS) rt_thread_mdelay(MS)
-
-#else
-#define clink_lock()
-#define clink_unlock()
-#define clink_lockirq()       (0)
-#define clink_unlockirq(X)    ((void)(X))
-
-#define clink_os_sleep_ms(MS) ((void)(MS))
-
-#endif
+void clink_delay_ms(uint32_t ms);
+void clink_delay_us(uint32_t us);
 
 /**@}*/
 
