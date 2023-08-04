@@ -29,6 +29,13 @@
 
 #include <chal/service.h>
 
+void clink_init_tick_1ms()
+{
+    SysTick->LOAD = (uint32_t)((SystemCoreClock / 1000) - 1UL);           /* set reload register */
+    SysTick->VAL  = 0UL;                                                  /* Load the SysTick Counter Value */
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk; /* Enable the Systick Timer */
+}
+
 void clink_delay_ms(uint32_t ms)
 {
     __IO uint32_t tmp = SysTick->CTRL;
