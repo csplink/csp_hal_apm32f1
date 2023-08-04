@@ -42,6 +42,7 @@ extern "C" {
 
 /**@{*/
 
+void clink_init_tick_1ms();
 void clink_delay_ms(uint32_t ms);
 void clink_delay_us(uint32_t us);
 
