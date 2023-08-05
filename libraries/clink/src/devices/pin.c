@@ -121,13 +121,13 @@ int8_t clink_pin_read(clink_base_t pin)
     struct clink_pin_value pin_value = {0};
 
     pin_value.pin = pin;
-    if (clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_READ_VALUE, (void *)&pin_value) != CLINK_EOK)
+    if (clink_device_control(&chal_pin_device, CLINK_PIN_CTRL_READ_VALUE, (void *)&pin_value) == CLINK_EOK)
     {
         return (int8_t)pin_value.value;
     }
     else
     {
-        return -1;
+        return -CLINK_ERROR;
     }
 }
 
