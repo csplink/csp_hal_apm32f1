@@ -51,6 +51,10 @@ extern "C" {
 
 #define CHAL_PIN_GET(PORTx, PIN) ((uint32_t)((((GPIO##PORTx##_BASE - GPIOA_BASE) / 0x0400UL) << 4) + PIN))
 
+void chal_pin_set_mode_user_callback(GPIO_T *port, uint16_t pin, clink_pin_mode_t mode);
+void chal_pin_enable_irq_user_callback(GPIO_T *port, uint16_t pin, clink_pin_irq_t irq);
+void chal_pin_disable_irq_user_callback(GPIO_T *port, uint16_t pin, clink_pin_irq_t irq);
+
 void chal_pin_register();
 
 #endif  // CLINK_USING_DEVICES_PIN
