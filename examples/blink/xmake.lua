@@ -34,12 +34,12 @@ includes("../../xmake.lua")
 add_requires("arm-none-eabi")
 set_toolchains("@arm-none-eabi")
 
-add_ldflags("-T../../libraries/cmsis/Source/gcc/gcc_APM32F10xxE.ld",
-            {force = true})
+add_ldflags("-T../../libraries/cmsis/Source/gcc/gcc_APM32F10xxE.ld", {force = true})
 
 target("blink")
 do
     set_kind("binary")
+    set_warnings("allextra", "error")
 
     set_languages("c99")
     set_extension(".elf")
