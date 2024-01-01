@@ -1,3 +1,0 @@
-[submodule "components/rt-thread"]
-	path = components/rt-thread
-	url = https://github.com/csplink/rt-thread.git

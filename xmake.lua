@@ -26,12 +26,6 @@ set_project("csp_hal_apm32f1") -- set project name
 
 add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
 
-includes("xmake/option.lua")
-includes("libraries/clink/xmake.lua")
-
-add_requires("arm-none-eabi")
-set_toolchains("@arm-none-eabi")
-
 set_config("arch", "arm")
 set_config("cpu", "cortex-m3")
 
@@ -42,41 +36,16 @@ do
     set_languages("c99", "cxx11")
     set_installdir("$(buildir)/install")
 
-    add_configfiles("chal_config.h.in")
-    add_imports("core.project.project")
-
     add_rules("asm")
-    add_rules("csp.cpu")
 
-    add_options("mcu")
-    add_options("use_default_startup")
-
-    add_includedirs("libraries/chal/inc", {public = true})
-    add_includedirs("libraries/cmsis/Include", {public = true})
-    add_includedirs("libraries/cmsis_core/Include", {public = true})
+    add_includedirs("libraries/cmsis/inc", {public = true})
+    add_includedirs("libraries/cmsis_core/inc", {public = true})
     add_includedirs("libraries/drivers/inc", {public = true})
 
-    add_files("libraries/chal/src/*.c")
-    add_files("libraries/cmsis/Source/*.c")
     add_files("libraries/drivers/src/*.c")
 
-    add_installfiles("$(buildir)/chal_config.h", {prefixdir = "include"})
-    add_installfiles("libraries/cmsis/Include/*.h", {prefixdir = "include"})
-    add_installfiles("libraries/cmsis_core/Include/*.h", {prefixdir = "include"})
+    add_installfiles("libraries/cmsis/inc/*.h", {prefixdir = "include"})
+    add_installfiles("libraries/cmsis_core/inc/*.h", {prefixdir = "include"})
     add_installfiles("libraries/drivers/inc/*.h", {prefixdir = "include"})
-    add_installfiles("libraries/chal/inc/(chal/*.h)", {prefixdir = "include"})
-
-    add_deps("clink")
-
-    on_config(function(target)
-        if project.option("use_default_startup"):value() then
-            local mcu = project.option("mcu"):value()
-            if string.find(mcu, "APM32F103ZE") then
-                if target:has_tool("cc", "gcc") then
-                    target:add("files", "$(scriptdir)/libraries/cmsis/Source/gcc/startup_apm32f10x_hd.S")
-                end
-            end
-        end
-    end)
 end
 target_end()
