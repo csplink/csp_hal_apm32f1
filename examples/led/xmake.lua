@@ -26,9 +26,9 @@ add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
 
 -------------------------------- project config -------------------------------
 ----< add user code begin project config
-set_project("untitled") -- Set project name
+set_project("led") -- Set project name
 set_version("0.0.0") -- Set version
-set_xmakever("2.7.9") -- Set minimal xmake version
+set_xmakever("2.8.3") -- Set minimal xmake version
 ----> add user code end project config
 
 ---------------------------------- includes -----------------------------------
@@ -65,6 +65,7 @@ do
     add_rules("csp.bin")
     add_rules("csp.map")
     ----< add user code begin target configs
+
     ----> add user code end target configs
 
     ------------------------------ target files -------------------------------
