@@ -28,7 +28,7 @@ add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
 ----< add user code begin project config
 set_project("led") -- Set project name
 set_version("0.0.0") -- Set version
-set_xmakever("2.8.3") -- Set minimal xmake version
+set_xmakever("2.8.6") -- Set minimal xmake version
 ----> add user code end project config
 
 ---------------------------------- includes -----------------------------------

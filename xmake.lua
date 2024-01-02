@@ -20,7 +20,7 @@
 -- ------------   ----------   -----------------------------------------------
 -- 2023-07-12     xqyjlj       initial version
 --
-set_xmakever("2.7.9")
+set_xmakever("2.8.6")
 set_version("0.0.2")
 set_project("csp_hal_apm32f1") -- set project name
 
