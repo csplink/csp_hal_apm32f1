@@ -229,6 +229,30 @@ function get_flags(project)
     }
 end
 
+function _deploy_files(project, outputdir)
+    local rootdir = path.join(os.scriptdir(), "..", "..")
+    -- LuaFormatter off
+    local filelist =
+    {
+        "libraries/**/*.h",
+        "libraries/**/*.c",
+        "libraries/**/*.txt",
+        ".clang-format",
+        "LICENSE",
+        "README*.md",
+        "xmake.lua",
+    }
+    -- LuaFormatter on
+    for _, match in ipairs(filelist) do
+        for _, file in ipairs(os.files(path.join(rootdir, match))) do
+            local dest = path.join(outputdir, "hal", path.relative(file, rootdir))
+            if not os.exists(dest) then
+                os.vcp(file, dest)
+            end
+        end
+    end
+end
+
 function deploy(project, outputdir)
     local name = string.lower(project["core"]["target"])
     local toolchains = project["core"]["toolchains"]
@@ -249,7 +273,7 @@ function deploy(project, outputdir)
     local source = path.join(os.scriptdir(), string.format(startupfiles[name], kind))
     local dest = path.join(outputdir, path.filename(source))
     if not os.exists(dest) then
-        os.cp(source, dest)
+        os.vcp(source, dest)
     end
 
     -- link script
@@ -257,7 +281,7 @@ function deploy(project, outputdir)
         local source = path.join(os.scriptdir(), string.format(linkscripts[name], kind))
         local dest = path.join(outputdir, string.upper(name) .. ".lds")
         if not os.exists(dest) then
-            os.cp(source, dest)
+            os.vcp(source, dest)
         end
     end
 
@@ -265,6 +289,8 @@ function deploy(project, outputdir)
     local source = path.join(os.scriptdir(), "res", "system_apm32f10x.c")
     local dest = path.join(outputdir, "core", "src", "system_apm32f10x.c")
     if not os.exists(dest) then
-        os.cp(source, dest)
+        os.vcp(source, dest)
     end
+
+    _deploy_files(project, outputdir)
 end
