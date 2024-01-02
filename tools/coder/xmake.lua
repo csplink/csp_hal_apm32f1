@@ -174,6 +174,8 @@ function get_header(kind)
         t = {"apm32f10x_gpio.h", "apm32f10x_eint.h", "apm32f10x_misc.h", "apm32f10x_rcm.h"}
     elseif kind == "main" then
         t = {}
+    else
+        assert(0, "unsupport kind \"%s\"", kind)
     end
 
     return t
