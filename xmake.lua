@@ -31,7 +31,7 @@ set_config("cpu", "cortex-m3")
 
 target("csp_hal_apm32f1")
 do
-    set_kind("static")
+    set_kind("object")
     set_warnings("allextra", "error")
     set_languages("c99", "cxx11")
     set_installdir("$(buildir)/install")
