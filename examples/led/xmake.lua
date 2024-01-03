@@ -52,7 +52,7 @@ add_asflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-secti
 add_defines("APM32F10X_HD", {force = true})
 ----> add user code end flags
 
-target("untitled")
+target("led")
 do
     set_kind("binary")
     ----------------------------- target configs ------------------------------
