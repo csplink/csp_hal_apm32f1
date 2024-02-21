@@ -34,7 +34,6 @@ jobs:
       matrix:
         target:
           - examples/led
-          - examples/pin_irq
     env:
       XMAKE_ROOT: "y"
 
