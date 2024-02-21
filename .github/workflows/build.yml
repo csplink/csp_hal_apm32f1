@@ -47,8 +47,8 @@ jobs:
       - name: ⬇️ checkout csp_repo
         uses: actions/checkout@v4
         with:
-          repository: csp/csp_repo
-          path: ~/.csp
+          repository: csplink/csp_repo
+          path: ~/.csplink
           submodules: true
 
       - name: ⬇️ install xmake
@@ -57,8 +57,8 @@ jobs:
       - name: 👷 build
         shell: bash
         run: |
-          ls ~/.csp
-          source ~/.csp/csp_repo/tools/env.sh
+          ls ~/.csplink
+          source ~/.csplink/csp_repo/tools/env.sh
           pushd ${{ matrix.target }}
             xmake f -m release -P .
             xmake -j$(nproc) -v -P .
