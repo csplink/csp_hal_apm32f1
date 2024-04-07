@@ -1,0 +1,65 @@
+{#
+# Licensed under the GNU General Public License v. 3 (the "License")
+# You may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+#
+# @author      xqyjlj
+# @file        xmake.lua.j2
+#
+# Change Logs:
+# Date           Author       Notes
+# ------------   ----------   -----------------------------------------------
+# 2024-03-22     xqyjlj       initial version
+#
+#}
+{%- extends "csp-file-base.xmake.lua.j2" %}
+
+{%- block project_config %}
+set_project("{{Project.Name}}") -- Set project name
+set_xmakever("2.8.6") -- Set minimal xmake version
+set_version("0.0.0") -- Set version
+{%- endblock %}
+
+{%- block toolchains %}
+add_requires("arm-none-eabi")
+set_toolchains("@arm-none-eabi")
+{%- endblock %}
+
+{%- block flags %}
+add_ldflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-Wl,--gc-sections", "-T{{Project['TargetChip']}}.lds", {force = true})
+add_cxflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", {force = true})
+add_asflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", {force = true})
+add_defines("{{CoderData['Marco']|join('", "')}}", {force = true})
+{%- endblock %}
+
+{%- block target_configs %}
+    set_warnings("allextra")
+    set_warnings("error")
+    set_languages("c99")
+    set_languages("cxx11")
+    add_rules("asm")
+    add_rules("csp.bin")
+    add_rules("csp.map")
+{%- endblock %}
+
+{%- block target_files %}
+    {%- for file in CoderData['Files']['Src']%}
+    add_files("{{file}}")
+    {%- endfor %}
+{% set _ = "" %}
+    add_files("{{CoderData['StartupFile']['Name']}}")
+{% set _ = "" %}
+    {%- for dir in CoderData['Files']['Inc']%}
+    add_includedirs("{{dir}}", {public = true})
+    {%- endfor %}
+{%- endblock %}
