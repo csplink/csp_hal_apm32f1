@@ -27,45 +27,52 @@
 import os
 import glob
 import shutil
+import xml.etree.ElementTree as etree
 
 script_dir = os.path.dirname(__file__)
 root_dir = os.path.join(script_dir, "..", "..")
 
 files_map = {
-    "Src": [
-        "hal/libraries/drivers/src/apm32f10x_adc.c",  #
-        "hal/libraries/drivers/src/apm32f10x_bakpr.c",
-        "hal/libraries/drivers/src/apm32f10x_can.c",
-        "hal/libraries/drivers/src/apm32f10x_crc.c",
-        "hal/libraries/drivers/src/apm32f10x_dac.c",
-        "hal/libraries/drivers/src/apm32f10x_dbgmcu.c",
-        "hal/libraries/drivers/src/apm32f10x_dma.c",
-        "hal/libraries/drivers/src/apm32f10x_dmc.c",
-        "hal/libraries/drivers/src/apm32f10x_eint.c",
-        "hal/libraries/drivers/src/apm32f10x_fmc.c",
-        "hal/libraries/drivers/src/apm32f10x_gpio.c",
-        "hal/libraries/drivers/src/apm32f10x_i2c.c",
-        "hal/libraries/drivers/src/apm32f10x_iwdt.c",
-        "hal/libraries/drivers/src/apm32f10x_misc.c",
-        "hal/libraries/drivers/src/apm32f10x_pmu.c",
-        "hal/libraries/drivers/src/apm32f10x_qspi.c",
-        "hal/libraries/drivers/src/apm32f10x_rcm.c",
-        "hal/libraries/drivers/src/apm32f10x_rtc.c",
-        "hal/libraries/drivers/src/apm32f10x_sci2c.c",
-        "hal/libraries/drivers/src/apm32f10x_sdio.c",
-        "hal/libraries/drivers/src/apm32f10x_smc.c",
-        "hal/libraries/drivers/src/apm32f10x_spi.c",
-        "hal/libraries/drivers/src/apm32f10x_tmr.c",
-        "hal/libraries/drivers/src/apm32f10x_usart.c",
-        "hal/libraries/drivers/src/apm32f10x_wwdt.c",
-        "core/src/system_apm32f10x.c",
-        "core/src/main.c"
-    ],
+    "Src": {
+        "application/user/core": [
+            "core/src/main.c",
+        ],
+        "drivers/hal": [
+            "hal/libraries/drivers/src/apm32f10x_adc.c",
+            "hal/libraries/drivers/src/apm32f10x_bakpr.c",
+            "hal/libraries/drivers/src/apm32f10x_can.c",
+            "hal/libraries/drivers/src/apm32f10x_crc.c",
+            "hal/libraries/drivers/src/apm32f10x_dac.c",
+            "hal/libraries/drivers/src/apm32f10x_dbgmcu.c",
+            "hal/libraries/drivers/src/apm32f10x_dma.c",
+            "hal/libraries/drivers/src/apm32f10x_dmc.c",
+            "hal/libraries/drivers/src/apm32f10x_eint.c",
+            "hal/libraries/drivers/src/apm32f10x_fmc.c",
+            "hal/libraries/drivers/src/apm32f10x_gpio.c",
+            "hal/libraries/drivers/src/apm32f10x_i2c.c",
+            "hal/libraries/drivers/src/apm32f10x_iwdt.c",
+            "hal/libraries/drivers/src/apm32f10x_misc.c",
+            "hal/libraries/drivers/src/apm32f10x_pmu.c",
+            "hal/libraries/drivers/src/apm32f10x_qspi.c",
+            "hal/libraries/drivers/src/apm32f10x_rcm.c",
+            "hal/libraries/drivers/src/apm32f10x_rtc.c",
+            "hal/libraries/drivers/src/apm32f10x_sci2c.c",
+            "hal/libraries/drivers/src/apm32f10x_sdio.c",
+            "hal/libraries/drivers/src/apm32f10x_smc.c",
+            "hal/libraries/drivers/src/apm32f10x_spi.c",
+            "hal/libraries/drivers/src/apm32f10x_tmr.c",
+            "hal/libraries/drivers/src/apm32f10x_usart.c",
+            "hal/libraries/drivers/src/apm32f10x_wwdt.c",
+        ],
+        "drivers/cmsis": [
+            "core/src/system_apm32f10x.c",
+        ],
+    },
     "Inc": [
-        "core/inc",  #
+        "core/inc",
         "hal/libraries/cmsis/inc",
         "hal/libraries/cmsis_core/inc",
-        "hal/libraries/drivers/inc"
+        "hal/libraries/drivers/inc",
     ]
 }
 
@@ -92,9 +99,16 @@ def parse_startup_file(project: dict) -> dict:
 
 
 def parse_files(project: dict) -> dict:
-    files = files_map
-    for module in project["Modules"]:
-        files["Src"].append(f"core/src/{module.lower()}.c")
+    files = {"Src": [], "Inc": files_map["Inc"]}
+    if project["TargetProject"] == "MDK-Arm":
+        files = files_map
+        for module in project["Modules"]:
+            files["Src"]["application/user/core"].append(f"core/src/{module.lower()}.c")
+    else:
+        for _, value in files_map["Src"].items():
+            files["Src"].extend(value)
+        for module in project["Modules"]:
+            files["Src"].append(f"core/src/{module.lower()}.c")
     return files
 
 
@@ -212,7 +226,10 @@ def deploy(project: dict, output_dir: str):
     # startup file
     startup_file_path = parse_startup_file(project)["Path"]
     startup_file_name = parse_startup_file(project)["Name"]
-    dest = f"{output_dir}/{startup_file_name}"
+    if project["TargetProject"] == "MDK-Arm":
+        dest = f"{output_dir}/mdk-arm/{startup_file_name}"
+    else:
+        dest = f"{output_dir}/{startup_file_name}"
     if not os.path.exists(dest):
         shutil.copy(startup_file_path, dest)
 
@@ -226,3 +243,58 @@ def deploy(project: dict, output_dir: str):
     dest = f"{output_dir}/core/src/system_apm32f10x.c"
     if not os.path.exists(dest):
         shutil.copy(f"{root_dir}/tools/coder/res/system_apm32f10x.c", dest)
+
+
+def generate_mdk_arm_project(project: dict, keil_utils) -> str:
+    """
+    Generate MDK project files for ARM.
+
+    Args:
+        project (dict): Project information.
+        output_dir (str): Output directory.
+    """
+
+    # version = project["TargetProjectMinVersion"]
+    chip = project["TargetChip"][:11]
+    chip_type = chip[:9]
+
+    template_file = f"{script_dir}/templates/MDK-Arm/{chip_type}/{chip}.uvprojx"
+    if os.path.isfile(template_file) is False:
+        Exception(f"Template file {template_file} not found.")
+
+    tree = etree.parse(template_file)
+    target_name = project['Name']
+
+    root = tree.getroot()
+    out = []
+    out.append('<?xml version="1.0" encoding="UTF-8" standalone="no" ?>\n')
+
+    tree.find('Targets/Target/TargetName').text = target_name
+    tree.find('Targets/Target/TargetOption/TargetCommonOption/OutputName').text = target_name
+    tree.find('Targets/Target/TargetOption/TargetCommonOption/AfterMake/RunUserProg1').text = "1"
+    tree.find('Targets/Target/TargetOption/TargetCommonOption/AfterMake/UserProg1Name'
+              ).text = f"fromelf --bin !L --output {target_name}.bin"
+    tree.find('Targets/Target/TargetOption/TargetArmAds/Cads/VariousControls/Define').text = ', '.join(
+        parse_marco(project))
+
+    files = parse_files(project)
+
+    incs = []
+    for inc in files["Inc"]:
+        incs.append(f'../{inc}'.replace('/', '\\'))
+    tree.find('Targets/Target/TargetOption/TargetArmAds/Cads/VariousControls/IncludePath').text = ';'.join(incs)
+
+    groups = tree.find('Targets/Target/Groups')
+    if groups is None:
+        groups = etree.SubElement(tree.find('Targets/Target'), 'Groups')
+
+    startup_file = parse_startup_file(project)
+    keil_utils.add_group(groups, "application/mdk", [startup_file["Name"]], "")
+
+    for key, value in files_map["Src"].items():
+        keil_utils.add_group(groups, key, value, "../")
+
+    keil_utils.xml_indent(root)
+    out.append(etree.tostring(root, encoding='utf-8', short_empty_elements=False).decode())
+
+    return "\n".join(out)
