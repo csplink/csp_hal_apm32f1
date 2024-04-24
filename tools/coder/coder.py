@@ -245,7 +245,7 @@ def deploy(project: dict, output_dir: str):
         shutil.copy(f"{root_dir}/tools/coder/res/system_apm32f10x.c", dest)
 
 
-def generate_mdk_arm_project(project: dict, keil_utils) -> str:
+def generate_mdk_arm_project(project: dict, keil_tree: etree.ElementTree, keil_utils) -> str:
     """
     Generate MDK project files for ARM.
 
@@ -262,7 +262,10 @@ def generate_mdk_arm_project(project: dict, keil_utils) -> str:
     if os.path.isfile(template_file) is False:
         Exception(f"Template file {template_file} not found.")
 
-    tree = etree.parse(template_file)
+    if keil_tree is None:
+        tree = etree.parse(template_file)
+    else:
+        tree = keil_tree
     target_name = project['Name']
 
     root = tree.getroot()

@@ -34,6 +34,17 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 {%- endblock %}
 
 {%- block toolchains %}
+{%- if ToolchainsPath %}
+set(CMAKE_C_COMPILER "{{ToolchainsPath}}/bin/arm-none-eabi-gcc")
+set(CMAKE_C_COMPILER_WORKS TRUE)
+set(CMAKE_ASM_COMPILER "{{ToolchainsPath}}/bin/arm-none-eabi-gcc")
+set(CMAKE_ASM_COMPILER_WORKS TRUE)
+set(CMAKE_CXX_COMPILER "{{ToolchainsPath}}/bin/arm-none-eabi-g++")
+set(CMAKE_CXX_COMPILER_WORKS TRUE)
+set(CMAKE_OBJCOPY "{{ToolchainsPath}}/bin/arm-none-eabi-objcopy")
+set(CMAKE_OBJDUMP "{{ToolchainsPath}}/bin/arm-none-eabi-objdump")
+set(CMAKE_SIZE "{{ToolchainsPath}}/bin/arm-none-eabi-size")
+{%- else %}
 set(CMAKE_C_COMPILER "arm-none-eabi-gcc")
 set(CMAKE_C_COMPILER_WORKS TRUE)
 set(CMAKE_ASM_COMPILER "arm-none-eabi-gcc")
@@ -43,6 +54,7 @@ set(CMAKE_CXX_COMPILER_WORKS TRUE)
 set(CMAKE_OBJCOPY "arm-none-eabi-objcopy")
 set(CMAKE_OBJDUMP "arm-none-eabi-objdump")
 set(CMAKE_SIZE "arm-none-eabi-size")
+{%- endif %}
 {%- endblock %}
 
 {%- block project_info %}
@@ -50,9 +62,9 @@ project({{Project.Name}} VERSION 0.0.0 LANGUAGES ASM C)
 {%- endblock %}
 
 {%- block flags %}
-set(CMAKE_CXX_FLAGS "-mcpu=cortex-m3 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -std=c++11")
-set(CMAKE_C_FLAGS "-mcpu=cortex-m3 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -std=gnu99")
-set(CMAKE_EXE_LINKER_FLAGS "-mcpu=cortex-m3 -mthumb -mthumb-interwork -Wl,--gc-sections -Wl,--print-memory-usage -T${CMAKE_SOURCE_DIR}/{{Project['TargetChip']}}.lds -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map")
+set(CMAKE_CXX_FLAGS "-mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections -std=c++11")
+set(CMAKE_C_FLAGS "-mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections -std=gnu99")
+set(CMAKE_EXE_LINKER_FLAGS "-mcpu=cortex-m3 -mthumb -specs=nano.specs -Wl,--gc-sections -lnosys -Wl,--print-memory-usage -T${CMAKE_SOURCE_DIR}/{{Project['TargetChip']}}.lds -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref")
 add_definitions(
     {%- for marco in CoderData['Marco']%}
     -D{{marco}}
