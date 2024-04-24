@@ -31,6 +31,7 @@ import xml.etree.ElementTree as etree
 
 script_dir = os.path.dirname(__file__)
 root_dir = os.path.join(script_dir, "..", "..")
+version = "v0.0.0.2"
 
 files_map = {
     "Src": {
@@ -197,7 +198,13 @@ def parse(project: dict) -> dict:
     marco = parse_marco(project)
     startup_file = parse_startup_file(project)
     files = parse_files(project)
-    return {"GpioConfigs": gpio_configs, "Marco": marco, "StartupFile": startup_file, "Files": files}
+    return {
+        "GpioConfigs": gpio_configs,
+        "Marco": marco,
+        "StartupFile": startup_file,
+        "Files": files,
+        "Version": version
+    }
 
 
 def deploy(project: dict, output_dir: str):
@@ -245,7 +252,7 @@ def deploy(project: dict, output_dir: str):
         shutil.copy(f"{root_dir}/tools/coder/res/system_apm32f10x.c", dest)
 
 
-def generate_mdk_arm_project(project: dict, keil_tree: etree.ElementTree, keil_utils) -> str:
+def generate_mdk_arm_project(project: dict, min_version: str, keil_tree: etree.ElementTree, keil_utils) -> str:
     """
     Generate MDK project files for ARM.
 
