@@ -53,15 +53,14 @@ toolchain_end()
 {%- endblock %}
 
 {%- block flags %}
-add_ldflags("-mcpu=cortex-m3", "-mthumb", "-specs=nano.specs", "-Wl,--gc-sections", "-lnosys", "-Wl,--print-memory-usage", "-T{{Project['TargetChip']}}.lds", {force = true})
-add_cxflags("-mcpu=cortex-m3", "-mthumb", "-ffunction-sections", "-fdata-sections", {force = true})
-add_asflags("-mcpu=cortex-m3", "-mthumb", "-ffunction-sections", "-fdata-sections", {force = true})
+add_cxxflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", "-Wall", "-std=c++11", {force = true})
+add_cflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", "-Wall", "-std=gnu99", {force = true})
+add_asflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", "-Wall", "-x", "assembler-with-cpp", {force = true})
+add_ldflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-specs=nano.specs", "-specs=nosys.specs", "-Wl,--gc-sections", "-Wl,--print-memory-usage", "-T{{Project['TargetChip']}}.lds", {force = true})
 add_defines("{{CoderData['Marco']|join('", "')}}", {force = true})
 {%- endblock %}
 
 {%- block target_configs %}
-    set_warnings("allextra")
-    set_warnings("error")
     set_languages("c99")
     set_languages("cxx11")
 
@@ -87,7 +86,7 @@ add_defines("{{CoderData['Marco']|join('", "')}}", {force = true})
         import("core.project.config")
         local artifact_dir = path.join(config.buildir(), config.plat(), config.arch(), config.mode())
         local map = path.join(artifact_dir, target:name() .. ".map")
-        target:add("ldflags", string.format("-Wl,-Map=%s,--cref", map)  , {force = true})
+        target:add("ldflags", string.format("-Wl,-Map=%s,--cref", map), {force = true})
     end)
 
     after_link(function(target)
