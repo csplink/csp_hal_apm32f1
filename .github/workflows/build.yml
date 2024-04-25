@@ -67,6 +67,8 @@ jobs:
         shell: bash
         run: |
           export PATH="${TOOLCHAINS_PATH}:${PATH}"
+          ls ${TOOLCHAINS_PATH}
+          arm-none-eabi-gcc -v
           pushd ${{ matrix.target }}
             xmake f -m release --buildir=build.xmake -P . -y
             xmake -j$(nproc) -v -P . -y
