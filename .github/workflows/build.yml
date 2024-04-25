@@ -75,6 +75,13 @@ jobs:
             xmake -j$(nproc) -v -P . -y
           popd
 
+      - name: ⬆️ upload xmake artifact
+        uses: actions/upload-artifact@v4
+        if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.draft == false
+        with:
+          name: xmake-artifact
+          path: ${{ matrix.target }}/build.xmake/cross/arm
+
       - name: 👷 build cmake
         shell: bash
         run: |
@@ -84,7 +91,25 @@ jobs:
             pushd build.cmake
               cmake .. -DCMAKE_BUILD_TYPE=Release
               make -j$(nproc) VERBOSE=1
+              mkdir -pv cross/arm/release
+              mv *.elf cross/arm/release/
+              mv *.bin cross/arm/release/
+              mv *.hex cross/arm/release/
+              mv *.map cross/arm/release/
+
               cmake .. -DCMAKE_BUILD_TYPE=Debug
               make -j$(nproc) VERBOSE=1
+              mkdir -pv cross/arm/debug
+              mv *.elf cross/arm/debug/
+              mv *.bin cross/arm/debug/
+              mv *.hex cross/arm/debug/
+              mv *.map cross/arm/debug/
             popd
           popd
+
+      - name: ⬆️ upload cmake artifact
+        uses: actions/upload-artifact@v4
+        if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.draft == false
+        with:
+          name: cmake-artifact
+          path: ${{ matrix.target }}/build.cmake/cross/arm
