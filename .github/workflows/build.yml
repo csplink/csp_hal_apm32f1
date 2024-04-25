@@ -36,6 +36,7 @@ jobs:
           - examples/led
     env:
       XMAKE_ROOT: "y"
+      TOOLCHAINS_PATH: "/opt/arm-none-eabi/bin/"
 
     steps:
       - name: ⬇️ checkout csp_hal_apm32f1
@@ -59,12 +60,13 @@ jobs:
           pushd /opt
             wget https://github.com/csplink/toolchains/releases/download/arm-none-eabi/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
             tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-            echo "/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/bin/:${PATH}" >> ${GITHUB_PATH}
+            mv /opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi /opt/arm-none-eabi
           popd
 
       - name: 👷 build xmake
         shell: bash
         run: |
+          export PATH="${TOOLCHAINS_PATH}:${PATH}"
           pushd ${{ matrix.target }}
             xmake f -m release --buildir=build.xmake -P . -y
             xmake -j$(nproc) -v -P . -y
@@ -75,6 +77,7 @@ jobs:
       - name: 👷 build cmake
         shell: bash
         run: |
+          export PATH="${TOOLCHAINS_PATH}:${PATH}"
           pushd ${{ matrix.target }}
             mkdir -pv build.cmake
             pushd build.cmake
