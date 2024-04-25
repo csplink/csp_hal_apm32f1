@@ -57,9 +57,9 @@ jobs:
         run: |
           mkdir -pv /opt
           pushd /opt
-          wget https://github.com/csplink/toolchains/releases/download/arm-none-eabi/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-          tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-          export PATH="/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/bin/:${PATH}"
+            wget https://github.com/csplink/toolchains/releases/download/arm-none-eabi/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+            tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+            echo "/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/bin/:${PATH}" >> ${GITHUB_PATH}
           popd
 
       - name: 👷 build xmake
