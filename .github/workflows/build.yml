@@ -43,23 +43,44 @@ jobs:
         with:
           submodules: true
 
-      - name: ⬇️ checkout csp_repo
-        uses: actions/checkout@v4
-        with:
-          repository: csplink/csp_repo
-          path: .csplink/csp_repo
-          submodules: true
-
       - name: ⬇️ install xmake
         uses: xmake-io/github-action-setup-xmake@v1
 
-      - name: 👷 build
+      - name: ⬇️ install cmake
         shell: bash
         run: |
-          source .csplink/csp_repo/tools/env.sh
+          sudo apt-get update
+          sudo apt-get install -y cmake
+
+      - name: ⬇️ install toolchains
+        shell: bash
+        run: |
+          mkdir -pv /opt
+          pushd /opt
+          wget https://github.com/csplink/toolchains/releases/download/arm-none-eabi/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+          tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+          export PATH="/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/bin/:${PATH}"
+          popd
+
+      - name: 👷 build xmake
+        shell: bash
+        run: |
           pushd ${{ matrix.target }}
-            xmake f -m release -P . -y
+            xmake f -m release --buildir=build.xmake -P . -y
             xmake -j$(nproc) -v -P . -y
-            xmake f -m debug -P . -y
+            xmake f -m debug --buildir=build.xmake -P . -y
             xmake -j$(nproc) -v -P . -y
+          popd
+
+      - name: 👷 build cmake
+        shell: bash
+        run: |
+          pushd ${{ matrix.target }}
+            mkdir -pv build.cmake
+            pushd build.cmake
+              cmake .. -DCMAKE_BUILD_TYPE=Release
+              make -j$(nproc) VERBOSE=1
+              cmake .. -DCMAKE_BUILD_TYPE=Debug
+              make -j$(nproc) VERBOSE=1
+            popd
           popd
