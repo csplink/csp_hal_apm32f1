@@ -60,7 +60,7 @@ jobs:
           pushd /opt
             wget https://github.com/csplink/toolchains/releases/download/arm-none-eabi/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
             tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-            mv /opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi /opt/arm-none-eabi
+            mv /opt/gcc-arm-none-eabi-10.3-2021.10 /opt/arm-none-eabi
           popd
 
       - name: 👷 build xmake
