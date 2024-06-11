@@ -1,0 +1,21 @@
+Author:
+  Name: xqyjlj
+  Email: xqyjlj@126.com
+  Website:
+    Blog: https://xqyjlj.github.io/
+    Github: https://github.com/xqyjlj
+Name: csp_hal_apm32f1
+Version: v0.0.2
+License: Apache-2.0
+Type: HAL
+Vendor: Geehy
+VendorUrl:
+  en:
+  zh_CN: https://geehy.com
+Description:
+  en:
+  zh_CN: Chip Support Package for APM32F1 for CSP Software
+Url:
+  en:
+  zh_CN: https://geehy.com
+SupportContact: xqyjlj@126.com
