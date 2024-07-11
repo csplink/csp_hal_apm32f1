@@ -25,39 +25,42 @@
 {%- extends "csp-file-base.c.j2" %}
 
 {%- block includes %}
+
 #include "csplink/gpio.h"
-{%- endblock %}
+{%  endblock %}
 
 {%- block function_body %}
+
 void csplink_gpio_init(void)
 {
-    GPIO_Config_T config = { 0 };
-{%  set gpio_configs = CoderData["GpioConfigs"] %}
-{%- set gpio_infos = gpio_configs["Infos"] %}
-    /* enable the {{gpio_configs["Clock"]["Names"]|join(",")}} ports clock */
-    RCM_EnableAPB2PeriphClock({{gpio_configs["Clock"]["Values"]|join(" | ")}});
+    GPIO_Config_T config = {0};
 
-{%- for gpiox in gpio_infos|sort %}
-    {%- for pin in gpio_infos[gpiox]|sort %}
-{%  set pin_info = gpio_infos[gpiox][pin] %}
+    /*!< enable the {{Project|gpio_clock_names|join(", ")}} clock */
+    RCM_EnableAPB2PeriphClock({{Project|gpio_clocks|join(" | ")}});
+
+{%- set ports = Project|gpio_ports %}
+{%- for port in ports %}
+    {%- for pin_group in Project|gpio_pin_groups_by_port(port) %}
+
     /**************************************************************************/
-        {%- if pin_info["Comment"] %}
-    /* configure the {{pin_info["Port"]}}-->{{gpiox}}, {{pin_info["Pin"]}}-->{{pin}} */
-        {%- else %}
-    /* configure the {{pin_info["Port"]}}, {{pin_info["Pin"]}} */
+    /*!< configure the {{port}}<{{pin_group|join(", ")}}> */
+
+        {%- set level_map = Project|gpio_pin_level_map(port, pin_group) %}
+        {%- if level_map %}
+            {%- for level, pins in level_map.items() %}
+    GPIO_WriteBitValue({{port}}, {{pins|join(" | ")}}, {{level}});
+            {%- endfor %}
         {%- endif %}
 
-        {%- if pin_info["Level"] %}
-    GPIO_WriteBitValue({{pin_info["Port"]}}, {{pin_info["Pin"]}}, {{pin_info["Level"]}});
-        {%- endif %}
+    config.pin = {{pin_group|join(" | ")}};
+    config.mode = {{Project|gpio_pin_mode(port, pin_group[0])}};
 
-    config.pin = {{pin_info["Pin"]}};
-    config.mode = {{pin_info["Mode"]}};
-        {%- if pin_info["Speed"] %}
-    config.speed = {{pin_info["Speed"]}};
+        {%- set speed = Project|gpio_pin_speed(port, pin_group[0]) %}
+        {%- if speed %}
+    config.speed = {{speed}};
         {%- endif %}
-    GPIO_Config({{pin_info["Port"]}}, &config);
+    GPIO_Config({{port}}, &config);
     {%- endfor %}
-    {%- endfor %}
+{%- endfor %}
 }
-{%- endblock %}
+{%  endblock %}

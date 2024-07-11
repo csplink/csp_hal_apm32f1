@@ -26,7 +26,6 @@
 
 {%- block project_config %}
 set_project("{{Project.Name}}")
-set_xmakever("2.8.6")
 set_version("0.0.0")
 
 set_config("plat", "cross")
@@ -57,7 +56,7 @@ add_cxxflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sect
 add_cflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", "-Wall", "-std=gnu99", {force = true})
 add_asflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", "-Wall", "-x", "assembler-with-cpp", {force = true})
 add_ldflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-specs=nano.specs", "-specs=nosys.specs", "-Wl,--gc-sections", "-Wl,--print-memory-usage", "-T{{Project['TargetChip']}}.lds", {force = true})
-add_defines("{{CoderData['Marco']|join('", "')}}", {force = true})
+add_defines("{{Project|make_marco|join('", "')}}", {force = true})
 {%- endblock %}
 
 {%- block target_configs %}
@@ -70,13 +69,13 @@ add_defines("{{CoderData['Marco']|join('", "')}}", {force = true})
 {%- endblock %}
 
 {%- block target_files %}
-    {%- for file in CoderData['Files']['Src']%}
+    {%- for file in Project|make_src_files %}
     add_files("{{file}}")
     {%- endfor %}
 {% set _ = "" %}
-    add_files("{{CoderData['StartupFile']['Name']}}")
+    add_files("{{Project|make_startup_file}}")
 {% set _ = "" %}
-    {%- for dir in CoderData['Files']['Inc']%}
+    {%- for dir in Project|make_inc_dirs %}
     add_includedirs("{{dir}}", {public = true})
     {%- endfor %}
 {%- endblock %}
