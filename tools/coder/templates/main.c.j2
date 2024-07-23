@@ -27,14 +27,14 @@
 {%- block includes %}
 
 #include "apm32f10x.h"
-{%- for module in Project["Modules"]|sort %}
+{%- for module in project["modules"]|sort %}
 #include "csplink/{{module|lower}}.h"
 {%- endfor %}
 {%  endblock %}
 
 {%- block main_init_body %}
 
-{%- for module in Project["Modules"]|sort %}
+{%- for module in project["modules"]|sort %}
     csplink_{{module|lower}}_init();
 {%  endfor %}
 {%- endblock %}

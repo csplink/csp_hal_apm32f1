@@ -35,17 +35,17 @@ void csplink_gpio_init(void)
 {
     GPIO_Config_T config = {0};
 
-    /*!< enable the {{Project|gpio_clock_names|join(", ")}} clock */
-    RCM_EnableAPB2PeriphClock({{Project|gpio_clocks|join(" | ")}});
+    /*!< enable the {{project|gpio_clock_names|join(", ")}} clock */
+    RCM_EnableAPB2PeriphClock({{project|gpio_clocks|join(" | ")}});
 
-{%- set ports = Project|gpio_ports %}
+{%- set ports = project|gpio_ports %}
 {%- for port in ports %}
-    {%- for pin_group in Project|gpio_pin_groups_by_port(port) %}
+    {%- for pin_group in project|gpio_pin_groups_by_port(port) %}
 
     /**************************************************************************/
     /*!< configure the {{port}}<{{pin_group|join(", ")}}> */
 
-        {%- set level_map = Project|gpio_pin_level_map(port, pin_group) %}
+        {%- set level_map = project|gpio_pin_level_map(port, pin_group) %}
         {%- if level_map %}
             {%- for level, pins in level_map.items() %}
     GPIO_WriteBitValue({{port}}, {{pins|join(" | ")}}, {{level}});
@@ -53,9 +53,9 @@ void csplink_gpio_init(void)
         {%- endif %}
 
     config.pin = {{pin_group|join(" | ")}};
-    config.mode = {{Project|gpio_pin_mode(port, pin_group[0])}};
+    config.mode = {{project|gpio_pin_mode(port, pin_group[0])}};
 
-        {%- set speed = Project|gpio_pin_speed(port, pin_group[0]) %}
+        {%- set speed = project|gpio_pin_speed(port, pin_group[0]) %}
         {%- if speed %}
     config.speed = {{speed}};
         {%- endif %}

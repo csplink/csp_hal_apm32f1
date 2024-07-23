@@ -34,10 +34,10 @@
 {% endblock %}
 
 {%- block define %}
-{%- set ports = Project|gpio_ports %}
+{%- set ports = project|gpio_ports %}
 {%- for port in ports %}
-    {%- for pin in Project|gpio_pins_by_port(port) %}
-        {%- set alias = Project|gpio_pin_alias(port, pin) %}
+    {%- for pin in project|gpio_pins_by_port(port) %}
+        {%- set alias = project|gpio_pin_alias(port, pin) %}
         {%- if alias %}
 
 #define {{alias}}_PORT {{port}} /*!< Alias for {{port}} */
