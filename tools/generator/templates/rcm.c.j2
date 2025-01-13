@@ -1,0 +1,126 @@
+{#
+ # Licensed under the GNU General Public License v. 3 (the "License")
+ # You may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     https://www.gnu.org/licenses/gpl-3.0.html
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+ #
+ # @author      xqyjlj
+ # @file        rcm.c.j2
+ #
+ # Change Logs:
+ # Date           Author       Notes
+ # ------------   ----------   -----------------------------------------------
+ # 2024-12-10     xqyjlj       initial version
+ #
+ #}
+{%- extends "csp-file-base.c.j2" %}
+
+{%- block includes %}
+
+#include "csp/rcm.h"
+{%  endblock %}
+
+{%- block function_body %}
+
+void csp_rcm_init(void)
+{
+    {%- if CSP.project|rcm_prefetch_buffer_enabled_t == 'geehy.rcm_prefetch_buffer_enable' %}
+    FMC_EnablePrefetchBuffer();
+    {%- endif %}
+
+    /*!< set flash latency. */
+    FMC->CTRL1_B.WS = {{ CSP.project|rcm_flash_latency }}U;
+    while(FMC->CTRL1_B.WS != {{ CSP.project|rcm_flash_latency }}U)
+    {
+    }
+
+{%- if CSP.project|rcm_hse_used %}
+{##}
+    {%- set rcm_hse_clock_source = CSP.project|rcm_hse_clock_source_t %}
+    {%- if rcm_hse_clock_source == 'geehy.rcm_hse_clock_source_oscillator' %}
+    RCM_ConfigHSE(RCM_HSE_OPEN);
+    {%- else %}
+    RCM_ConfigHSE(RCM_HSE_BYPASS);
+    {%- endif %}
+
+    /*!< wait till HSE is ready. */
+    while(RCM->CTRL_B.HSERDYFLG != 1U)
+    {
+    }
+{%- endif %}
+
+{%- if CSP.project|rcm_hsi_used %}
+{##}
+    RCM_ConfigHSITrim({{ CSP.project|rcm_hsi_calibration_t }}U);
+    RCM_EnableHSI();
+
+    /*!< wait till HSI is ready. */
+    while(RCM->CTRL_B.HSIRDYFLG != 1U)
+    {
+    }
+{%- endif %}
+
+{%- if CSP.project|rcm_lse_used %}
+{##}
+    {%- set rcm_lse_clock_source = CSP.project|rcm_lse_clock_source_t %}
+    {%- if rcm_lse_clock_source == 'geehy.rcm_lse_clock_source_oscillator' %}
+    RCM_ConfigLSE(RCM_LSE_OPEN);
+    {%- else %}
+    RCM_ConfigLSE(RCM_LSE_BYPASS);
+    {%- endif %}
+
+    /*!< wait till LSE is ready. */
+    while(RCM->CTRL_B.LSERDYFLG != 1U)
+    {
+    }
+{%- endif %}
+
+{%- if CSP.project|rcm_lse_used %}
+{##}
+    RCM_EnableLSI();
+
+    /*!< wait till LSI is ready. */
+    while(RCM->CTRL_B.LSIRDYFLG != 1U)
+    {
+    }
+{%- endif %}
+
+{%- if CSP.project|rcm_pll_used %}
+{##}
+    RCM_ConfigPLL({{ CSP.project|rcm_pll_clk_selector }}, {{ CSP.project|rcm_pll_mul }});
+    RCM_EnablePLL();
+
+    /*!< wait till PLL is ready. */
+    while(RCM->CTRL_B.PLL1RDYFLG != 1U)
+    {
+    }
+{%- endif %}
+
+    RCM_ConfigAHB({{ CSP.project|rcm_ahb_div }});
+    RCM_ConfigAPB1({{ CSP.project|rcm_apb1_div }});
+    RCM_ConfigAPB2({{ CSP.project|rcm_apb2_div }});
+
+    RCM_ConfigSYSCLK({{ CSP.project|rcm_system_clk_selector }});
+
+    /*!< wait till SYSCLK is ready. */
+    while(RCM_ReadSYSCLKSource() != {{ CSP.project|rcm_system_clk_selector }})
+    {
+    }
+
+    SystemCoreClock = {{ CSP.project|rcm_sys_timer_clk_out_t|int }}U;
+
+{%- if CSP.project|rcm_mco_enabled_t(false) %}
+{##}
+    RCM_ConfigMCO({{ CSP.project|rcm_mco_clk_selector }});
+{%- endif %}
+}
+{%  endblock %}

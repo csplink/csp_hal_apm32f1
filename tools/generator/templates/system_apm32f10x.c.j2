@@ -1,0 +1,155 @@
+{#
+ # Licensed under the GNU General Public License v. 3 (the "License")
+ # You may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     https://www.gnu.org/licenses/gpl-3.0.html
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+ #
+ # @author      xqyjlj
+ # @file        system_apm32f10x.c.j2
+ #
+ # Change Logs:
+ # Date           Author       Notes
+ # ------------   ----------   -----------------------------------------------
+ # 2024-12-12     xqyjlj       initial version
+ #
+ #}
+{%- extends "csp-file-base.c.j2" %}
+
+{%- block includes %}
+
+#include "apm32f10x.h"
+#include "apm32f10x_rcm.h"
+#include "system_apm32f10x.h"
+{%  endblock %}
+
+
+{%- block define %}
+
+#if !defined  (HSE_VALUE)
+# define HSE_VALUE (8000000U) /*!< Default value of the External oscillator in Hz. */
+#endif
+
+#if !defined  (HSI_VALUE)
+# define HSI_VALUE (8000000U) /*!< Default value of the Internal oscillator in Hz. */
+#endif
+{%  endblock %}
+
+{%- block variables %}
+
+uint32_t SystemCoreClock = 0;
+{%  endblock %}
+
+{%- block function_body %}
+
+void SystemInit(void)
+{
+    RCM_Reset();
+    SystemCoreClockUpdate();
+}
+
+void SystemCoreClockUpdate(void)
+{
+#ifdef APM32F10X_CL
+    uint32_t sysClock, pllMull, pllSource, pll2Mull, pllPsc1, pllPsc2;
+#else
+    uint32_t sysClock, pllMull, pllSource;
+#endif
+
+    /*!< get sys clock */
+    sysClock = RCM->CFG_B.SCLKSEL;
+
+    switch (sysClock)
+    {
+    /*!< sys clock is HSI */
+    case 0:
+        sysClock = HSI_VALUE;
+        break;
+
+    /*!< sys clock is HSE */
+    case 1:
+        sysClock = HSE_VALUE;
+        break;
+
+    /*!< sys clock is PLL */
+    case 2:
+#ifdef APM32F10X_CL
+        /*!< NOTE : PLL is the same as PLL1 */
+        pllSource = RCM->CFG_B.PLL1SRCSEL;
+
+        /*!< PLL entry clock source is HSE */
+        if (pllSource)
+        {
+            /*!< PLLPSC1 prescaler factor */
+            pllPsc1 = (RCM->CFG2_B.PLLPSC1 + 1);
+
+            /*!< PLL entry clock source is PLL2 */
+            if (RCM->CFG2_B.PLLPSC1SRC)
+            {
+                pll2Mull = (RCM->CFG2_B.PLL2MUL != 15) ? (RCM->CFG2_B.PLL2MUL + 2) : 20;
+                pllPsc2 = RCM->CFG2_B.PLLPSC2 + 1;
+
+                pllSource = ((HSE_VALUE / pllPsc2) * pll2Mull) / pllPsc1;
+            }
+            /*!< PLL entry clock source is HSE */
+            else
+            {
+                pllSource = HSE_VALUE / pllPsc1;
+            }
+        }
+        /*!< PLL entry clock source is HSI/2 */
+        else
+        {
+            pllSource = HSI_VALUE >> 1;
+        }
+
+        pllMull = RCM->CFG_B.PLL1MULCFG;
+        if (pllMull == 13)
+        {
+            /*!< For 6.5 multiplication factor */
+            sysClock = pllSource * pllMull / 2;
+        }
+        else
+        {
+            sysClock = pllSource * (pllMull + 2);
+        }
+#else
+        pllMull = RCM->CFG_B.PLL1MULCFG + 2;
+        pllSource = RCM->CFG_B.PLL1SRCSEL;
+
+        /*!< PLL entry clock source is HSE */
+        if (pllSource == BIT_SET)
+        {
+            sysClock = HSE_VALUE * pllMull;
+
+            /*!< HSE clock divided by 2 */
+            if (pllSource == RCM->CFG_B.PLLHSEPSC)
+            {
+                sysClock >>= 1;
+            }
+        }
+        /*!< PLL entry clock source is HSI/2 */
+        else
+        {
+            sysClock = (HSI_VALUE >> 1) * pllMull;
+        }
+#endif
+        break;
+
+    default:
+        sysClock = HSI_VALUE;
+        break;
+    }
+
+    SystemCoreClock = sysClock;
+}
+
+{%  endblock %}

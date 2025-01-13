@@ -1,0 +1,189 @@
+{#
+ # Licensed under the GNU General Public License v. 3 (the "License")
+ # You may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     https://www.gnu.org/licenses/gpl-3.0.html
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ # Copyright (C) 2024-2024 xqyjlj<xqyjlj@126.com>
+ #
+ # @author      xqyjlj
+ # @file        linker_script.lds.j2
+ #
+ # Change Logs:
+ # Date           Author       Notes
+ # ------------   ----------   -----------------------------------------------
+ # 2024-12-11     xqyjlj       initial version
+ #}
+/**
+ * *****************************************************************************
+ *  @author:            {{CSP.author}}
+ *  @file:              {{CSP.file}}
+ *  @brief:             {{CSP.brief}}
+ *  @version:           {{CSP.version}}
+ *  @hal:               {{CSP.project.vendor}}.{{CSP.project.gen.hal}}@{{ CSP.project.gen.halVersion }}
+ *  @project:           {{CSP.project.name}}
+ *  @targetChip:        {{CSP.project.targetChip}}
+ *  @time:              {{CSP.time}}
+ *
+ * *****************************************************************************
+ *  @attention
+ *
+ *  Copyright (C) {{year}} csp software.
+ *  All rights reserved.
+ *
+ * *****************************************************************************
+ */
+
+{%- set info = CSP.project|chip_info %}
+
+/*!< entry point */
+ENTRY(Reset_Handler)
+
+__heap_size__       = {{ CSP.project.gen.linker.defaultHeapSize|hex(4) }};
+__stack_size__      = {{ CSP.project.gen.linker.defaultStackSize|hex(4) }};
+__default_stack__   = {{ (info.ram.addr + info.ram.size )|hex(4) }};
+
+MEMORY
+{
+    FLASH (rx)      : ORIGIN = {{ info.flash.addr|hex }}, LENGTH = {{ info.flash.size|hex }} /*!< {{ info.flash.size//1024 }}K */
+    RAM (xrw)       : ORIGIN = {{ info.ram.addr|hex }}, LENGTH = {{ info.ram.size|hex }} /*!< {{ info.ram.size//1024 }}K */
+}
+
+SECTIONS
+{
+    /*!< the startup code goes first into FLASH */
+    .isr_vector :
+    {
+        . = ALIGN(4);
+        KEEP(*(.isr_vector)) /*!< startup code */
+        . = ALIGN(4);
+    } >FLASH
+
+    /*!< the program code and other data goes into FLASH */
+    .text :
+    {
+        . = ALIGN(4);
+        __text_start__ = .;
+        *(.text)            /*!< .text sections (code) */
+        *(.text*)           /*!< .text* sections (code) */
+        *(.glue_7)          /*!< glue arm to thumb code */
+        *(.glue_7t)         /*!< glue thumb to arm code */
+        *(.eh_frame)
+
+        KEEP (*(.init))
+        KEEP (*(.fini))
+
+        . = ALIGN(4);
+        __text_end__ = .;
+    } >FLASH
+
+    /*!< constant data goes into FLASH */
+    .rodata :
+    {
+        . = ALIGN(4);
+        __rodata_start__ = .;
+        *(.rodata)          /*!< .rodata sections (constants, strings, etc.) */
+        *(.rodata*)         /*!< .rodata* sections (constants, strings, etc.) */
+        . = ALIGN(4);
+        __rodata_end__ = .;
+    } >FLASH
+
+    /*!< ARM exception table goes into FLASH */
+    .ARM.extab :
+    {
+        *(.ARM.extab* .gnu.linkonce.armextab.*)
+    } >FLASH
+
+    /*!< ARM exception index table */
+    .ARM :
+    {
+        __exidx_start = .;
+        *(.ARM.exidx*)
+        __exidx_end = .;
+    } >FLASH
+
+    /*!< pre-initialization array for C++ global/static objects */
+    .preinit_array :
+    {
+        PROVIDE_HIDDEN (__preinit_array_start = .);
+        KEEP (*(.preinit_array*))
+        PROVIDE_HIDDEN (__preinit_array_end = .);
+    } >FLASH
+
+    /*!< initialization array for C++ global/static objects */
+    .init_array :
+    {
+        PROVIDE_HIDDEN (__init_array_start = .);
+        KEEP (*(SORT(.init_array.*)))
+        KEEP (*(.init_array*))
+        PROVIDE_HIDDEN (__init_array_end = .);
+    } >FLASH
+
+    /*!< finalization array for C++ global/static objects */
+    .fini_array :
+    {
+        PROVIDE_HIDDEN (__fini_array_start = .);
+        KEEP (*(SORT(.fini_array.*)))
+        KEEP (*(.fini_array*))
+        PROVIDE_HIDDEN (__fini_array_end = .);
+    } >FLASH
+
+    /*!< initialized data sections goes into RAM, load LMA copy after code */
+    .data :
+    {
+        . = ALIGN(4);
+        __data_start__ = .; /*!< create a global symbol at data start */
+        *(.data)            /*!< .data sections */
+        *(.data*)           /*!< .data* sections */
+
+        . = ALIGN(4);
+        __data_end__ = .;   /*!< define a global symbol at data end */
+    } >RAM AT> FLASH
+
+    /*!< used by the startup to initialize data */
+    __data_flash_start__ = LOADADDR(.data);
+
+    /*!< uninitialized data section */
+    .bss :
+    {
+        . = ALIGN(4);
+        __bss_start__ = .;  /*!< define a global symbol at bss start */
+        *(.bss)
+        *(.bss*)
+        *(COMMON)
+
+        . = ALIGN(4);
+        __bss_end__ = .;    /*!< define a global symbol at bss end */
+    } >RAM
+
+    /*!< user_heap_stack section, used to check that there is enough RAM left */
+    ._user_heap_stack :
+    {
+        . = ALIGN(8);
+        PROVIDE ( end = . );
+        PROVIDE ( _end = . );
+        . = . + __heap_size__;
+        . = . + __stack_size__;
+        . = ALIGN(8);
+    } >RAM
+
+    /*!< remove information from the standard libraries */
+    /DISCARD/ :
+    {
+        libc.a ( * )
+        libm.a ( * )
+        libgcc.a ( * )
+    }
+
+    .ARM.attributes 0 :
+    {
+        *(.ARM.attributes)
+    }
+}

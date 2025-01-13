@@ -1,0 +1,81 @@
+{#
+ # Licensed under the GNU General Public License v. 3 (the "License")
+ # You may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     https://www.gnu.org/licenses/gpl-3.0.html
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+ #
+ # @author      xqyjlj
+ # @file        gpio.c.j2
+ #
+ # Change Logs:
+ # Date           Author       Notes
+ # ------------   ----------   -----------------------------------------------
+ # 2024-03-22     xqyjlj       initial version
+ #
+ #}
+{%- extends "csp-file-base.c.j2" %}
+
+{%- block includes %}
+#include "csp/gpio.h"
+{%- endblock %}
+
+{%- block function_body %}
+void csp_gpio_init(void)
+{
+    GPIO_Config_T config = {0};
+
+    /*!< enable the {{ CSP.project|gpio_clock_names|join(", ") }} clock. */
+    RCM_EnableAPB2PeriphClock({{ CSP.project|gpio_clocks|join(" | ") }});
+
+{%- set ports = CSP.project|gpio_ports %}
+{%- for port in ports %}
+    {%- for pin_group in CSP.project|gpio_pin_groups_by_port(port) %}
+
+    /**************************************************************************/
+    /*!< configure the {{ port }}<{{ pin_group|join(", ") }}>. */
+
+        {%- set level_map = CSP.project|gpio_pin_level_map(port, pin_group) %}
+        {%- if level_map %}
+            {%- for level, pins in level_map.items() %}
+    GPIO_WriteBitValue({{ port }}, {{ pins|join(" | ") }}, {{ level }});
+            {%- endfor %}
+        {%- endif %}
+
+    config.pin = {{ pin_group|join(" | ") }};
+    config.mode = {{ CSP.project|gpio_pin_mode(port, pin_group[0]) }};
+
+        {%- set speed = CSP.project|gpio_pin_speed(port, pin_group[0]) %}
+        {%- if speed %}
+    config.speed = {{ speed }};
+        {%- endif %}
+    GPIO_Config({{ port }}, &config);
+    {%- endfor %}
+{%- endfor %}
+
+{%- set eventout_map = CSP.project|gpio_eventout %}
+    {%- for port, pins in eventout_map.items() %}
+        {%- for pin in pins %}
+
+    /**************************************************************************/
+    /*!< selects the {{ port }}<{{ pin }}> used as event output. */
+    GPIO_ConfigEventOutput({{ port.replace("GPIO", "GPIO_PORT_SOURCE_") }}, {{ pin }});
+        {%- endfor %}
+    {%- endfor %}
+
+    {%- if eventout_map|length > 0 %}
+
+    /**************************************************************************/
+    /*!< enables the event output. */
+    GPIO_EnableEventOutput();
+    {%- endif %}
+}
+{%- endblock %}
