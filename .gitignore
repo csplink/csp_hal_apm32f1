@@ -1,0 +1,35 @@
+#Clion
+.idea/
+cmake-build*/
+
+#vscode
+.vscode/
+
+#keil
+*.uvmpw.*
+DebugConfig/
+Listings/
+Objects/
+RTE/
+*.uvoptx
+*.uvguix.*
+
+#cache
+cache/
+
+# Xmake cache
+.xmake/
+build*/
+
+# MacOS Cache
+.DS_Store
+
+# cmake
+/CMakeLists.txt
+
+# python
+__pycache__
+
+# ozone
+*.jdebug
+*.jdebug.user

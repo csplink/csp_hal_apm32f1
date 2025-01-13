@@ -1,0 +1,10 @@
+BasedOnStyle: Microsoft
+---
+Language: Cpp
+ColumnLimit: 120
+AlignConsecutiveMacros: AcrossEmptyLinesAndComments
+BraceWrapping:
+  AfterExternBlock: false
+PackConstructorInitializers: Never
+IndentPPDirectives: AfterHash
+PPIndentWidth: 1
