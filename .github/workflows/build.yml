@@ -32,11 +32,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target:
-          - examples/led
+        include:
+          - target: examples/led
+            file: led.csp
     env:
-      XMAKE_ROOT: "y"
-      TOOLCHAINS_PATH: "/opt/arm-none-eabi/bin/"
+      QT_ASSUME_STDERR_HAS_CONSOLE: 1
+      QT_QPA_PLATFORM: "offscreen"
 
     steps:
       - name: ⬇️ checkout csp_hal_apm32f1
@@ -44,49 +45,28 @@ jobs:
         with:
           submodules: true
 
-      - name: ⬇️ install xmake
-        uses: xmake-io/github-action-setup-xmake@v1
-
-      - name: ⬇️ install cmake
+      - name: ⬇️ init env packages
         shell: bash
         run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake
+          sudo apt update
+          sudo apt install libegl1-mesa-dev libegl1 wget
 
-      - name: ⬇️ install toolchains
+      - name: ⬇️ install csp
+        uses: csplink/action_setup_csp@master
+
+      - name: ⬇️ install csp package
         shell: bash
         run: |
-          mkdir -pv /opt
-          pushd /opt
-            wget https://github.com/csplink/toolchains/releases/download/arm-none-eabi/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-            tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-            mv /opt/gcc-arm-none-eabi-10.3-2021.10 /opt/arm-none-eabi
-            /opt/arm-none-eabi/bin/arm-none-eabi-gcc -v
-          popd
+          csp --version
+          wget https://github.com/csplink/toolchains/releases/download/arm-none-eabi/gcc-arm-none-eabi-10.3.1.linux.csppack -O gcc-arm-none-eabi.linux.csppack
+          csp install -p gcc-arm-none-eabi.linux.csppack
+          csp install -p .
 
-      - name: 👷 build xmake
+      - name: 👷 build
         shell: bash
         run: |
-          export PATH="${TOOLCHAINS_PATH}:${PATH}"
           pushd ${{ matrix.target }}
-            xmake f -m release --buildir=build.xmake -P . -y
-            xmake -j$(nproc) -v -P . -y
-            xmake f -m debug --buildir=build.xmake -P . -y
-            xmake -j$(nproc) -v -P . -y
-          popd
-
-      - name: ⬆️ upload xmake artifact
-        uses: actions/upload-artifact@v4
-        if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.draft == false
-        with:
-          name: xmake-artifact
-          path: ${{ matrix.target }}/build.xmake/cross/arm
-
-      - name: 👷 build cmake
-        shell: bash
-        run: |
-          export PATH="${TOOLCHAINS_PATH}:${PATH}"
-          pushd ${{ matrix.target }}
+            csp gen -f ${{ matrix.file }}
             mkdir -pv build.cmake
             pushd build.cmake
               cmake .. -DCMAKE_BUILD_TYPE=Release
@@ -107,9 +87,8 @@ jobs:
             popd
           popd
 
-      - name: ⬆️ upload cmake artifact
+      - name: ⬆️ upload artifact
         uses: actions/upload-artifact@v4
-        if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.draft == false
         with:
-          name: cmake-artifact
+          name: artifact
           path: ${{ matrix.target }}/build.cmake/cross/arm

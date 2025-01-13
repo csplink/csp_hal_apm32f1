@@ -78,12 +78,13 @@ gen:
   builderVersion: v3.7
   copyLibrary: true
   hal: csp_hal_apm32f1
-  halVersion: v0.0.2
+  halVersion: latest
   linker:
     defaultHeapSize: 512
     defaultStackSize: 1024
   toolchains: arm-none-eabi
-  useToolchainsPackage: false
+  toolchainsVersion: 10.3.1
+  useToolchainsPackage: true
 modules:
 - RCM
 - GPIO
