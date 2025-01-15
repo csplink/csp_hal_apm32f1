@@ -33,3 +33,6 @@ __pycache__
 # ozone
 *.jdebug
 *.jdebug.user
+
+# csp
+.csp
