@@ -4,6 +4,9 @@
     </a>
     <h1>CSP HAL APM32F1</h1>
     <div>
+        <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow/build_release.yml">
+            <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/build_release.yml?style=flat&label=build_release" alt="github-ci" />
+        </a>
         <a href="https://github.com/csplink/csp_hal_apm32f1/actions?query=workflow/mirror.yml">
             <img src="https://img.shields.io/github/actions/workflow/status/csplink/csp_hal_apm32f1/mirror.yml?style=flat&label=mirror" alt="github-ci" />
         </a>
