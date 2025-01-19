@@ -43,7 +43,8 @@ def __gpio_config(project: dict) -> dict[str, dict[str, str]]:
 def gpio_pin_names(project: dict) -> list[str]:
     pins = []
     for key, value in __pin_config(project).items():
-        if value.get("locked", False) == True and len(value.get("function", "")) != 0:
+        if value.get("locked", False) and len(value.get("function", "")) != 0 and not key.startswith(
+                'RCM-') and not value.get("unsupported", False):
             pins.append(key)
 
     pins.sort()
