@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: ⬇️ checkout csp_hal_apm32f1
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
 
@@ -100,7 +100,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: ⬇️ checkout csp_hal_apm32f1
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
 
