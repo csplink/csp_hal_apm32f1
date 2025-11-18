@@ -1,9 +1,9 @@
 {#
- # Licensed under the GNU General Public License v. 3 (the "License")
+ # Licensed under the Apache License v. 2 (the "License")
  # You may not use this file except in compliance with the License.
  # You may obtain a copy of the License at
  #
- #     https://www.gnu.org/licenses/gpl-3.0.html
+ #     https://www.apache.org/licenses/LICENSE-2.0.html
  #
  # Unless required by applicable law or agreed to in writing, software
  # distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,23 +23,34 @@
  #
  #}
 {%- extends "csp-file-base.main.c.j2" %}
-{%- set modules = CSP.project.modules|sort %}
-{%- block includes %}
 
+{%- macro init_func(name, modules) %}
+    {%- if name in modules %}
+    csp_{{ name|lower() }}_init();
+    {%- endif %}
+{%- endmacro %}
+
+{%- set modules = CSP.project.modules|sort %}
+
+{%- block includes %}
 #include "apm32f10x.h"
 {%- for module in modules %}
-#include "csp/{{module|lower}}.h"
+#include "csp/{{ module|lower }}.h"
 {%- endfor %}
-{%  endblock %}
+{%- endblock includes %}
 
 {%- block main_init_body %}
-
-{%- if 'RCM' in modules %}
-    csp_rcm_init();
-{%- endif %}
-{%- if 'GPIO' in modules %}
-    csp_gpio_init();
-{%- endif %}
+    {{- init_func("RCM", modules) }}
+    {{- init_func("SYS", modules) }}
+    {{- init_func("GPIO", modules) }}
+    {{- init_func("USART1", modules) }}
+    {{- init_func("USART2", modules) }}
+    {{- init_func("USART3", modules) }}
+    {{- init_func("UART4", modules) }}
+    {{- init_func("UART5", modules) }}
+    {{- init_func("CRC", modules) }}
+    {{- init_func("IWDT", modules) }}
+    {{- init_func("WWDT", modules) }}
 {##}
-{%- endblock %}
+{%- endblock main_init_body %}
 

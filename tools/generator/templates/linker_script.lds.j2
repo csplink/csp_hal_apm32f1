@@ -1,9 +1,9 @@
 {#
- # Licensed under the GNU General Public License v. 3 (the "License")
+ # Licensed under the Apache License v. 2 (the "License")
  # You may not use this file except in compliance with the License.
  # You may obtain a copy of the License at
  #
- #     https://www.gnu.org/licenses/gpl-3.0.html
+ #     https://www.apache.org/licenses/LICENSE-2.0.html
  #
  # Unless required by applicable law or agreed to in writing, software
  # distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,19 +23,19 @@
  #}
 /**
  * *****************************************************************************
- *  @author:            {{CSP.author}}
- *  @file:              {{CSP.file}}
- *  @brief:             {{CSP.brief}}
- *  @version:           {{CSP.version}}
- *  @hal:               {{CSP.project.vendor}}.{{CSP.project.gen.hal}}@{{ CSP.project.gen.halVersion }}
- *  @project:           {{CSP.project.name}}
- *  @targetChip:        {{CSP.project.targetChip}}
- *  @time:              {{CSP.time}}
+ *  @author:            {{ CSP.author }}
+ *  @file:              {{ CSP.file }}
+ *  @brief:             {{ CSP.brief }}
+ *  @version:           {{ CSP.version }}
+ *  @hal:               {{ CSP.project.vendor }}.{{ CSP.project.gen.hal }}@{{ CSP.project.gen.halVersion }}
+ *  @project:           {{ CSP.project.name }}
+ *  @targetChip:        {{ CSP.project.targetChip }}
+ *  @time:              {{ CSP.time }}
  *
  * *****************************************************************************
  *  @attention
  *
- *  Copyright (C) {{year}} csp software.
+ *  Copyright (C) {{ year }} csp software.
  *  All rights reserved.
  *
  * *****************************************************************************
@@ -46,9 +46,9 @@
 /*!< entry point */
 ENTRY(Reset_Handler)
 
-__heap_size__       = {{ CSP.project.gen.linker.defaultHeapSize|hex(4) }};
-__stack_size__      = {{ CSP.project.gen.linker.defaultStackSize|hex(4) }};
-__default_stack__   = {{ (info.ram.addr + info.ram.size )|hex(4) }};
+__heap_size__       = {{ CSP.project.gen.linker.heapSize|hex(4) }};
+__stack_size__      = {{ CSP.project.gen.linker.stackSize|hex(4) }};
+__default_stack__   = {{ (info.ram.addr + info.ram.size)|hex(4) }};
 
 MEMORY
 {

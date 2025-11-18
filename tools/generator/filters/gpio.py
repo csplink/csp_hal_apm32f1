@@ -1,65 +1,195 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-# Licensed under the GNU General Public License v. 3 (the "License")
-# You may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
 #
-#     https://www.gnu.org/licenses/gpl-3.0.html
+# ------------------------------------------------------------------------------
+#  @author:            csplink coder
+#  @file:              gpio.py
+#  @version:           0.0.6
+#  @time:              2025-11-15 17:54:10
 #
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# ------------------------------------------------------------------------------
+#  @attention
 #
-# Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+#  Copyright (C) 2025 csplink software.
+#  All rights reserved.
 #
-# @author      xqyjlj
-# @file        gpio.py
-#
-# Change Logs:
-# Date           Author       Notes
-# ------------   ----------   -----------------------------------------------
-# 2024-05-31     xqyjlj       initial version
+# ------------------------------------------------------------------------------
 #
 
+from typing import Literal
+
+from csp.project import Project
+
+# --< user code begin import, do not change this comment!
+# isort: off
 import json
 
+# isort: on
+# --> user code end import, do not change this comment!
 
+# ------------------------------------------------------------------------------
+# region autogen filters
+# fmt: off
+
+_gpio_mode_t_return_type = Literal[
+    "af_od",
+    "af_pp",
+    "analog",
+    "evt_falling",
+    "evt_rising",
+    "evt_rising_falling",
+    "input",
+    "it_falling",
+    "it_rising",
+    "it_rising_falling",
+    "output_od",
+    "output_pp",
+]
+
+
+_gpio_pull_t_return_type = Literal[
+    "nopull",
+    "pulldown",
+    "pullup",
+]
+
+
+_gpio_speed_t_return_type = Literal[
+    "high",
+    "low",
+    "medium",
+]
+
+
+_gpio_state_t_return_type = Literal[
+    "reset",
+    "set",
+]
+
+
+def gpio_mode_t(
+    project: Project,
+    channel: str,
+    instance: str = "GPIO",
+    default: _gpio_mode_t_return_type = "input",
+) -> _gpio_mode_t_return_type:
+    return project.configs.get(f"{instance}.{channel}.gpio_mode_t", default)
+
+
+def gpio_pull_t(
+    project: Project,
+    channel: str,
+    instance: str = "GPIO",
+    default: _gpio_pull_t_return_type = "nopull",
+) -> _gpio_pull_t_return_type:
+    return project.configs.get(f"{instance}.{channel}.gpio_pull_t", default)
+
+
+def gpio_speed_t(
+    project: Project,
+    channel: str,
+    instance: str = "GPIO",
+    default: _gpio_speed_t_return_type = "low",
+) -> _gpio_speed_t_return_type:
+    return project.configs.get(f"{instance}.{channel}.gpio_speed_t", default)
+
+
+def gpio_state_t(
+    project: Project,
+    channel: str,
+    instance: str = "GPIO",
+    default: _gpio_state_t_return_type = "reset",
+) -> _gpio_state_t_return_type:
+    return project.configs.get(f"{instance}.{channel}.gpio_state_t", default)
+
+
+def gpio_channels(
+    project: Project,
+    instance: str = "GPIO",
+) -> list[str]:
+    return list(project.configs.get(instance, {}).keys())
+
+
+def pin_function(
+    project: Project,
+    channel: str,
+    default: str = "",
+) -> str:
+    return project.configs.get(f"pins.{channel}.function", default)
+
+
+def pin_label(
+    project: Project,
+    channel: str,
+    default: str = "",
+) -> str:
+    return project.configs.get(f"pins.{channel}.label", default)
+
+
+def pin_locked(
+    project: Project,
+    channel: str,
+    default: bool = False,
+) -> bool:
+    return project.configs.get(f"pins.{channel}.locked", default)
+
+
+def pin_mode(
+    project: Project,
+    channel: str,
+    default: str = "",
+) -> str:
+    return project.configs.get(f"pins.{channel}.mode", default)
+
+
+def pin_channels(
+    project: Project,
+) -> str:
+    return list(project.configs.get("pins", {}).keys())
+
+
+# fmt: on
+# endregion
+# ------------------------------------------------------------------------------
+
+
+# --< user code begin code, do not change this comment!
 def __hash_dict(dictionary) -> int:
     json_str = json.dumps(dictionary, sort_keys=True)
     return hash(json_str)
 
 
-def __pin_config(project: dict) -> dict[str, dict[str, str]]:
-    return project["configs"]["pin"]
-
-
-def __gpio_config(project: dict) -> dict[str, dict[str, str]]:
-    return project["configs"]["GPIO"]
-
-
-def gpio_pin_names(project: dict) -> list[str]:
+def gpio_used_channels(project: Project) -> list[str]:
     pins = []
-    for key, value in __pin_config(project).items():
-        if value.get("locked", False) and len(value.get("function", "")) != 0 and not key.startswith(
-                'RCM-') and not value.get("unsupported", False):
-            pins.append(key)
+    channels = gpio_channels(project)
+    for channel in channels:
+        locked = pin_locked(project, channel)
+        function = pin_function(project, channel)
+        mode = pin_mode(project, channel)
+
+        if (
+            locked  # locked == True
+            and len(function) != 0  # function != ""
+            and not channel.startswith("RCM-")  # name startswith "RCM-"
+            and len(mode) == 0  # mode == ""
+        ):
+            pins.append(channel)
 
     pins.sort()
     return pins
 
 
-def gpio_clocks(project: dict) -> list[str]:
+def gpio_used_clocks(project: Project) -> list[str]:
     clocks = []
 
-    pins = gpio_pin_names(project)
-    for pin in pins:
-        clocks.append(f"RCM_APB2_PERIPH_GPIO{str(pin[1]).upper()}")
-        if __pin_config(project)[pin].get("function", "") == "GPIO:EXTI":
+    channels = gpio_used_channels(project)
+    for channel in channels:
+        clocks.append(f"RCM_APB2_PERIPH_GPIO{str(channel[1]).upper()}")
+        function = pin_function(project, channel)
+        if function == "GPIO:EXTI":
             clocks.append(f"RCM_APB2_PERIPH_AFIO")
-        elif __pin_config(project)[pin].get("function", "") == "GPIO:EVENTOUT":
+        elif function == "GPIO:EVENTOUT":
             clocks.append(f"RCM_APB2_PERIPH_AFIO")
 
     clocks = list(set(clocks))
@@ -68,10 +198,9 @@ def gpio_clocks(project: dict) -> list[str]:
     return clocks
 
 
-def gpio_clock_names(project: dict) -> list[str]:
+def gpio_clocks_to_alias(clocks: list[str]) -> list[str]:
     names = []
 
-    clocks = gpio_clocks(project)
     for clock in clocks:
         names.append(clock.replace("RCM_APB2_PERIPH_", ""))
 
@@ -80,12 +209,46 @@ def gpio_clock_names(project: dict) -> list[str]:
     return names
 
 
-def gpio_ports(project: dict) -> list[str]:
+def gpio_channel_to_clock(channel: str) -> str:
+    return f"RCM_APB2_PERIPH_GPIO{str(channel[1]).upper()}"
+
+
+def gpio_channel_to_port(channel: str) -> str:
+    return f"GPIO{str(channel[1]).upper()}"
+
+
+def gpio_channel_to_port_source(channel: str) -> str:
+    return f"GPIO_PORT_SOURCE_{str(channel[1]).upper()}"
+
+
+def gpio_channel_to_pin(channel: str) -> str:
+    return f"GPIO_PIN_{channel[2:]}"
+
+
+def gpio_channel_to_pin_source(channel: str) -> str:
+    return f"GPIO_PIN_SOURCE_{channel[2:]}"
+
+
+def gpio_channel_to_eint_line(channel: str) -> str:
+    return f"EINT_LINE_{channel[2:]}"
+
+
+def gpio_channels_to_pins(channels: list[str]) -> list[str]:
+    pins = []
+
+    for channel in channels:
+        pins.append(gpio_channel_to_pin(channel))
+
+    pins.sort()
+
+    return pins
+
+
+def gpio_used_ports(channels: list[str]) -> list[str]:
     ports = []
 
-    pins = gpio_pin_names(project)
-    for pin in pins:
-        ports.append(f"GPIO{str(pin[1]).upper()}")
+    for channel in channels:
+        ports.append(gpio_channel_to_port(channel))
 
     ports = list(set(ports))
     ports.sort()
@@ -93,154 +256,189 @@ def gpio_ports(project: dict) -> list[str]:
     return ports
 
 
-def gpio_pins_by_port(project: dict, port: str) -> list[str]:
-    ports = []
-
-    pins = gpio_pin_names(project)
-    for pin in pins:
-        if port[4] == pin[1]:
-            ports.append(f"GPIO_PIN_{pin[2:]}")
-
-    ports = list(set(ports))
-    ports.sort()
-
-    return ports
-
-
-def gpio_pin_groups_by_port(project: dict, port: str) -> list[list[str]]:
-    pin_groups_map = {}
-    pin_groups = []
-    pins = gpio_pin_names(project)
-    for pin in pins:
+def gpio_channels_group_by_port(
+    project: Project, channels: list[str], port: str
+) -> list[list[str]]:
+    channels_group_map: dict[str, list[str]] = {}
+    channels_group = []
+    for channel in channels:
         config = {}
-        if port[4] == pin[1]:
-            config["function"] = __pin_config(project)[pin].get("function", "")
-            config["config"] = __gpio_config(project)[pin]
+        if port[4] == channel[1]:
+            config["function"] = pin_function(project, channel)
+            config["gpio_mode_t"] = gpio_mode_t(project, channel)
+            config["gpio_pull_t"] = gpio_pull_t(project, channel)
+            config["gpio_speed_t"] = gpio_speed_t(project, channel)
 
             # group according to different configurations, pins with the same configuration are in the same group
             hash_str = __hash_dict(config)
-            if not hash_str in pin_groups_map:
-                pin_groups_map[hash_str] = [f"GPIO_PIN_{pin[2:]}"]
+            if not hash_str in channels_group_map:
+                channels_group_map[hash_str] = [channel]
             else:
-                pin_groups_map[hash_str].append(f"GPIO_PIN_{pin[2:]}")
+                channels_group_map[hash_str].append(channel)
 
-    for _, value in pin_groups_map.items():
+    for _, value in channels_group_map.items():
         group = list(set(value))
         group.sort()
-        pin_groups.append(group)
+        channels_group.append(group)
 
-    pin_groups.sort()
+    channels_group.sort()
 
-    return pin_groups
-
-
-def gpio_pin_alias(project: dict, port: str, pin: str) -> str:
-    pin_name = f'P{port.replace("GPIO", "")}{pin.replace("GPIO_PIN_", "")}'
-    alias = __pin_config(project)[pin_name].get("label", None)
-
-    return alias
+    return channels_group
 
 
-def gpio_pin_level(project: dict, port: str, pin: str) -> str | None:
-    level_map = {
-        "geehy.gpio_level_low": "BIT_RESET",
-        "geehy.gpio_level_high": "BIT_SET",
+def gpio_channel_alias(project: Project, channel: str) -> str:
+    return pin_label(project, channel)
+
+
+def gpio_channel_state(project: Project, channel: str) -> str | None:
+    state_map = {
+        "reset": "BIT_RESET",
+        "set": "BIT_SET",
     }
 
-    pin_name = f'P{port.replace("GPIO", "")}{pin.replace("GPIO_PIN_", "")}'
-    gpio_config = __gpio_config(project).get(pin_name, {})
+    state = gpio_state_t(project, channel)
 
-    if not "geehy.gpio_level_t" in gpio_config:
-        return None
-
-    return level_map[gpio_config["geehy.gpio_level_t"]]
+    return state_map[state]
 
 
-def gpio_pin_level_map(project: dict, port: str, pins: list) -> dict:
-    if not gpio_pin_level(project, port, pins[0]):
-        return {}
-    level_groups_map = {}
+def gpio_channels_classify_by_state(
+    project: Project, channels: list
+) -> dict[str, list[str]]:
+    if not gpio_channel_state(project, channels[0]):
+        return {}  # 代表这组通道并非输出类型的
+    state_groups_map: dict[str, list[str]] = {}
 
-    for pin in pins:
-        level = gpio_pin_level(project, port, pin)
-        if not level in level_groups_map:
-            level_groups_map[level] = [pin]
+    for channel in channels:
+        state = gpio_channel_state(project, channel)
+        if not state in state_groups_map:
+            state_groups_map[state] = [channel]
         else:
-            level_groups_map[level].append(pin)
+            state_groups_map[state].append(channel)
 
-    for level_groups in level_groups_map.keys():
-        level_groups_map[level_groups].sort()
+    for level_groups in state_groups_map.keys():
+        state_groups_map[level_groups].sort()
 
-    return level_groups_map
-
-
-def gpio_pin_mode(project: dict, port: str, pin: str) -> str:
-    output_mode_map = {
-        "geehy.gpio_output_pp": "GPIO_MODE_OUT_PP",
-        "geehy.gpio_output_od": "GPIO_MODE_OUT_OD",
-    }
-    input_mode_map = {
-        "geehy.gpio_pull_up": "GPIO_MODE_IN_PU",
-        "geehy.gpio_pull_down": "GPIO_MODE_IN_PD",
-        "geehy.gpio_pull_no": "GPIO_MODE_IN_FLOATING",
-    }
-    analog_mode_map = {
-        "geehy.gpio_mode_analog": "GPIO_MODE_ANALOG",
-    }
-    alternate_mode_map = {
-        "geehy.gpio_output_pp": "GPIO_MODE_AF_PP",
-        "geehy.gpio_output_od": "GPIO_MODE_AF_OD",
-    }
-
-    pin_name = f'P{port.replace("GPIO", "")}{pin.replace("GPIO_PIN_", "")}'
-    function = __pin_config(project).get(pin_name, {}).get("function", "")
-    gpio_config = __gpio_config(project).get(pin_name, {})
-
-    if function == "GPIO:Output":
-        mode = output_mode_map[gpio_config["geehy.gpio_output_type_t"]]
-    elif function == "GPIO:Analog":
-        mode = analog_mode_map[gpio_config["geehy.gpio_mode_t"]]
-    elif function == "GPIO:Input":
-        mode = input_mode_map[gpio_config["geehy.gpio_pull_t"]]
-    elif function == "GPIO:EXTI":
-        mode = input_mode_map[gpio_config["geehy.gpio_pull_t"]]
-    elif function == "GPIO:EVENTOUT":
-        mode = alternate_mode_map[gpio_config["geehy.gpio_output_type_t"]]
-    else:
-        mode = "_N_O_N_E_ /** error: Unexpected Error. */"
-
-    return mode
+    return state_groups_map
 
 
-def gpio_pin_speed(project: dict, port: str, pin: str) -> str:
+def gpio_channel_mode(project: Project, channel: str) -> str:
+    mode = gpio_mode_t(project, channel)
+    pull = gpio_pull_t(project, channel)
+
+    result = ""
+
+    if mode in [
+        "input",
+        "it_rising",
+        "it_falling",
+        "it_rising_falling",
+        "evt_rising",
+        "evt_falling",
+        "evt_rising_falling",
+    ]:
+        if pull == "nopull":
+            result = "GPIO_MODE_IN_FLOATING"
+        elif pull == "pullup":
+            result = "GPIO_MODE_IN_PU"
+        elif pull == "pulldown":
+            result = "GPIO_MODE_IN_PD"
+    elif mode == "output_pp":
+        result = "GPIO_MODE_OUT_PP"
+    elif mode == "output_od":
+        result = "GPIO_MODE_OUT_OD"
+    elif mode == "af_pp":
+        result = "GPIO_MODE_AF_PP"
+    elif mode == "af_od":
+        result = "GPIO_MODE_AF_OD"
+    elif mode == "analog":
+        result = "GPIO_MODE_ANALOG"
+
+    assert result != "", f"failed to get gpio mode, {mode!r}, {pull!r}"
+
+    return result
+
+
+def gpio_channel_speed(project: Project, channel: str) -> str:
     speed_map = {
-        "geehy.gpio_speed_2mhz": "GPIO_SPEED_2MHz",
-        "geehy.gpio_speed_10mhz": "GPIO_SPEED_10MHz",
-        "geehy.gpio_speed_50mhz": "GPIO_SPEED_50MHz",
+        "low": "GPIO_SPEED_2MHz",
+        "medium": "GPIO_SPEED_10MHz",
+        "high": "GPIO_SPEED_50MHz",
     }
 
-    pin_name = f'P{port.replace("GPIO", "")}{pin.replace("GPIO_PIN_", "")}'
-    gpio_config = __gpio_config(project).get(pin_name, {})
-
-    if not "geehy.gpio_speed_t" in gpio_config:
+    speed = gpio_speed_t(project, channel, default="")
+    if speed == "":
         return ""
 
-    return speed_map[gpio_config["geehy.gpio_speed_t"]]
+    return speed_map[speed]
 
 
-def gpio_eventout(project: dict) -> dict[str, list[str]]:
-    eventout = {}
+def gpio_channel_eint_mode(project: Project, channel: str) -> str:
+    mode = gpio_mode_t(project, channel)
+    result = ""
 
-    ports = gpio_ports(project)
+    if mode in [
+        "it_rising",
+        "it_falling",
+        "it_rising_falling",
+    ]:
+        result = "EINT_MODE_INTERRUPT"
+    elif mode in [
+        "evt_rising",
+        "evt_falling",
+        "evt_rising_falling",
+    ]:
+        result = "EINT_MODE_EVENT"
 
-    for port in ports:
-        pins = gpio_pins_by_port(project, port)
-        for pin in pins:
-            pin_name = f'P{port.replace("GPIO", "")}{pin.replace("GPIO_PIN_", "")}'
-            function = __pin_config(project).get(pin_name, {}).get("function", "")
-            if function == "GPIO:EVENTOUT":
-                if eventout.get(port) is None:
-                    eventout[port] = []
-                eventout[port].append(pin)
+    assert result != "", f"failed to get gpio eint mode, {mode!r}"
 
-    return eventout
+    return result
+
+
+def gpio_channel_eint_trigger(project: Project, channel: str) -> str:
+    mode = gpio_mode_t(project, channel)
+    result = ""
+
+    if mode in [
+        "it_rising",
+        "evt_rising",
+    ]:
+        result = "EINT_TRIGGER_RISING"
+    elif mode in [
+        "it_falling",
+        "evt_falling",
+    ]:
+        result = "EINT_TRIGGER_FALLING"
+    elif mode in [
+        "it_rising_falling",
+        "evt_rising_falling",
+    ]:
+        result = "EINT_TRIGGER_RISING_FALLING"
+
+    assert result != "", f"failed to get gpio eint trigger, {mode!r}"
+
+    return result
+
+
+def gpio_eventout_channels(project: Project, channels: list[str]) -> list[str]:
+    result = []
+
+    for channel in channels:
+        function = pin_function(project, channel)
+        if function == "GPIO:EVENTOUT":
+            result.append(channel)
+
+    return result
+
+
+def gpio_eint_channels(project: Project, channels: list[str]) -> list[str]:
+    result = []
+
+    for channel in channels:
+        function = pin_function(project, channel)
+        if function.startswith("GPIO:EINT"):
+            result.append(channel)
+
+    return result
+
+
+# --> user code end code, do not change this comment!

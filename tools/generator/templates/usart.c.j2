@@ -1,0 +1,155 @@
+{#
+ # Licensed under the Apache License v. 2 (the "License")
+ # You may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     https://www.apache.org/licenses/LICENSE-2.0.html
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+ #
+ # @author      xqyjlj
+ # @file        usart.c.j2
+ #
+ # Change Logs:
+ # Date           Author       Notes
+ # ------------   ----------   -----------------------------------------------
+ # 2024-04-01     xqyjlj       initial version
+ #
+ #}
+{%- extends "csp-file-base.c.j2" %}
+
+{%- set module = CSP.module %}
+{%- set mode = CSP.project|usart_ctrl_mode_t(module) %}
+{%- set name = CSP.module|lower() %}
+
+{%- block includes %}
+#include "csp/{{ name }}.h"
+{%- endblock %}
+
+{%- block function_body %}
+{#
+{%- set tx_io = CSP.project|usart_io(module + ":TX") %}
+{%- set rx_io = CSP.project|usart_io(module + ":RX") %}
+{%- set ck_io = CSP.project|usart_io(module + ":CK") %}
+#}
+void csp_{{ name }}_init(void)
+{
+    // GPIO_Config_T gpio_config = {0};
+    USART_Config_T usart_config = {0};
+{%- if mode == "synchronous" %}
+    USART_ClockConfig_T usart_clock_config = {0};
+{%- endif %}
+{#  #}
+    /*!< enable the {{ module }} clock. */
+{%- if module == "USART1" %}
+    RCM_EnableAPB2PeriphClock(RCM_APB2_PERIPH_{{ module }});
+{%- else %}
+    RCM_EnableAPB1PeriphClock(RCM_APB1_PERIPH_{{ module }});
+{%- endif %}
+{#
+    RCM_EnableAPB2PeriphClock({{ CSP.project|usart_io_clocks(tx_io, rx_io, ck_io)|join(" | ") }});
+#}
+    // TODO: io
+{#  #}
+    usart_config.baudRate = {{ CSP.project|usart_baud_rate_t(module, 115200) }}U;
+    usart_config.hardwareFlow = {{ CSP.project|usart_ctrl_hardware_flow_control_rs232(module) }};
+    usart_config.mode = {{ CSP.project|usart_mode(module) }};
+    usart_config.parity = {{ CSP.project|usart_parity(module) }};
+    usart_config.stopBits = {{ CSP.project|usart_stop_bits(module) }};
+    usart_config.wordLength = {{ CSP.project|usart_word_length(module) }};
+    USART_Config({{ module }}, &usart_config);
+
+{%- if mode == "half_duplex_single_wire_mode" %}
+{#  #}
+    USART_EnableHalfDuplex({{ module }});
+{%- elif mode == "ir_da" %}
+{#  #}
+    USART_ConfigIrDA({{ module }}, {{ CSP.project|usart_ir_da_mode(module) }});
+    USART_ConfigPrescaler({{ module }}, {{ CSP.project|usart_prescaler_t(module) }}U);
+    USART_EnableIrDA({{ module }});
+{%- elif mode == "multiprocessor_communication" %}
+{#  #}
+    USART_ConfigWakeUp({{ module }}, {{ CSP.project|usart_wake_up_methode(module) }});
+
+    {%- if CSP.project|usart_wake_up_methode_t(instance) == "addressmark" %}
+    USART_Address({{ module }}, {{ CSP.project|usart_address_t(module) }}U);
+    {%- endif %}
+
+{%- elif mode == "synchronous" %}
+{#  #}
+    usart_clock_config.clock = USART_CLKEN_ENABLE;
+    usart_clock_config.polarity = {{ CSP.project|usart_clk_polarity(module) }};
+    usart_clock_config.phase = {{ CSP.project|usart_clk_phase(module) }};
+    usart_clock_config.lastBit = {{ CSP.project|usart_clk_last_bit(module) }};
+    USART_ConfigClock({{ module }}, &usart_clock_config);
+{%- elif mode == "smart_card" %}
+{#  #}
+    USART_ConfigGuardTime({{ module }}, {{ CSP.project|usart_guard_time_t(module) }}U);
+    {%- if CSP.project|usart_nack_state_t(instance) == "enable" %}
+    USART_EnableSmartCardNACK({{ module }});
+    {%- endif %}
+    USART_EnableSmartCard({{ module }});
+{%- elif mode == "smart_card_with_clock" %}
+{#  #}
+    USART_ConfigGuardTime({{ module }}, {{ CSP.project|usart_guard_time_t(module) }}U);
+    {%- if CSP.project|usart_nack_state_t(instance) == "enable" %}
+    USART_EnableSmartCardNACK({{ module }});
+    {%- endif %}
+
+    usart_clock_config.clock = USART_CLKEN_ENABLE;
+    usart_clock_config.polarity = {{ CSP.project|usart_clk_polarity(module) }};
+    usart_clock_config.phase = {{ CSP.project|usart_clk_phase(module) }};
+    usart_clock_config.lastBit = {{ CSP.project|usart_clk_last_bit(module) }};
+    USART_ConfigClock({{ module }}, &usart_clock_config);
+
+    USART_ConfigPrescaler({{ module }}, {{ CSP.project|usart_prescaler_t(module) }}U);
+    USART_EnableSmartCard({{ module }});
+{%- endif %}
+{#  #}
+    USART_Enable({{ module }});
+
+{%- if mode == "lin" %}
+{#  #}
+    USART_ConfigLINBreakDetectLength({{ module }}, {{ CSP.project|usart_break_detect_length(module) }});
+    USART_EnableLIN({{ module }});
+{%- endif %}
+}
+
+int32_t csp_{{ name }}_write(const void *buffer, uint32_t length)
+{
+    uint32_t i = 0;
+    const uint8_t *buf = (const uint8_t *)buffer;
+
+    for (i = 0; i < length; i++)
+    {
+        while (({{ module }}->STS & USART_FLAG_TXBE) == 0U)
+        {
+        }
+        {{ module }}->DATA_B.DATA = buf[i];
+    }
+
+    return 0;
+}
+
+int32_t csp_{{ name }}_read(void *buffer, uint32_t length)
+{
+    uint32_t i = 0;
+    uint8_t *buf = (uint8_t *)buffer;
+
+    for (i = 0; i < length; i++)
+    {
+        while (({{ module }}->STS & USART_FLAG_RXBNE) == 0U)
+        {
+        }
+        buf[i] = {{ module }}->DATA_B.DATA;
+    }
+
+    return 0;
+}
+{%- endblock %}

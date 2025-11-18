@@ -1,9 +1,9 @@
 {#
- # Licensed under the GNU General Public License v. 3 (the "License")
+ # Licensed under the Apache License v. 2 (the "License")
  # You may not use this file except in compliance with the License.
  # You may obtain a copy of the License at
  #
- #     https://www.gnu.org/licenses/gpl-3.0.html
+ #     https://www.apache.org/licenses/LICENSE-2.0.html
  #
  # Unless required by applicable law or agreed to in writing, software
  # distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,12 @@
  #}
 {%- extends "csp-file-base.c.j2" %}
 
+{%- set used_channels = CSP.project|gpio_channels() %}
+{%- set used_ports = used_channels|gpio_used_ports() %}
+{%- set eint_channels = CSP.project|gpio_eint_channels(used_channels) %}
+{%- set eventout_channels = CSP.project|gpio_eventout_channels(used_channels) %}
+{%- set eventout_eint_channels = eint_channels + eventout_channels %}
+
 {%- block includes %}
 #include "csp/gpio.h"
 {%- endblock %}
@@ -31,51 +37,82 @@
 {%- block function_body %}
 void csp_gpio_init(void)
 {
-    GPIO_Config_T config = {0};
+{%- if used_ports|length() > 0 %}
+    GPIO_Config_T gpio_config = {0};
+{%- endif %}
+{%- if eint_channels|length() > 0 %}
+    EINT_Config_T eint_config = {0};
+{%- endif %}
+{#  #}
+{%- set clocks = CSP.project|gpio_used_clocks() %}
+{%- if clocks|length() > 0 %}
+    /*!< enable the {{ clocks|gpio_clocks_to_alias|join(", ") }} clock. */
+    RCM_EnableAPB2PeriphClock({{ clocks|join(" | ") }});
+{%- endif %}
 
-    /*!< enable the {{ CSP.project|gpio_clock_names|join(", ") }} clock. */
-    RCM_EnableAPB2PeriphClock({{ CSP.project|gpio_clocks|join(" | ") }});
-
-{%- set ports = CSP.project|gpio_ports %}
-{%- for port in ports %}
-    {%- for pin_group in CSP.project|gpio_pin_groups_by_port(port) %}
-
+{%- for port in used_ports %}
+    {%- for channels_group in CSP.project|gpio_channels_group_by_port(used_channels, port) %}
+{#  #}
     /**************************************************************************/
-    /*!< configure the {{ port }}<{{ pin_group|join(", ") }}>. */
+    {%- set pins = channels_group|gpio_channels_to_pins() %}
+    /*!< configure the {{ port }}<{{ pins|join(", ") }}>. */
 
-        {%- set level_map = CSP.project|gpio_pin_level_map(port, pin_group) %}
-        {%- if level_map %}
-            {%- for level, pins in level_map.items() %}
-    GPIO_WriteBitValue({{ port }}, {{ pins|join(" | ") }}, {{ level }});
+        {%- set channels_classified = CSP.project|gpio_channels_classify_by_state(channels_group) %}
+        {%- if channels_classified %}
+            {%- for level, channels in channels_classified.items() %}
+            {%- set pins_classified = channels|gpio_channels_to_pins() %}
+    GPIO_WriteBitValue({{ port }}, {{ pins_classified|join(" | ") }}, {{ level }});
             {%- endfor %}
         {%- endif %}
 
-    config.pin = {{ pin_group|join(" | ") }};
-    config.mode = {{ CSP.project|gpio_pin_mode(port, pin_group[0]) }};
+    gpio_config.pin = {{ pins|join(" | ") }};
+    gpio_config.mode = {{ CSP.project|gpio_channel_mode(channels_group[0]) }};
 
-        {%- set speed = CSP.project|gpio_pin_speed(port, pin_group[0]) %}
+        {%- set speed = CSP.project|gpio_channel_speed(channels_group[0]) %}
         {%- if speed %}
-    config.speed = {{ speed }};
+    gpio_config.speed = {{ speed }};
         {%- endif %}
-    GPIO_Config({{ port }}, &config);
+    GPIO_Config({{ port }}, &gpio_config);
     {%- endfor %}
 {%- endfor %}
 
-{%- set eventout_map = CSP.project|gpio_eventout %}
-    {%- for port, pins in eventout_map.items() %}
-        {%- for pin in pins %}
-
+{%- if eint_channels|length > 0 %}
+    {%- for channel in eint_channels %}
+{#  #}
     /**************************************************************************/
-    /*!< selects the {{ port }}<{{ pin }}> used as event output. */
-    GPIO_ConfigEventOutput({{ port.replace("GPIO", "GPIO_PORT_SOURCE_") }}, {{ pin }});
-        {%- endfor %}
-    {%- endfor %}
+        {%- set port = channel|gpio_channel_to_port() %}
+        {%- set pin = channel|gpio_channel_to_pin() %}
+        {%- set port_source = channel|gpio_channel_to_port_source() %}
+        {%- set pin_source = channel|gpio_channel_to_pin_source() %}
+        {%- set eint_line = channel|gpio_channel_to_eint_line() %}
+    /*!< selects the {{ port }}<{{ pin }}> used as eint. */
+    GPIO_ConfigEINTLine({{ port_source }}, {{ pin_source }});
 
-    {%- if eventout_map|length > 0 %}
+    eint_config.line = {{ eint_line }};
+    eint_config.mode = {{ CSP.project|gpio_channel_eint_mode(channel) }};
+    eint_config.trigger = {{ CSP.project|gpio_channel_eint_trigger(channel) }};
+    eint_config.lineCmd = ENABLE;
+    EINT_Config(&eint_config);
+
+    // TODO: NVIC
+    {%- endfor %}
+{%- endif %}
+
+{%- if eventout_channels|length > 0 %}
+    {%- for channel in eventout_channels %}
+{#  #}
+    /**************************************************************************/
+        {%- set port = channel|gpio_channel_to_port() %}
+        {%- set pin = channel|gpio_channel_to_pin() %}
+        {%- set port_source = channel|gpio_channel_to_port_source() %}
+        {%- set pin_source = channel|gpio_channel_to_pin_source() %}
+    /*!< selects the {{ port }}<{{ pin }}> used as event output. */
+    GPIO_ConfigEventOutput({{ port_source }}, {{ pin_source }});
+    {%- endfor %}
 
     /**************************************************************************/
     /*!< enables the event output. */
     GPIO_EnableEventOutput();
-    {%- endif %}
+{%- endif %}
 }
 {%- endblock %}

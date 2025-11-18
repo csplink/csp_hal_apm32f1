@@ -14,28 +14,33 @@
  # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
  #
  # @author      xqyjlj
- # @file        rcm.h.j2
+ # @file        iwdt.c.j2
  #
  # Change Logs:
  # Date           Author       Notes
  # ------------   ----------   -----------------------------------------------
- # 2024-03-22     xqyjlj       initial version
+ # 2024-04-01     xqyjlj       initial version
  #
  #}
-{%- extends "csp-file-base.h.j2" %}
+{%- extends "csp-file-base.c.j2" %}
 
 {%- block includes %}
-#include "apm32f10x.h"
-#include "apm32f10x_fmc.h"
-#include "apm32f10x_gpio.h"
-#include "apm32f10x_misc.h"
-#include "apm32f10x_rcm.h"
-#include "system_apm32f10x.h"
+#include "csp/iwdt.h"
 {%- endblock %}
 
-{%- block functions_prototypes %}
-/**
- * @brief configure rcm
- */
-void csp_rcm_init(void);
+{%- block function_body %}
+void csp_iwdt_init(void)
+{
+    IWDT_Enable();
+    IWDT_EnableWriteAccess();
+
+    IWDT_ConfigDivider({{ CSP.project|iwdt_prescaler() }});
+    IWDT_ConfigReload({{ CSP.project|iwdt_reload_t(4095) }}U);
+
+    while (IWDT_ReadStatusFlag(IWDT_FLAG_PSCU | IWDT_FLAG_CNTU) == RESET)
+    {
+    }
+
+    IWDT_Refresh();
+}
 {%- endblock %}

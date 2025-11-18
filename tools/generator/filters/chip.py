@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-# Licensed under the GNU General Public License v. 3 (the "License")
+# Licensed under the Apache License v. 2 (the "License")
 # You may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.gnu.org/licenses/gpl-3.0.html
+#     https://www.apache.org/licenses/LICENSE-2.0.html
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,15 +25,28 @@
 #
 
 
-import os
-
-import yaml
-
-__resourceDir = os.path.join(os.path.dirname(__file__), "..", "resource")
+from csp.project import Project
 
 
-def chip_info(project: dict) -> dict:
-    with open(os.path.join(__resourceDir, "chip_info.yaml"), "r") as f:
-        infos = yaml.load(f.read(), Loader=yaml.FullLoader)
+APM32F10xxE = {
+    "flash": {
+        "addr": 0x08000000,
+        "size": 0x0080000,
+    },
+    "ram": {
+        "addr": 0x20000000,
+        "size": 0x00020000,
+    },
+}
 
-    return infos[project['targetChip']]
+infos = {
+    "APM32F103ZET6": {
+        **APM32F10xxE,
+        "class": "APM32F10X_HD",
+        "line": "APM32F103ZE",
+    }
+}
+
+
+def chip_info(project: Project) -> dict:
+    return infos[project.targetChip]

@@ -1,350 +1,746 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-# Licensed under the GNU General Public License v. 3 (the "License")
-# You may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
 #
-#     https://www.gnu.org/licenses/gpl-3.0.html
+# ------------------------------------------------------------------------------
+#  @author:            csplink coder
+#  @file:              rcm.py
+#  @version:           0.0.6
+#  @time:              2025-11-14 15:39:42
 #
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# ------------------------------------------------------------------------------
+#  @attention
 #
-# Copyright (C) 2024-2024 xqyjlj<xqyjlj@126.com>
+#  Copyright (C) 2025 csplink software.
+#  All rights reserved.
 #
-# @author      xqyjlj
-# @file        rcm.py
-#
-# Change Logs:
-# Date           Author       Notes
-# ------------   ----------   -----------------------------------------------
-# 2024-12-27     xqyjlj       initial version
+# ------------------------------------------------------------------------------
 #
 
-import csp_project_helper
+from typing import Literal
 
+from csp.project import Project
+
+# --< user code begin import, do not change this comment!
+# isort: off
+
+# isort: on
+# --> user code end import, do not change this comment!
 
 # ------------------------------------------------------------------------------
-def rcm_adc_clk_div_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_adc_clk_div_t', default)
+# region autogen filters
+# fmt: off
+
+_rcm_hse_clk_div_rtc_t_return_type = Literal[
+    "/128",
+]
+
+
+_rcm_rtc_clk_mux_t_return_type = Literal[
+    "hse_div128",
+    "lse",
+    "lsi",
+]
+
+
+_rcm_system_clk_mux_t_return_type = Literal[
+    "hse",
+    "hsi",
+    "pll",
+]
+
+
+_rcm_pll_clk_mux_t_return_type = Literal[
+    "hse",
+    "hsi_div2",
+]
+
+
+_rcm_mco_clk_mux_t_return_type = Literal[
+    "hse",
+    "hsi",
+    "pll_div2",
+    "system",
+]
+
+
+_rcm_hsi_clk_div_pll_t_return_type = Literal[
+    "2",
+]
 
 
-def rcm_adc_clk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_adc_clk_out_t', default)
+_rcm_hse_clk_div_pll_t_return_type = Literal[
+    "/1",
+    "/2",
+]
 
 
-def rcm_ahb_div_sdio_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_ahb_div_sdio_t', default)
+_rcm_pll_clk_mul_t_return_type = Literal[
+    "*10",
+    "*11",
+    "*12",
+    "*13",
+    "*14",
+    "*15",
+    "*16",
+    "*2",
+    "*3",
+    "*4",
+    "*5",
+    "*6",
+    "*7",
+    "*8",
+    "*9",
+]
 
 
-def rcm_ahb_div_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_ahb_div_t', default)
+_rcm_ahb_clk_div_hclk_t_return_type = Literal[
+    "/1",
+    "/128",
+    "/16",
+    "/2",
+    "/256",
+    "/4",
+    "/512",
+    "/64",
+    "/8",
+]
 
 
-def rcm_apb1_div_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_apb1_div_t', default)
+_rcm_hclk_div_sys_timer_clk_t_return_type = Literal[
+    "/1",
+    "/8",
+]
 
 
-def rcm_apb1_peripherals_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_apb1_peripherals_out_t', default)
+_rcm_apb1_div_t_return_type = Literal[
+    "/1",
+    "/16",
+    "/2",
+    "/4",
+    "/8",
+]
 
 
-def rcm_apb1_timers_mul_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_apb1_timers_mul_t', default)
+_rcm_apb1_timers_mul_t_return_type = Literal[
+    "*1",
+    "*2",
+]
 
 
-def rcm_apb1_timers_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_apb1_timers_out_t', default)
+_rcm_apb2_div_t_return_type = Literal[
+    "/1",
+    "/16",
+    "/2",
+    "/4",
+    "/8",
+]
 
 
-def rcm_apb2_div_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_apb2_div_t', default)
+_rcm_apb2_timers_mul_t_return_type = Literal[
+    "*1",
+    "*2",
+]
 
 
-def rcm_apb2_peripherals_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_apb2_peripherals_out_t', default)
+_rcm_adc_clk_div_t_return_type = Literal[
+    "/1",
+    "/16",
+    "/2",
+    "/4",
+    "/8",
+]
 
 
-def rcm_apb2_timers_mul_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_apb2_timers_mul_t', default)
+_rcm_fpu_clk_div_t_return_type = Literal[
+    "/1",
+    "/2",
+]
 
 
-def rcm_apb2_timers_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_apb2_timers_out_t', default)
+_rcm_usb_clk_div_t_return_type = Literal[
+    "/1",
+    "/1.5",
+    "/2",
+    "/2.5",
+]
 
 
-def rcm_css_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_css_t', default)
+_rcm_sdram_clk_div_t_return_type = Literal[
+    "/1",
+    "/2",
+    "/4",
+]
 
 
-def rcm_emmc_clk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_emmc_clk_out_t', default)
+_rcm_pll_clk_div_mco_clk_t_return_type = Literal[
+    "/2",
+]
 
 
-def rcm_fclk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_fclk_out_t', default)
+_rcm_flash_latency_t_return_type = Literal[
+    "0",
+    "1",
+    "2",
+    "3",
+]
 
 
-def rcm_flash_latency_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_flash_latency_t', default)
+_rcm_css_t_return_type = Literal[
+    "rcm_css_disable",
+    "rcm_css_enable",
+]
 
 
-def rcm_fmc_clk_value_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_fmc_clk_value_t', default)
+_rcm_hse_clock_source_t_return_type = Literal[
+    "bypass",
+    "disable",
+    "oscillator",
+]
 
 
-def rcm_fpu_clk_div_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_fpu_clk_div_t', default)
+_rcm_lse_clock_source_t_return_type = Literal[
+    "bypass",
+    "disable",
+    "oscillator",
+]
 
 
-def rcm_fpu_clk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_fpu_clk_out_t', default)
+_rcm_prefetch_buffer_enabled_t_return_type = Literal[
+    "rcm_prefetch_buffer_disable",
+    "rcm_prefetch_buffer_enable",
+]
 
 
-def rcm_hclk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hclk_out_t', default)
+_rcm_mco_enabled_t_return_type = Literal[
+    "disabled",
+    "enabled",
+]
 
 
-def rcm_hclk_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hclk_t', default)
+def rcm_lse_clk_input_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 32768,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_lse_clk_input_t", default)
 
 
-def rcm_hse_clock_source_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hse_clock_source_t', default)
+def rcm_hse_clk_input_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_hse_clk_input_t", default)
 
 
-def rcm_hse_div_pll_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hse_div_pll_t', default)
+def rcm_hse_clk_div_rtc_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_hse_clk_div_rtc_t_return_type = "/128",
+) -> _rcm_hse_clk_div_rtc_t_return_type:
+    return project.configs.get(f"{instance}.rcm_hse_clk_div_rtc_t", default)
 
 
-def rcm_hse_div_rtc_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hse_div_rtc_t', default)
+def rcm_rtc_clk_mux_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_rtc_clk_mux_t_return_type = "lsi",
+) -> _rcm_rtc_clk_mux_t_return_type:
+    return project.configs.get(f"{instance}.rcm_rtc_clk_mux_t", default)
 
 
-def rcm_hse_value_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hse_value_t', default)
+def rcm_rtc_clk_output_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 40000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_rtc_clk_output_t", default)
 
 
-def rcm_hsi_calibration_t(project: dict, default: int | None = None) -> int:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hsi_calibration_t', default)
+def rcm_lsi_clk_input_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 40000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_lsi_clk_input_t", default)
 
 
-def rcm_hsi_div_pll_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hsi_div_pll_t', default)
+def rcm_iwdt_clk_output_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 40000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_iwdt_clk_output_t", default)
 
 
-def rcm_hsi_value_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_hsi_value_t', default)
+def rcm_hsi_clk_input_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_hsi_clk_input_t", default)
 
 
-def rcm_i2s2_clk_freq_value_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_i2s2_clk_freq_value_t', default)
+def rcm_system_clk_mux_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_system_clk_mux_t_return_type = "hsi",
+) -> _rcm_system_clk_mux_t_return_type:
+    return project.configs.get(f"{instance}.rcm_system_clk_mux_t", default)
 
 
-def rcm_i2s3_clk_freq_value_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_i2s3_clk_freq_value_t', default)
+def rcm_fmc_clk_output_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_fmc_clk_output_t", default)
 
 
-def rcm_iwdg_clk_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_iwdg_clk_t', default)
+def rcm_pll_clk_mux_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_pll_clk_mux_t_return_type = "hsi_div2",
+) -> _rcm_pll_clk_mux_t_return_type:
+    return project.configs.get(f"{instance}.rcm_pll_clk_mux_t", default)
 
 
-def rcm_lse_clock_source_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_lse_clock_source_t', default)
+def rcm_mco_clk_mux_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_mco_clk_mux_t_return_type = "hsi",
+) -> _rcm_mco_clk_mux_t_return_type:
+    return project.configs.get(f"{instance}.rcm_mco_clk_mux_t", default)
 
 
-def rcm_lse_value_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_lse_value_t', default)
+def rcm_hsi_clk_div_pll_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_hsi_clk_div_pll_t_return_type = "2",
+) -> _rcm_hsi_clk_div_pll_t_return_type:
+    return project.configs.get(f"{instance}.rcm_hsi_clk_div_pll_t", default)
 
 
-def rcm_lsi_value_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_lsi_value_t', default)
+def rcm_hse_clk_div_pll_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_hse_clk_div_pll_t_return_type = "/1",
+) -> _rcm_hse_clk_div_pll_t_return_type:
+    return project.configs.get(f"{instance}.rcm_hse_clk_div_pll_t", default)
 
 
-def rcm_mco_clk_selector_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_mco_clk_selector_t', default)
+def rcm_pll_clk_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 4000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_pll_clk_t", default)
 
 
-def rcm_mco_clk_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_mco_clk_t', default)
+def rcm_pll_clk_mul_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_pll_clk_mul_t_return_type = "*2",
+) -> _rcm_pll_clk_mul_t_return_type:
+    return project.configs.get(f"{instance}.rcm_pll_clk_mul_t", default)
 
 
-def rcm_mco_enabled_t(project: dict, default: bool | None = None) -> bool:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_mco_enabled_t', default)
+def rcm_sys_clk_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_sys_clk_t", default)
 
 
-def rcm_mco_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_mco_out_t', default)
+def rcm_i2s_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_i2s_clk_out_t", default)
 
 
-def rcm_pll_clk_selector_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_pll_clk_selector_t', default)
+def rcm_ahb_clk_div_hclk_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_ahb_clk_div_hclk_t_return_type = "/1",
+) -> _rcm_ahb_clk_div_hclk_t_return_type:
+    return project.configs.get(f"{instance}.rcm_ahb_clk_div_hclk_t", default)
 
 
-def rcm_pll_div_mco_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_pll_div_mco_t', default)
+def rcm_hclk_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_hclk_t", default)
 
 
-def rcm_pll_mul_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_pll_mul_t', default)
+def rcm_hclk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_hclk_out_t", default)
 
 
-def rcm_pll_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_pll_t', default)
+def rcm_fclk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_fclk_out_t", default)
 
 
-def rcm_prefetch_buffer_enabled_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_prefetch_buffer_enabled_t', default)
+def rcm_hclk_div_sys_timer_clk_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_hclk_div_sys_timer_clk_t_return_type = "/1",
+) -> _rcm_hclk_div_sys_timer_clk_t_return_type:
+    return project.configs.get(f"{instance}.rcm_hclk_div_sys_timer_clk_t", default)
 
 
-def rcm_rtc_clk_selector_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_rtc_clk_selector_t', default)
+def rcm_sys_timer_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_sys_timer_clk_out_t", default)
 
 
-def rcm_rtc_clk_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_rtc_clk_t', default)
+def rcm_apb1_div_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_apb1_div_t_return_type = "/1",
+) -> _rcm_apb1_div_t_return_type:
+    return project.configs.get(f"{instance}.rcm_apb1_div_t", default)
 
 
-def rcm_sdio_ahb_clk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_sdio_ahb_clk_out_t', default)
+def rcm_apb1_peripherals_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_apb1_peripherals_out_t", default)
 
 
-def rcm_sdio_clk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_sdio_clk_out_t', default)
+def rcm_apb1_timers_mul_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_apb1_timers_mul_t_return_type = "*1",
+) -> _rcm_apb1_timers_mul_t_return_type:
+    return project.configs.get(f"{instance}.rcm_apb1_timers_mul_t", default)
 
 
-def rcm_sys_clk_freq_value_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_sys_clk_freq_value_t', default)
+def rcm_apb1_timers_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_apb1_timers_out_t", default)
 
 
-def rcm_sys_timer_clk_div_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_sys_timer_clk_div_t', default)
+def rcm_apb2_div_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_apb2_div_t_return_type = "/1",
+) -> _rcm_apb2_div_t_return_type:
+    return project.configs.get(f"{instance}.rcm_apb2_div_t", default)
 
 
-def rcm_sys_timer_clk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_sys_timer_clk_out_t', default)
+def rcm_apb2_peripherals_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_apb2_peripherals_out_t", default)
 
 
-def rcm_system_clk_selector_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_system_clk_selector_t', default)
+def rcm_apb2_timers_mul_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_apb2_timers_mul_t_return_type = "*1",
+) -> _rcm_apb2_timers_mul_t_return_type:
+    return project.configs.get(f"{instance}.rcm_apb2_timers_mul_t", default)
 
 
-def rcm_usb_clk_div_t(project: dict, default: str | None = None) -> str:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_usb_clk_div_t', default)
+def rcm_apb2_timers_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_apb2_timers_out_t", default)
 
 
-def rcm_usb_clk_out_t(project: dict, default: float | None = None) -> float:
-    return csp_project_helper.get(project, 'configs/RCM/geehy.rcm_usb_clk_out_t', default)
+def rcm_adc_clk_div_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_adc_clk_div_t_return_type = "/1",
+) -> _rcm_adc_clk_div_t_return_type:
+    return project.configs.get(f"{instance}.rcm_adc_clk_div_t", default)
 
 
+def rcm_adc_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 4000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_adc_clk_out_t", default)
+
+
+def rcm_fpu_clk_div_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_fpu_clk_div_t_return_type = "/1",
+) -> _rcm_fpu_clk_div_t_return_type:
+    return project.configs.get(f"{instance}.rcm_fpu_clk_div_t", default)
+
+
+def rcm_fpu_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_fpu_clk_out_t", default)
+
+
+def rcm_sdio_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_sdio_clk_out_t", default)
+
+
+def rcm_usb_clk_div_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_usb_clk_div_t_return_type = "/1",
+) -> _rcm_usb_clk_div_t_return_type:
+    return project.configs.get(f"{instance}.rcm_usb_clk_div_t", default)
+
+
+def rcm_usb_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 48000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_usb_clk_out_t", default)
+
+
+def rcm_smc_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_smc_clk_out_t", default)
+
+
+def rcm_dmc_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_dmc_clk_out_t", default)
+
+
+def rcm_sdram_clk_div_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_sdram_clk_div_t_return_type = "/1",
+) -> _rcm_sdram_clk_div_t_return_type:
+    return project.configs.get(f"{instance}.rcm_sdram_clk_div_t", default)
+
+
+def rcm_sdram_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_sdram_clk_out_t", default)
+
+
+def rcm_pll_clk_div_mco_clk_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_pll_clk_div_mco_clk_t_return_type = "/2",
+) -> _rcm_pll_clk_div_mco_clk_t_return_type:
+    return project.configs.get(f"{instance}.rcm_pll_clk_div_mco_clk_t", default)
+
+
+def rcm_mco_clk_out_t(
+    project: Project,
+    instance: str = "RCM",
+    default: float = 8000000,
+) -> float:
+    return project.configs.get(f"{instance}.rcm_mco_clk_out_t", default)
+
+
+def rcm_hsi_calibration_t(
+    project: Project,
+    instance: str = "RCM",
+    default: int = 16,
+) -> int:
+    return project.configs.get(f"{instance}.rcm_hsi_calibration_t", default)
+
+
+def rcm_flash_latency_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_flash_latency_t_return_type = "0",
+) -> _rcm_flash_latency_t_return_type:
+    return project.configs.get(f"{instance}.rcm_flash_latency_t", default)
+
+
+def rcm_css_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_css_t_return_type = "rcm_css_disable",
+) -> _rcm_css_t_return_type:
+    return project.configs.get(f"{instance}.rcm_css_t", default)
+
+
+def rcm_hse_clock_source_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_hse_clock_source_t_return_type = "disable",
+) -> _rcm_hse_clock_source_t_return_type:
+    return project.configs.get(f"{instance}.rcm_hse_clock_source_t", default)
+
+
+def rcm_lse_clock_source_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_lse_clock_source_t_return_type = "disable",
+) -> _rcm_lse_clock_source_t_return_type:
+    return project.configs.get(f"{instance}.rcm_lse_clock_source_t", default)
+
+
+def rcm_prefetch_buffer_enabled_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_prefetch_buffer_enabled_t_return_type = "rcm_prefetch_buffer_enable",
+) -> _rcm_prefetch_buffer_enabled_t_return_type:
+    return project.configs.get(f"{instance}.rcm_prefetch_buffer_enabled_t", default)
+
+
+def rcm_mco_enabled_t(
+    project: Project,
+    instance: str = "RCM",
+    default: _rcm_mco_enabled_t_return_type = "disabled",
+) -> _rcm_mco_enabled_t_return_type:
+    return project.configs.get(f"{instance}.rcm_mco_enabled_t", default)
+
+
+# fmt: on
+# endregion
 # ------------------------------------------------------------------------------
 
-
-def rcm_flash_latency(project: dict) -> str:
+# --< user code begin code, do not change this comment!
+def rcm_flash_latency(project: Project) -> str:
     m = {
-        'geehy.rcm_flash_latency_0': '0',
-        'geehy.rcm_flash_latency_1': '1',
-        'geehy.rcm_flash_latency_2': '2',
-        'geehy.rcm_flash_latency_3': '3',
+        "0": "0",
+        "1": "1",
+        "2": "2",
+        "3": "3",
     }
-    latency = rcm_flash_latency_t(project, 'geehy.rcm_flash_latency_3')
-    return m.get(latency, '3')
+    latency = rcm_flash_latency_t(project)
+    return m[latency]
 
 
-def rcm_hse_used(project: dict) -> bool:
-    pll_clk_selector = rcm_pll_clk_selector_t(project)
-    system_clk_selector = rcm_system_clk_selector_t(project)
-    mco_clk_selector = rcm_mco_clk_selector_t(project)
-    rtc_clk_selector = rcm_rtc_clk_selector_t(project)
+def rcm_hse_used(project: Project) -> bool:
+    pll_clk_mux = rcm_pll_clk_mux_t(project)
+    system_clk_mux = rcm_system_clk_mux_t(project)
+    mco_clk_mux = rcm_mco_clk_mux_t(project)
+    rtc_clk_mux = rcm_rtc_clk_mux_t(project)
 
-    hse_clock_source = rcm_hse_clock_source_t(project, 'geehy.rcm_hse_clock_source_disable')
+    hse_clock_source = rcm_hse_clock_source_t(project)
 
     use_rtc = True  # TODO:
     use_pll = rcm_pll_used(project)
     use_mco = True  # TODO:
 
-    if hse_clock_source == 'geehy.rcm_hse_clock_source_disable':
+    if hse_clock_source == "disable":
         return False
 
-    if use_rtc and rtc_clk_selector == 'geehy.rcm_rtc_clk_hse_div128_t':
+    if use_rtc and rtc_clk_mux == "hse_div128":
         return True
 
-    if use_pll and pll_clk_selector == 'geehy.rcm_pll_hse_t':
+    if use_pll and pll_clk_mux == "hse":
         return True
 
-    if system_clk_selector == 'geehy.rcm_system_clk_hse_t':
+    if system_clk_mux == "hse":
         return True
 
-    if use_mco and mco_clk_selector == 'geehy.rcm_mco_clk_hse_t':
+    if use_mco and mco_clk_mux == "hse":
         return True
 
     return False
 
 
-def rcm_hsi_used(project: dict) -> bool:
-    pll_clk_selector = rcm_pll_clk_selector_t(project)
-    system_clk_selector = rcm_system_clk_selector_t(project)
-    mco_clk_selector = rcm_mco_clk_selector_t(project)
+def rcm_hsi_used(project: Project) -> bool:
+    pll_clk_mux = rcm_pll_clk_mux_t(project)
+    system_clk_mux = rcm_system_clk_mux_t(project)
+    mco_clk_mux = rcm_mco_clk_mux_t(project)
 
     use_pll = rcm_pll_used(project)
     use_mco = True  # TODO:
 
-    if use_pll and pll_clk_selector == 'geehy.rcm_pll_hsi_div2_t':
+    if use_pll and pll_clk_mux == "hsi_div2":
         return True
 
-    if system_clk_selector == 'geehy.rcm_system_clk_hsi_t':
+    if system_clk_mux == "hsi":
         return True
 
-    if use_mco and mco_clk_selector == 'geehy.rcm_mco_clk_hsi_t':
+    if use_mco and mco_clk_mux == "hsi":
         return True
 
     return False
 
 
-def rcm_lse_used(project: dict) -> bool:
-    rtc_clk_selector = rcm_rtc_clk_selector_t(project)
+def rcm_lse_used(project: Project) -> bool:
+    rtc_clk_mux = rcm_rtc_clk_mux_t(project)
 
-    lse_clock_source = rcm_lse_clock_source_t(project, 'geehy.rcm_lse_clock_source_disable')
+    lse_clock_source = rcm_lse_clock_source_t(project)
 
     use_rtc = True  # TODO:
 
-    if lse_clock_source == 'geehy.rcm_lse_clock_source_disable':
+    if lse_clock_source == "disable":
         return False
 
-    if use_rtc and rtc_clk_selector == 'geehy.rcm_rtc_clk_lse_t':
+    if use_rtc and rtc_clk_mux == "lse":
         return True
 
     return False
 
 
-def rcm_lsi_used(project: dict) -> bool:
-    rtc_clk_selector = rcm_rtc_clk_selector_t(project)
+def rcm_lsi_used(project: Project) -> bool:
+    rtc_clk_mux = rcm_rtc_clk_mux_t(project)
 
     use_iwdg = True  # TODO:
 
     if use_iwdg:
         return True
 
-    if rtc_clk_selector == 'geehy.rcm_rtc_clk_lsi_t':
+    if rtc_clk_mux == "lsi":
         return True
 
     return False
 
 
-def rcm_pll_used(project: dict) -> bool:
-    system_clk_selector = rcm_system_clk_selector_t(project)
-    mco_clk_selector = rcm_mco_clk_selector_t(project)
+def rcm_pll_used(project: Project) -> bool:
+    system_clk_mux = rcm_system_clk_mux_t(project)
+    mco_clk_mux = rcm_mco_clk_mux_t(project)
 
     use_mco = True  # TODO:
     use_usb = True  # TODO:
 
-    if system_clk_selector == 'geehy.rcm_system_clk_pll_t':
+    if system_clk_mux == "pll":
         return True
 
-    if use_mco and mco_clk_selector == 'geehy.rcm_mco_clk_pll_div2_t':
+    if use_mco and mco_clk_mux == "pll_div2":
         return True
 
     if use_usb:
@@ -353,97 +749,113 @@ def rcm_pll_used(project: dict) -> bool:
     return False
 
 
-def rcm_pll_clk_selector(project: dict) -> str:
-    selector = rcm_pll_clk_selector_t(project)
-    div = rcm_hse_div_pll_t(project)
+def rcm_mco_enabled(project: Project) -> bool:
+    mco_enabled = rcm_mco_enabled_t(project)
+    return mco_enabled == "enabled"
 
-    if selector == 'geehy.rcm_pll_hsi_div2_t':
-        return 'RCM_PLLSEL_HSI_DIV_2'
+
+def rcm_pll_clk_mux(project: Project) -> str:
+    mux = rcm_pll_clk_mux_t(project)
+    div = rcm_hse_clk_div_pll_t(project)
+
+    if mux == "hsi_div2":
+        return "RCM_PLLSEL_HSI_DIV_2"
     else:
-        if div == 'geehy.rcm_hse_div_pll_div1':
-            return 'RCM_PLLSEL_HSE'
+        if div == "/1":
+            return "RCM_PLLSEL_HSE"
         else:
-            return 'RCM_PLLSEL_HSE_DIV2'
+            return "RCM_PLLSEL_HSE_DIV2"
 
 
-def rcm_system_clk_selector(project: dict) -> str:
+def rcm_system_clk_mux(project: Project) -> str:
     m = {
-        'geehy.rcm_system_clk_hsi_t': 'RCM_SYSCLK_SEL_HSI',
-        'geehy.rcm_system_clk_hse_t': 'RCM_SYSCLK_SEL_HSE',
-        'geehy.rcm_system_clk_pll_t': 'RCM_SYSCLK_SEL_PLL',
+        "hsi": "RCM_SYSCLK_SEL_HSI",
+        "hse": "RCM_SYSCLK_SEL_HSE",
+        "pll": "RCM_SYSCLK_SEL_PLL",
     }
-    selector = rcm_system_clk_selector_t(project)
-    return m.get(selector)
+    mux = rcm_system_clk_mux_t(project)
+    return m[mux]
 
 
-def rcm_mco_clk_selector(project: dict) -> str:
+def rcm_mco_clk_mux(project: Project) -> str:
     m = {
-        'geehy.rcm_mco_clk_pll_div2_t': 'RCM_MCOCLK_PLLCLK_DIV_2',
-        'geehy.rcm_mco_clk_hse_t': 'RCM_MCOCLK_HSE',
-        'geehy.rcm_mco_clk_hsi_t': 'RCM_MCOCLK_HSI',
-        'geehy.rcm_mco_clk_system_t': 'RCM_MCOCLK_SYSCLK',
+        "pll_div2": "RCM_MCOCLK_PLLCLK_DIV_2",
+        "hsi": "RCM_MCOCLK_HSI",
+        "hse": "RCM_MCOCLK_HSE",
+        "system": "RCM_MCOCLK_SYSCLK",
     }
-    selector = rcm_mco_clk_selector_t(project)
-    return m.get(selector)
+    mux = rcm_mco_clk_mux_t(project)
+    return m[mux]
 
 
-def rcm_pll_mul(project: dict) -> str:
+def rcm_pll_clk_mul(project: Project) -> str:
     m = {
-        'geehy.rcm_pll_mul2': 'RCM_PLLMF_2',
-        'geehy.rcm_pll_mul3': 'RCM_PLLMF_3',
-        'geehy.rcm_pll_mul4': 'RCM_PLLMF_4',
-        'geehy.rcm_pll_mul5': 'RCM_PLLMF_5',
-        'geehy.rcm_pll_mul6': 'RCM_PLLMF_6',
-        'geehy.rcm_pll_mul7': 'RCM_PLLMF_7',
-        'geehy.rcm_pll_mul8': 'RCM_PLLMF_8',
-        'geehy.rcm_pll_mul9': 'RCM_PLLMF_9',
-        'geehy.rcm_pll_mul10': 'RCM_PLLMF_10',
-        'geehy.rcm_pll_mul11': 'RCM_PLLMF_11',
-        'geehy.rcm_pll_mul12': 'RCM_PLLMF_12',
-        'geehy.rcm_pll_mul13': 'RCM_PLLMF_13',
-        'geehy.rcm_pll_mul14': 'RCM_PLLMF_14',
-        'geehy.rcm_pll_mul15': 'RCM_PLLMF_15',
-        'geehy.rcm_pll_mul16': 'RCM_PLLMF_16',
+        "*2": "RCM_PLLMF_2",
+        "*3": "RCM_PLLMF_3",
+        "*4": "RCM_PLLMF_4",
+        "*5": "RCM_PLLMF_5",
+        "*6": "RCM_PLLMF_6",
+        "*7": "RCM_PLLMF_7",
+        "*8": "RCM_PLLMF_8",
+        "*9": "RCM_PLLMF_9",
+        "*10": "RCM_PLLMF_10",
+        "*11": "RCM_PLLMF_11",
+        "*12": "RCM_PLLMF_12",
+        "*13": "RCM_PLLMF_13",
+        "*14": "RCM_PLLMF_14",
+        "*15": "RCM_PLLMF_15",
+        "*16": "RCM_PLLMF_16",
     }
-    mul = rcm_pll_mul_t(project)
-    return m.get(mul)
+    mul = rcm_pll_clk_mul_t(project)
+    return m[mul]
 
 
-def rcm_ahb_div(project: dict) -> str:
+def rcm_ahb_clk_div_hclk(project: Project) -> str:
     m = {
-        'geehy.rcm_ahb_div1': 'RCM_AHB_DIV_1',
-        'geehy.rcm_ahb_div2': 'RCM_AHB_DIV_2',
-        'geehy.rcm_ahb_div4': 'RCM_AHB_DIV_4',
-        'geehy.rcm_ahb_div8': 'RCM_AHB_DIV_8',
-        'geehy.rcm_ahb_div16': 'RCM_AHB_DIV_16',
-        'geehy.rcm_ahb_div64': 'RCM_AHB_DIV_64',
-        'geehy.rcm_ahb_div128': 'RCM_AHB_DIV_128',
-        'geehy.rcm_ahb_div256': 'RCM_AHB_DIV_256',
-        'geehy.rcm_ahb_div512': 'RCM_AHB_DIV_512',
+        "/1": "RCM_AHB_DIV_1",
+        "/2": "RCM_AHB_DIV_2",
+        "/4": "RCM_AHB_DIV_4",
+        "/8": "RCM_AHB_DIV_8",
+        "/16": "RCM_AHB_DIV_16",
+        "/64": "RCM_AHB_DIV_64",
+        "/128": "RCM_AHB_DIV_128",
+        "/256": "RCM_AHB_DIV_256",
+        "/512": "RCM_AHB_DIV_512",
     }
-    div = rcm_ahb_div_t(project)
-    return m.get(div)
+    div = rcm_ahb_clk_div_hclk_t(project)
+    return m[div]
 
 
-def rcm_apb1_div(project: dict) -> str:
+def rcm_apb1_div(project: Project) -> str:
     m = {
-        'geehy.rcm_apb1_div1': 'RCM_APB_DIV_1',
-        'geehy.rcm_apb1_div2': 'RCM_APB_DIV_2',
-        'geehy.rcm_apb1_div4': 'RCM_APB_DIV_4',
-        'geehy.rcm_apb1_div8': 'RCM_APB_DIV_8',
-        'geehy.rcm_apb1_div16': 'RCM_APB_DIV_16',
+        "/1": "RCM_APB_DIV_1",
+        "/2": "RCM_APB_DIV_2",
+        "/4": "RCM_APB_DIV_4",
+        "/8": "RCM_APB_DIV_8",
+        "/16": "RCM_APB_DIV_16",
     }
     div = rcm_apb1_div_t(project)
-    return m.get(div)
+    return m[div]
 
 
-def rcm_apb2_div(project: dict) -> str:
+def rcm_apb2_div(project: Project) -> str:
     m = {
-        'geehy.rcm_apb2_div1': 'RCM_APB_DIV_1',
-        'geehy.rcm_apb2_div2': 'RCM_APB_DIV_2',
-        'geehy.rcm_apb2_div4': 'RCM_APB_DIV_4',
-        'geehy.rcm_apb2_div8': 'RCM_APB_DIV_8',
-        'geehy.rcm_apb2_div16': 'RCM_APB_DIV_16',
+        "/1": "RCM_APB_DIV_1",
+        "/2": "RCM_APB_DIV_2",
+        "/4": "RCM_APB_DIV_4",
+        "/8": "RCM_APB_DIV_8",
+        "/16": "RCM_APB_DIV_16",
     }
     div = rcm_apb2_div_t(project)
-    return m.get(div)
+    return m[div]
+
+
+def rcm_mco_io(project: Project) -> str | None:
+    return None
+    ios = csp_project_helper.find_pins_by_function(project, "RCM:MCO")
+    if ios:
+        return ios[0]
+    else:
+        return None
+
+# --> user code end code, do not change this comment!

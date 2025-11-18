@@ -14,28 +14,33 @@
  # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
  #
  # @author      xqyjlj
- # @file        rcm.h.j2
+ # @file        wwdt.c.j2
  #
  # Change Logs:
  # Date           Author       Notes
  # ------------   ----------   -----------------------------------------------
- # 2024-03-22     xqyjlj       initial version
+ # 2024-04-01     xqyjlj       initial version
  #
  #}
-{%- extends "csp-file-base.h.j2" %}
+{%- extends "csp-file-base.c.j2" %}
 
 {%- block includes %}
-#include "apm32f10x.h"
-#include "apm32f10x_fmc.h"
-#include "apm32f10x_gpio.h"
-#include "apm32f10x_misc.h"
-#include "apm32f10x_rcm.h"
-#include "system_apm32f10x.h"
+#include "csp/wwdt.h"
 {%- endblock %}
 
-{%- block functions_prototypes %}
-/**
- * @brief configure rcm
- */
-void csp_rcm_init(void);
+{%- block function_body %}
+void csp_wwdt_init(void)
+{
+    /*!< enable the WWDT clock. */
+    RCM_EnableAPB1PeriphClock(RCM_APB1_PERIPH_WWDT);
+
+    WWDT_Enable({{ CSP.project|wwdt_counter_t(64) }}U);
+    WWDT_ConfigTimebase({{ CSP.project|wwdt_prescaler() }});
+    WWDT_ConfigWindowData({{ CSP.project|wwdt_window_t(64) }}U);
+{%- if CSP.project|wwdt_ewi_mode_t() == "enable" %}
+{#  #}
+    /*!< enable the early wakeup interrupt. */
+    WWDT_EnableEWI();
+{%- endif %}
+}
 {%- endblock %}

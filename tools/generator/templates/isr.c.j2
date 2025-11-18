@@ -11,31 +11,26 @@
  # See the License for the specific language governing permissions and
  # limitations under the License.
  #
- # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+ # Copyright (C) 2025-2025 xqyjlj<xqyjlj@126.com>
  #
  # @author      xqyjlj
- # @file        rcm.h.j2
+ # @file        isr.c.j2
  #
  # Change Logs:
  # Date           Author       Notes
  # ------------   ----------   -----------------------------------------------
- # 2024-03-22     xqyjlj       initial version
- #
+ # 2025-04-15     xqyjlj       initial version
  #}
-{%- extends "csp-file-base.h.j2" %}
+{%- extends "csp-file-base.c.j2" %}
+
+{%- set modules = CSP.project.modules|sort %}
 
 {%- block includes %}
 #include "apm32f10x.h"
-#include "apm32f10x_fmc.h"
-#include "apm32f10x_gpio.h"
-#include "apm32f10x_misc.h"
-#include "apm32f10x_rcm.h"
-#include "system_apm32f10x.h"
+{%- for module in modules %}
+#include "csp/{{ module|lower }}.h"
+{%- endfor %}
 {%- endblock %}
 
-{%- block functions_prototypes %}
-/**
- * @brief configure rcm
- */
-void csp_rcm_init(void);
+{%- block function_body %}
 {%- endblock %}
