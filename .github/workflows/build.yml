@@ -1,0 +1,77 @@
+# Licensed under the Apache License v. 2 (the "License")
+# You may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright (C) 2025-2025 xqyjlj<xqyjlj@126.com>
+#
+# @author      xqyjlj
+# @file        build_release.yml
+#
+# Change Logs:
+# Date           Author       Notes
+# ------------   ----------   -----------------------------------------------
+# 2025-01-16     xqyjlj       initial version
+#
+
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: 🧪 build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - target: examples/led
+            file: led.csp
+    steps:
+      - name: ⬇️ checkout csp_hal_apm32f1
+        uses: actions/checkout@v5
+        with:
+          submodules: true
+
+      - name: ⬇️ install csp-server
+        uses: csplink/action_setup_csp@master
+
+      - name: ⬇️ install csp package
+        shell: bash
+        run: |
+          csp-server --version
+          wget https://github.com/csplink/toolchains/releases/download/arm-none-eabi/gcc-arm-none-eabi-10.3.1.linux.csppack -O gcc-arm-none-eabi.linux.csppack
+          csp-server install gcc-arm-none-eabi.linux.csppack
+          csp-server install .
+
+      - name: 👷 build
+        shell: bash
+        run: |
+          pushd ${{ matrix.target }}
+            csp-server gen ${{ matrix.file }}
+            mkdir -pv build.cmake
+            pushd build.cmake
+              cmake ..
+              make -j$(nproc) VERBOSE=1
+              mkdir -pv artifact
+              mv *.elf artifact
+              mv *.bin artifact
+              mv *.hex artifact
+              mv *.map artifact
+            popd
+          popd
+
+      - name: ⬆️ upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: artifact
+          path: ${{ matrix.target }}/build.cmake/artifact
