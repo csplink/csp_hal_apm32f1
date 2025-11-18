@@ -11,31 +11,49 @@
  # See the License for the specific language governing permissions and
  # limitations under the License.
  #
- # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+ # Copyright (C) 2025-2025 xqyjlj<xqyjlj@126.com>
  #
  # @author      xqyjlj
- # @file        rcm.h.j2
+ # @file        uart.h.j2
  #
  # Change Logs:
  # Date           Author       Notes
  # ------------   ----------   -----------------------------------------------
- # 2024-03-22     xqyjlj       initial version
- #
+ # 2025-11-16     xqyjlj       initial version
  #}
 {%- extends "csp-file-base.h.j2" %}
 
 {%- block includes %}
 #include "apm32f10x.h"
-#include "apm32f10x_fmc.h"
+#include "apm32f10x_eint.h"
 #include "apm32f10x_gpio.h"
 #include "apm32f10x_misc.h"
+#include "apm32f10x_usart.h"
 #include "apm32f10x_rcm.h"
-#include "system_apm32f10x.h"
 {%- endblock %}
+
+{%- set module = CSP.module %}
+{%- set name = CSP.module|lower() %}
 
 {%- block functions_prototypes %}
 /**
- * @brief configure rcm
+ * @brief configure {{ module }}
  */
-void csp_rcm_init(void);
+void csp_{{ name }}_init(void);
+
+/**
+ * @brief send {{ module }} data sequence.
+ * @param[in] *buffer buffer pointer.
+ * @param[in] length buffer size.
+ * @return int32_t
+ */
+int32_t csp_{{ name }}_write(const void *buffer, uint32_t length);
+
+/**
+ * @brief receive {{ module }} data sequence.
+ * @param[out] *buffer buffer pointer.
+ * @param[in] length buffer size.
+ * @return int32_t
+ */
+int32_t csp_{{ name }}_read(void *buffer, uint32_t length);
 {%- endblock %}

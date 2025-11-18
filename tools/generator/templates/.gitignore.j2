@@ -11,31 +11,62 @@
  # See the License for the specific language governing permissions and
  # limitations under the License.
  #
- # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
+ # Copyright (C) 2025-2025 xqyjlj<xqyjlj@126.com>
  #
  # @author      xqyjlj
- # @file        rcm.h.j2
+ # @file        .gitignore.j2
  #
  # Change Logs:
  # Date           Author       Notes
  # ------------   ----------   -----------------------------------------------
- # 2024-03-22     xqyjlj       initial version
- #
+ # 2025-04-15     xqyjlj       initial version
  #}
-{%- extends "csp-file-base.h.j2" %}
 
-{%- block includes %}
-#include "apm32f10x.h"
-#include "apm32f10x_fmc.h"
-#include "apm32f10x_gpio.h"
-#include "apm32f10x_misc.h"
-#include "apm32f10x_rcm.h"
-#include "system_apm32f10x.h"
-{%- endblock %}
+#Clion
+.idea/
+cmake-build*/
 
-{%- block functions_prototypes %}
-/**
- * @brief configure rcm
- */
-void csp_rcm_init(void);
-{%- endblock %}
+#vscode
+.vscode/
+
+#mdk
+*.uvmpw.*
+DebugConfig/
+Listings/
+Objects/
+RTE/
+*.uvoptx
+*.uvguix.*
+
+#object
+*.o
+*.d
+*.obj
+*.elf
+*.map
+*.bin
+*.hex
+
+#cache
+cache/
+
+# Xmake cache
+.xmake/
+build*/
+
+# MacOS Cache
+.DS_Store
+
+# cmake
+/CMakeLists.txt
+
+# python
+__pycache__
+
+# ozone
+*.jdebug
+*.jdebug.user
+
+# csp
+.csp
+

@@ -1,9 +1,9 @@
 {#
- # Licensed under the GNU General Public License v. 3 (the "License")
+ # Licensed under the Apache License v. 2 (the "License")
  # You may not use this file except in compliance with the License.
  # You may obtain a copy of the License at
  #
- #     https://www.gnu.org/licenses/gpl-3.0.html
+ #     https://www.apache.org/licenses/LICENSE-2.0.html
  #
  # Unless required by applicable law or agreed to in writing, software
  # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,102 +25,116 @@
 {%- extends "csp-file-base.c.j2" %}
 
 {%- block includes %}
-
 #include "csp/rcm.h"
-{%  endblock %}
+{% endblock includes %}
 
 {%- block function_body %}
-
+{%- set mco_enabled = CSP.project|rcm_mco_enabled() %}
+{%- set mco_io = CSP.project|rcm_mco_io() %}
 void csp_rcm_init(void)
 {
-    {%- if CSP.project|rcm_prefetch_buffer_enabled_t == 'geehy.rcm_prefetch_buffer_enable' %}
+{%- if mco_enabled %}
+    GPIO_Config_T gpio_config = {0};
+{#  #}
+    RCM_EnableAPB2PeriphClock({{ mco_io|gpio_clock }});
+{%- endif %}
+
+    {%- if CSP.project|rcm_prefetch_buffer_enabled_t() == 'rcm_prefetch_buffer_enable' %}
     FMC_EnablePrefetchBuffer();
     {%- endif %}
 
     /*!< set flash latency. */
-    FMC->CTRL1_B.WS = {{ CSP.project|rcm_flash_latency }}U;
-    while(FMC->CTRL1_B.WS != {{ CSP.project|rcm_flash_latency }}U)
+    FMC->CTRL1_B.WS = {{ CSP.project|rcm_flash_latency() }}U;
+    while (FMC->CTRL1_B.WS != {{ CSP.project|rcm_flash_latency() }}U)
     {
     }
 
 {%- if CSP.project|rcm_hse_used %}
-{##}
-    {%- set rcm_hse_clock_source = CSP.project|rcm_hse_clock_source_t %}
-    {%- if rcm_hse_clock_source == 'geehy.rcm_hse_clock_source_oscillator' %}
+{#  #}
+    {%- set rcm_hse_clock_source = CSP.project|rcm_hse_clock_source_t() %}
+    {%- if rcm_hse_clock_source == 'rcm_hse_clock_source_oscillator' %}
     RCM_ConfigHSE(RCM_HSE_OPEN);
     {%- else %}
     RCM_ConfigHSE(RCM_HSE_BYPASS);
     {%- endif %}
 
     /*!< wait till HSE is ready. */
-    while(RCM->CTRL_B.HSERDYFLG != 1U)
+    while (RCM->CTRL_B.HSERDYFLG != 1U)
     {
     }
 {%- endif %}
 
 {%- if CSP.project|rcm_hsi_used %}
-{##}
-    RCM_ConfigHSITrim({{ CSP.project|rcm_hsi_calibration_t }}U);
+{#  #}
+    RCM_ConfigHSITrim({{ CSP.project|rcm_hsi_calibration_t() }}U);
     RCM_EnableHSI();
 
     /*!< wait till HSI is ready. */
-    while(RCM->CTRL_B.HSIRDYFLG != 1U)
+    while (RCM->CTRL_B.HSIRDYFLG != 1U)
     {
     }
 {%- endif %}
 
-{%- if CSP.project|rcm_lse_used %}
-{##}
-    {%- set rcm_lse_clock_source = CSP.project|rcm_lse_clock_source_t %}
-    {%- if rcm_lse_clock_source == 'geehy.rcm_lse_clock_source_oscillator' %}
+{%- if CSP.project|rcm_lse_used() %}
+{#  #}
+    {%- set rcm_lse_clock_source = CSP.project|rcm_lse_clock_source_t() %}
+    {%- if rcm_lse_clock_source == 'rcm_lse_clock_source_oscillator' %}
     RCM_ConfigLSE(RCM_LSE_OPEN);
     {%- else %}
     RCM_ConfigLSE(RCM_LSE_BYPASS);
     {%- endif %}
 
     /*!< wait till LSE is ready. */
-    while(RCM->CTRL_B.LSERDYFLG != 1U)
+    while (RCM->CTRL_B.LSERDYFLG != 1U)
     {
     }
 {%- endif %}
 
-{%- if CSP.project|rcm_lse_used %}
-{##}
+{%- if CSP.project|rcm_lse_used() %}
+{#  #}
     RCM_EnableLSI();
 
     /*!< wait till LSI is ready. */
-    while(RCM->CTRL_B.LSIRDYFLG != 1U)
+    while (RCM->CTRL_B.LSIRDYFLG != 1U)
     {
     }
 {%- endif %}
 
-{%- if CSP.project|rcm_pll_used %}
-{##}
-    RCM_ConfigPLL({{ CSP.project|rcm_pll_clk_selector }}, {{ CSP.project|rcm_pll_mul }});
+{%- if CSP.project|rcm_pll_used() %}
+{#  #}
+    RCM_ConfigPLL({{ CSP.project|rcm_pll_clk_mux() }}, {{ CSP.project|rcm_pll_clk_mul() }});
     RCM_EnablePLL();
 
     /*!< wait till PLL is ready. */
-    while(RCM->CTRL_B.PLL1RDYFLG != 1U)
+    while (RCM->CTRL_B.PLL1RDYFLG != 1U)
     {
     }
 {%- endif %}
 
-    RCM_ConfigAHB({{ CSP.project|rcm_ahb_div }});
-    RCM_ConfigAPB1({{ CSP.project|rcm_apb1_div }});
-    RCM_ConfigAPB2({{ CSP.project|rcm_apb2_div }});
+    RCM_ConfigAHB({{ CSP.project|rcm_ahb_clk_div_hclk() }});
+    RCM_ConfigAPB1({{ CSP.project|rcm_apb1_div() }});
+    RCM_ConfigAPB2({{ CSP.project|rcm_apb2_div() }});
 
-    RCM_ConfigSYSCLK({{ CSP.project|rcm_system_clk_selector }});
+    RCM_ConfigSYSCLK({{ CSP.project|rcm_system_clk_mux() }});
 
     /*!< wait till SYSCLK is ready. */
-    while(RCM_ReadSYSCLKSource() != {{ CSP.project|rcm_system_clk_selector }})
+    while (RCM_ReadSYSCLKSource() != {{ CSP.project|rcm_system_clk_mux() }})
     {
     }
 
-    SystemCoreClock = {{ CSP.project|rcm_sys_timer_clk_out_t|int }}U;
+    SystemCoreClock = {{ CSP.project|rcm_sys_timer_clk_out_t()|int }}U;
 
-{%- if CSP.project|rcm_mco_enabled_t(false) %}
-{##}
-    RCM_ConfigMCO({{ CSP.project|rcm_mco_clk_selector }});
+{%- if mco_enabled %}
+{#  #}
+    {%- set port = mco_io|gpio_channel_to_port %}
+    {%- set pin = mco_io|gpio_channel_to_pin %}
+    /*!< configure the {{ port }}<{{ pin }}> -> RCM:MCO. */
+    gpio_config.pin = {{ pin }};
+    gpio_config.mode = {{ CSP.project|gpio_io_mode(port, pin) }};
+    gpio_config.speed = {{ CSP.project|gpio_io_speed(port, pin) }};
+    GPIO_Config({{ port }}, &gpio_config);
+
+    RCM_ConfigMCO({{ CSP.project|rcm_mco_clk_mux() }});
 {%- endif %}
 }
-{%  endblock %}
+{% endblock function_body %}

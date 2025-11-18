@@ -43,7 +43,7 @@
     <i>Chip Support Package for APM32F1 Series.</i><br/>
 </div>
 
-**English** | [中文](README-zh_CN.md)
+**English** | [中文](README-zh-cn.md)
 
 ## ✨ Features
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-# Licensed under the GNU General Public License v. 3 (the "License")
+# Licensed under the Apache License v. 2 (the "License")
 # You may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.gnu.org/licenses/gpl-3.0.html
+#     https://www.apache.org/licenses/LICENSE-2.0.html
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright (C) 2024-2024 xqyjlj<xqyjlj@126.com>
+# Copyright (C) 2025-2025 xqyjlj<xqyjlj@126.com>
 #
 # @author      xqyjlj
 # @file        builder.py
@@ -26,7 +26,8 @@
 
 import copy
 
-import chip
+from csp.project import Project
+import filters.chip as chip
 
 inc_dirs = [
     "core/inc",
@@ -36,8 +37,9 @@ inc_dirs = [
 ]
 
 src_files_group = {
-    "application/user/core": [
+    "application/core": [
         "core/src/main.c",
+        "core/src/isr.c",
     ],
     "std_drivers/hal": [
         "hal/libraries/std_drivers/src/apm32f10x_adc.c",
@@ -77,21 +79,29 @@ device_map = {
 }
 
 
-def builder_defines(project: dict) -> list[str]:
+def builder_defines(project: Project) -> list[str]:
     cl = chip.chip_info(project)
     li = [cl["class"]]
     return li
 
 
-def builder_inc_dirs(project: dict) -> list:
+def builder_inc_dirs(project: Project) -> list:
     return inc_dirs
 
 
-def builder_src_files_group(project: dict) -> dict:
+def builder_src_files_group(project: Project) -> dict:
     group = copy.deepcopy(src_files_group)
 
-    for module in project["modules"]:
-        group["application/user/core"].append(f"core/src/{module.lower()}.c")
+    builder = project.gen.builder
+    toolchains = project.gen.toolchains
+
+    if builder == "MDK-Arm":
+        group["application/core"].append("startup_arm.s")
+    elif toolchains == "arm-none-eabi":
+        group["application/core"].append("startup_gcc.S")
+
+    for module in project.modules:
+        group["application/core"].append(f"core/src/{module.lower()}.c")
 
     for key in group.keys():
         group[key].sort()
@@ -99,7 +109,7 @@ def builder_src_files_group(project: dict) -> dict:
     return group
 
 
-def builder_src_files(project: dict) -> list:
+def builder_src_files(project: Project) -> list:
     files = []
 
     for _, value in builder_src_files_group(project).items():
@@ -109,10 +119,3 @@ def builder_src_files(project: dict) -> list:
     files.sort()
 
     return files
-
-
-def builder_startup_file(project: dict) -> str:
-    toolchains = project.get("gen", {}).get("toolchains", '')
-    if toolchains == 'arm-none-eabi':
-        return "startup_gcc.S"
-    return "None"

@@ -14,28 +14,30 @@
  # Copyright (C) 2022-2024 xqyjlj<xqyjlj@126.com>
  #
  # @author      xqyjlj
- # @file        rcm.h.j2
+ # @file        sys.c.j2
  #
  # Change Logs:
  # Date           Author       Notes
  # ------------   ----------   -----------------------------------------------
- # 2024-03-22     xqyjlj       initial version
+ # 2024-04-12     xqyjlj       initial version
  #
  #}
-{%- extends "csp-file-base.h.j2" %}
+{%- extends "csp-file-base.c.j2" %}
 
 {%- block includes %}
-#include "apm32f10x.h"
-#include "apm32f10x_fmc.h"
-#include "apm32f10x_gpio.h"
-#include "apm32f10x_misc.h"
-#include "apm32f10x_rcm.h"
-#include "system_apm32f10x.h"
+#include "csp/sys.h"
 {%- endblock %}
 
-{%- block functions_prototypes %}
-/**
- * @brief configure rcm
- */
-void csp_rcm_init(void);
+{%- block function_body %}
+void csp_sys_init(void)
+{
+{%- set sys_debug = CSP.project|sys_ctrl_debug_t %}
+{%- set clocks = CSP.project|sys_clocks() %}
+
+{%- if clocks|length() > 0 %}
+    RCM_EnableAPB2PeriphClock({{ clocks|join(" | ") }});
+{#  #}
+{%- endif %}
+    GPIO_ConfigPinRemap({{ CSP.project|sys_debug() }});
+}
 {%- endblock %}

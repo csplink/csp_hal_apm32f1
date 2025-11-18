@@ -1,9 +1,9 @@
 {#
- # Licensed under the GNU General Public License v. 3 (the "License")
+ # Licensed under the Apache License v. 2 (the "License")
  # You may not use this file except in compliance with the License.
  # You may obtain a copy of the License at
  #
- #     https://www.gnu.org/licenses/gpl-3.0.html
+ #     https://www.apache.org/licenses/LICENSE-2.0.html
  #
  # Unless required by applicable law or agreed to in writing, software
  # distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@
  # Date           Author       Notes
  # ------------   ----------   -----------------------------------------------
  # 2024-03-22     xqyjlj       initial version
+ # 2025-10-10     xqyjlj       improve xmake configuration
  #
  #}
 {%- extends "csp-file-base.xmake.lua.j2" %}
@@ -39,7 +40,7 @@ set_config("cpu", "cortex-m3")
 {%- endblock %}
 
 {%- block toolchains %}
-toolchain("arm-none-eabi")
+toolchain("gcc-arm-none-eabi")
 do
     set_kind("standalone")
     set_toolset("cc", "arm-none-eabi-gcc")
@@ -50,35 +51,67 @@ do
     set_toolset("objcopy", "arm-none-eabi-objcopy")
     set_toolset("size", "arm-none-eabi-size")
 {%- if CSP.toolchainsPath %}
-    set_sdkdir("{{ CSP.toolchainsPath }}")
+    local toolchain_path = os.getenv("CSP_TOOLCHAIN_PATH") or "{{ CSP.toolchainsPath }}"
+    set_sdkdir(toolchain_path)
 {%- endif %}
 end
 toolchain_end()
 {%- endblock %}
 
 {%- block flags %}
-add_cxxflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", "-Wall", "-std=c++11", {force = true})
-add_cflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", "-Wall", "-std=gnu99", {force = true})
-add_asflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-ffunction-sections", "-fdata-sections", "-fno-common", "-fmessage-length=0", "-Wall", "-x", "assembler-with-cpp", {force = true})
-add_ldflags("-mcpu=cortex-m3", "-mthumb", "-mthumb-interwork", "-specs=nano.specs", "-specs=nosys.specs", "-Wl,--gc-sections,--print-memory-usage", "-T{{ CSP.project.targetChip }}.lds", {force = true})
-add_defines("{{ CSP.project|builder_defines|join('", "') }}", {force = true})
+local common_flags = {
+    "-mcpu=cortex-m3",
+    "-mthumb",
+    "-mthumb-interwork",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fno-common",
+    "-fmessage-length=0",
+    "-Wall"
+}
+local cxx_flags = table.join(common_flags, {"-std=c++11"})
+local c_flags = table.join(common_flags, {"-std=gnu99"})
+local as_flags = table.join(common_flags, {"-x", "assembler-with-cpp"})
+local linker_script = path.join(os.projectdir(), "{{ CSP.project.targetChip }}.lds")
+local ld_flags = {
+    "-mcpu=cortex-m3",
+    "-mthumb",
+    "-mthumb-interwork",
+    "-specs=nano.specs",
+    "-specs=nosys.specs",
+    "-Wl,--gc-sections,--print-memory-usage",
+    "-T" .. linker_script
+}
+local defines = {
+{%- for define in CSP.project|builder_defines %}
+    "{{ define }}",
+{%- endfor %}
+}
 {%- endblock %}
 
 {%- block target_configs %}
-    set_languages("c99")
-    set_languages("cxx11")
+    set_languages("c99", "cxx11")
+    set_extension(".elf")
 
-    set_toolchains("arm-none-eabi")
+    set_toolchains("gcc-arm-none-eabi")
 
     add_rules("asm")
+
+    add_cxxflags(cxx_flags, {force = true})
+    add_cflags(c_flags, {force = true})
+    add_asflags(as_flags, {force = true})
+    add_ldflags(ld_flags, {force = true})
+    add_defines(defines, {force = true})
 {%- endblock %}
 
 {%- block target_files %}
 {%- for file in CSP.project|builder_src_files %}
-    add_files("{{file}}")
+    add_files("{{ file }}")
 {%- endfor %}
 {# #}
-    add_files("{{ CSP.project|builder_startup_file }}")
+{%- if CSP.project.gen.toolchains == "gcc-arm-none-eabi" %}
+    add_files("startup_gcc.S")
+{%- endif %}
 {# #}
 {%- for dir in CSP.project|builder_inc_dirs %}
     add_includedirs("{{ dir }}", {public = true})
@@ -98,6 +131,8 @@ add_defines("{{ CSP.project|builder_defines|join('", "') }}", {force = true})
         local artifact_dir = path.join(config.buildir(), config.plat(), config.arch(), config.mode())
         local objcopy, _ = target:tool("objcopy")
         local size, _ = target:tool("size")
+
+        os.mkdir(artifact_dir)
 
         if objcopy then
             local hex = path.join(artifact_dir, target:name() .. ".hex")
