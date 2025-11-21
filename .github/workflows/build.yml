@@ -38,7 +38,7 @@ jobs:
             file: led.csp
     steps:
       - name: ⬇️ checkout csp_hal_apm32f1
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
 
