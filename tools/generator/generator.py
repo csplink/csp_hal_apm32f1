@@ -30,9 +30,9 @@ import shutil
 import xml.etree.ElementTree as etree
 from typing import Callable
 
-import filters.builder as builder
-import filters.chip as chip
 from csp.project import Project
+
+from .filters import builder, chip
 
 script_dir = os.path.dirname(__file__)
 root_dir = os.path.join(script_dir, "..", "..")

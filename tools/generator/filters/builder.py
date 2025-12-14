@@ -27,7 +27,8 @@
 import copy
 
 from csp.project import Project
-import filters.chip as chip
+
+from . import chip
 
 inc_dirs = [
     "core/inc",
