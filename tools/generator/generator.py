@@ -30,6 +30,7 @@ import shutil
 import xml.etree.ElementTree as etree
 from typing import Callable
 
+from csp.coder import CoderFilesTableItemDict
 from csp.project import Project
 
 from .filters import builder, chip
@@ -38,11 +39,11 @@ script_dir = os.path.dirname(__file__)
 root_dir = os.path.join(script_dir, "..", "..")
 
 
-def _remove_trailing_digits(s):
+def _remove_trailing_digits(s: str):
     return s.rstrip("0123456789")
 
 
-def files_table(project: Project) -> dict[str, dict[str, str]]:
+def files_table(project: Project) -> dict[str, CoderFilesTableItemDict]:
     all_modules = [
         "ADC1",
         "ADC2",
@@ -82,14 +83,14 @@ def files_table(project: Project) -> dict[str, dict[str, str]]:
         "TMR7",
         "TMR8",
     ]
-    files = {
+    files: dict[str, CoderFilesTableItemDict] = {
         "core/inc/main.h": {"brief": "main program body"},
         "core/src/main.c": {"brief": "main program body"},
         "core/src/isr.c": {"brief": "interrupt function entry"},
         "core/src/system_apm32f10x.c": {
             "brief": "CMSIS Cortex-M3 Device Peripheral Access Layer System Source File"
         },
-        ".gitignore": {"force": False},
+        ".gitignore": {"brief": ".gitignore", "force": False},
     }
 
     modules: list[str] = project.modules
@@ -123,7 +124,9 @@ def files_table(project: Project) -> dict[str, dict[str, str]]:
             "brief": "this file provides code for the xmake build system"
         }
     elif builder == "MDK-Arm":
-        files[f"{project.name}.uvprojx"] = {}
+        files[f"{project.name}.uvprojx"] = {
+            "brief": "this file provides code for the MDK build system"
+        }
         files["startup_arm.s"] = {
             "brief": f"CMSIS Cortex-M3 based Core Device Startup File for Device {targetChip}"
         }
